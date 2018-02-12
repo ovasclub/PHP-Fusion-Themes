@@ -1498,7 +1498,7 @@ input[type=checkbox] {
   -webkit-appearance: none;
   width: 15px;
   height: 15px;
-  margin: -3px 0;
+  margin: 3px 0;
 }
 input[type=radio]:focus,
 input[type=checkbox]:focus {
@@ -1521,6 +1521,7 @@ input[type=checkbox]:disabled:checked:before {
 input[type=checkbox] {
   -webkit-border-radius: 2px;
   border-radius: 2px;
+  margin: -3px 0;
 }
 input[type=checkbox]:checked:before {
   font-size: 12px;
@@ -1534,8 +1535,8 @@ input[type=radio] {
 input[type=radio]:checked:before {
   font-size: 8px;
   content: "\f111";
-  margin-top: 1.2px;
-  margin-left: 2px;
+  margin-top: 1.4px;
+  margin-left: 2.4px;
 }
 .progress,
 .progress > .progress-bar {
