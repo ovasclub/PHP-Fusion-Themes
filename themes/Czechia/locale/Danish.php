@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.php-fusion.co.uk/
 +--------------------------------------------------------+
-| Filename: Czechia/locale/Czech.php
-| Author: RobiNN
+| Filename: Czechia/locale/Danish.php
+| Author: Helmuth Mikkelsen (helmuth)
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -15,17 +15,17 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['pfc_title'] = 'Czechia téma';
-$locale['pfc_description'] = 'Téma pro oficiální českou podporu.';
-$locale['created_by']  = 'Vytvořil';
-$locale['01'] = 'IP adresa';
-$locale['02'] = 'O nás';
-$locale['03'] = 'Poslední zprávy';
-$locale['04'] = 'Žádné zprávy zatím nebyly zveřejněny';
-$locale['05'] = 'Číst více';
-$locale['08'] = 'Kategorie';
-$locale['09'] = 'Stáhnout';
-$locale['10'] = 'Popis vydavatele';
-$locale['11'] = 'Podrobné snímky';
-$locale['12'] = 'Od';
-$locale['13'] = 'Poslední komentáře';
+$locale['pfc_title'] = 'Czechia tema';
+$locale['pfc_description'] = 'Tema til den officielle tjekkiske support.';
+$locale['created_by']  = 'Oprettet af';
+$locale['01'] = 'IP-adresse';
+$locale['02'] = 'Om os';
+$locale['03'] = 'Seneste nyheder';
+$locale['04'] = 'Ingen nyheder oprettet endnu';
+$locale['05'] = 'Læs mere';
+$locale['08'] = 'Kategori';
+$locale['09'] = 'Download';
+$locale['10'] = 'Udgivers beskrivelse';
+$locale['11'] = 'Detaljerede skærmdumps';
+$locale['12'] = 'Af';
+$locale['13'] = 'Seneste kommentarer';

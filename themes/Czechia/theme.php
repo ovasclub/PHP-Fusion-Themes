@@ -22,6 +22,10 @@ if (!defined('IN_FUSION')) {
 require_once 'theme_autoloader.php';
 define('THEME_BULLET', '<i class="fa fa-circle"></i>');
 
+define('BOOTSTRAP', TRUE);
+define('FONTAWESOME', TRUE);
+define('FONTAWESOME-V4', TRUE);
+
 /**
  * Required Theme Components
  */
