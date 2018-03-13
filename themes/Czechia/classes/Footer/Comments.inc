@@ -169,7 +169,7 @@ class Comments extends Core {
                 $i++;
             }
 
-            echo '<ul class="list-style-none">';
+            echo '<ul class="list-style-none break-words">';
             foreach ($info as $id => $data) {
                 $link = !empty($data['data']['user_id']) ? TRUE : FALSE;
 

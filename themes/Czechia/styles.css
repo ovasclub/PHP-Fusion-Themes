@@ -208,6 +208,17 @@ hr {
 .contentLower {
   margin-top: 10px;
 }
+.break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
 h1,
 h2,
 h3,
@@ -598,7 +609,6 @@ pre {
   background-color: #272822 !important;
   border: 1px solid #333;
   border-radius: 4px;
-  border-left: 5px solid #0099ff;
 }
 pre code {
   padding: 0;
@@ -1978,8 +1988,18 @@ input[type="button"].btn-block {
   background: #2980b9;
   padding: 15px 0;
 }
+@media (min-width: 768px) {
+  .theme-header {
+    padding: 50px 0;
+  }
+}
 .theme-header .logo {
   max-height: 60px;
+}
+@media (min-width: 992px) {
+  .theme-header .logo {
+    max-height: 100px;
+  }
 }
 .theme-header .menu {
   text-align: center;
@@ -1989,18 +2009,25 @@ input[type="button"].btn-block {
 .theme-header .menu > li {
   list-style: none;
   display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .theme-header .menu > li > a {
   color: #fff;
   background-color: #1a5a84;
   padding: 6px 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
+  display: block;
 }
 .theme-header .menu > li > a:hover,
 .theme-header .menu > li > a:focus {
   background-color: #15496a;
+}
+.theme-header .menu > li > a .msg-count {
+  margin-top: -15px;
+  margin-left: -5px;
+  position: absolute;
 }
 .theme-header .menu .loginform .dropdown-menu {
   width: 250px;
@@ -2011,29 +2038,12 @@ input[type="button"].btn-block {
 .theme-header .menu .link-avatar {
   margin-top: -5px;
 }
-.theme-header .menu .msg-count {
-  margin-left: 5px;
-  margin-top: 0;
-}
 .theme-header .menu .dropdown-user {
   z-index: 1112 !important;
-  padding-bottom: 0;
-  margin-top: 4px;
-  margin-right: 4px;
 }
 .theme-header .menu .dropdown-user .navbar-login {
   width: 300px;
   padding: 10px 10px 0;
-}
-@media (min-width: 768px) {
-  .theme-header {
-    padding: 50px 0;
-  }
-}
-@media (min-width: 992px) {
-  .theme-header .logo {
-    max-height: 100px;
-  }
 }
 #main-menu {
   background-color: #196496;

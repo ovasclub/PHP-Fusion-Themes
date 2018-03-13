@@ -37,7 +37,7 @@ class News extends Core {
             $data = NewsView::News()->get_NewsItem(['limit' => '0,5', 'order' => 'news_datestamp DESC']);
 
             if (!empty($data['news_items'])) {
-                echo '<ul class="list-style-none">';
+                echo '<ul class="list-style-none break-words">';
                     foreach ($data['news_items'] as $news_id => $news_data) {
                         echo '<li>';
                             echo '<a href="'.$news_data['news_url'].'">'.trim_text($news_data['news_subject'], 40).'</a>';

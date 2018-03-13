@@ -1,6 +1,8 @@
 $(function () {
-    $(".dropdown").on("show.bs.dropdown", function () {$(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);});
-    $(".dropdown").on("hide.bs.dropdown", function () {$(this).find(".dropdown-menu").first().stop(true, true).slideUp(100);});
+    var dropdown = $(".dropdown");
+
+    dropdown.on("show.bs.dropdown", function () {$(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);});
+    dropdown.on("hide.bs.dropdown", function () {$(this).find(".dropdown-menu").first().stop(true, true).slideUp(100);});
 
     $("#backtotop").on("click", function (e) {
         e.preventDefault();
