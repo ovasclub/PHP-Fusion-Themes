@@ -1,10 +1,13 @@
 # Czechia Theme
-## Official Theme for Czech support.
+Official Theme for Czech support.
 
-Improved templates:
+![Version](https://img.shields.io/badge/Version-1.8-blue.svg)
+
+Custom templates:
  - Downloads
  - Errors Page
  - Login / Register
  - News
+ - Profile
 
 ![Preview](https://raw.githubusercontent.com/RobiNN1/PHP-Fusion-Themes/master/themes/Czechia/preview.png)
