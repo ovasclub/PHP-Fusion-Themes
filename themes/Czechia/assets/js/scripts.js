@@ -1,5 +1,8 @@
 $(function () {
-    var dropdown = $(".dropdown");
+    "use strict";
+
+    var body = $("body"),
+        dropdown = $(".dropdown");
 
     dropdown.on("show.bs.dropdown", function () {
         $(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);
@@ -13,9 +16,7 @@ $(function () {
         $("html, body").animate({scrollTop: 0}, 200);
     });
 
-    var body = $("body");
-
-    $("#toggle-leftmenu").click(function (e) {
+    $("#toggle-leftmenu").on("click", function (e) {
         e.preventDefault();
         body.toggleClass("leftmenu-toggled");
         body.css("padding-right", getScrollbarWidth() + "px");
