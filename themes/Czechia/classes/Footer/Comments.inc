@@ -177,7 +177,7 @@ class Comments extends Core {
                     echo '<div class="pull-left">'.display_avatar($data['data'], '35px', '', $link, 'img-circle m-r-10 m-t-5').'</div>';
                     echo '<div class="overflow-hide">';
                         echo '<strong><a class="text-white" href="'.$data['url'].'">'.trim_text($data['title'], 40).'</a></strong>';
-                        echo '<div class="clearfix"><a href="'.$data['c_url'].'">'.trim_text($data['data']['comment_message'], 35).'</a></div>';
+                        echo '<div class="clearfix"><a href="'.$data['c_url'].'">'.trim_text(strip_tags(parse_textarea($data['data']['comment_message'])), 35).'</a></div>';
                     echo '</div>';
                 echo '</li>';
             }
