@@ -147,6 +147,7 @@
         background: rgba(255, 255, 255, 0.7);
         .border-radius(@box-border-radius);
 
+        > svg,
         > .fa {
             position: absolute;
             top: 50%;
@@ -182,18 +183,19 @@
         }
     }
 
+    > svg,
     > .fa,
     > .glyphicon,
-    > .ion,
     .box-title {
         display: inline-block;
         font-size: 18px;
         margin: 0;
         line-height: 1;
     }
+
+    > svg,
     > .fa,
-    > .glyphicon,
-    > .ion {
+    > .glyphicon {
         margin-right: 5px;
     }
 
@@ -201,6 +203,7 @@
         position: absolute;
         right: 10px;
         top: 5px;
+
         [data-toggle="tooltip"] {
             position: relative;
         }

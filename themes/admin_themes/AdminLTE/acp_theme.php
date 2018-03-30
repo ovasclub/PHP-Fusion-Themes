@@ -25,7 +25,6 @@ require_once ADMINLTE.'acp_autoloader.php';
 
 define('BOOTSTRAP', TRUE);
 define('FONTAWESOME', TRUE);
-define('FONTAWESOME-V4', TRUE);
 
 if (fusion_get_settings('version') != '9.0') {
     if (!check_admin_pass('')) {

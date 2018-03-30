@@ -293,7 +293,8 @@
 }
 
 .text-bold {
-    &, &.table td, &.table th {
+    &, &.table td,
+    &.table th {
         font-weight: 700;
     }
 }
@@ -531,6 +532,7 @@
 
 .full-opacity-hover {
     .opacity(.65);
+
     &:hover {
         .opacity(1);
     }
@@ -540,6 +542,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+
     svg,
     canvas {
         width: 100% !important;

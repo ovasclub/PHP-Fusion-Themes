@@ -71,11 +71,6 @@
         float: left;
         background: transparent none;
         padding: @navbar-padding-vertical @navbar-padding-horizontal;
-        font-family: FontAwesome, sans-serif;
-
-        &:before {
-            content: "\f0c9";
-        }
 
         &:hover {
             color: #fff;
@@ -92,6 +87,7 @@
     }
 
     .navbar .nav > li.user > a {
+        > svg,
         > .fa,
         > .glyphicon {
             margin-right: 5px;
@@ -169,6 +165,7 @@
             text-decoration: none;
             display: inline-block;
 
+            > svg,
             > .fa,
             > .glyphicon {
                 margin-right: 5px;

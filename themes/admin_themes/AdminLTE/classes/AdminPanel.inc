@@ -62,7 +62,7 @@ class AdminPanel extends Components {
             echo '</a>';
 
             echo '<nav class="navbar navbar-static-top">';
-                echo '<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><span class="sr-only">Toggle navigation</span></a>';
+                echo '<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="fa fa-fw fa-bars"></i></a>';
 
                 echo '<ul class="nav navbar-nav navbar-left hidden-xs">';
                     if (!empty($sections)) {

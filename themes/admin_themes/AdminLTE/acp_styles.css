@@ -5,7 +5,6 @@
 +--------------------------------------------------------+
 | Filename: AdminLTE/acp_styles.php
 | Author: RobiNN and Almsaeed Studio <https://adminlte.io>
-| Version: 1.3
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -391,10 +390,6 @@ a:focus {
   float: left;
   background: transparent none;
   padding: 15px 15px;
-  font-family: FontAwesome, sans-serif;
-}
-.main-header .sidebar-toggle:before {
-  content: "\f0c9";
 }
 .main-header .sidebar-toggle:hover {
   color: #fff;
@@ -406,6 +401,7 @@ a:focus {
 .main-header .sidebar-toggle .icon-bar {
   display: none;
 }
+.main-header .navbar .nav > li.user > a > svg,
 .main-header .navbar .nav > li.user > a > .fa,
 .main-header .navbar .nav > li.user > a > .glyphicon {
   margin-right: 5px;
@@ -476,6 +472,7 @@ a:focus {
   text-decoration: none;
   display: inline-block;
 }
+.content-header > .breadcrumb > li > a > svg,
 .content-header > .breadcrumb > li > a > .fa,
 .content-header > .breadcrumb > li > a > .glyphicon {
   margin-right: 5px;
@@ -631,6 +628,7 @@ a:focus {
   margin-top: 3px;
   font-size: 11px;
 }
+.user-panel > .info > a > svg,
 .user-panel > .info > a > .fa,
 .user-panel > .info > a > .glyphicon {
   margin-right: 3px;
@@ -649,6 +647,7 @@ a:focus {
   padding: 12px 5px 12px 15px;
   display: block;
 }
+.sidebar-menu > li > a > svg,
 .sidebar-menu > li > a > .fa,
 .sidebar-menu > li > a > .glyphicon,
 .sidebar-menu > li > a > img {
@@ -667,8 +666,6 @@ a:focus {
 }
 .sidebar-menu li > a > .fa-angle-left,
 .sidebar-menu li > a > .pull-right-container > .fa-angle-left {
-  width: auto;
-  height: auto;
   padding: 0;
   margin-right: 10px;
   -webkit-transition: transform 0.5s ease;
@@ -1084,9 +1081,9 @@ a:focus {
 .dropdown-menu > li > a {
   color: #777;
 }
+.dropdown-menu > li > a > svg,
 .dropdown-menu > li > a > .glyphicon,
-.dropdown-menu > li > a > .fa,
-.dropdown-menu > li > a > .ion {
+.dropdown-menu > li > a > .fa {
   margin-right: 10px;
 }
 .dropdown-menu > li > a:hover {
@@ -1175,6 +1172,7 @@ a:focus {
   text-overflow: ellipsis;
   padding: 10px;
 }
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > svg,
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .fa,
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .glyphicon {
   width: 20px;
@@ -1492,52 +1490,6 @@ a:focus {
 .form-group-lg .form-control {
   -webkit-border-radius: 0;
   border-radius: 0;
-}
-input[type=radio],
-input[type=checkbox] {
-  border: 2px solid #777777;
-  -webkit-appearance: none;
-  width: 15px;
-  height: 15px;
-  margin: 3px 0;
-}
-input[type=radio]:focus,
-input[type=checkbox]:focus {
-  outline: none;
-}
-input[type=radio]:checked:before,
-input[type=checkbox]:checked:before {
-  font-family: FontAwesome, sans-serif;
-  color: #777777;
-  position: absolute;
-}
-input[type=radio]:disabled,
-input[type=checkbox]:disabled {
-  border-color: #c4c4c4;
-}
-input[type=radio]:disabled:checked:before,
-input[type=checkbox]:disabled:checked:before {
-  color: #c4c4c4;
-}
-input[type=checkbox] {
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  margin: -3px 0;
-}
-input[type=checkbox]:checked:before {
-  font-size: 12px;
-  content: "\f00c";
-  margin-left: -1px;
-}
-input[type=radio] {
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-input[type=radio]:checked:before {
-  font-size: 8px;
-  content: "\f111";
-  margin-top: 1.4px;
-  margin-left: 2.4px;
 }
 .progress,
 .progress > .progress-bar {
@@ -1897,6 +1849,8 @@ input[type=radio]:checked:before {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
+.box .overlay > svg,
+.overlay-wrapper .overlay > svg,
 .box .overlay > .fa,
 .overlay-wrapper .overlay > .fa {
   position: absolute;
@@ -1937,18 +1891,18 @@ input[type=radio]:checked:before {
 .collapsed-box .box-header.with-border {
   border-bottom: none;
 }
+.box-header > svg,
 .box-header > .fa,
 .box-header > .glyphicon,
-.box-header > .ion,
 .box-header .box-title {
   display: inline-block;
   font-size: 18px;
   margin: 0;
   line-height: 1;
 }
+.box-header > svg,
 .box-header > .fa,
-.box-header > .glyphicon,
-.box-header > .ion {
+.box-header > .glyphicon {
   margin-right: 5px;
 }
 .box-header > .box-tools {
@@ -2219,6 +2173,7 @@ input[type=radio]:checked:before {
   background-color: #f4f4f4;
   font-size: 12px;
 }
+.btn-app > svg,
 .btn-app > .fa,
 .btn-app > .glyphicon {
   font-size: 20px;
@@ -2289,6 +2244,7 @@ input[type=radio]:checked:before {
   border-top: 3px solid transparent;
   color: #444;
 }
+.nav-pills > li > a > svg,
 .nav-pills > li > a > .fa,
 .nav-pills > li > a > .glyphicon {
   margin-right: 5px;
@@ -2406,6 +2362,7 @@ input[type=radio]:checked:before {
   font-size: 20px;
   color: #444;
 }
+.nav-tabs-custom > .nav-tabs > li.header > svg,
 .nav-tabs-custom > .nav-tabs > li.header > .fa,
 .nav-tabs-custom > .nav-tabs > li.header > .glyphicon {
   margin-right: 5px;
@@ -2624,6 +2581,7 @@ table.text-center th {
   display: block;
   font-size: 14px;
 }
+.treeview-menu > li > a > svg,
 .treeview-menu > li > a > .fa,
 .treeview-menu > li > a > .glyphicon,
 .treeview-menu > li > a > img {
@@ -3380,22 +3338,6 @@ table.text-center th {
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
 }
-.skin-blue input[type=radio],
-.skin-blue input[type=checkbox] {
-  border-color: #3c8dbc;
-}
-.skin-blue input[type=radio]:checked:before,
-.skin-blue input[type=checkbox]:checked:before {
-  color: #3c8dbc;
-}
-.skin-blue input[type=radio]:disabled,
-.skin-blue input[type=checkbox]:disabled {
-  border-color: #acd0e5;
-}
-.skin-blue input[type=radio]:disabled:checked:before,
-.skin-blue input[type=checkbox]:disabled:checked:before {
-  color: #acd0e5;
-}
 /*
  * Skin: Blue
  * ----------
@@ -3557,22 +3499,6 @@ table.text-center th {
 .skin-blue-light .main-footer {
   border-top-color: #d2d6de;
 }
-.skin-blue-light input[type=radio],
-.skin-blue-light input[type=checkbox] {
-  border-color: #3c8dbc;
-}
-.skin-blue-light input[type=radio]:checked:before,
-.skin-blue-light input[type=checkbox]:checked:before {
-  color: #3c8dbc;
-}
-.skin-blue-light input[type=radio]:disabled,
-.skin-blue-light input[type=checkbox]:disabled {
-  border-color: #acd0e5;
-}
-.skin-blue-light input[type=radio]:disabled:checked:before,
-.skin-blue-light input[type=checkbox]:disabled:checked:before {
-  color: #acd0e5;
-}
 /*
  * Skin: Black
  * -----------
@@ -3724,22 +3650,6 @@ table.text-center th {
   color: #999;
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
-}
-.skin-black input[type=radio],
-.skin-black input[type=checkbox] {
-  border-color: #222;
-}
-.skin-black input[type=radio]:checked:before,
-.skin-black input[type=checkbox]:checked:before {
-  color: #222;
-}
-.skin-black input[type=radio]:disabled,
-.skin-black input[type=checkbox]:disabled {
-  border-color: #6f6f6f;
-}
-.skin-black input[type=radio]:disabled:checked:before,
-.skin-black input[type=checkbox]:disabled:checked:before {
-  color: #6f6f6f;
 }
 /*
  * Skin: Black
@@ -3912,22 +3822,6 @@ table.text-center th {
     border-left: 1px solid #d2d6de;
   }
 }
-.skin-black-light input[type=radio],
-.skin-black-light input[type=checkbox] {
-  border-color: #111;
-}
-.skin-black-light input[type=radio]:checked:before,
-.skin-black-light input[type=checkbox]:checked:before {
-  color: #111;
-}
-.skin-black-light input[type=radio]:disabled,
-.skin-black-light input[type=checkbox]:disabled {
-  border-color: #5e5e5e;
-}
-.skin-black-light input[type=radio]:disabled:checked:before,
-.skin-black-light input[type=checkbox]:disabled:checked:before {
-  color: #5e5e5e;
-}
 /*
  * Skin: Green
  * -----------
@@ -4059,22 +3953,6 @@ table.text-center th {
   color: #999;
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
-}
-.skin-green input[type=radio],
-.skin-green input[type=checkbox] {
-  border-color: #00a65a;
-}
-.skin-green input[type=radio]:checked:before,
-.skin-green input[type=checkbox]:checked:before {
-  color: #00a65a;
-}
-.skin-green input[type=radio]:disabled,
-.skin-green input[type=checkbox]:disabled {
-  border-color: #40ffa8;
-}
-.skin-green input[type=radio]:disabled:checked:before,
-.skin-green input[type=checkbox]:disabled:checked:before {
-  color: #40ffa8;
 }
 /*
  * Skin: Green
@@ -4226,22 +4104,6 @@ table.text-center th {
     border-left: 1px solid #d2d6de;
   }
 }
-.skin-green-light input[type=radio],
-.skin-green-light input[type=checkbox] {
-  border-color: #00a65a;
-}
-.skin-green-light input[type=radio]:checked:before,
-.skin-green-light input[type=checkbox]:checked:before {
-  color: #00a65a;
-}
-.skin-green-light input[type=radio]:disabled,
-.skin-green-light input[type=checkbox]:disabled {
-  border-color: #40ffa8;
-}
-.skin-green-light input[type=radio]:disabled:checked:before,
-.skin-green-light input[type=checkbox]:disabled:checked:before {
-  color: #40ffa8;
-}
 /*
  * Skin: Red
  * ---------
@@ -4373,22 +4235,6 @@ table.text-center th {
   color: #999;
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
-}
-.skin-red input[type=radio],
-.skin-red input[type=checkbox] {
-  border-color: #dd4b39;
-}
-.skin-red input[type=radio]:checked:before,
-.skin-red input[type=checkbox]:checked:before {
-  color: #dd4b39;
-}
-.skin-red input[type=radio]:disabled,
-.skin-red input[type=checkbox]:disabled {
-  border-color: #f3c2bc;
-}
-.skin-red input[type=radio]:disabled:checked:before,
-.skin-red input[type=checkbox]:disabled:checked:before {
-  color: #f3c2bc;
 }
 /*
  * Skin: Red
@@ -4540,22 +4386,6 @@ table.text-center th {
     border-left: 1px solid #d2d6de;
   }
 }
-.skin-red-light input[type=radio],
-.skin-red-light input[type=checkbox] {
-  border-color: #dd4b39;
-}
-.skin-red-light input[type=radio]:checked:before,
-.skin-red-light input[type=checkbox]:checked:before {
-  color: #dd4b39;
-}
-.skin-red-light input[type=radio]:disabled,
-.skin-red-light input[type=checkbox]:disabled {
-  border-color: #f3c2bc;
-}
-.skin-red-light input[type=radio]:disabled:checked:before,
-.skin-red-light input[type=checkbox]:disabled:checked:before {
-  color: #f3c2bc;
-}
 /*
  * Skin: Yellow
  * ------------
@@ -4687,22 +4517,6 @@ table.text-center th {
   color: #999;
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
-}
-.skin-yellow input[type=radio],
-.skin-yellow input[type=checkbox] {
-  border-color: #f39c12;
-}
-.skin-yellow input[type=radio]:checked:before,
-.skin-yellow input[type=checkbox]:checked:before {
-  color: #f39c12;
-}
-.skin-yellow input[type=radio]:disabled,
-.skin-yellow input[type=checkbox]:disabled {
-  border-color: #fad9a4;
-}
-.skin-yellow input[type=radio]:disabled:checked:before,
-.skin-yellow input[type=checkbox]:disabled:checked:before {
-  color: #fad9a4;
 }
 /*
  * Skin: Yellow
@@ -4854,22 +4668,6 @@ table.text-center th {
     border-left: 1px solid #d2d6de;
   }
 }
-.skin-yellow-light input[type=radio],
-.skin-yellow-light input[type=checkbox] {
-  border-color: #f39c12;
-}
-.skin-yellow-light input[type=radio]:checked:before,
-.skin-yellow-light input[type=checkbox]:checked:before {
-  color: #f39c12;
-}
-.skin-yellow-light input[type=radio]:disabled,
-.skin-yellow-light input[type=checkbox]:disabled {
-  border-color: #fad9a4;
-}
-.skin-yellow-light input[type=radio]:disabled:checked:before,
-.skin-yellow-light input[type=checkbox]:disabled:checked:before {
-  color: #fad9a4;
-}
 /*
  * Skin: Purple
  * ------------
@@ -5001,22 +4799,6 @@ table.text-center th {
   color: #999;
   -webkit-border-radius: 0 2px 0 2px;
   border-radius: 0 2px 0 2px;
-}
-.skin-purple input[type=radio],
-.skin-purple input[type=checkbox] {
-  border-color: #605ca8;
-}
-.skin-purple input[type=radio]:checked:before,
-.skin-purple input[type=checkbox]:checked:before {
-  color: #605ca8;
-}
-.skin-purple input[type=radio]:disabled,
-.skin-purple input[type=checkbox]:disabled {
-  border-color: #c1c0dd;
-}
-.skin-purple input[type=radio]:disabled:checked:before,
-.skin-purple input[type=checkbox]:disabled:checked:before {
-  color: #c1c0dd;
 }
 /*
  * Skin: Purple
@@ -5168,22 +4950,6 @@ table.text-center th {
     border-left: 1px solid #d2d6de;
   }
 }
-.skin-purple-light input[type=radio],
-.skin-purple-light input[type=checkbox] {
-  border-color: #605ca8;
-}
-.skin-purple-light input[type=radio]:checked:before,
-.skin-purple-light input[type=checkbox]:checked:before {
-  color: #605ca8;
-}
-.skin-purple-light input[type=radio]:disabled,
-.skin-purple-light input[type=checkbox]:disabled {
-  border-color: #c1c0dd;
-}
-.skin-purple-light input[type=radio]:disabled:checked:before,
-.skin-purple-light input[type=checkbox]:disabled:checked:before {
-  color: #c1c0dd;
-}
 html[dir="rtl"] .content-wrapper,
 html[dir="rtl"] .main-footer {
   margin-left: inherit !important;
@@ -5251,6 +5017,7 @@ html[dir="rtl"] .main-header .navbar-right {
 html[dir="rtl"] .main-header .sidebar-toggle {
   float: right;
 }
+html[dir="rtl"] .main-header .navbar .nav > li.user > a > svg,
 html[dir="rtl"] .main-header .navbar .nav > li.user > a > .fa,
 html[dir="rtl"] .main-header .navbar .nav > li.user > a > .glyphicon {
   margin-right: inherit !important;
@@ -5278,6 +5045,7 @@ html[dir="rtl"] .content-header > h1 > small {
     left: 10px;
   }
 }
+html[dir="rtl"] .content-header > .breadcrumb > li > a > svg,
 html[dir="rtl"] .content-header > .breadcrumb > li > a > .fa,
 html[dir="rtl"] .content-header > .breadcrumb > li > a > .glyphicon {
   margin-right: inherit !important;
@@ -5337,6 +5105,7 @@ html[dir="rtl"] .user-panel > .info > a {
   padding-right: inherit !important;
   padding-left: 5px;
 }
+html[dir="rtl"] .user-panel > .info > a > svg,
 html[dir="rtl"] .user-panel > .info > a > .fa,
 html[dir="rtl"] .user-panel > .info > a > .glyphicon {
   margin-right: inherit !important;
@@ -5495,7 +5264,7 @@ html[dir="rtl"] .skin-preview .skin .body-right {
 }
 html[dir="rtl"] .dropdown-menu > li > a > .glyphicon,
 html[dir="rtl"] .dropdown-menu > li > a > .fa,
-html[dir="rtl"] .dropdown-menu > li > a > .ion {
+html[dir="rtl"] .dropdown-menu > li > a > svg {
   margin-right: inherit !important;
   margin-left: 10px;
 }
@@ -5537,21 +5306,13 @@ html[dir="rtl"] .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
     border-top: none;
   }
 }
-html[dir="rtl"] input[type=checkbox]:checked:before {
-  margin-left: inherit !important;
-  margin-right: -1px;
-}
-html[dir="rtl"] input[type=radio]:checked:before {
-  margin-left: inherit !important;
-  margin-right: 2px;
-}
 html[dir="rtl"] .small-box .icon {
   right: inherit !important;
   left: 10px;
 }
 html[dir="rtl"] .box-header > .fa,
 html[dir="rtl"] .box-header > .glyphicon,
-html[dir="rtl"] .box-header > .ion {
+html[dir="rtl"] .box-header > svg {
   right: inherit !important;
   margin-left: 5px;
 }
@@ -5588,6 +5349,7 @@ html[dir="rtl"] .alert .icon {
   margin-right: inherit !important;
   margin-left: 10px;
 }
+html[dir="rtl"] .nav-pills > li > a > svg,
 html[dir="rtl"] .nav-pills > li > a > .fa,
 html[dir="rtl"] .nav-pills > li > a > .glyphicon {
   margin-right: inherit !important;

@@ -77,7 +77,6 @@ hr {
 }
 #error_logform {
   margin-bottom: 20px !important;
-  padding-bottom: 10px;
 }
 #error_logform #delete_entries {
   padding: 5px 10px;
@@ -2102,7 +2101,7 @@ input[type="button"].btn-block {
   z-index: 800;
 }
 .leftmenu {
-  background: #fff;
+  background: #eaeaea;
   width: 100%;
   position: fixed;
   top: 0;
@@ -2134,7 +2133,7 @@ input[type="button"].btn-block {
   transform: translateX(-30px);
 }
 .leftmenu .contentLeft {
-  padding: 0 18px 35px;
+  padding: 18px 18px 35px;
 }
 .leftmenu .opentable,
 .leftmenu .openside {
@@ -2165,9 +2164,9 @@ input[type="button"].btn-block {
 .leftmenu-toggled .overlay {
   opacity: 1;
   visibility: visible;
-  -webkit-transition-delay: 0;
-  -o-transition-delay: 0;
-  transition-delay: 0;
+  -webkit-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 .mCSB_inside > .mCSB_container {
   margin-right: 5px !important;
