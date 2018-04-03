@@ -45,8 +45,6 @@ class News extends Core {
                 .item .post .meta {margin: 0;padding: 3px 0 10px;font-size: 12px;}
                 .item .post .readmore {border: 1px solid transparent; text-transform: uppercase;font-weight: bold;color: #046ca0;padding: 5px 10px;font-size: 14px;-webkit-border-radius: 2px;border-radius: 2px;display: inline-block;width: 100%;text-align: center;}
                 .item .post .readmore:hover {border-color: #046ca0;}
-                .row.item_ {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;flex-wrap: wrap;}
-                .row.item_ > [class*=\'col-\'] {display: flex;flex-direction: column;}
             }
         </style>');
 
@@ -73,12 +71,16 @@ class News extends Core {
                     foreach ($info['news_categories'][0] as $id => $data) {
                         $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' class="active"' : '';
                         echo '<li'.$active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$id.'">'.$data['name'].'</a></li>';
-                    }
 
-                    if (!empty($info['news_categories'][1]) && is_array($info['news_categories'][1])) {
-                        foreach ($info['news_categories'][1] as $id => $data) {
-                            $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' class="active"' : '';
-                            echo '<li'.$active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$id.'">'.$data['name'].'</a></li>';
+                        if ($id != 0 && $info['news_categories'] != 0) {
+                            foreach ($info['news_categories'] as $sub_cats_id => $sub_cats) {
+                                foreach ($sub_cats as $sub_cat_id => $sub_cat_data) {
+                                    if (!empty($sub_cat_data['parent']) && $sub_cat_data['parent'] == $id) {
+                                        $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_id ? ' class="active"' : '';
+                                        echo '<li'.$active.'><a class="p-l-10" href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_id.'">'.$sub_cat_data['name'].'</a></li>';
+                                    }
+                                }
+                            }
                         }
                     }
                 echo '</ul>';
@@ -94,7 +96,7 @@ class News extends Core {
 
         if (!empty($info['news_items'])) {
             echo '<div class="card">';
-                echo '<div class="row item_">';
+                echo '<div class="row equal-height">';
                     foreach ($info['news_items'] as $id => $data) {
                         $link = INFUSIONS.'news/news.php?readmore='.$data['news_id'];
 
