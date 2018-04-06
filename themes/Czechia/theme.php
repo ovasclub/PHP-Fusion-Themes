@@ -20,11 +20,10 @@ if (!defined('IN_FUSION')) {
 }
 
 require_once 'theme_autoloader.php';
-define('THEME_BULLET', '<i class="fa fa-circle"></i>');
 
+define('THEME_BULLET', '&middot;');
 define('BOOTSTRAP', TRUE);
 define('FONTAWESOME', TRUE);
-define('FONTAWESOME-V4', TRUE);
 
 /**
  * Required Theme Components
@@ -91,21 +90,6 @@ function display_main_news($info) {
 
 function render_news_item($info) {
     CzechiaTheme\Templates\News::render_news_item($info);
-}
-
-/**
- * Profile
- */
-function display_user_profile() {
-    CzechiaTheme\Templates\Profile::DisplayProfile();
-}
-
-function display_user_field() {
-    CzechiaTheme\Templates\Profile::Field();
-}
-
-function display_profile_form() {
-    CzechiaTheme\Templates\Profile::EditProfile();
 }
 
 set_image('imagenotfound', fusion_get_settings('siteurl').'themes/Czechia/images/noimage.svg');
