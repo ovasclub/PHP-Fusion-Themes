@@ -94,6 +94,7 @@ class News extends Core {
 
         self::Header($info);
 
+
         if (!empty($info['news_items'])) {
             echo '<div class="card">';
                 echo '<div class="row equal-height">';
@@ -113,7 +114,7 @@ class News extends Core {
                                     echo '<div class="meta">';
                                         echo '<span class="m-r-5"><i class="fa fa-user"></i> '.profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</span>';
                                         echo '<span class="m-r-5"><i class="fa fa-clock-o"></i> '.showdate(fusion_get_settings('newsdate'), $data['news_date']).'</span>';
-                                        echo '<span><i class="fa fa-folder-o"></i> <a href="'.$data['news_cat_url'].'">'.$data['news_cat_name'].'</a></span>';
+                                        echo '<span><i class="fa fa-folder-o"></i> <a href="'.$data['news_cat_link'].'">'.$data['news_cat_name'].'</a></span>';
                                     echo '</div>';
                                     echo '<a href="'.$link.'" class="readmore m-t-5">'.self::SetLocale('05').'</a>';
                                 echo '</div>';

@@ -276,7 +276,7 @@ class Main extends Core {
                         echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
                         echo fusion_get_settings('description');
                         echo '<br/>';
-                        echo parse_textarea(stripslashes(strip_tags(fusion_get_settings('footer'))));
+                        echo stripslashes(fusion_get_settings('footer'));
 
                         if (fusion_get_settings('visitorcounter_enabled')) {
                             echo '<br/>';
@@ -302,9 +302,7 @@ class Main extends Core {
                 echo '<div class="errors">'.$errors.'</div>';
             }
 
-            $rendertime = fusion_get_settings('rendertime_enabled') == 1 || fusion_get_settings('rendertime_enabled') == 2;
-
-            if ($rendertime) {
+            if (fusion_get_settings('rendertime_enabled') == 1 || fusion_get_settings('rendertime_enabled') == 2) {
                 echo '<div id="rendertime">';
                     echo showrendertime();
                     echo showMemoryUsage();
