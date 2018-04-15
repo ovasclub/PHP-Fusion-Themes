@@ -19,6 +19,7 @@ if (!defined('IN_FUSION')) {
     die('Access Denied');
 }
 
+require_once INCLUDES.'theme_functions_include.php';
 require_once 'theme_autoloader.php';
 
 define('THEME_BULLET', '&middot;');

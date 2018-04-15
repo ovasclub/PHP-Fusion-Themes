@@ -94,19 +94,13 @@ class Main extends Core {
                     if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE) {
                         echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
 
-                        if (defined('RIGHT') && RIGHT) {
-                            echo RIGHT;
-                        }
+                        echo defined('RIGHT') && RIGHT ? RIGHT : '';
 
                         echo '</div>';
                     }
                 echo '</div>';
 
-                if (defined('BL_CENTER') && BL_CENTER) {
-                    echo '<div class="row">';
-                    echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">'.BL_CENTER.'</div>';
-                    echo '</div>';
-                }
+                echo defined('BL_CENTER') && BL_CENTER ? BL_CENTER : '';
 
                 echo showbanners(2);
 
