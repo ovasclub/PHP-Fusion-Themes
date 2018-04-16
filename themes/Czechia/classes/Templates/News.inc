@@ -18,8 +18,9 @@
 namespace CzechiaTheme\Templates;
 
 use CzechiaTheme\Core;
-use \PHPFusion\OutputHandler;
 use \PHPFusion\News\NewsServer;
+use \PHPFusion\OutputHandler;
+use \PHPFusion\Panels;
 
 /**
  * Class News
@@ -54,7 +55,7 @@ class News extends Core {
 
         echo '<div class="card clearfix">';
             echo '<span class="m-r-10">';
-                echo "<strong class='text-dark'>".$locale['show'].":</strong> ";
+                echo '<strong class="text-dark">'.$locale['show'].':</strong> ';
                 $i = 0;
                 foreach ($info['news_filter'] as $link => $title) {
                     $filter_active = (!isset($_GET['type']) && $i == 0) || isset($_GET['type']) && stristr($link, $_GET['type']) ? ' text-dark' : '';
@@ -62,30 +63,32 @@ class News extends Core {
                     $i++;
                 }
             echo '</span>';
+        echo '</div>';
 
-            echo '<div class="dropdown pull-right">';
-                echo '<a id="categories" data-target="#" href="#" data-toggle="dropdown">';
-                    echo '<span class="text-bigger">'.$locale['news_0009'].'</span> <span class="caret"></span>';
-                echo '</a>';
-                echo '<ul class="dropdown-menu m-t-15" aria-labelledby="categories">';
-                    foreach ($info['news_categories'][0] as $id => $data) {
-                        $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' class="active"' : '';
-                        echo '<li'.$active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$id.'">'.$data['name'].'</a></li>';
+        ob_start();
+        openside('<i class="fa fa-list"></i> '.$locale['news_0009']);
+        echo '<ul class="list-style-none">';
+            foreach ($info['news_categories'][0] as $id => $data) {
+                $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' class="text-dark"' : '';
+                echo '<li><a'.$active.' href="'.INFUSIONS.'news/news.php?cat_id='.$id.'">'.$data['name'].'</a></li>';
 
-                        if ($id != 0 && $info['news_categories'] != 0) {
-                            foreach ($info['news_categories'] as $sub_cats_id => $sub_cats) {
-                                foreach ($sub_cats as $sub_cat_id => $sub_cat_data) {
-                                    if (!empty($sub_cat_data['parent']) && $sub_cat_data['parent'] == $id) {
-                                        $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_id ? ' class="active"' : '';
-                                        echo '<li'.$active.'><a class="p-l-10" href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_id.'">'.$sub_cat_data['name'].'</a></li>';
-                                    }
-                                }
+                if ($id != 0 && $info['news_categories'] != 0) {
+                    foreach ($info['news_categories'] as $sub_cats_id => $sub_cats) {
+                        foreach ($sub_cats as $sub_cat_id => $sub_cat_data) {
+                            if (!empty($sub_cat_data['parent']) && $sub_cat_data['parent'] == $id) {
+                                $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_id ? 'text-dark ' : '';
+                                echo '<li><a class="'.$active.'p-l-15" href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_id.'">'.$sub_cat_data['name'].'</a></li>';
                             }
                         }
                     }
-                echo '</ul>';
-            echo '</div>';
-        echo '</div>';
+                }
+            }
+        echo '</ul>';
+        closeside();
+        $cats_menu = ob_get_contents();
+        ob_end_clean();
+
+        Panels::addPanel('menu_panel', $cats_menu, Panels::PANEL_RIGHT, iGUEST, 1);
     }
 
     public static function display_main_news($info) {

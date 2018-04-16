@@ -52,14 +52,14 @@ class Downloads extends Core {
         }
 
         if (!empty($info['download_item'])) {
-            echo '<div class="row m-b-10">';
+            echo '<div class="row equal-height m-b-10">';
                 foreach ($info['download_item'] as $download_id => $data) {
                     echo '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
                         echo '<div class="card item">';
                             $cat_id = $data['download_cat_id'];
                             $link = DOWNLOADS.'downloads.php?cat_id='.$cat_id.'&download_id='.$data['download_id'];
 
-                            echo '<h5 class="m-t-5 text-center"><a href="'.$link.'">'.trimlink($data['download_title'], 20).'</a></h5>';
+                            echo '<h4 class="m-t-5 text-center"><a href="'.$link.'">'.trimlink($data['download_title'], 20).'</a></h4>';
 
                             echo '<div class="preview">';
                                 if ($data['download_image']) {
@@ -80,14 +80,13 @@ class Downloads extends Core {
                                 echo '</div>';
 
                                 echo '<div class="publisher m-t-10 text-center">';
-                                    echo display_avatar($data, '30px', '', FALSE, 'img-rounded m-r-10');
                                     echo self::SetLocale('12').' ';
                                     echo !empty($data['user_id']) ? profile_link($data['user_id'], $data['user_name'], $data['user_status']) : $locale['user_na'];
                                 echo '</div>';
                             echo '</div>';
 
                             echo '<div class="card-footer">';
-                                echo '<a href="'.$link.'" class="btn btn-success btn-sm btn-block">';
+                                echo '<a href="'.$link.'" class="btn btn-link btn-sm btn-block">';
                                     echo '<i class="fa fa-download fa-fw"></i> '.$locale['download_1007'];
                                 echo '</a>';
                             echo '</div>';
@@ -239,7 +238,7 @@ class Downloads extends Core {
 
         ob_start();
 
-        echo '<ul class="list-style-none m-b-20">';
+        echo '<ul class="list-style-none m-t-5 m-b-20">';
         echo '<li><a title="'.$locale['download_1001'].'" href="'.DOWNLOADS.'downloads.php"><span>'.$locale['download_1001'].'</span></a></li>';
 
         $filter_ = $info['download_filter'];
@@ -250,15 +249,15 @@ class Downloads extends Core {
         }
         echo '</ul>';
 
-        echo '<div class="text-bigger strong text-dark"><i class="fa fa-list"></i> '.$locale['download_1003'].'</div>';
-
+        openside('<i class="fa fa-list"></i> '.$locale['download_1003']);
         echo '<div class="list-group">';
             $download_cat_menu = self::display_cat_menu($info['download_categories']);
             echo !empty($download_cat_menu) ? $download_cat_menu : '<p>'.$locale['download_3001'].'</p>';
         echo '</div>';
+        closeside();
 
-        echo '<div class="text-bigger strong text-dark"><i class="fa fa-users"></i> '.$locale['download_1004'].'</div>';
-        echo '<ul class="list-style-none m-l-20 m-b-20">';
+        openside('<i class="fa fa-users"></i> '.$locale['download_1004']);
+        echo '<ul class="list-style-none">';
             if (!empty($info['download_author'])) {
                 foreach ($info['download_author'] as $author_id => $author_info) {
                     echo '<li'.($author_info['active'] ? ' class="active strong"' : '').'>';
@@ -270,6 +269,7 @@ class Downloads extends Core {
                 echo '<li>'.$locale['download_3002'].'</li>';
             }
         echo '</ul>';
+        closeside();
 
         $html = ob_get_contents();
         ob_end_clean();

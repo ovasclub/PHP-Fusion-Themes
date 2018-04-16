@@ -68,15 +68,10 @@ class Main extends Core {
             }
 
             if (defined('LEFT') && LEFT) {
-                echo '<aside class="leftmenu">';
-                    echo '<div class="left-content">';
-                        echo LEFT;
-                    echo '</div>';
-                echo '</aside>';
+                echo '<aside class="leftmenu"><div class="left-content">'.LEFT.'</div></aside>';
             }
 
             echo '<div class="container">';
-
                 if ($this->GetParam('notices') == TRUE) {
                     echo renderNotices(getNotices(['all', FUSION_SELF]));
                 }
@@ -93,9 +88,7 @@ class Main extends Core {
 
                     if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE) {
                         echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
-
-                        echo defined('RIGHT') && RIGHT ? RIGHT : '';
-
+                            echo defined('RIGHT') && RIGHT ? RIGHT : '';
                         echo '</div>';
                     }
                 echo '</div>';
@@ -246,13 +239,15 @@ class Main extends Core {
         $html .= form_text('user_pass', '', '', ['placeholder' => $locale['global_102'], 'type' => 'password', 'required' => TRUE, 'input_id' => 'userpassword']);
         $html .= form_checkbox('remember_me', $locale['global_103'], '', ['value' => 'y', 'reverse_label' => TRUE, 'input_id' => 'rememberme']);
         $html .= form_button('login', $locale['global_104'], '', ['class' => 'btn-primary m-t-5 m-b-5', 'icon' => 'fa fa-sign-in', 'input_id' => 'loginbtn']);
-        $html .= str_replace(['[LINK]', '[/LINK]'], ['<a href="'.BASEDIR.'lostpassword.php">', '</a>'], $locale['global_106']);
+        $html .= str_replace(['[LINK]', '[/LINK]'], ['<a class="display-block" href="'.BASEDIR.'lostpassword.php">', '</a>'], $locale['global_106']);
         $html .= closeform();
 
         return $html;
     }
 
     private function Footer() {
+        $settings = fusion_get_settings();
+
         echo '<footer class="site-footer">';
             echo '<div id="backtotop" class="center-x"><a href="#" class="button"><i class="fa fa-angle-up"></i></a></div>';
 
@@ -268,11 +263,11 @@ class Main extends Core {
                 echo '<div class="row">';
                     echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
                         echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
-                        echo fusion_get_settings('description');
+                        echo $settings['description'];
                         echo '<br/>';
-                        echo stripslashes(fusion_get_settings('footer'));
+                        echo stripslashes($settings['footer']);
 
-                        if (fusion_get_settings('visitorcounter_enabled')) {
+                        if ($settings['visitorcounter_enabled']) {
                             echo '<br/>';
                             echo showcounter();
                         }
@@ -296,7 +291,7 @@ class Main extends Core {
                 echo '<div class="errors">'.$errors.'</div>';
             }
 
-            if (fusion_get_settings('rendertime_enabled') == 1 || fusion_get_settings('rendertime_enabled') == 2) {
+            if ($settings['rendertime_enabled'] == 1 || $settings['rendertime_enabled'] == 2) {
                 echo '<div id="rendertime">';
                     echo showrendertime();
                     echo showMemoryUsage();

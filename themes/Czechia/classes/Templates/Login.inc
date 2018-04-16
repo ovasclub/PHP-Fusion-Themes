@@ -46,22 +46,24 @@ class Login extends Core {
         if (iMEMBER) {
             $msg_count = dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'");
             echo '<h3 class="text-center">'.$userdata['user_name'].'</h3>';
-            echo "<div class='text-center'><br />\n";
-            echo THEME_BULLET." <a href='".BASEDIR."edit_profile.php' class='side'>".$locale['global_120']."</a><br />\n";
-            echo THEME_BULLET." <a href='".BASEDIR."messages.php' class='side'>".$locale['global_121']."</a><br />\n";
-            echo THEME_BULLET." <a href='".BASEDIR."members.php' class='side'>".$locale['global_122']."</a><br />\n";
-            if (iADMIN && (iUSER_RIGHTS != "" || iUSER_RIGHTS != "C")) {
-                echo THEME_BULLET." <a href='".ADMIN."index.php".$aidlink."' class='side'>".$locale['global_123']."</a><br />\n";
+            echo '<div class="text-center"><br/>';
+            echo THEME_BULLET.' <a href="'.BASEDIR.'edit_profile.php" class="side">'.$locale['global_120'].'</a><br/>';
+            echo THEME_BULLET.' <a href="'.BASEDIR.'messages.php" class="side">'.$locale['global_121'].'</a><br/>';
+            echo THEME_BULLET.' <a href="'.BASEDIR.'members.php" class="side">'.$locale['global_122'].'</a><br/>';
+
+            if (iADMIN && (iUSER_RIGHTS != '' || iUSER_RIGHTS != 'C')) {
+                echo THEME_BULLET.' <a href="'.ADMIN.'index.php'.$aidlink.'" class="side">'.$locale['global_123'].'</a><br/>';
             }
-            echo THEME_BULLET." <a href='".BASEDIR."index.php?logout=yes' class='side'>".$locale['global_124']."</a><br />\n";
+
+            echo THEME_BULLET.' <a href="'.BASEDIR.'index.php?logout=yes" class="side">'.$locale['global_124'].'</a><br/>';
             if ($msg_count) {
-                echo "<br /><br />\n";
-                echo "<strong><a href='".BASEDIR."messages.php' class='side'>".sprintf($locale['global_125'], $msg_count);
-                echo ($msg_count == 1 ? $locale['global_126'] : $locale['global_127'])."</a></strong><br/>\n";
+                echo '<br/><br/>';
+                echo '<strong><a href="'.BASEDIR.'messages.php" class="side">'.sprintf($locale['global_125'], $msg_count);
+                echo ($msg_count == 1 ? $locale['global_126'] : $locale['global_127']).'</a></strong><br/>';
             }
 
             echo '<a href="'.BASEDIR.fusion_get_settings('opening_page').'">'.$locale['home'].'</a>';
-            echo "</div>\n";
+            echo '</div>';
         } else {
             echo renderNotices(getNotices(['all', FUSION_SELF]));
 
@@ -85,6 +87,14 @@ class Login extends Core {
             echo $info['login_button'];
             echo '<div class="display-block text-center m-t-10">'.$info['registration_link'].'</div>';
             echo $info['close_form'];
+
+            if (!empty($info['connect_buttons'])) {
+                echo '<hr/>';
+
+                foreach ($info['connect_buttons'] as $mhtml) {
+                    echo $mhtml;
+                }
+            }
         }
 
         echo '</div>';
