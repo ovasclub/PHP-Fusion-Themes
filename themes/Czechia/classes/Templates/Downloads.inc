@@ -63,9 +63,7 @@ class Downloads extends Core {
 
                             echo '<div class="preview">';
                                 if ($data['download_image']) {
-                                    echo '<div class="text-center">';
-                                    echo $data['download_image'];
-                                    echo '</div>';
+                                    echo '<div class="text-center" style="widht: 100px;height: 100px;">'.$data['download_image'].'</div>';
                                 } else {
                                     echo '<div class="display-inline-block image-wrap thumb text-center overflow-hide m-2">';
                                     echo get_image('imagenotfound', $data['download_title'], 'height: 100px;');
