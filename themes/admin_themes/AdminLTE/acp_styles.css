@@ -295,9 +295,6 @@ a:focus {
   -webkit-border-radius: 0 !important;
   border-radius: 0 !important;
 }
-.panel-txtarea .select2-container {
-  width: 100% !important;
-}
 .panel-txtarea .panel-heading .bbcode {
   margin: 5px 1px;
 }
