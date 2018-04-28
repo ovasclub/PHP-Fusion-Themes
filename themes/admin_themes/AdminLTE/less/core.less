@@ -282,7 +282,7 @@ a:focus {
 
 .panel-txtarea {
     .box-shadow(initial);
-    border: 1px solid #ddd;
+    border: 1px solid #ddd !important;
     .border-radius(0) !important;
 
     .select2-container {
@@ -307,8 +307,7 @@ a:focus {
                 }
 
                 > a {
-                    padding: 4px 7px;
-                    margin-top: 3px;
+                    padding: 5px 10px;
                 }
             }
         }
@@ -340,4 +339,10 @@ a:focus {
 
 .mce-fullscreen {
     z-index: 1050 !important;
+}
+
+.list-group-item,
+.list-group-item:first-child,
+.list-group-item:last-child {
+    .border-radius(0);
 }
