@@ -46,6 +46,7 @@ class Downloads extends Core {
 
     private static function display_download_index($info) {
         $locale = fusion_get_locale();
+        $dl_settings = get_settings('downloads');
 
         if (!empty($info['download_cat_description'])) {
             echo '<div class="display-block">'.$info['download_cat_description'].'</div>';
@@ -56,24 +57,23 @@ class Downloads extends Core {
                 foreach ($info['download_item'] as $download_id => $data) {
                     echo '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
                         echo '<div class="card item">';
-                            $cat_id = $data['download_cat_id'];
-                            $link = DOWNLOADS.'downloads.php?cat_id='.$cat_id.'&download_id='.$data['download_id'];
+                            $link = DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'&download_id='.$data['download_id'];
 
                             echo '<h4 class="m-t-5 text-center"><a href="'.$link.'">'.trimlink($data['download_title'], 20).'</a></h4>';
 
-                            echo '<div class="preview">';
-                                if ($data['download_image']) {
-                                    echo '<div class="text-center" style="widht: 100px;height: 100px;">'.$data['download_image'].'</div>';
-                                } else {
-                                    echo '<div class="display-inline-block image-wrap thumb text-center overflow-hide m-2">';
-                                    echo get_image('imagenotfound', $data['download_title'], 'height: 100px;');
-                                    echo '</div>';
-                                }
-                            echo '</div>';
+                            if ($dl_settings['download_screenshot'] == 1) {
+                                echo '<div class="preview display-inline-block image-wrap thumb text-center overflow-hide m-2">';
+                                    if (!empty($data['download_thumb']) && file_exists($data['download_thumb'])) {
+                                        echo '<img style="width: 140px;height: 140px;" class="img-responsive" src="'.$data['download_thumb'].'" alt="'.$data['download_title'].'"/>';
+                                    } else {
+                                        echo get_image('imagenotfound', $data['download_title'], 'width: 140px;height: 140px;');
+                                    }
+                                echo '</div>';
+                            }
 
                             echo '<div class="card-body">';
                                 echo '<div class="card-meta text-center">';
-                                    echo '<a class="m-r-5" href="'.DOWNLOADS.'downloads.php?cat_id='.$cat_id.'">'.$data['download_cat_name'].'</a>';
+                                    echo '<a class="m-r-5" href="'.DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'">'.$data['download_cat_name'].'</a>';
                                     echo '<br/><time>'.$data['download_post_time'].'</time>';
                                 echo '</div>';
 
@@ -100,8 +100,8 @@ class Downloads extends Core {
     }
 
     private static function display_download_item($info) {
-        $dl_settings = get_settings('downloads');
         $locale = fusion_get_locale();
+        $dl_settings = get_settings('downloads');
         self::SetParam('content_container', FALSE);
         $data = $info['download_item'];
 
@@ -124,12 +124,12 @@ class Downloads extends Core {
             echo '<hr/>';
 
             echo '<div class="row m-b-20">';
-                if ($dl_settings['download_screenshot']) {
+                if ($dl_settings['download_screenshot'] == 1) {
                     echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
-                        if ($data['download_image']) {
+                        if ($data['download_image'] && file_exists(DOWNLOADS.'images/'.$data['download_image'])) {
                             echo thumbnail(DOWNLOADS.'images/'.$data['download_image'], '200px');
                         } else {
-                            echo get_image('imagenotfound', $data['download_title']);
+                            echo get_image('imagenotfound', $data['download_title'], 'width: 200px;height: 200px;');
                         }
                     echo '</div>';
 
@@ -159,7 +159,7 @@ class Downloads extends Core {
                 echo '</div>';
             }
 
-            if ($dl_settings['download_screenshot'] && $data['download_image'] && file_exists(DOWNLOADS.'images/'.$data['download_image'])) {
+            if ($dl_settings['download_screenshot'] == 1 && $data['download_image'] && file_exists(DOWNLOADS.'images/'.$data['download_image'])) {
                 echo '<div class="p-10 m-b-20" style="border: 1px solid #ddd;">';
                     echo '<strong>'.self::SetLocale('11').'</strong><br/>';
                     $link = DOWNLOADS.'images/'.$data['download_image'];
