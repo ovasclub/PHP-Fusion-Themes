@@ -146,9 +146,7 @@ class Downloads extends Core {
                     $link = DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'];
                     echo '<a href="'.$link.'">'.$data['download_cat_name'].'</a>';
                     echo '<br/>';
-                    echo '<a href="'.$data['download_file_link'].'" class="btn btn-primary m-b-20">';
-                        echo '<i class="fa fa-download"></i> '.self::SetLocale('09');
-                    echo '</a>';
+                    echo '<a href="'.$data['download_file_link'].'" class="btn btn-primary m-b-20"><i class="fa fa-download"></i> '.self::SetLocale('09').($data['download_filesize'] ? ' ('.$data['download_filesize'].')' : '').'</a>';
                 echo '</div>';
             echo '</div>';
 
