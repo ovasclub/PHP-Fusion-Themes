@@ -8,6 +8,5 @@ Custom templates:
  - Errors Page
  - Login / Register
  - News
- - Profile
 
-![Preview](https://raw.githubusercontent.com/RobiNN1/PHP-Fusion-Themes/master/themes/Czechia/preview.png)
+![Preview](preview.png)

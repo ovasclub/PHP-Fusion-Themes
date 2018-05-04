@@ -1,7 +1,9 @@
 # PHP-Fusion v9 Themes
 
+Support is not guaranteed.
+
 - ### Themes:
-    - [Czechia](https://github.com/RobiNN1/PHP-Fusion-Themes/tree/master/themes/Czechia)
+    - [Czechia](themes/Czechia)
 
 - ### Admin Themes:
-    - [AdminLTE](https://github.com/RobiNN1/PHP-Fusion-Themes/tree/master/themes/admin_themes/AdminLTE)
+    - [AdminLTE](themes/admin_themes/AdminLTE)
