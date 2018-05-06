@@ -55,7 +55,7 @@ class News extends Core {
 
         echo '<div class="card clearfix">';
             if (!empty($info['news_last_updated'])) {
-                echo '<span class="m-r-10"><strong class="text-dark">'.$locale['news_0008'].':</strong> '.$info['news_last_updated'].'</span>';
+                echo '<span class="m-r-10"><strong class="text-dark">'.$locale['news_0008'].':</strong> '.(is_array($info['news_last_updated']) ? showdate('newsdate', $info['news_last_updated'][1]) : $info['news_last_updated']).'</span>';
             }
 
             echo '<span class="m-r-10">';
