@@ -105,7 +105,6 @@ class News extends Core {
             echo '<div class="card">';
                 echo '<div class="row equal-height">';
                     foreach ($info['news_items'] as $id => $data) {
-                        $data['news_cat_link'] = !empty($data['news_cat_link']) ? $data['news_cat_link'] : $data['news_cat_url'];
                         $link = INFUSIONS.'news/news.php?readmore='.$data['news_id'];
 
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-t-15">';
@@ -121,7 +120,7 @@ class News extends Core {
                                     echo '<div class="meta">';
                                         echo '<span class="m-r-5"><i class="fa fa-user"></i> '.profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</span>';
                                         echo '<span class="m-r-5"><i class="fa fa-clock-o"></i> '.showdate(fusion_get_settings('newsdate'), $data['news_date']).'</span>';
-                                        echo '<span><i class="fa fa-folder-o"></i> <a href="'.$data['news_cat_link'].'">'.$data['news_cat_name'].'</a></span>';
+                                        echo '<span><i class="fa fa-folder-o"></i> <a href="'.INFUSIONS.'news/news.php?cat_id='.$data['news_cat_id'].'">'.$data['news_cat_name'].'</a></span>';
                                     echo '</div>';
                                     echo '<a href="'.$link.'" class="readmore m-t-5">'.self::SetLocale('05').'</a>';
                                 echo '</div>';
