@@ -1,0 +1,3 @@
+[submodule "php-fusion/Themes"]
+	path = php-fusion/Themes
+	url = https://github.com/php-fusion/Themes
