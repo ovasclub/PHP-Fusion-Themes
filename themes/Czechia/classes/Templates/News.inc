@@ -201,6 +201,7 @@ class News extends Core {
                 echo '<div><b>'.$data['news_news'].'</b></div>';
                 echo '<br/>';
                 echo $data['news_extended'];
+                echo !empty($data['news_pagenav']) ? '<div class="text-center m-10">'.$data['news_pagenav'].'</div>' : '';
             echo '</div>';
 
             if (!empty($data['news_gallery'])) {
