@@ -265,7 +265,7 @@ class Main extends Core {
                         echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
                         echo $settings['description'];
                         echo '<br/>';
-                        echo stripslashes($settings['footer']);
+                        echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
 
                         if ($settings['visitorcounter_enabled']) {
                             echo '<br/>';
