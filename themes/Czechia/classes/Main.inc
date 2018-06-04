@@ -29,8 +29,10 @@ use \PHPFusion\SiteLinks;
  */
 class Main extends Core {
     public function __construct() {
+        $settings = fusion_get_settings();
+
         if ($this->GetParam('header') == TRUE) {
-            $url = fusion_get_settings('siteurl').'themes/Czechia/assets/';
+            $url = $settings['siteurl'].'themes/Czechia/assets/';
             OutputHandler::addToFooter('<script type="text/javascript" src="'.$url.'js/scripts.min.js"></script>');
             OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
             OutputHandler::addToFooter('<script type="text/javascript" src="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>');
@@ -43,7 +45,7 @@ class Main extends Core {
                 $icon = '<a href="#" id="toggle-leftmenu" class="navbar-brand icon"><i class="fa fa-bars"></i></a>';
             }
 
-            $logo = '<a class="navbar-brand hidden-md hidden-lg" href="'.BASEDIR.fusion_get_settings('opening_page').'">'.fusion_get_settings('sitename').'</a>';
+            $logo = '<a class="navbar-brand hidden-md hidden-lg" href="'.BASEDIR.$settings['opening_page'].'">'.$settings['sitename'].'</a>';
 
             $menu_options = [
                 'id'           => 'main-menu',
@@ -109,13 +111,14 @@ class Main extends Core {
     private function Header() {
         $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
+        $settings = fusion_get_settings();
         $languages = fusion_get_enabled_languages();
 
         echo '<header class="theme-header">';
             echo '<div class="container"><div class="row">';
                 echo '<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">';
-                    echo '<a href="'.BASEDIR.fusion_get_settings('opening_page').'" title="'.fusion_get_settings('sitename').'">';
-                        echo '<img src="'.BASEDIR.fusion_get_settings('sitebanner').'" class="logo" alt="Logo"/>';
+                    echo '<a href="'.BASEDIR.$settings['opening_page'].'" title="'.$settings['sitename'].'">';
+                        echo '<img src="'.BASEDIR.$settings['sitebanner'].'" class="logo" alt="Logo"/>';
                     echo '</a>';
                 echo '</div>';
                 echo '<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">';
@@ -174,7 +177,7 @@ class Main extends Core {
                                 $msg_count = dbcount(
                                     "('message_id')",
                                     DB_MESSAGES, "message_to=:my_id AND message_read=:unread AND message_folder=:inbox",
-                                    [':inbox' => 0, ':my_id' => fusion_get_userdata('user_id'), ':unread' => 0]
+                                    [':inbox' => 0, ':my_id' => $userdata['user_id'], ':unread' => 0]
                                 );
 
                                 $messages_count = '';
@@ -202,7 +205,7 @@ class Main extends Core {
                                         echo '</li>';
                                     echo '</ul>';
                                 echo '</li>';
-                                if (fusion_get_settings('enable_registration')) {
+                                if ($settings['enable_registration']) {
                                     echo '<li><a href="'.BASEDIR.'register.php"><i class="fa fa-user-plus"></i> '.$locale['register'].'</a></li>';
                                 }
                             }

@@ -97,13 +97,14 @@ class Search {
 
     private function DisplayResult() {
         $locale = fusion_get_locale();
+        $settings = fusion_get_settings();
 
         if (!empty($this->result['data'])) {
             foreach ($this->result['data'] as $data) {
                 if (stristr($data['admin_link'], '/infusions/')) {
-                    $link = fusion_get_settings('siteurl').'infusions/'.$data['admin_link'];
+                    $link = $settings['siteurl'].'infusions/'.$data['admin_link'];
                 } else {
-                    $link = fusion_get_settings('siteurl').'administration/'.$data['admin_link'];
+                    $link = $settings['siteurl'].'administration/'.$data['admin_link'];
                 }
 
                 $link = $link.fusion_get_aidlink();
@@ -114,9 +115,9 @@ class Search {
                     $title = isset($locale[$data['admin_rights']]) ? $locale[$data['admin_rights']] : $title;
                 }
 
-                $icon = strtr(get_image("ac_".$data['admin_rights']), [
-                    INFUSIONS => fusion_get_settings('siteurl').'infusions/',
-                    ADMIN     => fusion_get_settings('siteurl').'administration/'
+                $icon = strtr(get_image('ac_'.$data['admin_rights']), [
+                    INFUSIONS => $settings['siteurl'].'infusions/',
+                    ADMIN     => $settings['siteurl'].'administration/'
                 ]);
 
                 if (checkrights($data['admin_rights'])) {

@@ -28,6 +28,7 @@ use CzechiaTheme\Main;
 class Error extends Core {
     public static function display_error_page($data) {
         $locale = fusion_get_locale();
+        $settings = fusion_get_settings();
 
         add_to_head('<style type="text/css">body {background: #0077C0;color: #fff;}.wrapper {margin: 50px auto;max-width: 600px;}.logo {max-height: 120px;}.status {font-size: 5em;}@media (min-width: 400px) {.status {font-size: 7em;}}@media (min-width: 768px) {.status {font-size: 10em;}}</style>');
 
@@ -38,8 +39,8 @@ class Error extends Core {
 
         echo '<div class="wrapper">';
             echo '<div class="logo">';
-                echo '<a href="'.BASEDIR.fusion_get_settings('opening_page').'" title="'.fusion_get_settings('sitename').'">';
-                    echo '<img src="'.fusion_get_settings('siteurl').'/'.fusion_get_settings('sitebanner').'" class="logo center-x" alt="Logo"/>';
+                echo '<a href="'.BASEDIR.$settings['opening_page'].'" title="'.$settings['sitename'].'">';
+                    echo '<img src="'.$settings['siteurl'].'/'.$settings['sitebanner'].'" class="logo center-x" alt="Logo"/>';
                 echo '</a>';
             echo '</div>';
 
