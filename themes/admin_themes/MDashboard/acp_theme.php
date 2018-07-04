@@ -20,6 +20,7 @@ if (!defined('IN_FUSION')) {
 }
 
 define('MD', THEMES.'admin_themes/MDashboard/');
+require_once INCLUDES.'theme_functions_include.php';
 require_once MD.'acp_autoloader.php';
 
 if (!defined('MD_LOCALE')) {
