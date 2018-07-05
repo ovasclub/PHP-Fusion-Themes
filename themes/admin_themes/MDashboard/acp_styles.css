@@ -1262,3 +1262,27 @@ input[type="checkbox"]:disabled:checked:after,
     -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.panel-txtarea {
+    border: 1px solid #ddd !important;
+    -webkit-border-radius: 3px !important;
+    border-radius: 3px !important;
+}
+
+.panel-txtarea .panel-heading .bbcode {
+    margin: 5px 1px;
+}
+
+.panel-txtarea .panel-heading .bbcode-img .caret {
+    margin-left: -5px !important;
+}
+
+.panel-txtarea .editor-wrapper > .nav > li a:active,
+.panel-txtarea .editor-wrapper > .nav > li.active > a {
+    background-color: #e7e7e7;
+    border-color: #ddd;
+}
+
+.panel-txtarea .editor-wrapper > .nav > li > a {
+    padding: 5px 10px;
+}

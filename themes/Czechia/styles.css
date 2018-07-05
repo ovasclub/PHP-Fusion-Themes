@@ -199,9 +199,6 @@ hr {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-.panel-txtarea .bbcode_input {
-  height: 35px;
-}
 .panel-txtarea .editor-wrapper > .nav > li a:active,
 .panel-txtarea .editor-wrapper > .nav > li.active > a {
   background-color: #798d8f;

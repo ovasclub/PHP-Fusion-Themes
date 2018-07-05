@@ -298,9 +298,6 @@ a:focus {
 .panel-txtarea .panel-heading .bbcode {
   margin: 5px 1px;
 }
-.panel-txtarea .bbcode_input {
-  height: 35px;
-}
 .panel-txtarea .editor-wrapper > .nav > li a:active,
 .panel-txtarea .editor-wrapper > .nav > li.active > a {
   background-color: #e7e7e7;
