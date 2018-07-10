@@ -25,14 +25,16 @@ namespace CzechiaTheme;
  */
 class Core {
     private static $options = [
-        'right'   => TRUE,
-        'header'  => TRUE,
-        'footer'  => TRUE,
-        'notices' => TRUE
+        'right'         => TRUE,
+        'header'        => TRUE,
+        'footer'        => TRUE,
+        'footer_panels' => TRUE,
+        'notices'       => TRUE
     ];
 
     /**
      * @param null $name
+     *
      * @return mixed
      */
     protected static function GetParam($name = NULL) {
@@ -56,6 +58,7 @@ class Core {
 
     /**
      * @param null $key
+     *
      * @return mixed
      */
     public static function SetLocale($key = NULL) {

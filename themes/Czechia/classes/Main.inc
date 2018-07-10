@@ -196,13 +196,7 @@ class Main extends Core {
 
                                     echo '<ul class="dropdown-menu" aria-labelledby="login-register">';
                                         echo '<li>'.self::LoginForm().'</li>';
-                                        echo '<li>';
-                                            echo str_replace(
-                                                ['[LINK]', '[/LINK]'],
-                                                ['<a href="'.BASEDIR.'lostpassword.php">', '</a>'],
-                                                $locale['global_106']
-                                            );
-                                        echo '</li>';
+                                        echo '<li>'.str_replace(['[LINK]', '[/LINK]'], ['<a class="display-block" href="'.BASEDIR.'lostpassword.php">', '</a>'], $locale['global_106']).'</li>';
                                     echo '</ul>';
                                 echo '</li>';
                                 if ($settings['enable_registration']) {
@@ -242,7 +236,6 @@ class Main extends Core {
         $html .= form_text('user_pass', '', '', ['placeholder' => $locale['global_102'], 'type' => 'password', 'required' => TRUE, 'input_id' => 'userpassword']);
         $html .= form_checkbox('remember_me', $locale['global_103'], '', ['value' => 'y', 'reverse_label' => TRUE, 'input_id' => 'rememberme']);
         $html .= form_button('login', $locale['global_104'], '', ['class' => 'btn-primary m-t-5 m-b-5', 'icon' => 'fa fa-sign-in', 'input_id' => 'loginbtn']);
-        $html .= str_replace(['[LINK]', '[/LINK]'], ['<a class="display-block" href="'.BASEDIR.'lostpassword.php">', '</a>'], $locale['global_106']);
         $html .= closeform();
 
         return $html;
@@ -252,42 +245,44 @@ class Main extends Core {
         $settings = fusion_get_settings();
 
         echo '<footer class="site-footer">';
-            echo '<div id="backtotop" class="center-x"><a href="#" class="button"><i class="fa fa-angle-up"></i></a></div>';
+            if (self::GetParam('footer_panels') == TRUE) {
+                echo '<div id="backtotop" class="center-x"><a href="#" class="button"><i class="fa fa-angle-up"></i></a></div>';
 
-            echo '<div id="footer">';
-                echo '<div class="row">';
-                    echo defined('USER1') && USER1 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER1.'</div>' : '';
-                    echo defined('USER2') && USER2 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER2.'</div>' : '';
-                    echo defined('USER3') && USER3 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER3.'</div>' : '';
-                    echo defined('USER4') && USER4 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER4.'</div>' : '';
-                echo '</div>';
+                echo '<div id="footer">';
+                    echo '<div class="row">';
+                        echo defined('USER1') && USER1 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER1.'</div>' : '';
+                        echo defined('USER2') && USER2 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER2.'</div>' : '';
+                        echo defined('USER3') && USER3 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER3.'</div>' : '';
+                        echo defined('USER4') && USER4 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER4.'</div>' : '';
+                    echo '</div>';
 
-                $grid = 4;
-                echo '<div class="row">';
-                    echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                        echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
-                        echo $settings['description'];
-                        echo '<br/>';
-                        echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
-
-                        if ($settings['visitorcounter_enabled']) {
+                    $grid = 4;
+                    echo '<div class="row">';
+                        echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
+                            echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
+                            echo $settings['description'];
                             echo '<br/>';
-                            echo showcounter();
+                            echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
+
+                            if ($settings['visitorcounter_enabled']) {
+                                echo '<br/>';
+                                echo showcounter();
+                            }
+                        echo '</div>';
+
+                        echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
+                            Footer\Comments::Panel();
+                        echo '</div>';
+
+                        $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
+                        if ($news) {
+                            echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
+                                Footer\News::Panel();
+                            echo '</div>';
                         }
                     echo '</div>';
-
-                    echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                        Footer\Comments::Panel();
-                    echo '</div>';
-
-                    $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
-                    if ($news) {
-                        echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                            Footer\News::Panel();
-                        echo '</div>';
-                    }
                 echo '</div>';
-            echo '</div>';
+            }
 
             $errors = showFooterErrors();
             if ($errors) {

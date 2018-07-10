@@ -1,4 +1,6 @@
 $(function () {
+    let body = $("body");
+
     $('[data-toggle="tooltip"]').tooltip();
 
     $(".sidebar .sidebar-content").mCustomScrollbar({
@@ -13,11 +15,37 @@ $(function () {
     });
 
     $(".btn").ripple();
+
+    $("#toggle-sidebar").on("click", function (e) {
+        e.preventDefault();
+
+        if (body.hasClass("sidebar-toggled")) {
+            body.removeClass("sidebar-toggled");
+            Cookies.set("sidebar-toggled", 0);
+        } else {
+            body.addClass("sidebar-toggled");
+            Cookies.set("sidebar-toggled", 1);
+        }
+    });
+
+    $("#messages-box").on("click", function (e) {
+        e.preventDefault();
+        $("#pms-box").toggle();
+        $("#sidebar-menu").toggle();
+    });
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 0) {
+            $(".topnav, .sidebar .logo").addClass("active");
+        } else {
+            $(".topnav, .sidebar .logo").removeClass("active");
+        }
+    });
 });
 
 $.fn.extend({
     ripple: function (options, callback) {
-        var self = this;
+        let self = this;
 
         self.defaults = {
             debug: false,
@@ -35,7 +63,7 @@ $.fn.extend({
         self.defaults = $.extend({}, self.defaults, options);
 
         $(document).on(self.defaults.on, self.selector, function (e) {
-            var ripple,
+            let ripple,
                 settings;
 
             $(this).addClass("has-ripple");
@@ -47,7 +75,7 @@ $.fn.extend({
                 ripple.appendTo($(this));
 
                 if (!ripple.height() && !ripple.width()) {
-                    var size = Math.max($(this).outerWidth(), $(this).outerHeight());
+                    let size = Math.max($(this).outerWidth(), $(this).outerHeight());
 
                     ripple.css({
                         height: size,
@@ -56,7 +84,7 @@ $.fn.extend({
                 }
 
                 if (settings.rate && typeof settings.rate === "function") {
-                    var rate = Math.round(ripple.width() / settings.duration),
+                    let rate = Math.round(ripple.width() / settings.duration),
                         filteredRate = settings.rate(rate),
                         newDuration = (ripple.width() / filteredRate);
 
@@ -65,7 +93,7 @@ $.fn.extend({
                     }
                 }
 
-                var color = (settings.color === "auto") ? $(this).css("color") : settings.color,
+                let color = (settings.color === "auto") ? $(this).css("color") : settings.color,
                     css = {
                         animationDuration: (settings.duration).toString() + "s",
                         animationTimingFunction: settings.easing,
@@ -82,7 +110,7 @@ $.fn.extend({
 
             ripple.removeClass("ripple-animate");
 
-            var x = e.pageX - $(this).offset().left - ripple.width() / 2,
+            let x = e.pageX - $(this).offset().left - ripple.width() / 2,
                 y = e.pageY - $(this).offset().top - ripple.height() / 2;
 
             if (settings.multi) {

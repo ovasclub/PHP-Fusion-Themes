@@ -26,7 +26,7 @@ class Login {
         $locale = fusion_get_locale('', MD_LOCALE);
         $userdata = fusion_get_userdata();
 
-        add_to_head('<style type="text/css">body{background: url("'.MD.'images/login.jpg") no-repeat fixed center;background-size: cover;}</style>');
+        add_to_head('<style type="text/css">body, html {height: 100%;}body{background: url("'.MD.'images/login.jpg") no-repeat fixed center;background-size: cover;}</style>');
         add_to_jquery('$("#admin_password").focus();');
 
         echo '<div class="login-wrapper p-20">';

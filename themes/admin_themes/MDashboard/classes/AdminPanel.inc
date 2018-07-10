@@ -26,6 +26,7 @@ use \PHPFusion\OutputHandler;
  */
 class AdminPanel {
     private static $breadcrumbs = FALSE;
+    private $messages = [];
 
     public function __construct() {
         OutputHandler::addToFooter('<script type="text/javascript" src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
@@ -79,56 +80,49 @@ class AdminPanel {
                     echo '</li>';
                 }
 
-                $msg_count = dbcount(
-                    "('message_id')",
-                    DB_MESSAGES, "message_to=:my_id AND message_read=:unread AND message_folder=:inbox",
-                    [':inbox' => 0, ':my_id' => $userdata['user_id'], ':unread' => 0]
-                );
+                $messages_count = $this->Messages();
+                $messages_count = !empty($messages_count) ? '<span class="label label-danger msg-count">'.count($messages_count).'</span>' : '';
 
-                $messages_count = '';
-                if ($msg_count > 0) {
-                    $messages_count = '<span class="label label-danger msg-count">'.$msg_count.'</span>';
-                }
-
-                echo '<li><a href="'.BASEDIR.'messages.php" title="'.$locale['message'].'"><i class="fa fa-envelope"></i>'.$messages_count.'</a></li>';
+                echo '<li><a '.(!empty($messages_count) ? 'id="messages-box"' : '').' href="'.BASEDIR.'messages.php" title="'.$locale['message'].'"><i class="fa fa-envelope"></i>'.$messages_count.'</a></li>';
                 echo '<li><a href="'.BASEDIR.'index.php" title="'.fusion_get_settings('sitename').'"><i class="fa fa-home"></i></a></li>';
             echo '</ul>';
 
-            echo '<div class="sidebar-form">';
-                echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
-                echo '<i class="fa fa-search input-search-icon"></i>';
-            echo '</div>';
-            echo '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
-            echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
+            echo '<div id="sidebar-menu">';
+                echo '<div class="sidebar-form">';
+                    echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
+                    echo '<i class="fa fa-search input-search-icon"></i>';
+                echo '</div>';
+                echo '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
+                echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
 
-            echo Admins::getInstance()->vertical_admin_nav(TRUE);
+                echo Admins::getInstance()->vertical_admin_nav(TRUE);
+            echo '</div>';
+
+            $messages = $this->GetMessages();
+
+            if (!empty($messages)) {
+                echo '<ul id="pms-box" style="display: none;">';
+                foreach ($messages as $message) {
+                    echo '<li>';
+                        echo '<div class="msg-block">';
+                            echo '<div class="avatar-block">';
+                                echo display_avatar($message['user'], '40px', '', FALSE, 'img-circle');
+                                echo $message['user']['user_lastvisit'] >= time() - 300 ? '<i class="fa fa-circle text-success"></i>' : '';
+                            echo '</div>';
+                            echo '<div class="clearfix">';
+                                echo $message['user']['user_name'];
+                                echo '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';
+                            echo '</div>';
+                        echo '</div>';
+                    echo '</li>';
+                }
+                echo '</ul>';
+            }
         echo '</div></aside>';
     }
 
     private function Navigation() {
         $sections  = Admins::getInstance()->getAdminSections();
-
-        OutputHandler::addToJQuery('
-            $("#toggle-sidebar").on("click", function (e) {
-                e.preventDefault();
-                            
-                if ($("body").hasClass("sidebar-toggled")) {
-                    $("body").removeClass("sidebar-toggled");
-                    Cookies.set("sidebar-toggled", 0);
-                } else {
-                    $("body").addClass("sidebar-toggled");
-                    Cookies.set("sidebar-toggled", 1);
-                }
-            });
-            
-            $(window).scroll(function() {
-                if ($(window).scrollTop() > 0) {
-                    $(".topnav, .sidebar .logo").addClass("active");
-                } else {
-                    $(".topnav, .sidebar .logo").removeClass("active");
-                }
-            });
-        ');
 
         echo '<nav class="topnav animate">';
             echo '<ul class="left top-navbar navbar-left pull-left m-b-0">';
@@ -231,5 +225,42 @@ class AdminPanel {
                 }
             }
         }
+    }
+
+    private function Messages() {
+        $userdata = fusion_get_userdata();
+
+        $result = dbquery("
+            SELECT message_id, message_subject, message_from user_id, u.user_name, u.user_status, u.user_avatar, u.user_lastvisit, message_datestamp
+            FROM ".DB_MESSAGES."
+            INNER JOIN ".DB_USERS." u ON u.user_id=message_from
+            WHERE message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
+            GROUP BY message_id
+        ");
+
+        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
+            if (dbrows($result) > 0) {
+                while ($data = dbarray($result)) {
+                    $this->messages[] = [
+                        'link'      => $data['message_id'],
+                        'title'     => $data['message_subject'],
+                        'user'      => [
+                            'user_id'        => $data['user_id'],
+                            'user_name'      => $data['user_name'],
+                            'user_status'    => $data['user_status'],
+                            'user_avatar'    => $data['user_avatar'],
+                            'user_lastvisit' => $data['user_lastvisit']
+                        ],
+                        'datestamp' => timer($data['message_datestamp'])
+                    ];
+                }
+            }
+        }
+
+        return $this->messages;
+    }
+
+    private function GetMessages() {
+        return $this->messages;
     }
 }
