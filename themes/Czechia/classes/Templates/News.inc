@@ -172,7 +172,6 @@ class News extends Core {
                 $action = $data['news_admin_actions'];
                 if (!empty($action)) {
                     echo '<div class="btn-group">';
-
                         echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank">';
                             echo '<i class="fa fa-print"></i>';
                         echo '</a>';
@@ -186,6 +185,10 @@ class News extends Core {
                         echo '</a>';
 
                     echo '</div>';
+                } else {
+                    echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank">';
+                        echo '<i class="fa fa-print"></i>';
+                    echo '</a>';
                 }
             echo '</div>';
 

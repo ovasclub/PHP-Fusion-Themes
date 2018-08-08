@@ -20,11 +20,16 @@ $(function () {
         e.preventDefault();
         body.toggleClass("leftmenu-toggled");
         body.css("padding-right", getScrollbarWidth() + "px");
+
+        if ($("#main-menu").hasClass("affix")) {
+            $("#main-menu").css("width", "calc(100% - " + getScrollbarWidth() + "px)");
+        }
     });
 
     $(".overlay").bind("click", function () {
         body.removeClass("leftmenu-toggled");
         body.css("padding-right", "0px");
+        $("#main-menu").css("width", "100%");
     });
 
     $("#main-menu").affix({
