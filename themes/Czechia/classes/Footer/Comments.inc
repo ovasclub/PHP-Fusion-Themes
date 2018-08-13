@@ -42,14 +42,9 @@ class Comments extends Core {
 
         if (dbrows($result)) {
             $i = 0;
-
             $info = [];
 
             while ($data = dbarray($result)) {
-                if ($i == $display_comments) {
-                    break;
-                }
-
                 switch ($data['comment_type']) {
                     case 'A':
                         $result_a = dbquery("SELECT ar.article_subject
@@ -166,6 +161,9 @@ class Comments extends Core {
                         break;
                 }
 
+                if ($i == $display_comments) {
+                    break;
+                }
                 $i++;
             }
 

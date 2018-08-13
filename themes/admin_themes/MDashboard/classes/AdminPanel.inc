@@ -105,10 +105,6 @@ class AdminPanel {
                 foreach ($messages as $message) {
                     echo '<li>';
                         echo '<div class="msg-block">';
-                            echo '<div class="avatar-block">';
-                                echo display_avatar($message['user'], '40px', '', FALSE, 'img-circle');
-                                echo $message['user']['user_lastvisit'] >= time() - 300 ? '<i class="fa fa-circle text-success"></i>' : '';
-                            echo '</div>';
                             echo '<div class="clearfix">';
                                 echo $message['user']['user_name'];
                                 echo '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';

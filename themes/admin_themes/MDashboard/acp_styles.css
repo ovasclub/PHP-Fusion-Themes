@@ -49,7 +49,7 @@ a:focus {
 
 .sidebar {
     background-color: #FCFCFC;
-    width: 250px;
+    width: 230px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -197,6 +197,7 @@ a:focus {
     width: 40px;
     height: 40px;
     text-align: center;
+    font-size: 24px;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     padding: 7px;
@@ -228,7 +229,7 @@ a:focus {
     border-top: 4px solid \9;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
-    margin-top: -30px;
+    margin-top: -10px;
 }
 
 .sidebar .user-actions .label {
@@ -263,15 +264,15 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
 }
 
 .sidebar-toggled .topnav {
-    margin-left: 250px;
+    margin-left: 230px;
 }
 
 @media (min-width: 768px) {
     .topnav {
-        width: -webkit-calc(100% - 250px);
-        width: -moz-calc(100% - 250px);
-        width: calc(100% - 250px);
-        margin-left: 250px;
+        width: -webkit-calc(100% - 230px);
+        width: -moz-calc(100% - 230px);
+        width: calc(100% - 230px);
+        margin-left: 230px;
     }
 
     .sidebar-toggled .topnav {
@@ -337,7 +338,7 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
 
 @media (min-width: 768px) {
     .content-wrapper {
-        margin-left: 250px;
+        margin-left: 230px;
     }
 
     .sidebar-toggled .content-wrapper {
@@ -458,7 +459,7 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
     display: block;
     float: left;
     height: 100px;
-    width: 100px;
+    width: 90px;
     text-align: center;
     font-size: 45px;
     line-height: 90px;
@@ -471,7 +472,7 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
 
 .info-box-content {
     padding: 5px 10px;
-    margin-left: 100px;
+    margin-left: 90px;
 }
 
 .info-box-text {
@@ -1292,15 +1293,12 @@ input[type="checkbox"]:disabled:checked:after,
     margin: 5px;
 }
 
-#pms-box > li .msg-block img {
-    float: left;
-    margin-right: 10px;
+#pms-box > li .msg-block {
+    border-bottom: 1px solid #ddd;
 }
 
-#pms-box > li .msg-block .avatar-block i,
-#pms-box > li .msg-block .avatar-block svg {
-    position: absolute;
-    margin-left: -20px;
+#pms-box > li:first-child .msg-block {
+    border-top: 1px solid #ddd;
 }
 
 #pms-box > li .msg-block .msg-date abbr {
