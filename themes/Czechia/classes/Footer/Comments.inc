@@ -159,8 +159,6 @@ class Comments extends Core {
                         }
                         break;
                 }
-
-                $i++;
             }
 
             echo '<ul class="list-style-none break-words">';
