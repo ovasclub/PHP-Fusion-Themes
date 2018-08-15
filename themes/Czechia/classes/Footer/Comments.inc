@@ -30,7 +30,6 @@ class Comments extends Core {
 
         echo '<h3 class="title"><i class="fa fa-comments-o"></i> '.self::SetLocale('13').'</h3>';
 
-        $display_comments = 5;
         $comments_per_page = fusion_get_settings('comments_per_page');
 
         $result = dbquery("SELECT c.*, u.user_id, u.user_name, u.user_status, u.user_avatar
@@ -38,10 +37,10 @@ class Comments extends Core {
             LEFT JOIN ".DB_USERS." u ON u.user_id=c.comment_name
             WHERE c.comment_hidden=0
             ORDER BY c.comment_datestamp DESC
+            LIMIT 5
         ");
 
         if (dbrows($result)) {
-            $i = 0;
             $info = [];
 
             while ($data = dbarray($result)) {
@@ -161,9 +160,6 @@ class Comments extends Core {
                         break;
                 }
 
-                if ($i == $display_comments) {
-                    break;
-                }
                 $i++;
             }
 
