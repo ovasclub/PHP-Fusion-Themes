@@ -204,8 +204,8 @@ class Downloads extends Core {
 
         echo '</div>';
 
-        echo $data['download_allow_comments'] ? '<div class="card">'.$data['download_show_comments'].'</div>' : '';
-        $ratings = $data['download_allow_ratings'] ? '<div class="m-b-20 ratings-box">'.$data['download_show_ratings'].'</div>' : '';
+        echo $data['download_allow_comments'] && fusion_get_settings('comments_enabled') == 1 ? '<div class="card">'.$data['download_show_comments'].'</div>' : '';
+        $ratings = $data['download_allow_ratings'] && fusion_get_settings('ratings_enabled') == 1 ? '<div class="m-b-20 ratings-box">'.$data['download_show_ratings'].'</div>' : '';
         self::SetParam('right_middle_content', $ratings);
     }
 
