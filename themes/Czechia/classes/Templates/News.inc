@@ -172,21 +172,21 @@ class News extends Core {
                 $action = $data['news_admin_actions'];
                 if (!empty($action)) {
                     echo '<div class="btn-group">';
-                        echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank">';
+                        echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-sm" title="'.$locale['print'].'" target="_blank">';
                             echo '<i class="fa fa-print"></i>';
                         echo '</a>';
 
-                        echo '<a href="'.$action['edit']['link'].'" class="btn btn-warning btn-circle btn-xs" title="'.$locale['edit'].'">';
+                        echo '<a href="'.$action['edit']['link'].'" class="btn btn-warning btn-sm" title="'.$locale['edit'].'">';
                             echo '<i class="fa fa-pencil"></i>';
                         echo '</a>';
 
-                        echo '<a href="'.$action['delete']['link'].'" class="btn btn-danger btn-circle btn-xs" title="'.$locale['delete'].'">';
+                        echo '<a href="'.$action['delete']['link'].'" class="btn btn-danger btn-sm" title="'.$locale['delete'].'">';
                             echo '<i class="fa fa-trash"></i>';
                         echo '</a>';
 
                     echo '</div>';
                 } else {
-                    echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank">';
+                    echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-sm" title="'.$locale['print'].'" target="_blank">';
                         echo '<i class="fa fa-print"></i>';
                     echo '</a>';
                 }
