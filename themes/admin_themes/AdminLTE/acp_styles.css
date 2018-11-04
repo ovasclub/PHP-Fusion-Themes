@@ -620,7 +620,8 @@ a:focus {
 .user-panel:after {
   clear: both;
 }
-.user-panel > .image > img {
+.user-panel > .image > img,
+.user-panel > .image > .avatar > svg {
   width: 100% !important;
   max-width: 45px;
   height: auto;
@@ -768,6 +769,10 @@ a:focus {
   }
   .sidebar-mini.sidebar-collapse .main-header .navbar {
     margin-left: 50px;
+  }
+  .sidebar-mini.sidebar-collapse .user-panel > .image > img,
+  .sidebar-mini.sidebar-collapse .user-panel > .image > .avatar > svg {
+    max-width: 30px;
   }
 }
 .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
