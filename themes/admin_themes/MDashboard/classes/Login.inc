@@ -35,7 +35,7 @@ class Login {
                 echo '<div class="login-box">';
                     echo '<div class="clearfix m-b-20">';
                         echo '<div class="pull-left m-r-10">';
-                            echo display_avatar($userdata, '90px', '', FALSE, 'avatar');
+                            echo display_avatar($userdata, '90px', '', FALSE, 'img-rounded');
                         echo '</div>';
                         echo '<div class="text-left">';
                             echo '<h3>'.$locale['welcome'].',<br/>'.$userdata['user_name'].'</h3>';
