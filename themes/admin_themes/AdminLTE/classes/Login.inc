@@ -17,13 +17,9 @@
 +--------------------------------------------------------*/
 namespace AdminLTE;
 
-/**
- * Class Login
- * @package AdminLTE
- */
-class Login extends Components {
+class Login {
     public function __construct() {
-        $locale = fusion_get_locale();
+        $locale = fusion_get_locale('', ALTE_LOCALE);
         $userdata = fusion_get_userdata();
 
         add_to_jquery('$("#admin_password").focus();');
@@ -53,7 +49,7 @@ class Login extends Components {
                 $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&amp;pagenum=0' : FUSION_REQUEST;
                 echo openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
                     echo '<div class="input-group">';
-                        echo '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.self::SetLocale('007').'">';
+                        echo '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['ALT_007'].'">';
 
                         echo '<div class="input-group-btn">';
                             echo '<button type="submit" name="admin_login" class="btn" title="'.$locale['login'].'"><i class="fa fa-arrow-right text-muted"></i></button>';
@@ -68,7 +64,7 @@ class Login extends Components {
 
             echo '<div class="lockscreen-footer text-center">';
                 echo 'AdminLTE Admin Theme &copy; '.date('Y').'<br/>';
-                echo $this->SetLocale('006').' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                echo $locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
                 echo $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a><br/>';
                 echo showcopyright();
             echo '</div>';

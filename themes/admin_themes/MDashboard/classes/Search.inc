@@ -19,10 +19,6 @@ namespace MDashboard;
 
 use PHPFusion\Admins;
 
-/**
- * Class Search
- * @package MDashboard
- */
 class Search {
     private $result = [
         'data'   => [],

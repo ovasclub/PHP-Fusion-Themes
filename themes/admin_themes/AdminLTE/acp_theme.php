@@ -19,6 +19,14 @@ if (!defined('IN_FUSION')) {
     die('Access Denied');
 }
 
+if (!defined('ALTE_LOCALE')) {
+    if (file_exists(THEMES.'admin_themes/AdminLTE/locale/'.LANGUAGE.'.php')) {
+        define('ALTE_LOCALE', THEMES.'admin_themes/AdminLTE/locale/'.LANGUAGE.'.php');
+    } else {
+        define('ALTE_LOCALE', THEMES.'admin_themes/AdminLTE/locale/English.php');
+    }
+}
+
 define('ADMINLTE', THEMES.'admin_themes/AdminLTE/');
 require_once INCLUDES.'theme_functions_include.php';
 require_once ADMINLTE.'acp_autoloader.php';
@@ -55,19 +63,23 @@ function render_admin_dashboard() {
 }
 
 function openside($title = FALSE, $class = NULL) {
-    AdminLTE\Components::OpenSide($title, $class);
+    echo '<div class="box box-widget '.$class.'">';
+    echo $title ? '<div class="box-header with-border">'.$title.'</div>' : '';
+    echo '<div class="box-body">';
 }
 
-function closeside($title = FALSE) {
-    AdminLTE\Components::CloseSide($title);
+function closeside($footer = FALSE) {
+    echo '</div>';
+    echo $footer ? '<div class="box-footer">'.$footer.'</div>' : '';
+    echo '</div>';
 }
 
 function opentable($title, $class = NULL, $bg = TRUE) {
-    AdminLTE\Components::OpenTable($title, $class, $bg);
+    AdminLTE\AdminPanel::OpenTable($title, $class, $bg);
 }
 
 function closetable($bg = TRUE) {
-    AdminLTE\Components::CloseTable($bg);
+    AdminLTE\AdminPanel::CloseTable($bg);
 }
 
 \PHPFusion\OutputHandler::addHandler(function ($output = '') {

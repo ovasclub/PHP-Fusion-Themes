@@ -17,10 +17,6 @@
 +--------------------------------------------------------*/
 namespace MDashboard;
 
-/**
- * Class Dashboard
- * @package MDashboard
- */
 class Dashboard {
     private static function RenderDashboard() {
         global $members, $forum, $download, $news, $articles, $weblinks, $photos, $global_comments,
@@ -182,16 +178,12 @@ class Dashboard {
                                     echo '<h4 class="m-t-0">'.number_format($weblinks['weblink']).'</h4>';
                                 echo '</div>';
                                 echo '<div class="pull-left display-inline-block m-r-5">';
-                                    echo '<span class="text-smaller">'.$locale['257'].'</span><br/>';
-                                    echo '<h4 class="m-t-0">'.number_format($weblinks['comment']).'</h4>';
-                                echo '</div>';
-                                echo '<div class="pull-left display-inline-block m-r-5">';
                                     echo '<span class="text-smaller">'.$locale['254'].'</span><br/>';
                                     echo '<h4 class="m-t-0">'.number_format($weblinks['submit']).'</h4>';
                                 echo '</div>';
                             echo '</div>';
                         echo '</div>';
-                    echo "</div>";
+                    echo '</div>';
                 }
 
                 $gallery_ = function_exists('infusion_exists') ? infusion_exists('gallery') : db_exists(DB_PREFIX.'photos');

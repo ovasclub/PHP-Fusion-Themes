@@ -20,11 +20,10 @@ namespace AdminLTE;
 use \PHPFusion\Admins;
 use \PHPFusion\OutputHandler;
 
-/**
- * Class AdminPanel
- * @package AdminLTE
- */
-class AdminPanel extends Components {
+class AdminPanel {
+    private static $messages = [];
+    private static $breadcrumbs = FALSE;
+
     public function __construct() {
         OutputHandler::addToHead('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">');
         OutputHandler::addToFooter('<script type="text/javascript" src="'.ADMINLTE.'js/adminlte.min.js"></script>');
@@ -52,8 +51,6 @@ class AdminPanel extends Components {
 
     private function MainHeader() {
         $aidlink = fusion_get_aidlink();
-        $sections = Admins::getInstance()->getAdminSections();
-        $languages = fusion_get_enabled_languages();
 
         echo '<header class="main-header">';
             echo '<a href="'.ADMIN.'index.php'.$aidlink.'" class="logo">';
@@ -65,6 +62,7 @@ class AdminPanel extends Components {
                 echo '<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="fa fa-fw fa-bars"></i></a>';
 
                 echo '<ul class="nav navbar-nav navbar-left hidden-xs">';
+                    $sections = Admins::getInstance()->getAdminSections();
                     if (!empty($sections)) {
                         $i = 0;
 
@@ -78,6 +76,7 @@ class AdminPanel extends Components {
 
                 echo '<div class="navbar-custom-menu">';
                     echo '<ul class="nav navbar-nav">';
+                        $languages = fusion_get_enabled_languages();
                         if (count($languages) > 1) {
                             echo '<li class="dropdown languages-menu">';
                                 echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
@@ -107,7 +106,7 @@ class AdminPanel extends Components {
     }
 
     private function MessagesMenu() {
-        $locale = fusion_get_locale();
+        $locale = fusion_get_locale('', ALTE_LOCALE);
         $messages = self::Messages();
         $msg_icon = !empty($messages) ? '<span class="label label-danger" style="margin-top: inherit;">'.count($messages).'</span>' : '';
 
@@ -117,7 +116,7 @@ class AdminPanel extends Components {
                 echo '<span class="caret"></span>';
             echo '</a>';
             echo '<ul class="dropdown-menu">';
-                echo '<li class="header text-center">'.$this->SetLocale('001').' '.format_word(count($messages), $locale['fmt_message']).'</li>';
+                echo '<li class="header text-center">'.$locale['ALT_001'].' '.format_word(count($messages), $locale['fmt_message']).'</li>';
                 echo '<li><ul class="menu">';
                     if (!empty($messages)) {
                         foreach ($messages as $message) {
@@ -135,11 +134,11 @@ class AdminPanel extends Components {
                             echo '</li>';
                         }
                     } else {
-                        echo '<li class="text-center">'.$this->SetLocale('002').'</li>';
+                        echo '<li class="text-center">'.$locale['ALT_002'].'</li>';
                     }
 
                 echo '</ul></li>';
-                echo '<li class="footer"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$this->SetLocale('003').'</a></li>';
+                echo '<li class="footer"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$locale['ALT_003'].'</a></li>';
             echo '</ul>';
         echo '</li>';
     }
@@ -150,14 +149,14 @@ class AdminPanel extends Components {
 
         echo '<li class="dropdown user user-menu">';
             echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
-                echo display_avatar($userdata, '25px', '', FALSE, 'user-image');
+                echo display_avatar($userdata, '25px', '', FALSE, 'user-image img-circle');
                 echo '<span class="hidden-xs">'.$userdata['user_name'].'</span>';
                 echo '<span class="caret"></span>';
             echo '</a>';
             echo '<ul class="dropdown-menu">';
                 echo '<li class="user-header">';
                     echo display_avatar($userdata, '90px', '', FALSE, 'img-circle');
-                    echo '<p>'.$userdata['user_name'].'<small>'.$this->SetLocale('004').' '.showdate('longdate', $userdata['user_joined']).'</small></p>';
+                    echo '<p>'.$userdata['user_name'].'<small>'.$locale['ALT_004'].' '.showdate('longdate', $userdata['user_joined']).'</small></p>';
                 echo '</li>';
                 echo '<li class="user-body">';
                     echo '<div class="row">';
@@ -204,7 +203,7 @@ class AdminPanel extends Components {
                 echo '</div>';
 
                 echo '<div class="sidebar-form">';
-                    echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$this->SetLocale('005').'">';
+                    echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
                 echo '</div>';
                 echo '<ul class="sidebar-menu" id="search_result" style="display: none;"></ul>';
                 echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE.'images/loader.svg"/>';
@@ -304,7 +303,7 @@ class AdminPanel extends Components {
             }
 
             echo '<strong>';
-                echo 'AdminLTE Admin Theme &copy; '.date('Y').' '.$this->SetLocale('006').' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                echo 'AdminLTE Admin Theme &copy; '.date('Y').' '.$locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
                 echo $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a>';
             echo '</strong>';
             echo '<br/>'.str_replace('<br />', ' | ', showcopyright());
@@ -312,26 +311,28 @@ class AdminPanel extends Components {
     }
 
     private function ControlSidebar() {
+        $locale = fusion_get_locale('', ALTE_LOCALE);
+
         OutputHandler::addToFooter('<script type="text/javascript" src="'.ADMINLTE.'js/control-sidebar.min.js"></script>');
         ?>
         <aside class="control-sidebar control-sidebar-dark">
             <div class="content">
-                <h4 class="control-sidebar-heading"><?php echo $this->SetLocale('008'); ?></h4>
+                <h4 class="control-sidebar-heading"><?php echo $locale['ALT_008']; ?></h4>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        <input type="checkbox" data-layout="fixed" class="pull-right"> <?php echo $this->SetLocale('009'); ?>
+                        <input type="checkbox" data-layout="fixed" class="pull-right"> <?php echo $locale['ALT_009']; ?>
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"> <?php echo $this->SetLocale('010'); ?>
+                        <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"> <?php echo $locale['ALT_010']; ?>
                     </label>
                 </div>
 
-                <h4 class="control-sidebar-heading"><?php echo $this->SetLocale('011'); ?></h4>
-                <h5><?php echo $this->SetLocale('012'); ?></h5>
+                <h4 class="control-sidebar-heading"><?php echo $locale['ALT_011']; ?></h4>
+                <h5><?php echo $locale['ALT_012']; ?></h5>
 
                 <ul class="list-unstyled clearfix">
                     <li class="skin-preview">
@@ -372,7 +373,7 @@ class AdminPanel extends Components {
                     </li>
                 </ul>
 
-                <h5><?php echo $this->SetLocale('013'); ?></h5>
+                <h5><?php echo $locale['ALT_013']; ?></h5>
 
                 <ul class="list-unstyled clearfix">
                     <li class="skin-preview">
@@ -418,5 +419,67 @@ class AdminPanel extends Components {
 
         <div class="control-sidebar-bg"></div>
         <?php
+    }
+
+    public static function Messages() {
+        $userdata = fusion_get_userdata();
+
+        $result = dbquery("
+            SELECT message_id, message_subject, message_from user_id, u.user_name, u.user_status, u.user_avatar, message_datestamp
+            FROM ".DB_MESSAGES."
+            INNER JOIN ".DB_USERS." u ON u.user_id=message_from
+            WHERE message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
+            GROUP BY message_id
+        ");
+
+        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
+            if (dbrows($result) > 0) {
+                while ($data = dbarray($result)) {
+                    self::$messages[] = [
+                        'link'      => $data['message_id'],
+                        'title'     => $data['message_subject'],
+                        'user'      => [
+                            'user_id'     => $data['user_id'],
+                            'user_name'   => $data['user_name'],
+                            'user_status' => $data['user_status'],
+                            'user_avatar' => $data['user_avatar']
+                        ],
+                        'datestamp' => timer($data['message_datestamp'])
+                    ];
+                }
+            }
+        }
+
+        return self::$messages;
+    }
+
+    public static function GetMessages() {
+        return self::$messages;
+    }
+
+    public static function IsMobile() {
+        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER['HTTP_USER_AGENT']);
+    }
+
+    public static function OpenTable($title = FALSE, $class = NULL, $bg = TRUE) {
+        if (!empty($title)) {
+            echo '<section class="content-header">';
+            echo '<h1>'.$title.'</h1>';
+
+            if (self::$breadcrumbs == FALSE) {
+                echo render_breadcrumbs();
+                self::$breadcrumbs = TRUE;
+            }
+            echo '</section>';
+        }
+
+        echo '<section class="content '.$class.'">';
+
+        if ($bg == TRUE) echo '<div class="p-15" style="background-color: #fff;">';
+    }
+
+    public static function CloseTable($bg = TRUE) {
+        if ($bg == TRUE) echo '</div>';
+        echo '</section>';
     }
 }

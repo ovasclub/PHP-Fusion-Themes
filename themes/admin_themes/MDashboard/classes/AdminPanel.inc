@@ -20,13 +20,9 @@ namespace MDashboard;
 use \PHPFusion\Admins;
 use \PHPFusion\OutputHandler;
 
-/**
- * Class AdminPanel
- * @package MDashboard
- */
 class AdminPanel {
-    private static $breadcrumbs = FALSE;
     private $messages = [];
+    private static $breadcrumbs = FALSE;
 
     public function __construct() {
         OutputHandler::addToFooter('<script type="text/javascript" src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
@@ -50,9 +46,6 @@ class AdminPanel {
     private function Sidebar() {
         $locale = fusion_get_locale('', MD_LOCALE);
         $userdata = fusion_get_userdata();
-        $languages = fusion_get_enabled_languages();
-
-        $this->SearchAjax();
 
         echo '<aside class="sidebar animate"><div class="sidebar-content">';
             echo '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['MD_001'].'</span></div>';
@@ -69,6 +62,7 @@ class AdminPanel {
                     echo '</ul>';
                 echo '</li>';
 
+                $languages = fusion_get_enabled_languages();
                 if (count($languages) > 1) {
                     echo '<li class="dropdown languages-menu">';
                         echo '<a id="languages-list" class="icon-down" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.translate_lang_names(LANGUAGE).'"><i class="fa fa-globe"></i></a>';
@@ -115,32 +109,7 @@ class AdminPanel {
                 echo '</ul>';
             }
         echo '</div></aside>';
-    }
 
-    private function Navigation() {
-        $sections  = Admins::getInstance()->getAdminSections();
-
-        echo '<nav class="topnav animate">';
-            echo '<ul class="left top-navbar navbar-left pull-left m-b-0">';
-                echo '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
-            echo '</ul>';
-
-            $this->GetPageTitle();
-
-            echo '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
-                if (!empty($sections)) {
-                    $i = 0;
-                    foreach ($sections as $section_name) {
-                        $active = (isset($_GET['pagenum']) && $_GET['pagenum'] == $i || !isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i) ? ' class="active"' : '';
-                        echo '<li'.$active.'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
-                        $i++;
-                    }
-                }
-            echo '</ul>';
-        echo '</nav>';
-    }
-
-    private function SearchAjax() {
         OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
             var data = {
                 "pagestring": $(this).val(),
@@ -171,6 +140,28 @@ class AdminPanel {
         });');
     }
 
+    private function Navigation() {
+        echo '<nav class="topnav animate">';
+            echo '<ul class="left top-navbar navbar-left pull-left m-b-0">';
+                echo '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
+            echo '</ul>';
+
+            $this->GetPageTitle();
+
+            echo '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
+                $sections = Admins::getInstance()->getAdminSections();
+                if (!empty($sections)) {
+                    $i = 0;
+                    foreach ($sections as $section_name) {
+                        $active = (isset($_GET['pagenum']) && $_GET['pagenum'] == $i || !isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i) ? ' class="active"' : '';
+                        echo '<li'.$active.'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
+                        $i++;
+                    }
+                }
+            echo '</ul>';
+        echo '</nav>';
+    }
+
     private function Footer() {
         $locale = fusion_get_locale();
 
@@ -184,25 +175,6 @@ class AdminPanel {
             echo '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['MD_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
             echo '<br/>'.str_replace('<br />', ' | ', showcopyright());
         echo '</footer>';
-    }
-
-    public static function OpenTable($title = FALSE, $class = NULL) {
-        if (!empty($title)) {
-            echo '<section class="content-header">';
-            echo '<h1>'.$title.'</h1>';
-
-            if (self::$breadcrumbs == FALSE) {
-                echo render_breadcrumbs();
-                self::$breadcrumbs = TRUE;
-            }
-            echo '</section>';
-        }
-
-        echo '<section class="content '.$class.'">';
-    }
-
-    public static function CloseTable() {
-        echo '</section>';
     }
 
     private function GetPageTitle() {
@@ -258,5 +230,24 @@ class AdminPanel {
 
     private function GetMessages() {
         return $this->messages;
+    }
+
+    public static function OpenTable($title = FALSE, $class = NULL) {
+        if (!empty($title)) {
+            echo '<section class="content-header">';
+            echo '<h1>'.$title.'</h1>';
+
+            if (self::$breadcrumbs == FALSE) {
+                echo render_breadcrumbs();
+                self::$breadcrumbs = TRUE;
+            }
+            echo '</section>';
+        }
+
+        echo '<section class="content '.$class.'">';
+    }
+
+    public static function CloseTable() {
+        echo '</section>';
     }
 }

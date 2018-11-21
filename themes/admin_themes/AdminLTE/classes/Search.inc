@@ -19,10 +19,6 @@ namespace AdminLTE;
 
 use PHPFusion\Admins;
 
-/**
- * Class Search
- * @package AdminLTE
- */
 class Search {
     private $result = [
         'data'   => [],
