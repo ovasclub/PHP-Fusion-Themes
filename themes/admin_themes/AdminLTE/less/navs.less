@@ -7,6 +7,17 @@
     }
 }
 
+.nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+
+    > li {
+        float: none;
+    }
+}
+
 .nav-pills {
     > li > a {
         .border-radius(0);
@@ -133,9 +144,11 @@
 
         &.pull-right {
             float: none !important;
+
             > li {
                 float: right;
             }
+
             > li:first-of-type {
                 margin-right: 0;
 

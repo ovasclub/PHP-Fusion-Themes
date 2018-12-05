@@ -49,19 +49,6 @@
     }
 }
 
-.direct-chat-variant(@bg-color; @color: #fff) {
-    .right > .direct-chat-text {
-        background: @bg-color;
-        border-color: @bg-color;
-        color: @color;
-
-        &:after,
-        &:before {
-            border-left-color: @bg-color;
-        }
-    }
-}
-
 .border-radius(@radius) {
     -webkit-border-radius: @radius;
     border-radius: @radius;
@@ -114,6 +101,7 @@
             color: @sidebar-dark-hover-color;
             background: @sidebar-dark-hover-bg;
         }
+
         &.active > a {
             border-left-color: @link-hover-border-color;
         }
@@ -172,6 +160,7 @@
 
             }
         }
+
         .btn {
             color: #999;
             .border-radius(0 2px 0 2px);
@@ -284,6 +273,7 @@
                 border-left-color: #fff;
             }
         }
+
         .btn {
             color: #999;
             .border-radius(0 2px 0 2px);

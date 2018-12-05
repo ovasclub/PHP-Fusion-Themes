@@ -1583,6 +1583,37 @@ a:focus {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
+input[type="checkbox"] {
+  position: relative;
+}
+input[type="checkbox"]:after,
+input[type="checkbox"]:focus:after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #707070;
+  background-color: #fff;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+input[type="checkbox"]:checked:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 6px;
+  display: table;
+  width: 7px;
+  height: 15px;
+  border: 2px solid #707070;
+  border-top-width: 0;
+  border-left-width: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 .progress,
 .progress > .progress-bar {
   -webkit-box-shadow: none;
@@ -2337,6 +2368,15 @@ a:focus {
 .nav > li > a:focus {
   color: #444;
   background: #f7f7f7;
+}
+.nav-tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.nav-tabs > li {
+  float: none;
 }
 .nav-pills > li > a {
   -webkit-border-radius: 0;
