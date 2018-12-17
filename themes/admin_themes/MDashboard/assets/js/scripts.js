@@ -1,5 +1,5 @@
 $(function () {
-    let body = $("body");
+    var body = $("body");
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -45,7 +45,7 @@ $(function () {
 
 $.fn.extend({
     ripple: function (options, callback) {
-        let self = this;
+        var self = this;
 
         self.defaults = {
             debug: false,
@@ -63,7 +63,7 @@ $.fn.extend({
         self.defaults = $.extend({}, self.defaults, options);
 
         $(document).on(self.defaults.on, self.selector, function (e) {
-            let ripple,
+            var ripple,
                 settings;
 
             $(this).addClass("has-ripple");
@@ -75,7 +75,7 @@ $.fn.extend({
                 ripple.appendTo($(this));
 
                 if (!ripple.height() && !ripple.width()) {
-                    let size = Math.max($(this).outerWidth(), $(this).outerHeight());
+                    var size = Math.max($(this).outerWidth(), $(this).outerHeight());
 
                     ripple.css({
                         height: size,
@@ -84,7 +84,7 @@ $.fn.extend({
                 }
 
                 if (settings.rate && typeof settings.rate === "function") {
-                    let rate = Math.round(ripple.width() / settings.duration),
+                    var rate = Math.round(ripple.width() / settings.duration),
                         filteredRate = settings.rate(rate),
                         newDuration = (ripple.width() / filteredRate);
 
@@ -93,7 +93,7 @@ $.fn.extend({
                     }
                 }
 
-                let color = (settings.color === "auto") ? $(this).css("color") : settings.color,
+                var color = (settings.color === "auto") ? $(this).css("color") : settings.color,
                     css = {
                         animationDuration: (settings.duration).toString() + "s",
                         animationTimingFunction: settings.easing,
@@ -110,7 +110,7 @@ $.fn.extend({
 
             ripple.removeClass("ripple-animate");
 
-            let x = e.pageX - $(this).offset().left - ripple.width() / 2,
+            var x = e.pageX - $(this).offset().left - ripple.width() / 2,
                 y = e.pageY - $(this).offset().top - ripple.height() / 2;
 
             if (settings.multi) {

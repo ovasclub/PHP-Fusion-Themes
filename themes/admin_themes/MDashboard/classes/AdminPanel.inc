@@ -30,6 +30,7 @@ class AdminPanel {
         OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,latin-ext,vietnamese"/>');
         OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
         OutputHandler::addToFooter('<script type="text/javascript" src="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>'); // https://github.com/malihu/malihu-custom-scrollbar-plugin
+        OutputHandler::addToHead('<script src="'.MD.'assets/js/jquery.mousewheel.min.js"></script>');
 
         $this->Navigation();
         $this->Sidebar();

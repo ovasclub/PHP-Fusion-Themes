@@ -1211,15 +1211,24 @@ input[type="checkbox"]:disabled:checked:after,
 
 .nav-tabs {
     border-bottom: 2px solid #ddd;
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: -webkit-box;
-    display: -moz-box;
 }
 
 .nav-tabs > li {
-    float: none;
+    float: left;
     margin-bottom: -1px;
+}
+
+@media (max-width: 767px) {
+    .nav-tabs {
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: -webkit-box;
+        display: -moz-box;
+    }
+
+    .nav-tabs > li {
+        float: none;
+    }
 }
 
 .nav-tabs > li > a {
@@ -1286,6 +1295,15 @@ input[type="checkbox"]:disabled:checked:after,
     -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dropdown-menu {
+    color: #212529;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border: 0;
 }
 
 .panel-txtarea {
