@@ -1,8 +1,5 @@
 $(function () {
-    $("[data-toggle=\"control-sidebar\"]").controlSidebar()
-
-    var $controlSidebar = $("[data-toggle=\"control-sidebar\"]").data("lte.controlsidebar");
-    var $layout         = $("body").data("lte.layout");
+    $("[data-toggle=\"control-sidebar\"]").controlSidebar();
 
     /**
      * List of all the available skins
@@ -69,7 +66,6 @@ $(function () {
      */
     function changeLayout(cls) {
         $("body").toggleClass(cls);
-        $controlSidebar.fix();
     }
 
     /**

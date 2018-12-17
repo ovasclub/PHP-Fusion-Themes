@@ -44,12 +44,8 @@
         }
 
         li.user-header {
-            background-color: darken(@light-blue, 10%);
+            background-color: @light-blue;
         }
-    }
-
-    &.layout-top-nav .main-header > .logo {
-        .logo-variant(@light-blue);
     }
 
     .content-header {
@@ -61,4 +57,8 @@
     .main-footer {
         border-top-color: @gray-lte;
     }
+}
+
+.skin-blue.layout-top-nav .main-header > .logo {
+    .logo-variant(@light-blue);
 }
