@@ -28,7 +28,7 @@ class Core {
         'right'         => TRUE,
         'header'        => TRUE,
         'footer'        => TRUE,
-        'footer_panels' => TRUE,
+        'footer_panels' => TRUE, // set FALSE to disable panels in footer
         'notices'       => TRUE
     ];
 
