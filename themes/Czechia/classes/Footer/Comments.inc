@@ -67,7 +67,7 @@ class Comments extends Core {
                                 'c_url' => INFUSIONS.'articles/articles.php?article_id='.$data['comment_item_id'].$comment_start.'#c'.$data['comment_id']
                             ];
                         }
-                        continue;
+                        continue 2;
                     case 'B':
                         $result_b = dbquery("SELECT d.blog_subject
                             FROM ".DB_BLOG." AS d
@@ -89,7 +89,7 @@ class Comments extends Core {
                                 'c_url' => INFUSIONS.'blog/blog.php?readmore='.$data['comment_item_id'].$comment_start.'#c'.$data['comment_id']
                             ];
                         }
-                        continue;
+                        continue 2;
                     case 'N':
                         $result_n = dbquery("SELECT ns.news_subject
                             FROM ".DB_NEWS." AS ns
@@ -113,7 +113,7 @@ class Comments extends Core {
                                 'c_url' => INFUSIONS.'news/news.php?readmore='.$data['comment_item_id'].$comment_start.'#c'.$data['comment_id']
                             ];
                         }
-                        continue;
+                        continue 2;
                     case 'P':
                         $result_p = dbquery("SELECT p.photo_title
                             FROM ".DB_PHOTOS." AS p
@@ -135,7 +135,7 @@ class Comments extends Core {
                                 'c_url' => INFUSIONS.'gallery/gallery.php?photo_id='.$data['comment_item_id'].$comment_start.'#c'.$data['comment_id']
                             ];
                         }
-                        continue;
+                        continue 2;
                     case 'D':
                         $result_d = dbquery("SELECT d.download_title
                             FROM ".DB_DOWNLOADS." AS d
