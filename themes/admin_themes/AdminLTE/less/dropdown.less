@@ -20,9 +20,7 @@
     }
 }
 
-.navbar-nav > .notifications-menu,
-.navbar-nav > .messages-menu,
-.navbar-nav > .tasks-menu {
+.navbar-nav > .messages-menu {
     > .dropdown-menu {
         > li {
             position: relative;
@@ -84,24 +82,6 @@
     }
 }
 
-.navbar-nav > .notifications-menu {
-    > .dropdown-menu > li .menu {
-        > li > a {
-            color: #444444;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 10px;
-
-            > svg,
-            > .fa,
-            > .glyphicon {
-                width: 20px;
-            }
-        }
-
-    }
-}
-
 .navbar-nav > .messages-menu {
     > .dropdown-menu > li .menu {
         > li > a {
@@ -141,26 +121,6 @@
     }
 }
 
-.navbar-nav > .tasks-menu {
-    > .dropdown-menu > li .menu {
-        > li > a {
-            padding: 10px;
-
-            > h3 {
-                font-size: 14px;
-                padding: 0;
-                margin: 0 0 10px 0;
-                color: #666666;
-            }
-
-            > .progress {
-                padding: 0;
-                margin: 0;
-            }
-        }
-    }
-}
-
 .navbar-nav > .user-menu {
     > .dropdown-menu {
         .border-top-radius(0);
@@ -178,7 +138,8 @@
             padding: 10px;
             text-align: center;
 
-            > img {
+            > .avatar,
+            > .avatar {
                 z-index: 5;
                 height: 90px;
                 width: 90px;
