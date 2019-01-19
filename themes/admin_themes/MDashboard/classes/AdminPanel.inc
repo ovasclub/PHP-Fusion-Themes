@@ -53,7 +53,7 @@ class AdminPanel {
 
             echo '<ul class="user-actions">';
                 echo '<li class="dropdown">';
-                    echo '<a id="user-actions" class="icon-down" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.$userdata['user_name'].'"><i class="fa fa-user"></i></a>';
+                    echo '<a id="user-actions" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.$userdata['user_name'].'"><i class="fa fa-user"></i></a>';
                     echo '<ul class="dropdown-menu m-t-10" aria-labelledby="user-actions">';
                         echo '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                         echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
@@ -66,7 +66,7 @@ class AdminPanel {
                 $languages = fusion_get_enabled_languages();
                 if (count($languages) > 1) {
                     echo '<li class="dropdown languages-menu">';
-                        echo '<a id="languages-list" class="icon-down" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.translate_lang_names(LANGUAGE).'"><i class="fa fa-globe"></i></a>';
+                        echo '<a id="languages-list" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.translate_lang_names(LANGUAGE).'"><i class="fa fa-globe"></i></a>';
                         echo '<ul class="dropdown-menu m-t-10" aria-labelledby="languages-list">';
                             foreach ($languages as $language_folder => $language_name) {
                                 echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
