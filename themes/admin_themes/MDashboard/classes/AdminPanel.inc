@@ -112,15 +112,11 @@ class AdminPanel {
         echo '</div></aside>';
 
         OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
-            var data = {
-                "pagestring": $(this).val(),
-                "url": "'.$_SERVER['REQUEST_URI'].'",
-            };
-
             $.ajax({
-                url: "'.MD.'acp_search.php'.fusion_get_aidlink().'",
+                url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
                 method: "get",
-                data: $.param(data),
+                data: $.param({"pagestring": $(this).val()}),
+                dataType: "json",
                 beforeSend: function () {
                     $("#ajax-loader").show();
                 },
@@ -130,7 +126,19 @@ class AdminPanel {
                         $("#search_result").html(e).hide();
                         $("#search_result li").html(e).hide();
                     } else {
-                        $("#search_result").html(e).show();
+                        var result = "";
+
+                        if (!e.status) {
+                            $.each(e, function (i, data) {
+                                if (data) {
+                                    result += "<li><a href=\"" + data.link + "\"><img class=\"admin-image\" alt=\"" + data.title + "\" src=\"" + data.icon + "\"/> " + data.title + "</a></li>";
+                                }
+                            });
+                        } else {
+                            result = "<li class=\"text-center\"><span class=\"p-5\">" + e.status + "</span></li>";
+                        }
+
+                        $("#search_result").html(result).show();
                         $("#adl").hide();
                     }
                 },

@@ -28,9 +28,3 @@ $locale['ALT_010'] = 'Kis oldalsáv';
 $locale['ALT_011'] = 'Felület';
 $locale['ALT_012'] = 'Sötét';
 $locale['ALT_013'] = 'Világos';
-// Result Messages
-$locale['ALT_100'] = "Sikertelen rendszerellenőrzés";
-$locale['ALT_101'] = "Sikertelen rendszerbiztonsági intézkedések";
-$locale['ALT_102'] = "Nem sikerült betölteni az oldalakat";
-$locale['ALT_103'] = "Kevés karaktert adtál meg";
-$locale['ALT_104'] = "Nincs találat";

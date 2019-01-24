@@ -216,15 +216,11 @@ class AdminPanel {
 
     private function SearchAjax() {
         OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
-            var data = {
-                "pagestring": $(this).val(),
-                "url": "'.$_SERVER['REQUEST_URI'].'",
-            };
-
             $.ajax({
-                url: "'.ADMINLTE.'acp_search.php'.fusion_get_aidlink().'",
+                url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
                 method: "get",
-                data: $.param(data),
+                data: $.param({"pagestring": $(this).val()}),
+                dataType: "json",
                 beforeSend: function () {
                     $("#ajax-loader").show();
                 },
@@ -234,7 +230,19 @@ class AdminPanel {
                         $("#search_result").html(e).hide();
                         $("#search_result li").html(e).hide();
                     } else {
-                        $("#search_result").html(e).show();
+                        var result = "";
+
+                        if (!e.status) {
+                            $.each(e, function (i, data) {
+                                if (data) {
+                                    result += "<li><a href=\"" + data.link + "\"><img class=\"admin-image\" alt=\"" + data.title + "\" src=\"" + data.icon + "\"/> " + data.title + "</a></li>";
+                                }
+                            });
+                        } else {
+                            result = "<li class=\"header text-white\">" + e.status + "</li>";
+                        }
+
+                        $("#search_result").html(result).show();
                         $("#adl").hide();
                     }
                 },
@@ -255,7 +263,7 @@ class AdminPanel {
             foreach ($admin_sections as $i => $section_name) {
                 $active = ((isset($_GET['pagenum']) && $_GET['pagenum'] == $i) || (!isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i)) ? TRUE : FALSE;
 
-                if (!empty($admin_pages[$i]) && is_array($admin_pages[$i])) {
+                if (!empty($admin_pages[$i])) {
                     echo '<li class="treeview'.($active ? ' active' : '').'">';
                         echo '<a href="#">';
                             echo Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
@@ -276,9 +284,20 @@ class AdminPanel {
 
                                     $icon = '<img class="m-r-5" src="'.get_image('ac_'.$data['admin_rights']).'" alt="'.$title.'"/>';
 
-                                    echo '<li'.($sub_active ? ' class="active"' : '').'>';
-                                        echo '<a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' '.$title.'</a>';
-                                    echo '</li>';
+                                    if (!empty($admin_pages[$data['admin_rights']])) {
+                                        if (checkrights($data['admin_rights'])) {
+                                            echo '<li class="treeview'.($sub_active ? ' menu-open' : '').'">';
+                                                echo '<a href="#">'.$icon.' '.$title.'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+                                                echo '<ul class="treeview-menu"'.($sub_active ? ' style="display: block;"' : '').'>';
+                                                    foreach ($admin_pages[$data['admin_rights']] as $sub_page) {
+                                                        echo '<li><a href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
+                                                    }
+                                                echo '</ul>';
+                                            echo '</li>';
+                                        }
+                                    } else {
+                                        echo '<li'.($sub_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' '.$title.'</a></li>';
+                                    }
                                 }
                             }
                         echo '</ul>';

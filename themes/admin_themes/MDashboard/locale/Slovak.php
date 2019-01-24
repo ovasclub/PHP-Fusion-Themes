@@ -18,9 +18,3 @@
 $locale['MD_001'] = 'Administrácia';
 $locale['MD_002'] = 'Hľadať...';
 $locale['MD_003'] = 'Vytvoril';
-// Result Messages
-$locale['MD_100'] = 'Zlyhal systém validácie';
-$locale['MD_101'] = 'Zlyhal bezpečnostný systém opatrení';
-$locale['MD_102'] = 'Stránky sa nepodarilo načítať';
-$locale['MD_103'] = 'Hľadaný výraz je príliš krátky';
-$locale['MD_104'] = 'Neboli nájdené žiadne výsledky';

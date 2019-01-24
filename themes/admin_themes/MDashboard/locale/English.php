@@ -18,9 +18,3 @@
 $locale['MD_001'] = 'Administration';
 $locale['MD_002'] = 'Search...';
 $locale['MD_003'] = 'Created by';
-// Result Messages
-$locale['MD_100'] = 'Failed system validation';
-$locale['MD_101'] = 'Failed system security measures';
-$locale['MD_102'] = 'Pages failed to load';
-$locale['MD_103'] = 'Search string is too short';
-$locale['MD_104'] = 'There are no results found';

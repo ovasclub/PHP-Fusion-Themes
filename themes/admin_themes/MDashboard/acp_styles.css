@@ -170,6 +170,10 @@ a:focus {
     width: 20px;
 }
 
+.sidebar .admin-vertical-link > li .admin-subpages > li > a {
+    padding: 5px 5px 5px 35px;
+}
+
 .sidebar .user-actions {
     margin: 10px auto;
     text-align: center;

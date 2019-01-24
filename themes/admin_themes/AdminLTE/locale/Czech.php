@@ -28,9 +28,3 @@ $locale['ALT_010'] = 'Malý boční panel';
 $locale['ALT_011'] = 'Vzhledy';
 $locale['ALT_012'] = 'Tmavé';
 $locale['ALT_013'] = 'Světlé';
-// Result Messages
-$locale['ALT_100'] = 'Selhal systém validace';
-$locale['ALT_101'] = 'Selhal bezpečnostní systém opatření';
-$locale['ALT_102'] = 'Stránky se nepodařilo načíst';
-$locale['ALT_103'] = 'Hledaný výraz je příliš krátký';
-$locale['ALT_104'] = 'Nebyly nalezeny žádné výsledky';

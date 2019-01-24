@@ -18,9 +18,3 @@
 $locale['MD_001'] = "Adminisztráció";
 $locale['MD_002'] = "Keresés...";
 $locale['MD_003'] = "Készítette";
-// Result Messages
-$locale['MD_100'] = "Sikertelen rendszerellenőrzés";
-$locale['MD_101'] = "Sikertelen rendszerbiztonsági intézkedések";
-$locale['MD_102'] = "Nem sikerült betölteni az oldalakat";
-$locale['MD_103'] = "Kevés karaktert adtál meg";
-$locale['MD_104'] = "Nincs találat";

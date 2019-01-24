@@ -28,9 +28,3 @@ $locale['ALT_010'] = 'Lille sidebar';
 $locale['ALT_011'] = 'Skins';
 $locale['ALT_012'] = 'Mørk';
 $locale['ALT_013'] = 'Lys';
-// Result Messages
-$locale['ALT_100'] = 'Fejlede system validering';
-$locale['ALT_101'] = 'Fejlede system sikkerheds indstillinger';
-$locale['ALT_102'] = 'Sider kunne ikke hentes';
-$locale['ALT_103'] = 'Søgestreng er for kort';
-$locale['ALT_104'] = 'Søgning resultatløs';

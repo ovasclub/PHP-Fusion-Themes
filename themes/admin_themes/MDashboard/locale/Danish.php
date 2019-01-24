@@ -18,9 +18,3 @@
 $locale['MD_001'] = 'Administration';
 $locale['MD_002'] = 'Søg ...';
 $locale['MD_003'] = 'Oprettet af';
-// Result Messages
-$locale['MD_100'] = 'Mislykkede system validering';
-$locale['MD_101'] = 'Mislykkede system sikkerheds foranstaltninger';
-$locale['MD_102'] = 'Sider kunne ikke indlæses';
-$locale['MD_103'] = 'Søgestreng er for kort';
-$locale['MD_104'] = 'Der blev ikke fundet nogen resultater';
