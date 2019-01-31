@@ -33,9 +33,11 @@ class AdminPanel {
             $this->MainSidebar();
 
             echo '<div class="content-wrapper">';
-                echo '<div class="notices">';
-                    echo renderNotices(getNotices());
-                echo '</div>';
+                if (function_exists('renderNotices') && function_exists('getNotices')) {
+                    echo '<div class="notices">';
+                        echo renderNotices(getNotices());
+                    echo '</div>';
+                }
 
                 echo CONTENT;
             echo '</div>';
@@ -169,9 +171,11 @@ class AdminPanel {
                     echo '</div>';
                 echo '</li>';
                 echo '<li class="user-footer">';
-                    echo '<div class="pull-left">';
-                        echo '<a href="'.FUSION_REQUEST.'&amp;logout" class="btn btn-default btn-flat">'.$locale['admin-logout'].'</a>';
-                    echo '</div>';
+                    if (IS_V9) {
+                        echo '<div class="pull-left">';
+                            echo '<a href="'.FUSION_REQUEST.'&amp;logout" class="btn btn-default btn-flat">'.$locale['admin-logout'].'</a>';
+                        echo '</div>';
+                    }
                     echo '<div class="pull-right">';
                         echo '<a href="'.BASEDIR.'index.php?logout=yes" class="btn btn-default btn-flat">'.$locale['logout'].'</a>';
                     echo '</div>';
@@ -184,8 +188,6 @@ class AdminPanel {
         $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
         $useronline = $userdata['user_lastvisit'] >= time() - 900 ? TRUE : FALSE;
-
-        $this->SearchAjax();
 
         echo '<aside class="main-sidebar">';
             echo '<section class="sidebar">';
@@ -202,11 +204,15 @@ class AdminPanel {
                     echo '</div>';
                 echo '</div>';
 
-                echo '<div class="sidebar-form">';
-                    echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
-                echo '</div>';
-                echo '<ul class="sidebar-menu" id="search_result" style="display: none;"></ul>';
-                echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE.'images/loader.svg"/>';
+                if (class_exists('\PHPFusion\AdminSearch')) {
+                    echo '<div class="sidebar-form">';
+                        echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
+                    echo '</div>';
+                    echo '<ul class="sidebar-menu" id="search_result" style="display: none;"></ul>';
+                    echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE.'images/loader.svg"/>';
+
+                    $this->SearchAjax();
+                }
 
                 $this->SidebarMenu();
 
@@ -315,10 +321,20 @@ class AdminPanel {
         $locale = fusion_get_locale();
 
         echo '<footer class="main-footer">';
-            echo showFooterErrors();
+            if (function_exists('showFooterErrors')) {
+                echo showFooterErrors();
+            } else {
+                if (!IS_V9) {
+                    global $_errorHandler;
+
+                    if (iADMIN && checkrights('ERRO') && count($_errorHandler) > 0) {
+                        echo '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
+                    }
+                }
+            }
 
             if (fusion_get_settings('rendertime_enabled')) {
-                echo showrendertime().showMemoryUsage().'<br />';
+                echo showrendertime().' '.showMemoryUsage().'<br />';
             }
 
             echo '<strong>';
@@ -443,15 +459,21 @@ class AdminPanel {
     public static function Messages() {
         $userdata = fusion_get_userdata();
 
+        if (column_exists(DB_MESSAGES, 'message_user')) {
+            $msg_user = 'message_user';
+        } else {
+            $msg_user = 'message_to';
+        }
+
         $result = dbquery("
-            SELECT message_id, message_subject, message_from user_id, u.user_name, u.user_status, u.user_avatar, message_datestamp
+            SELECT message_id, message_subject, message_from, user_id, u.user_name, u.user_status, u.user_avatar, message_datestamp
             FROM ".DB_MESSAGES."
             INNER JOIN ".DB_USERS." u ON u.user_id=message_from
-            WHERE message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
+            WHERE message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
             GROUP BY message_id
         ");
 
-        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
+        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
                     self::$messages[] = [

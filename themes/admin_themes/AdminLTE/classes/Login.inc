@@ -36,15 +36,17 @@ class Login {
                     echo  display_avatar($userdata, '70px', '', FALSE, 'img-circle');
                 echo '</div>';
 
-                \defender::getInstance()->add_field_session([
-                    'input_name'     => 'admin_password',
-                    'id'             => 'admin_password',
-                    'type'           => 'password',
-                    'callback_check' => 'check_admin_pass',
-                    'required'       => TRUE,
-                    'min_length'     => '',
-                    'max_length'     => ''
-                ]);
+                if (class_exists('\defender')) {
+                    \defender::getInstance()->add_field_session([
+                        'input_name'     => 'admin_password',
+                        'id'             => 'admin_password',
+                        'type'           => 'password',
+                        'callback_check' => 'check_admin_pass',
+                        'required'       => TRUE,
+                        'min_length'     => '',
+                        'max_length'     => ''
+                    ]);
+                }
 
                 $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&amp;pagenum=0' : FUSION_REQUEST;
                 echo openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
@@ -56,7 +58,7 @@ class Login {
                         echo '</div>';
                     echo '</div>';
 
-                    if (\defender::inputHasError('admin_password')) {
+                    if (class_exists('\defender') && \defender::inputHasError('admin_password')) {
                         echo '<div class="label label-danger error-text">'.$locale['global_182'].'</div>';
                     }
                 echo closeform();

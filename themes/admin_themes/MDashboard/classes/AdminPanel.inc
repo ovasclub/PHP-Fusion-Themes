@@ -36,7 +36,9 @@ class AdminPanel {
         $this->Sidebar();
 
         echo '<div class="content-wrapper animate">';
-            echo renderNotices(getNotices());
+            if (function_exists('renderNotices') && function_exists('getNotices')) {
+                echo renderNotices(getNotices());
+            }
 
             echo CONTENT;
 
@@ -58,7 +60,10 @@ class AdminPanel {
                         echo '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                         echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
                         echo '<li class="divider"></li>';
-                        echo '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>';
+
+                        if (IS_V9) {
+                            echo '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>';
+                        }
                         echo '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> <span class="text-danger">'.$locale['logout'].'</span></a></li>';
                     echo '</ul>';
                 echo '</li>';
@@ -83,12 +88,14 @@ class AdminPanel {
             echo '</ul>';
 
             echo '<div id="sidebar-menu">';
-                echo '<div class="sidebar-form">';
-                    echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
-                    echo '<i class="fa fa-search input-search-icon"></i>';
-                echo '</div>';
-                echo '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
-                echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
+                if (class_exists('\PHPFusion\AdminSearch')) {
+                    echo '<div class="sidebar-form">';
+                        echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
+                        echo '<i class="fa fa-search input-search-icon"></i>';
+                    echo '</div>';
+                    echo '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
+                    echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
+                }
 
                 echo Admins::getInstance()->vertical_admin_nav(TRUE);
             echo '</div>';
@@ -111,42 +118,44 @@ class AdminPanel {
             }
         echo '</div></aside>';
 
-        OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
-            $.ajax({
-                url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
-                method: "get",
-                data: $.param({"pagestring": $(this).val()}),
-                dataType: "json",
-                beforeSend: function () {
-                    $("#ajax-loader").show();
-                },
-                success: function (e) {
-                    if ($("#search_pages").val() == "") {
-                        $("#adl").show();
-                        $("#search_result").html(e).hide();
-                        $("#search_result li").html(e).hide();
-                    } else {
-                        var result = "";
-
-                        if (!e.status) {
-                            $.each(e, function (i, data) {
-                                if (data) {
-                                    result += "<li><a href=\"" + data.link + "\"><img class=\"admin-image\" alt=\"" + data.title + "\" src=\"" + data.icon + "\"/> " + data.title + "</a></li>";
-                                }
-                            });
+        if (class_exists('\PHPFusion\AdminSearch')) {
+            OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
+                $.ajax({
+                    url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
+                    method: "get",
+                    data: $.param({"pagestring": $(this).val()}),
+                    dataType: "json",
+                    beforeSend: function () {
+                        $("#ajax-loader").show();
+                    },
+                    success: function (e) {
+                        if ($("#search_pages").val() == "") {
+                            $("#adl").show();
+                            $("#search_result").html(e).hide();
+                            $("#search_result li").html(e).hide();
                         } else {
-                            result = "<li class=\"text-center\"><span class=\"p-5\">" + e.status + "</span></li>";
-                        }
+                            var result = "";
 
-                        $("#search_result").html(result).show();
-                        $("#adl").hide();
+                            if (!e.status) {
+                                $.each(e, function (i, data) {
+                                    if (data) {
+                                        result += "<li><a href=\"" + data.link + "\"><img class=\"admin-image\" alt=\"" + data.title + "\" src=\"" + data.icon + "\"/> " + data.title + "</a></li>";
+                                    }
+                                });
+                            } else {
+                                result = "<li class=\"text-center\"><span class=\"p-5\">" + e.status + "</span></li>";
+                            }
+
+                            $("#search_result").html(result).show();
+                            $("#adl").hide();
+                        }
+                    },
+                    complete: function () {
+                        $("#ajax-loader").hide();
                     }
-                },
-                complete: function () {
-                    $("#ajax-loader").hide();
-                }
-            });
-        });');
+                });
+            });');
+        }
     }
 
     private function Navigation() {
@@ -155,7 +164,9 @@ class AdminPanel {
                 echo '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
             echo '</ul>';
 
-            $this->GetPageTitle();
+            if (IS_V9) {
+                $this->GetPageTitle();
+            }
 
             echo '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
                 $sections = Admins::getInstance()->getAdminSections();
@@ -175,10 +186,20 @@ class AdminPanel {
         $locale = fusion_get_locale();
 
         echo '<footer class="main-footer">';
-            echo showFooterErrors();
+            if (function_exists('showFooterErrors')) {
+                echo showFooterErrors();
+            } else {
+                if (!IS_V9) {
+                    global $_errorHandler;
+
+                    if (iADMIN && checkrights('ERRO') && count($_errorHandler) > 0) {
+                        echo '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
+                    }
+                }
+            }
 
             if (fusion_get_settings('rendertime_enabled')) {
-                echo showrendertime().showMemoryUsage().'<br />';
+                echo showrendertime().' '.showMemoryUsage().'<br />';
             }
 
             echo '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['MD_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
@@ -207,15 +228,21 @@ class AdminPanel {
     private function Messages() {
         $userdata = fusion_get_userdata();
 
+        if (column_exists(DB_MESSAGES, 'message_user')) {
+            $msg_user = 'message_user';
+        } else {
+            $msg_user = 'message_to';
+        }
+
         $result = dbquery("
             SELECT message_id, message_subject, message_from user_id, u.user_name, u.user_status, u.user_avatar, u.user_lastvisit, message_datestamp
             FROM ".DB_MESSAGES."
             INNER JOIN ".DB_USERS." u ON u.user_id=message_from
-            WHERE message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
+            WHERE message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
             GROUP BY message_id
         ");
 
-        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
+        if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
                     $this->messages[] = [

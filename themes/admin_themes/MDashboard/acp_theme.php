@@ -34,11 +34,11 @@ if (!defined('MD_LOCALE')) {
 define('BOOTSTRAP', TRUE);
 define('FONTAWESOME', TRUE);
 
+define("IS_V9", (version_compare(fusion_get_settings('version'), '8.0', (strpos(fusion_get_settings('version'), '9.') === 0 ? '>' : '<'))) ? TRUE : FALSE);
+
 if (isset($_COOKIE['sidebar-toggled']) && $_COOKIE['sidebar-toggled'] == 1) {
     define('THEME_BODY', '<body class="sidebar-toggled">');
 }
-
-\PHPFusion\Admins::getInstance()->setAdminBreadcrumbs();
 
 function render_admin_panel() {
     new MDashboard\AdminPanel();
@@ -70,4 +70,19 @@ function opentable($title, $class = NULL) {
 
 function closetable() {
     MDashboard\AdminPanel::CloseTable();
+}
+
+if (!IS_V9) {
+    \PHPFusion\OutputHandler::addHandler(function ($output = '') {
+        return strtr($output, [
+            'class=\'textbox' => 'class=\'textbox form-control m-t-5 m-b-5',
+            'class="textbox'  => 'class="textbox form-control m-t-5 m-b-5',
+            'class=\'button'  => 'class=\'button btn btn-default',
+            'class="button'   => 'class="button btn btn-default'
+        ]);
+    });
+} else {
+    if (fusion_get_settings('version') != '9.0') {
+        \PHPFusion\Admins::getInstance()->setAdminBreadcrumbs();
+    }
 }

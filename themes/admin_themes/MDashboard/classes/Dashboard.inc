@@ -26,6 +26,7 @@ class Dashboard {
 
         $locale = fusion_get_locale();
         $aidlink = fusion_get_aidlink();
+        $settings = fusion_get_settings();
 
         opentable($locale['250']);
             $mobile  = 12;
@@ -65,8 +66,7 @@ class Dashboard {
             $desktop = 4;
 
             echo '<div class="row">';
-                $forum_ = function_exists('infusion_exists') ? infusion_exists('forum') : db_exists(DB_PREFIX.'forums');
-                if ($forum_) {
+                if (defined('FORUM_EXIST') || db_exists(DB_PREFIX.'forums')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-comments"></i></span>';
@@ -94,8 +94,7 @@ class Dashboard {
                     echo '</div>';
                 }
 
-                $downloads_ = function_exists('infusion_exists') ? infusion_exists('downloads') : db_exists(DB_PREFIX.'downloads');
-                if ($downloads_) {
+                if (defined('DOWNLOADS_EXIST') || db_exists(DB_PREFIX.'downloads')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-cloud-download"></i></span>';
@@ -118,8 +117,7 @@ class Dashboard {
                     echo '</div>';
                 }
 
-                $news_ = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
-                if ($news_) {
+                if (defined('NEWS_EXIST') || db_exists(DB_PREFIX.'news')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-newspaper-o"></i></span>';
@@ -142,8 +140,7 @@ class Dashboard {
                     echo '</div>';
                 }
 
-                $articles_ = function_exists('infusion_exists') ? infusion_exists('articles') : db_exists(DB_PREFIX.'articles');
-                if ($articles_) {
+                if (defined('ARTICLES_EXIST') || db_exists(DB_PREFIX.'articles')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-book"></i></span>';
@@ -166,8 +163,7 @@ class Dashboard {
                     echo '</div>';
                 }
 
-                $weblinks_ = function_exists('infusion_exists') ? infusion_exists('weblinks') : db_exists(DB_PREFIX.'weblinks');
-                if ($weblinks_) {
+                if (defined('WEBLINKS_EXIST') || db_exists(DB_PREFIX.'weblinks')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-link"></i></span>';
@@ -186,8 +182,7 @@ class Dashboard {
                     echo '</div>';
                 }
 
-                $gallery_ = function_exists('infusion_exists') ? infusion_exists('gallery') : db_exists(DB_PREFIX.'photos');
-                if ($gallery_) {
+                if (defined('GALLERY_EXIST') || db_exists(DB_PREFIX.'photos')) {
                     echo '<div class="col-xs-'.$mobile.' col-sm-'.$tablet.' col-md-'.$laptop.' col-lg-'.$desktop.' block">';
                         echo '<div class="info-box">';
                             echo '<span class="info-box-icon"><i class="fa fa-camera-retro"></i></span>';
@@ -213,7 +208,7 @@ class Dashboard {
 
             echo '<div class="row">';
                 echo '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
-                    if (fusion_get_settings('comments_enabled') == 1) {
+                    if ($settings['comments_enabled'] == 1) {
                         echo '<div id="comments">';
                             openside('<i class="fa fa-comments-o"></i> <strong class="text-uppercase">'.$locale['277'].'</strong><span class="pull-right badge bg-blue">'.number_format($global_comments['rows']).'</span>');
                                 if (count($global_comments['data']) > 0) {
@@ -245,7 +240,7 @@ class Dashboard {
                         echo '</div>'; // #comments
                     }
 
-                    if (fusion_get_settings('ratings_enabled') == 1) {
+                    if ($settings['ratings_enabled'] == 1) {
                         echo '<div id="ratings">';
                             openside('<i class="fa fa-star-o"></i> <strong class="text-uppercase">'.$locale['278'].'</strong><span class="pull-right badge bg-blue">'.number_format($global_ratings['rows']).'</span>');
                                 if (count($global_ratings['data']) > 0) {
@@ -292,12 +287,20 @@ class Dashboard {
                                     foreach ($global_submissions['data'] as $i => $submit_data) {
                                         $review_link = sprintf($submit_link[$submit_data['submit_type']], $submit_data['submit_id']);
                                         echo '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
-                                            echo '<div class="pull-left display-inline-block m-t-0 m-b-0">'.display_avatar($submit_data, '25px', '', FALSE, 'img-rounded m-r-5').'</div>';
+                                            echo '<div class="pull-left display-inline-block m-t-0 m-b-0">'.display_avatar($submit_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
                                             echo '<strong>'.profile_link($submit_data['user_id'], $submit_data['user_name'], $submit_data['user_status']).' </strong>';
                                             echo $locale['273b'].' <strong>'.$submit_type[$submit_data['submit_type']].'</strong> ';
                                             echo timer($submit_data['submit_datestamp']);
                                             if (!empty($review_link)) {
                                                 echo '<a class="btn btn-sm btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
+                                            } else {
+                                                // v8
+                                                if (!IS_V9) {
+                                                    echo '<div class="btn-group m-l-10 pull-right">';
+                                                        echo '<a class="btn btn-sm btn-primary" title="'.$locale['286'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;action=2&amp;t='.$submit_data['submit_type'].'&amp;submit_id='.$submit_data['submit_id'].'"><i class="fa fa-eye"></i></a>';
+                                                        echo '<a class="btn btn-sm btn-danger" title="'.$locale['287'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;delete='.$submit_data['submit_id'].'"><i class="fa fa-trash"></i></a>';
+                                                    echo '</div>';
+                                                }
                                             }
                                         echo '</div>';
                                     }
@@ -319,14 +322,10 @@ class Dashboard {
                     echo '<div id="infusions">';
                         openside('<i class="fa fa-cubes"></i> <strong class="text-uppercase">'.$locale['283'].'</strong><span class="pull-right badge bg-blue">'.number_format((int)$infusions_count).'</span>');
                             $content = '';
-                            $bg_colors = ['gray', 'red', 'yellow', 'aqua', 'blue', 'light-blue', 'green', 'navy', 'teal', 'olive', 'orange', 'fuschia', 'purple', 'maroon', ''];
-
                             if ($infusions_count > 0) {
                                 if (!empty($global_infusions)) {
                                     foreach ($global_infusions as $inf_id => $inf_data) {
-                                        $color = array_rand($bg_colors);
-
-                                        echo '<span class="badge bg-'.$bg_colors[$color].' m-b-10 m-r-5">'.$inf_data['inf_title'].'</span>';
+                                        echo '<span class="badge m-b-10 m-r-5">'.$inf_data['inf_title'].'</span>';
                                     }
                                 }
                                 $content = checkrights('I') ? '<div class="text-right text-uppercase"><a class="text-smaller" href="'.ADMIN.'infusions.php'.$aidlink.'">'.$locale['285'].' <i class="fa fa-arrow-circle-right"></i></a></div>' : '';
@@ -337,6 +336,7 @@ class Dashboard {
                     echo '</div>'; // #infusins
                 echo '</div>';
             echo '</div>'; // .row
+
         closetable();
     }
 
