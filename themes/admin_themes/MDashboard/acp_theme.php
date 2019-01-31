@@ -82,7 +82,7 @@ if (!IS_V9) {
         ]);
     });
 } else {
-    if (fusion_get_settings('version') != '9.0') {
+    if (fusion_get_settings('version') === '9.0') {
         \PHPFusion\Admins::getInstance()->setAdminBreadcrumbs();
     }
 }
