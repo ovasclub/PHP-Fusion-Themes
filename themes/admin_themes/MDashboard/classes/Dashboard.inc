@@ -279,7 +279,7 @@ class Dashboard {
                                             echo $locale['273b'].' <strong>'.$submit_data[$submit_date['submit_type']]['submit_locale'].'</strong> ';
                                             echo timer($submit_date['submit_datestamp']);
                                             if (!empty($review_link)) {
-                                                echo '<a class="btn btn-sm btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
+                                                echo '<a class="btn btn-xs btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
                                             }
                                         echo '</div>';
                                     }
@@ -292,13 +292,13 @@ class Dashboard {
                                             echo $locale['273b'].' <strong>'.$submit_type[$submit_data['submit_type']].'</strong> ';
                                             echo timer($submit_data['submit_datestamp']);
                                             if (!empty($review_link)) {
-                                                echo '<a class="btn btn-sm btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
+                                                echo '<a class="btn btn-xs btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
                                             } else {
                                                 // v8
                                                 if (!IS_V9) {
                                                     echo '<div class="btn-group m-l-10 pull-right">';
-                                                        echo '<a class="btn btn-sm btn-primary" title="'.$locale['286'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;action=2&amp;t='.$submit_data['submit_type'].'&amp;submit_id='.$submit_data['submit_id'].'"><i class="fa fa-eye"></i></a>';
-                                                        echo '<a class="btn btn-sm btn-danger" title="'.$locale['287'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;delete='.$submit_data['submit_id'].'"><i class="fa fa-trash"></i></a>';
+                                                        echo '<a class="btn btn-xs btn-primary" title="'.$locale['286'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;action=2&amp;t='.$submit_data['submit_type'].'&amp;submit_id='.$submit_data['submit_id'].'"><i class="fa fa-eye"></i></a>';
+                                                        echo '<a class="btn btn-xs btn-danger" title="'.$locale['287'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;delete='.$submit_data['submit_id'].'"><i class="fa fa-trash"></i></a>';
                                                     echo '</div>';
                                                 }
                                             }
