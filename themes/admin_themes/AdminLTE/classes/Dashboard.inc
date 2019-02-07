@@ -47,7 +47,7 @@ class Dashboard {
                 'registered'   => ['link' => '', 'title' => $locale['251'], 'bg' => 'green', 'icon' => 'users'],
                 'cancelled'    => ['link' => 'status=5', 'title' => $locale['263'], 'bg' => 'yellow', 'icon' => 'user-times'],
                 'unactivated'  => ['link' => 'status=2', 'title' => $locale['252'], 'bg' => 'aqua', 'icon' => 'user-secret'],
-                'security_ban' => ['link' => 'status=4', 'title' => $locale['253'], 'bg' => 'red', 'icon' => 'user-o']
+                'security_ban' => ['link' => 'status=4', 'title' => $locale['253'], 'bg' => 'red', 'icon' => 'user-slash']
             ];
 
             $html .= '<div class="row">';
