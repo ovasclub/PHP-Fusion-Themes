@@ -18,170 +18,181 @@
 namespace AdminLTE;
 
 use \PHPFusion\Admins;
-use \PHPFusion\OutputHandler;
 
 class AdminPanel {
-    private static $messages = [];
+    protected static $instance = NULL;
+    private $messages = [];
+    private $pagenum;
     private static $breadcrumbs = FALSE;
 
     public function __construct() {
-        OutputHandler::addToHead('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">');
-        OutputHandler::addToFooter('<script type="text/javascript" src="'.ADMINLTE.'js/adminlte.min.js"></script>');
+        add_to_head('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">');
+        add_to_footer('<script type="text/javascript" src="'.ADMINLTE.'js/adminlte.min.js"></script>');
 
-        echo '<div class="wrapper">';
-            $this->MainHeader();
-            $this->MainSidebar();
+        $this->pagenum = (int)filter_input(INPUT_GET, 'pagenum');
 
-            echo '<div class="content-wrapper">';
+        $html = '<div class="wrapper">';
+            $html .= $this->MainHeader();
+            $html .= $this->MainSidebar();
+
+            $html .= '<div class="content-wrapper">';
                 if (function_exists('renderNotices') && function_exists('getNotices')) {
-                    echo '<div class="notices">';
-                        echo renderNotices(getNotices());
-                    echo '</div>';
+                    $html .= '<div class="notices">';
+                        $html .= renderNotices(getNotices());
+                    $html .= '</div>';
                 }
 
-                echo CONTENT;
-            echo '</div>';
+                $html .= CONTENT;
+            $html .= '</div>';
 
-            $this->MainFooter();
+            $html .= $this->MainFooter();
 
-            if (!self::IsMobile()) {
-                $this->ControlSidebar();
+            if (!$this->IsMobile()) {
+                $html .= $this->ControlSidebar();
             }
 
-        echo '</div>';
+        $html .= '</div>';
+
+        echo $html;
     }
 
     private function MainHeader() {
         $aidlink = fusion_get_aidlink();
 
-        echo '<header class="main-header">';
-            echo '<a href="'.ADMIN.'index.php'.$aidlink.'" class="logo">';
-                echo '<span class="logo-mini"><i class="php-fusion"></i></span>';
-                echo '<span class="logo-lg">PHP-Fusion</span>';
-            echo '</a>';
+        $html = '<header class="main-header">';
+            $html .= '<a href="'.ADMIN.'index.php'.$aidlink.'" class="logo">';
+                $html .= '<span class="logo-mini"><i class="php-fusion"></i></span>';
+                $html .= '<span class="logo-lg">PHP-Fusion</span>';
+            $html .= '</a>';
 
-            echo '<nav class="navbar navbar-static-top">';
-                echo '<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="fa fa-fw fa-bars"></i></a>';
+            $html .= '<nav class="navbar navbar-static-top">';
+                $html .= '<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="fa fa-fw fa-bars"></i></a>';
 
-                echo '<ul class="nav navbar-nav navbar-left hidden-xs">';
+                $html .= '<ul class="nav navbar-nav navbar-left hidden-xs">';
                     $sections = Admins::getInstance()->getAdminSections();
                     if (!empty($sections)) {
                         $i = 0;
 
                         foreach ($sections as $section_name) {
-                            $active = (isset($_GET['pagenum']) && $_GET['pagenum'] == $i || !isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i) ? ' class="active"' : '';
-                            echo '<li'.$active.'><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum='.$i.'" data-toggle="tooltip" data-placement="bottom" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
+                            $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i)) ? TRUE : FALSE;
+                            $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum='.$i.'" data-toggle="tooltip" data-placement="bottom" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
                             $i++;
                         }
                     }
-                echo '</ul>';
+                $html .= '</ul>';
 
-                echo '<div class="navbar-custom-menu">';
-                    echo '<ul class="nav navbar-nav">';
+                $html .= '<div class="navbar-custom-menu">';
+                    $html .= '<ul class="nav navbar-nav">';
                         $languages = fusion_get_enabled_languages();
                         if (count($languages) > 1) {
-                            echo '<li class="dropdown languages-menu">';
-                                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
-                                    echo '<i class="fa fa-globe"></i> <img style="margin-top: -3px;" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
-                                    echo '<span class="caret"></span>';
-                                echo '</a>';
-                                echo '<ul class="dropdown-menu">';
+                            $html .= '<li class="dropdown languages-menu">';
+                                $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
+                                    $html .= '<i class="fa fa-globe"></i> <img style="margin-top: -3px;" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
+                                    $html .= '<span class="caret"></span>';
+                                $html .= '</a>';
+                                $html .= '<ul class="dropdown-menu">';
                                     foreach ($languages as $language_folder => $language_name) {
-                                        echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
+                                        $html .= '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
                                     }
-                                echo '</ul>';
-                            echo '</li>';
+                                $html .= '</ul>';
+                            $html .= '</li>';
                         }
 
-                        $this->MessagesMenu();
-                        $this->UserMenu();
+                        $html .= $this->MessagesMenu();
+                        $html .= $this->UserMenu();
 
-                        echo '<li><a href="'.BASEDIR.'index.php"><i class="fa fa-home"></i></a></li>';
+                        $html .= '<li><a href="'.BASEDIR.'index.php"><i class="fa fa-home"></i></a></li>';
 
-                        if (!self::IsMobile()) {
-                            echo '<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>';
+                        if (!$this->IsMobile()) {
+                            $html .= '<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>';
                         }
-                    echo '</ul>';
-                echo '</div>';
-            echo '</nav>';
-        echo '</header>';
+                    $html .= '</ul>';
+                $html .= '</div>';
+            $html .= '</nav>';
+        $html .= '</header>';
+
+        return $html;
     }
 
     private function MessagesMenu() {
         $locale = fusion_get_locale('', ALTE_LOCALE);
-        $messages = self::Messages();
+        $messages = $this->Messages();
         $msg_icon = !empty($messages) ? '<span class="label label-danger" style="margin-top: inherit;">'.count($messages).'</span>' : '';
 
-        echo '<li class="dropdown messages-menu">';
-            echo '<a href="'.BASEDIR.'messages.php" class="dropdown-toggle" data-toggle="dropdown">';
-                echo '<i class="fa fa-envelope-o"></i>'.$msg_icon;
-                echo '<span class="caret"></span>';
-            echo '</a>';
-            echo '<ul class="dropdown-menu">';
-                echo '<li class="header text-center">'.$locale['ALT_001'].' '.format_word(count($messages), $locale['fmt_message']).'</li>';
-                echo '<li><ul class="menu">';
+        $html = '<li class="dropdown messages-menu">';
+            $html .= '<a href="'.BASEDIR.'messages.php" class="dropdown-toggle" data-toggle="dropdown">';
+                $html .= '<i class="fa fa-envelope-o"></i>'.$msg_icon;
+                $html .= '<span class="caret"></span>';
+            $html .= '</a>';
+            $html .= '<ul class="dropdown-menu">';
+                $html .= '<li class="header text-center">'.$locale['ALT_001'].' '.format_word(count($messages), $locale['fmt_message']).'</li>';
+                $html .= '<li><ul class="menu">';
                     if (!empty($messages)) {
                         foreach ($messages as $message) {
-                            echo '<li>';
-                                echo '<a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'">';
-                                    echo '<div class="pull-left">';
-                                        echo display_avatar($message['user'], '40px', '', FALSE, 'img-circle');
-                                    echo '</div>';
-                                    echo '<h4>';
-                                        echo $message['user']['user_name'];
-                                        echo '<small><i class="fa fa-clock-o"></i> '.$message['datestamp'].'</small>';
-                                    echo '</h4>';
-                                    echo '<p>'.trim_text($message['title'], 20).'</p>';
-                                echo '</a>';
-                            echo '</li>';
+                            $html .= '<li>';
+                                $html .= '<a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'">';
+                                    $html .= '<div class="pull-left">';
+                                        $html .= display_avatar($message['user'], '40px', '', FALSE, 'img-circle');
+                                    $html .= '</div>';
+                                    $html .= '<h4>';
+                                        $html .= $message['user']['user_name'];
+                                        $html .= '<small><i class="fa fa-clock-o"></i> '.$message['datestamp'].'</small>';
+                                    $html .= '</h4>';
+                                    $html .= '<p>'.trim_text($message['title'], 20).'</p>';
+                                $html .= '</a>';
+                            $html .= '</li>';
                         }
                     } else {
-                        echo '<li class="text-center">'.$locale['ALT_002'].'</li>';
+                        $html .= '<li class="text-center">'.$locale['ALT_002'].'</li>';
                     }
 
-                echo '</ul></li>';
-                echo '<li class="footer"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$locale['ALT_003'].'</a></li>';
-            echo '</ul>';
-        echo '</li>';
+                $html .= '</ul></li>';
+                $html .= '<li class="footer"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$locale['ALT_003'].'</a></li>';
+            $html .= '</ul>';
+        $html .= '</li>';
+
+        return $html;
     }
 
     private function UserMenu() {
         $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
 
-        echo '<li class="dropdown user user-menu">';
-            echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
-                echo display_avatar($userdata, '25px', '', FALSE, 'user-image img-circle');
-                echo '<span class="hidden-xs">'.$userdata['user_name'].'</span>';
-                echo '<span class="caret"></span>';
-            echo '</a>';
-            echo '<ul class="dropdown-menu">';
-                echo '<li class="user-header">';
-                    echo display_avatar($userdata, '90px', '', FALSE, 'img-circle');
-                    echo '<p>'.$userdata['user_name'].'<small>'.$locale['ALT_004'].' '.showdate('longdate', $userdata['user_joined']).'</small></p>';
-                echo '</li>';
-                echo '<li class="user-body">';
-                    echo '<div class="row">';
-                        echo '<div class="col-xs-6 text-center">';
-                            echo '<a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a>';
-                        echo '</div>';
-                        echo '<div class="col-xs-6 text-center">';
-                            echo '<a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a>';
-                        echo '</div>';
-                    echo '</div>';
-                echo '</li>';
-                echo '<li class="user-footer">';
+        $html = '<li class="dropdown user user-menu">';
+            $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
+                $html .= display_avatar($userdata, '25px', '', FALSE, 'user-image img-circle');
+                $html .= '<span class="hidden-xs">'.$userdata['user_name'].'</span>';
+                $html .= '<span class="caret"></span>';
+            $html .= '</a>';
+            $html .= '<ul class="dropdown-menu">';
+                $html .= '<li class="user-header">';
+                    $html .= display_avatar($userdata, '90px', '', FALSE, 'img-circle');
+                    $html .= '<p>'.$userdata['user_name'].'<small>'.$locale['ALT_004'].' '.showdate('longdate', $userdata['user_joined']).'</small></p>';
+                $html .= '</li>';
+                $html .= '<li class="user-body">';
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-xs-6 text-center">';
+                            $html .= '<a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a>';
+                        $html .= '</div>';
+                        $html .= '<div class="col-xs-6 text-center">';
+                            $html .= '<a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a>';
+                        $html .= '</div>';
+                    $html .= '</div>';
+                $html .= '</li>';
+                $html .= '<li class="user-footer">';
                     if (IS_V9) {
-                        echo '<div class="pull-left">';
-                            echo '<a href="'.FUSION_REQUEST.'&amp;logout" class="btn btn-default btn-flat">'.$locale['admin-logout'].'</a>';
-                        echo '</div>';
+                        $html .= '<div class="pull-left">';
+                            $html .= '<a href="'.FUSION_REQUEST.'&amp;logout" class="btn btn-default btn-flat">'.$locale['admin-logout'].'</a>';
+                        $html .= '</div>';
                     }
-                    echo '<div class="pull-right">';
-                        echo '<a href="'.BASEDIR.'index.php?logout=yes" class="btn btn-default btn-flat">'.$locale['logout'].'</a>';
-                    echo '</div>';
-                echo '</li>';
-            echo '</ul>';
-        echo '</li>';
+                    $html .= '<div class="pull-right">';
+                        $html .= '<a href="'.BASEDIR.'index.php?logout=yes" class="btn btn-default btn-flat">'.$locale['logout'].'</a>';
+                    $html .= '</div>';
+                $html .= '</li>';
+            $html .= '</ul>';
+        $html .= '</li>';
+
+        return $html;
     }
 
     private function MainSidebar() {
@@ -189,39 +200,41 @@ class AdminPanel {
         $userdata = fusion_get_userdata();
         $useronline = $userdata['user_lastvisit'] >= time() - 900 ? TRUE : FALSE;
 
-        echo '<aside class="main-sidebar">';
-            echo '<section class="sidebar">';
-                echo '<div class="user-panel">';
-                    echo '<div class="pull-left image">';
-                        echo display_avatar($userdata, '45px', '', FALSE, 'img-circle');
-                    echo '</div>';
-                    echo '<div class="pull-left info">';
-                        echo '<p>'.$userdata['user_name'].'</p>';
-                        echo '<a href="#">';
-                            echo '<i class="fa fa-circle '.($useronline ? 'text-success' : 'text-danger').'"></i> ';
-                            echo $useronline ? $locale['online'] : $locale['offline'];
-                        echo '</a>';
-                    echo '</div>';
-                echo '</div>';
+        $html = '<aside class="main-sidebar">';
+            $html .= '<section class="sidebar">';
+                $html .= '<div class="user-panel">';
+                    $html .= '<div class="pull-left image">';
+                        $html .= display_avatar($userdata, '45px', '', FALSE, 'img-circle');
+                    $html .= '</div>';
+                    $html .= '<div class="pull-left info">';
+                        $html .= '<p>'.$userdata['user_name'].'</p>';
+                        $html .= '<a href="#">';
+                            $html .= '<i class="fa fa-circle '.($useronline ? 'text-success' : 'text-danger').'"></i> ';
+                            $html .= $useronline ? $locale['online'] : $locale['offline'];
+                        $html .= '</a>';
+                    $html .= '</div>';
+                $html .= '</div>';
 
                 if (class_exists('\PHPFusion\AdminSearch')) {
-                    echo '<div class="sidebar-form">';
-                        echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
-                    echo '</div>';
-                    echo '<ul class="sidebar-menu" id="search_result" style="display: none;"></ul>';
-                    echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE.'images/loader.svg"/>';
+                    $html .= '<div class="sidebar-form">';
+                        $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
+                    $html .= '</div>';
+                    $html .= '<ul class="sidebar-menu" id="search_result" style="display: none;"></ul>';
+                    $html .= '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE.'images/loader.svg"/>';
 
                     $this->SearchAjax();
                 }
 
-                $this->SidebarMenu();
+                $html .= $this->SidebarMenu();
 
-            echo '</section>';
-        echo '</aside>';
+            $html .= '</section>';
+        $html .= '</aside>';
+
+        return $html;
     }
 
     private function SearchAjax() {
-        OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
+        add_to_jquery('$("#search_pages").bind("keyup", function (e) {
             $.ajax({
                 url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
                 method: "get",
@@ -265,20 +278,20 @@ class AdminPanel {
         $admin_sections = Admins::getInstance()->getAdminSections();
         $admin_pages = Admins::getInstance()->getAdminPages();
 
-        echo '<ul id="adl" class="sidebar-menu" data-widget="tree">';
+        $html = '<ul id="adl" class="sidebar-menu" data-widget="tree">';
             foreach ($admin_sections as $i => $section_name) {
-                $active = ((isset($_GET['pagenum']) && $_GET['pagenum'] == $i) || (!isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i)) ? TRUE : FALSE;
+                $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i)) ? TRUE : FALSE;
 
                 if (!empty($admin_pages[$i])) {
-                    echo '<li class="treeview'.($active ? ' active' : '').'">';
-                        echo '<a href="#">';
-                            echo Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
-                            echo '<span class="pull-right-container">';
-                                echo '<i class="fa fa-angle-left pull-right"></i>';
-                                echo ($i > 4 ? '<small class="label pull-right bg-blue">'.count($admin_pages[$i]).'</small>' : '');
-                            echo '</span>';
-                        echo '</a>';
-                        echo '<ul class="treeview-menu">';
+                    $html .= '<li class="treeview'.($active ? ' active' : '').'">';
+                        $html .= '<a href="#">';
+                            $html .= Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
+                            $html .= '<span class="pull-right-container">';
+                                $html .= '<i class="fa fa-angle-left pull-right"></i>';
+                                $html .= ($i > 4 ? '<small class="label pull-right bg-blue">'.count($admin_pages[$i]).'</small>' : '');
+                            $html .= '</span>';
+                        $html .= '</a>';
+                        $html .= '<ul class="treeview-menu">';
                             foreach ($admin_pages[$i] as $key => $data) {
                                 if (checkrights($data['admin_rights'])) {
                                     $sub_active = $data['admin_link'] == Admins::getInstance()->_currentPage() ? TRUE : FALSE;
@@ -292,82 +305,87 @@ class AdminPanel {
 
                                     if (!empty($admin_pages[$data['admin_rights']])) {
                                         if (checkrights($data['admin_rights'])) {
-                                            echo '<li class="treeview'.($sub_active ? ' menu-open' : '').'">';
-                                                echo '<a href="#">'.$icon.' '.$title.'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-                                                echo '<ul class="treeview-menu"'.($sub_active ? ' style="display: block;"' : '').'>';
+                                            $html .= '<li class="treeview'.($sub_active ? ' menu-open' : '').'">';
+                                                $html .= '<a href="#">'.$icon.' '.$title.'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+                                                $html .= '<ul class="treeview-menu"'.($sub_active ? ' style="display: block;"' : '').'>';
                                                     foreach ($admin_pages[$data['admin_rights']] as $sub_page) {
-                                                        echo '<li><a href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
+                                                        $html .= '<li><a href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
                                                     }
-                                                echo '</ul>';
-                                            echo '</li>';
+                                                $html .= '</ul>';
+                                            $html .= '</li>';
                                         }
                                     } else {
-                                        echo '<li'.($sub_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' '.$title.'</a></li>';
+                                        $html .= '<li'.($sub_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' '.$title.'</a></li>';
                                     }
                                 }
                             }
-                        echo '</ul>';
-                    echo '</li>';
+                        $html .= '</ul>';
+                    $html .= '</li>';
                 } else {
-                    echo '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum=0">';
-                        echo Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
-                    echo '</a></li>';
+                    $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum=0">';
+                        $html .= Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
+                    $html .= '</a></li>';
                 }
             }
-        echo '</ul>';
+        $html .= '</ul>';
+
+        return $html;
     }
 
     private function MainFooter() {
         $locale = fusion_get_locale();
 
-        echo '<footer class="main-footer">';
+        $html = '<footer class="main-footer">';
             if (function_exists('showFooterErrors')) {
-                echo showFooterErrors();
+                $html .= showFooterErrors();
             } else {
                 if (!IS_V9) {
                     global $_errorHandler;
 
                     if (iADMIN && checkrights('ERRO') && count($_errorHandler) > 0) {
-                        echo '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
+                        $html .= '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
                     }
                 }
             }
 
             if (fusion_get_settings('rendertime_enabled')) {
-                echo showrendertime().' '.showMemoryUsage().'<br />';
+                $html .= showrendertime().' '.showMemoryUsage().'<br />';
             }
 
-            echo '<strong>';
-                echo 'AdminLTE Admin Theme &copy; '.date('Y').' '.$locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
-                echo $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a>';
-            echo '</strong>';
-            echo '<br/>'.str_replace('<br />', ' | ', showcopyright());
-        echo '</footer>';
+            $html .= '<strong>';
+                $html .= 'AdminLTE Admin Theme &copy; '.date('Y').' '.$locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                $html .= $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a>';
+            $html .= '</strong>';
+            $html .= '<br/>'.str_replace('<br />', ' | ', showcopyright());
+        $html .= '</footer>';
+
+        return $html;
     }
 
     private function ControlSidebar() {
         $locale = fusion_get_locale('', ALTE_LOCALE);
 
-        OutputHandler::addToFooter('<script type="text/javascript" src="'.ADMINLTE.'js/control-sidebar.min.js"></script>');
-        ?>
+        add_to_footer('<script type="text/javascript" src="'.ADMINLTE.'js/control-sidebar.min.js"></script>');
+
+        $html = '
         <aside class="control-sidebar control-sidebar-dark">
             <div class="content">
-                <h4 class="control-sidebar-heading"><?php echo $locale['ALT_008']; ?></h4>
+                <h4 class="control-sidebar-heading">'.$locale['ALT_008'].'</h4>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        <input type="checkbox" data-layout="fixed" class="pull-right"> <?php echo $locale['ALT_009']; ?>
+                        <input type="checkbox" data-layout="fixed" class="pull-right"> '.$locale['ALT_009'].'
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"> <?php echo $locale['ALT_010']; ?>
+                        <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"> '.$locale['ALT_010'].'
                     </label>
                 </div>
 
-                <h4 class="control-sidebar-heading"><?php echo $locale['ALT_011']; ?></h4>
-                <h5><?php echo $locale['ALT_012']; ?></h5>
+                <h4 class="control-sidebar-heading">'.$locale['ALT_011'].'</h4>
+                <h5>'.$locale['ALT_012'].'</h5>
 
                 <ul class="list-unstyled clearfix">
                     <li class="skin-preview">
@@ -408,7 +426,7 @@ class AdminPanel {
                     </li>
                 </ul>
 
-                <h5><?php echo $locale['ALT_013']; ?></h5>
+                <h5>'.$locale['ALT_013'].'</h5>
 
                 <ul class="list-unstyled clearfix">
                     <li class="skin-preview">
@@ -452,11 +470,12 @@ class AdminPanel {
             </div>
         </aside>
 
-        <div class="control-sidebar-bg"></div>
-        <?php
+        <div class="control-sidebar-bg"></div>';
+
+        return $html;
     }
 
-    public static function Messages() {
+    public function Messages() {
         $userdata = fusion_get_userdata();
 
         if (column_exists(DB_MESSAGES, 'message_user')) {
@@ -476,7 +495,7 @@ class AdminPanel {
         if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    self::$messages[] = [
+                    $this->messages[] = [
                         'link'      => $data['message_id'],
                         'title'     => $data['message_subject'],
                         'user'      => [
@@ -491,36 +510,43 @@ class AdminPanel {
             }
         }
 
-        return self::$messages;
+        return $this->messages;
     }
 
-    public static function GetMessages() {
-        return self::$messages;
+    public function GetMessages() {
+        return $this->messages;
     }
 
-    public static function IsMobile() {
+    public function IsMobile() {
         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER['HTTP_USER_AGENT']);
     }
 
     public static function OpenTable($title = FALSE, $class = NULL, $bg = TRUE) {
+        $html = '';
+
         if (!empty($title)) {
-            echo '<section class="content-header">';
-            echo '<h1>'.$title.'</h1>';
+            $html .= '<section class="content-header">';
+            $html .= '<h1>'.$title.'</h1>';
 
             if (self::$breadcrumbs == FALSE) {
-                echo render_breadcrumbs();
+                $html .= render_breadcrumbs();
                 self::$breadcrumbs = TRUE;
             }
-            echo '</section>';
+            $html .= '</section>';
         }
 
-        echo '<section class="content '.$class.'">';
+        $html .= '<section class="content '.$class.'">';
 
-        if ($bg == TRUE) echo '<div class="p-15" style="background-color: #fff;">';
+        if ($bg == TRUE) $html .= '<div class="p-15" style="background-color: #fff;">';
+
+        echo $html;
     }
 
     public static function CloseTable($bg = TRUE) {
-        if ($bg == TRUE) echo '</div>';
-        echo '</section>';
+        $html = '';
+        if ($bg === TRUE) $html .= '</div>';
+        $html .= '</section>';
+
+        echo $html;
     }
 }

@@ -81,19 +81,23 @@ function render_admin_login() {
 }
 
 function render_admin_dashboard() {
-    AdminLTE\Dashboard::AdminDashboard();
+    new AdminLTE\Dashboard();
 }
 
 function openside($title = FALSE, $class = NULL) {
-    echo '<div class="box box-widget '.$class.'">';
-    echo $title ? '<div class="box-header with-border">'.$title.'</div>' : '';
-    echo '<div class="box-body">';
+    $html = '<div class="box box-widget '.$class.'">';
+    $html .= $title ? '<div class="box-header with-border">'.$title.'</div>' : '';
+    $html .= '<div class="box-body">';
+
+    echo $html;
 }
 
 function closeside($footer = FALSE) {
-    echo '</div>';
-    echo $footer ? '<div class="box-footer">'.$footer.'</div>' : '';
-    echo '</div>';
+    $html = '</div>';
+    $html .= $footer ? '<div class="box-footer">'.$footer.'</div>' : '';
+    $html .= '</div>';
+
+    echo $html;
 }
 
 function opentable($title, $class = NULL, $bg = TRUE) {

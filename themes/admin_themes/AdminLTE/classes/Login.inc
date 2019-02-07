@@ -24,17 +24,17 @@ class Login {
 
         add_to_jquery('$("#admin_password").focus();');
 
-        echo '<div class="lockscreen-wrapper">';
-            echo '<div class="lockscreen-logo">';
-                echo '<a href="'.BASEDIR.fusion_get_settings('opening_page').'"><b>Admin</b>LTE</a>';
-            echo '</div>';
+        $html = '<div class="lockscreen-wrapper">';
+            $html .= '<div class="lockscreen-logo">';
+                $html .= '<a href="'.BASEDIR.fusion_get_settings('opening_page').'"><b>Admin</b>LTE</a>';
+            $html .= '</div>';
 
-            echo '<div class="lockscreen-name">'.$userdata['user_name'].'</div>';
+            $html .= '<div class="lockscreen-name">'.$userdata['user_name'].'</div>';
 
-            echo '<div class="lockscreen-item">';
-                echo '<div class="lockscreen-image">';
-                    echo  display_avatar($userdata, '70px', '', FALSE, 'img-circle');
-                echo '</div>';
+            $html .= '<div class="lockscreen-item">';
+                $html .= '<div class="lockscreen-image">';
+                    $html .= display_avatar($userdata, '70px', '', FALSE, 'img-circle');
+                $html .= '</div>';
 
                 if (class_exists('\defender')) {
                     \defender::getInstance()->add_field_session([
@@ -49,27 +49,29 @@ class Login {
                 }
 
                 $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&amp;pagenum=0' : FUSION_REQUEST;
-                echo openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
-                    echo '<div class="input-group">';
-                        echo '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['ALT_007'].'">';
+                $html .= openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
+                    $html .= '<div class="input-group">';
+                        $html .= '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['ALT_007'].'">';
 
-                        echo '<div class="input-group-btn">';
-                            echo '<button type="submit" name="admin_login" class="btn" title="'.$locale['login'].'"><i class="fa fa-arrow-right text-muted"></i></button>';
-                        echo '</div>';
-                    echo '</div>';
+                        $html .= '<div class="input-group-btn">';
+                            $html .= '<button type="submit" name="admin_login" class="btn" title="'.$locale['login'].'"><i class="fa fa-arrow-right text-muted"></i></button>';
+                        $html .= '</div>';
+                    $html .= '</div>';
 
                     if (class_exists('\defender') && \defender::inputHasError('admin_password')) {
-                        echo '<div class="label label-danger error-text">'.$locale['global_182'].'</div>';
+                        $html .= '<div class="label label-danger error-text">'.$locale['global_182'].'</div>';
                     }
-                echo closeform();
-            echo '</div>';
+                $html .= closeform();
+            $html .= '</div>';
 
-            echo '<div class="lockscreen-footer text-center">';
-                echo 'AdminLTE Admin Theme &copy; '.date('Y').'<br/>';
-                echo $locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
-                echo $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a><br/>';
-                echo showcopyright();
-            echo '</div>';
-        echo '</div>';
+            $html .= '<div class="lockscreen-footer text-center">';
+                $html .= 'AdminLTE Admin Theme &copy; '.date('Y').'<br/>';
+                $html .= $locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                $html .= $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a><br/>';
+                $html .= showcopyright();
+            $html .= '</div>';
+        $html .= '</div>';
+
+        echo $html;
     }
 }
