@@ -25,24 +25,26 @@ class Login {
         add_to_head('<style type="text/css">body, html {height: 100%;}body{background: url("'.MD.'images/login.jpg") no-repeat fixed center;background-size: cover;}</style>');
         add_to_jquery('$("#admin_password").focus();');
 
-        echo '<div class="login-container">';
-            echo '<h1 class="title">'.$locale['MD_001'].'</h1>';
-            echo '<div class="login-box">';
-                echo '<div class="clearfix m-b-20">';
-                    echo '<div class="pull-left m-r-10">';
-                        echo display_avatar($userdata, '90px', '', FALSE, 'img-rounded');
-                    echo '</div>';
-                    echo '<div class="text-left">';
-                        echo '<h3>'.$locale['welcome'].',<br/>'.$userdata['user_name'].'</h3>';
-                    echo '</div>';
-                echo '</div>';
+        $html = '<div class="login-container">';
+            $html .= '<h1 class="title">'.$locale['MD_001'].'</h1>';
+            $html .= '<div class="login-box">';
+                $html .= '<div class="clearfix m-b-20">';
+                    $html .= '<div class="pull-left m-r-10">';
+                        $html .= display_avatar($userdata, '90px', '', FALSE, 'img-rounded');
+                    $html .= '</div>';
+                    $html .= '<div class="text-left">';
+                        $html .= '<h3>'.$locale['welcome'].',<br/>'.$userdata['user_name'].'</h3>';
+                    $html .= '</div>';
+                $html .= '</div>';
 
                 $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink() ? FUSION_SELF.fusion_get_aidlink().'&amp;pagenum=0' : FUSION_REQUEST;
-                echo openform('admin-login-form', 'post', $form_action, ['class' => 'm-t-30']);
-                    echo form_text('admin_password', '', '', ['type' => 'password', 'callback_check' => 'check_admin_pass', 'placeholder' => $locale['281'], 'error_text' => $locale['global_182'], 'autocomplete_off' => TRUE, 'required' => TRUE]);
-                    echo form_button('admin_login', $locale['login'], $locale['login'], ['class' => 'btn-primary btn-block m-t-15']);
-                echo closeform();
-            echo '</div>';
-        echo '</div>';
+                $html .= openform('admin-login-form', 'post', $form_action, ['class' => 'm-t-30']);
+                    $html .= form_text('admin_password', '', '', ['type' => 'password', 'callback_check' => 'check_admin_pass', 'placeholder' => $locale['281'], 'error_text' => $locale['global_182'], 'autocomplete_off' => TRUE, 'required' => TRUE]);
+                    $html .= form_button('admin_login', $locale['login'], $locale['login'], ['class' => 'btn-primary btn-block m-t-15']);
+                $html .= closeform();
+            $html .= '</div>';
+        $html .= '</div>';
+
+        echo $html;
     }
 }

@@ -49,19 +49,23 @@ function render_admin_login() {
 }
 
 function render_admin_dashboard() {
-    MDashboard\Dashboard::AdminDashboard();
+    new MDashboard\Dashboard();
 }
 
 function openside($title = FALSE, $class = NULL) {
-    echo '<div class="sidepanel '.$class.'">';
-    echo $title ? '<div class="sidepanel-header">'.$title.'</div>' : '';
-    echo '<div class="sidepanel-body">';
+    $html = '<div class="sidepanel '.$class.'">';
+    $html .= $title ? '<div class="sidepanel-header">'.$title.'</div>' : '';
+    $html .= '<div class="sidepanel-body">';
+
+    echo $html;
 }
 
 function closeside($title = FALSE) {
-    echo '</div>';
-    echo $title ? '<div class="sidepanel-footer">'.$title.'</div>' : '';
-    echo '</div>';
+    $html = '</div>';
+    $html .= $title ? '<div class="sidepanel-footer">'.$title.'</div>' : '';
+    $html .= '</div>';
+
+    echo $html;
 }
 
 function opentable($title, $class = NULL) {

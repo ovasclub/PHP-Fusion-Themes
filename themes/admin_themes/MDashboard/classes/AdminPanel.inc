@@ -23,100 +23,106 @@ use \PHPFusion\OutputHandler;
 class AdminPanel {
     private $messages = [];
     private static $breadcrumbs = FALSE;
+    private $pagenum;
 
     public function __construct() {
-        OutputHandler::addToFooter('<script type="text/javascript" src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
-        OutputHandler::addToFooter('<script type="text/javascript" src="'.MD.'assets/js/scripts.min.js"></script>');
-        OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,latin-ext,vietnamese"/>');
-        OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
-        OutputHandler::addToFooter('<script type="text/javascript" src="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>'); // https://github.com/malihu/malihu-custom-scrollbar-plugin
-        OutputHandler::addToHead('<script src="'.MD.'assets/js/jquery.mousewheel.min.js"></script>');
+        $this->pagenum = (int)filter_input(INPUT_GET, 'pagenum');
 
-        $this->Navigation();
-        $this->Sidebar();
+        $output_handler = new OutputHandler;
+        $output_handler->addToFooter('<script type="text/javascript" src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
+        $output_handler->addToFooter('<script type="text/javascript" src="'.MD.'assets/js/scripts.min.js"></script>');
+        $output_handler->addToHead('<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,latin-ext,vietnamese"/>');
+        $output_handler->addToHead('<link rel="stylesheet" type="text/css" href="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
+        $output_handler->addToFooter('<script type="text/javascript" src="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>'); // https://github.com/malihu/malihu-custom-scrollbar-plugin
+        $output_handler->addToHead('<script src="'.MD.'assets/js/jquery.mousewheel.min.js"></script>');
 
-        echo '<div class="content-wrapper animate">';
+        $html = $this->Navigation();
+        $html .= $this->Sidebar();
+
+        $html .= '<div class="content-wrapper animate">';
             if (function_exists('renderNotices') && function_exists('getNotices')) {
-                echo renderNotices(getNotices());
+                $html .= renderNotices(getNotices());
             }
 
-            echo CONTENT;
+            $html .= CONTENT;
 
-            $this->Footer();
-        echo '</div>';
+            $html .= $this->Footer();
+        $html .= '</div>';
+
+        echo $html;
     }
 
     private function Sidebar() {
         $locale = fusion_get_locale('', MD_LOCALE);
         $userdata = fusion_get_userdata();
 
-        echo '<aside class="sidebar animate"><div class="sidebar-content">';
-            echo '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['MD_001'].'</span></div>';
+        $html = '<aside class="sidebar animate"><div class="sidebar-content">';
+            $html .= '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['MD_001'].'</span></div>';
 
-            echo '<ul class="user-actions">';
-                echo '<li class="dropdown">';
-                    echo '<a id="user-actions" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.$userdata['user_name'].'"><i class="fa fa-user"></i></a>';
-                    echo '<ul class="dropdown-menu m-t-10" aria-labelledby="user-actions">';
-                        echo '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
-                        echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
-                        echo '<li class="divider"></li>';
-                        echo IS_V9 ? '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>' : '';
-                        echo '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> <span class="text-danger">'.$locale['logout'].'</span></a></li>';
-                    echo '</ul>';
-                echo '</li>';
+            $html .= '<ul class="user-actions">';
+                $html .= '<li class="dropdown">';
+                    $html .= '<a id="user-actions" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.$userdata['user_name'].'"><i class="fa fa-user"></i></a>';
+                    $html .= '<ul class="dropdown-menu m-t-10" aria-labelledby="user-actions">';
+                        $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
+                        $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
+                        $html .= '<li class="divider"></li>';
+                        $html .= IS_V9 ? '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>' : '';
+                        $html .= '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> <span class="text-danger">'.$locale['logout'].'</span></a></li>';
+                    $html .= '</ul>';
+                $html .= '</li>';
 
                 $languages = fusion_get_enabled_languages();
                 if (count($languages) > 1) {
-                    echo '<li class="dropdown languages-menu">';
-                        echo '<a id="languages-list" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.translate_lang_names(LANGUAGE).'"><i class="fa fa-globe"></i></a>';
-                        echo '<ul class="dropdown-menu m-t-10" aria-labelledby="languages-list">';
+                    $html .= '<li class="dropdown languages-menu">';
+                        $html .= '<a id="languages-list" class="icon-down" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="'.translate_lang_names(LANGUAGE).'"><i class="fa fa-globe"></i></a>';
+                        $html .= '<ul class="dropdown-menu m-t-10" aria-labelledby="languages-list">';
                             foreach ($languages as $language_folder => $language_name) {
-                                echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
+                                $html .= '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
                             }
-                        echo '</ul>';
-                    echo '</li>';
+                        $html .= '</ul>';
+                    $html .= '</li>';
                 }
 
                 $messages_count = $this->Messages();
                 $messages_count = !empty($messages_count) ? '<span class="label label-danger msg-count">'.count($messages_count).'</span>' : '';
 
-                echo '<li><a '.(!empty($messages_count) ? 'id="messages-box"' : '').' href="'.BASEDIR.'messages.php" title="'.$locale['message'].'"><i class="fa fa-envelope"></i>'.$messages_count.'</a></li>';
-                echo '<li><a href="'.BASEDIR.'index.php" title="'.fusion_get_settings('sitename').'"><i class="fa fa-home"></i></a></li>';
-            echo '</ul>';
+                $html .= '<li><a '.(!empty($messages_count) ? 'id="messages-box"' : '').' href="'.BASEDIR.'messages.php" title="'.$locale['message'].'"><i class="fa fa-envelope"></i>'.$messages_count.'</a></li>';
+                $html .= '<li><a href="'.BASEDIR.'index.php" title="'.fusion_get_settings('sitename').'"><i class="fa fa-home"></i></a></li>';
+            $html .= '</ul>';
 
-            echo '<div id="sidebar-menu">';
+            $html .= '<div id="sidebar-menu">';
                 if (class_exists('\PHPFusion\AdminSearch')) {
-                    echo '<div class="sidebar-form">';
-                        echo '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
-                        echo '<i class="fa fa-search input-search-icon"></i>';
-                    echo '</div>';
-                    echo '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
-                    echo '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
+                    $html .= '<div class="sidebar-form">';
+                        $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
+                        $html .= '<i class="fa fa-search input-search-icon"></i>';
+                    $html .= '</div>';
+                    $html .= '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
+                    $html .= '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.IMAGES.'loader.svg"/>';
                 }
 
-                echo Admins::getInstance()->vertical_admin_nav(TRUE);
-            echo '</div>';
+                $html .= Admins::getInstance()->vertical_admin_nav(TRUE);
+            $html .= '</div>';
 
             $messages = $this->GetMessages();
 
             if (!empty($messages)) {
-                echo '<ul id="pms-box" style="display: none;">';
+                $html .= '<ul id="pms-box" style="display: none;">';
                 foreach ($messages as $message) {
-                    echo '<li>';
-                        echo '<div class="msg-block">';
-                            echo '<div class="clearfix">';
-                                echo $message['user']['user_name'];
-                                echo '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';
-                            echo '</div>';
-                        echo '</div>';
-                    echo '</li>';
+                    $html .= '<li>';
+                        $html .= '<div class="msg-block">';
+                            $html .= '<div class="clearfix">';
+                                $html .= $message['user']['user_name'];
+                                $html .= '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';
+                            $html .= '</div>';
+                        $html .= '</div>';
+                    $html .= '</li>';
                 }
-                echo '</ul>';
+                $html .= '</ul>';
             }
-        echo '</div></aside>';
+        $html .= '</div></aside>';
 
         if (class_exists('\PHPFusion\AdminSearch')) {
-            OutputHandler::addToJQuery('$("#search_pages").bind("keyup", function (e) {
+            add_to_jquery('$("#search_pages").bind("keyup", function (e) {
                 $.ajax({
                     url: "'.ADMIN.'includes/acp_search.php'.fusion_get_aidlink().'",
                     method: "get",
@@ -153,55 +159,61 @@ class AdminPanel {
                 });
             });');
         }
+
+        return $html;
     }
 
     private function Navigation() {
-        echo '<nav class="topnav animate">';
-            echo '<ul class="left top-navbar navbar-left pull-left m-b-0">';
-                echo '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
-            echo '</ul>';
+        $html = '<nav class="topnav animate">';
+            $html .= '<ul class="left top-navbar navbar-left pull-left m-b-0">';
+                $html .= '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
+            $html .= '</ul>';
 
             if (IS_V9) {
-                $this->GetPageTitle();
+                $html .= $this->GetPageTitle();
             }
 
-            echo '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
+            $html .= '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
                 $sections = Admins::getInstance()->getAdminSections();
                 if (!empty($sections)) {
                     $i = 0;
                     foreach ($sections as $section_name) {
-                        $active = (isset($_GET['pagenum']) && $_GET['pagenum'] == $i || !isset($_GET['pagenum']) && Admins::getInstance()->_isActive() == $i) ? ' class="active"' : '';
-                        echo '<li'.$active.'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
+                        $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i)) ? TRUE : FALSE;
+                        $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
                         $i++;
                     }
                 }
-            echo '</ul>';
-        echo '</nav>';
+            $html .= '</ul>';
+        $html .= '</nav>';
+
+        return $html;
     }
 
     private function Footer() {
         $locale = fusion_get_locale();
 
-        echo '<footer class="main-footer">';
+        $html = '<footer class="main-footer">';
             if (function_exists('showFooterErrors')) {
-                echo showFooterErrors();
+                $html .= showFooterErrors();
             } else {
                 if (!IS_V9) {
                     global $_errorHandler;
 
                     if (iADMIN && checkrights('ERRO') && count($_errorHandler) > 0) {
-                        echo '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
+                        $html .= '<div>'.str_replace('[ERROR_LOG_URL]', ADMIN.'errors.php'.fusion_get_aidlink(), $locale['err_101']).'</div>';
                     }
                 }
             }
 
             if (fusion_get_settings('rendertime_enabled')) {
-                echo showrendertime().' '.showMemoryUsage().'<br />';
+                $html .= showrendertime().' '.showMemoryUsage().'<br />';
             }
 
-            echo '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['MD_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
-            echo '<br/>'.str_replace('<br />', ' | ', showcopyright());
-        echo '</footer>';
+            $html .= '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['MD_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
+            $html .= '<br/>'.str_replace('<br />', ' | ', showcopyright());
+        $html .= '</footer>';
+
+        return $html;
     }
 
     private function GetPageTitle() {
@@ -215,11 +227,13 @@ class AdminPanel {
             if (!empty($current_page)) {
                 foreach ($pages as $page_data) {
                     if ($page_data['admin_link'] == $current_page) {
-                        echo '<div class="page-title hidden-xs hidden-sm"><img class="img-responsive" src="'.get_image('ac_'.$page_data['admin_rights']).'" alt="'.$page_data['admin_title'].'"/> <span>'.$page_data['admin_title'].'</span></div>';
+                        return '<div class="page-title hidden-xs hidden-sm"><img class="img-responsive" src="'.get_image('ac_'.$page_data['admin_rights']).'" alt="'.$page_data['admin_title'].'"/> <span>'.$page_data['admin_title'].'</span></div>';
                     }
                 }
             }
         }
+
+        return NULL;
     }
 
     private function Messages() {
@@ -266,18 +280,22 @@ class AdminPanel {
     }
 
     public static function OpenTable($title = FALSE, $class = NULL) {
+        $html = '';
+
         if (!empty($title)) {
-            echo '<section class="content-header">';
-            echo '<h1>'.$title.'</h1>';
+            $html .= '<section class="content-header">';
+            $html .= '<h1>'.$title.'</h1>';
 
             if (self::$breadcrumbs == FALSE) {
-                echo render_breadcrumbs();
+                $html .= render_breadcrumbs();
                 self::$breadcrumbs = TRUE;
             }
-            echo '</section>';
+            $html .= '</section>';
         }
 
-        echo '<section class="content '.$class.'">';
+        $html .= '<section class="content '.$class.'">';
+
+        echo $html;
     }
 
     public static function CloseTable() {
