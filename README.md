@@ -4,5 +4,5 @@
     - [Czechia](themes/Czechia)
 
 - ### Admin Themes:
-    - [AdminLTE](themes/admin_themes/AdminLTE)
+    - AdminLTE - moved to main PHP Fusion repo
     - [MDashboard](themes/admin_themes/MDashboard)
