@@ -257,7 +257,7 @@ class Main extends Core {
                         echo defined('USER4') && USER4 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER4.'</div>' : '';
                     echo '</div>';
 
-                    $grid = 4;
+                    /*$grid = 4;
                     echo '<div class="row">';
                         echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
                             echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
@@ -281,7 +281,13 @@ class Main extends Core {
                                 Footer\News::Panel();
                             echo '</div>';
                         }
-                    echo '</div>';
+                    echo '</div>';*/
+
+                    echo '<div class="p-20">'.nl2br(parse_textarea($settings['footer'], FALSE, TRUE)).'</div>';
+
+                    if ($settings['visitorcounter_enabled']) {
+                        echo showcounter();
+                    }
                 echo '</div>';
             }
 
