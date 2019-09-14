@@ -26,7 +26,7 @@ class Login {
         add_to_jquery('$("#admin_password").focus();');
 
         $html = '<div class="login-container">';
-            $html .= '<h1 class="title">'.$locale['MD_001'].'</h1>';
+            $html .= '<h1 class="title">'.$locale['md_001'].'</h1>';
             $html .= '<div class="login-box">';
                 $html .= '<div class="clearfix m-b-20">';
                     $html .= '<div class="pull-left m-r-10">';

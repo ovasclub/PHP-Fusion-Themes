@@ -15,6 +15,6 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['MD_001'] = 'Administrace';
-$locale['MD_002'] = 'Hledat...';
-$locale['MD_003'] = 'Vytvořil';
+$locale['md_001'] = 'Administrace';
+$locale['md_002'] = 'Hledat...';
+$locale['md_003'] = 'Vytvořil';

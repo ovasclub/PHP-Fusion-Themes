@@ -25,10 +25,10 @@ use CzechiaTheme\Core;
  * @package CzechiaTheme\Footer
  */
 class Comments extends Core {
-    public static function Panel() {
+    public static function panel() {
         $locale = fusion_get_locale();
 
-        echo '<h3 class="title"><i class="fa fa-comments-o"></i> '.self::SetLocale('13').'</h3>';
+        echo '<h3 class="title"><i class="fa fa-comments-o"></i> '.self::setLocale('13').'</h3>';
 
         $comments_per_page = fusion_get_settings('comments_per_page');
 

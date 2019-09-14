@@ -29,8 +29,8 @@ use \PHPFusion\News\NewsView;
  * @package CzechiaTheme\Footer
  */
 class News extends Core {
-    public static function Panel() {
-        echo '<h3 class="title"><i class="fa fa-bullhorn"></i> '.self::SetLocale('03').'</h3>';
+    public static function panel() {
+        echo '<h3 class="title"><i class="fa fa-bullhorn"></i> '.self::setLocale('03').'</h3>';
 
         $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
         if ($news) {
@@ -51,7 +51,7 @@ class News extends Core {
                     }
                 echo '</ul>';
             } else {
-                echo self::SetLocale('04');
+                echo self::setLocale('04');
             }
         }
     }

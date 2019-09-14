@@ -37,7 +37,7 @@ class Core {
      *
      * @return mixed
      */
-    protected static function GetParam($name = NULL) {
+    protected static function getParam($name = NULL) {
         if (isset(self::$options[$name])) {
             return self::$options[$name];
         }
@@ -49,7 +49,7 @@ class Core {
      * @param $name
      * @param $value
      */
-    public static function SetParam($name, $value) {
+    public static function setParam($name, $value) {
         self::$options[$name] = $value;
     }
 
@@ -58,7 +58,7 @@ class Core {
      *
      * @return mixed
      */
-    public static function SetLocale($key = NULL) {
+    public static function setLocale($key = NULL) {
         $locale = [];
 
         if (file_exists(THEME.'locale/'.LANGUAGE.'.php')) {
@@ -73,8 +73,8 @@ class Core {
     /**
      * Copyright
      */
-    public static function ThemeCopyright() {
-        echo '<strong>'.self::SetLocale('pfc_title').' &copy; '.date('Y').' '.self::SetLocale('created_by');
+    public static function themeCopyright() {
+        echo '<strong>'.self::setLocale('pfc_title').' &copy; '.date('Y').' '.self::setLocale('created_by');
         echo ' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
     }
 }

@@ -36,8 +36,8 @@ class AdminPanel {
         $output_handler->addToFooter('<script type="text/javascript" src="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>'); // https://github.com/malihu/malihu-custom-scrollbar-plugin
         $output_handler->addToHead('<script src="'.MD.'assets/js/jquery.mousewheel.min.js"></script>');
 
-        $html = $this->Navigation();
-        $html .= $this->Sidebar();
+        $html = $this->navigation();
+        $html .= $this->sidebar();
 
         $html .= '<div class="content-wrapper animate">';
             if (function_exists('renderNotices') && function_exists('getNotices')) {
@@ -46,18 +46,18 @@ class AdminPanel {
 
             $html .= CONTENT;
 
-            $html .= $this->Footer();
+            $html .= $this->footer();
         $html .= '</div>';
 
         echo $html;
     }
 
-    private function Sidebar() {
+    private function sidebar() {
         $locale = fusion_get_locale('', MD_LOCALE);
         $userdata = fusion_get_userdata();
 
         $html = '<aside class="sidebar animate"><div class="sidebar-content">';
-            $html .= '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['MD_001'].'</span></div>';
+            $html .= '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['md_001'].'</span></div>';
 
             $html .= '<ul class="user-actions">';
                 $html .= '<li class="dropdown">';
@@ -83,7 +83,7 @@ class AdminPanel {
                     $html .= '</li>';
                 }
 
-                $messages_count = $this->Messages();
+                $messages_count = $this->messages();
                 $messages_count = !empty($messages_count) ? '<span class="label label-danger msg-count">'.count($messages_count).'</span>' : '';
 
                 $html .= '<li><a '.(!empty($messages_count) ? 'id="messages-box"' : '').' href="'.BASEDIR.'messages.php" title="'.$locale['message'].'"><i class="fa fa-envelope"></i>'.$messages_count.'</a></li>';
@@ -93,7 +93,7 @@ class AdminPanel {
             $html .= '<div id="sidebar-menu">';
                 if (class_exists('\PHPFusion\AdminSearch')) {
                     $html .= '<div class="sidebar-form">';
-                        $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['MD_002'].'">';
+                        $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['md_002'].'">';
                         $html .= '<i class="fa fa-search input-search-icon"></i>';
                     $html .= '</div>';
                     $html .= '<ul class="admin-vertical-link" id="search_result" style="display: none;"></ul>';
@@ -103,7 +103,7 @@ class AdminPanel {
                 $html .= Admins::getInstance()->vertical_admin_nav(TRUE);
             $html .= '</div>';
 
-            $messages = $this->GetMessages();
+            $messages = $this->getMessages();
 
             if (!empty($messages)) {
                 $html .= '<ul id="pms-box" style="display: none;">';
@@ -163,14 +163,14 @@ class AdminPanel {
         return $html;
     }
 
-    private function Navigation() {
+    private function navigation() {
         $html = '<nav class="topnav animate">';
             $html .= '<ul class="left top-navbar navbar-left pull-left m-b-0">';
                 $html .= '<li><a href="#" id="toggle-sidebar" title="Sidebar"><i class="fa fa-bars"></i></a></li>';
             $html .= '</ul>';
 
             if (IS_V9) {
-                $html .= $this->GetPageTitle();
+                $html .= $this->getPageTitle();
             }
 
             $html .= '<ul class="right top-navbar navbar-right pull-right m-r-5 m-b-0">';
@@ -189,7 +189,7 @@ class AdminPanel {
         return $html;
     }
 
-    private function Footer() {
+    private function footer() {
         $locale = fusion_get_locale();
 
         $html = '<footer class="main-footer">';
@@ -209,14 +209,14 @@ class AdminPanel {
                 $html .= showrendertime().' '.showMemoryUsage().'<br />';
             }
 
-            $html .= '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['MD_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
+            $html .= '<strong>MDashboard Theme &copy; '.date('Y').' '.$locale['md_003'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
             $html .= '<br/>'.str_replace('<br />', ' | ', showcopyright());
         $html .= '</footer>';
 
         return $html;
     }
 
-    private function GetPageTitle() {
+    private function getPageTitle() {
         $sections = Admins::getInstance()->getAdminSections();
         $pages = Admins::getInstance()->getAdminPages();
         $current_page = Admins::getInstance()->getCurrentPage();
@@ -236,7 +236,7 @@ class AdminPanel {
         return NULL;
     }
 
-    private function Messages() {
+    private function messages() {
         $userdata = fusion_get_userdata();
 
         if (column_exists(DB_MESSAGES, 'message_user')) {
@@ -275,11 +275,11 @@ class AdminPanel {
         return $this->messages;
     }
 
-    private function GetMessages() {
+    private function getMessages() {
         return $this->messages;
     }
 
-    public static function OpenTable($title = FALSE, $class = NULL) {
+    public static function openTable($title = FALSE, $class = NULL) {
         $html = '';
 
         if (!empty($title)) {
@@ -298,7 +298,7 @@ class AdminPanel {
         echo $html;
     }
 
-    public static function CloseTable() {
+    public static function closeTable() {
         echo '</section>';
     }
 }

@@ -31,7 +31,7 @@ class Main extends Core {
     public function __construct() {
         $settings = fusion_get_settings();
 
-        if ($this->GetParam('header') == TRUE) {
+        if ($this->getParam('header') == TRUE) {
             $url = $settings['siteurl'].'themes/Czechia/assets/';
             OutputHandler::addToFooter('<script src="'.$url.'js/scripts.min.js"></script>');
             OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
@@ -39,7 +39,7 @@ class Main extends Core {
             OutputHandler::addToHead('<script src="'.$url.'js/jquery.mousewheel.min.js"></script>');
             OutputHandler::addToJQuery('$(".leftmenu .left-content").mCustomScrollbar({theme: "dark-2",axis: "y",scrollInertia: 550,mouseWheel: {enable: !0,axis: "y",preventDefault: !0},scrollButtons: {enable: true}});');
 
-            self::Header();
+            self::header();
 
             $icon = '';
             if (defined('LEFT') && LEFT) {
@@ -64,7 +64,7 @@ class Main extends Core {
             $content = ['sm' => 12, 'md' => 12, 'lg' => 12];
             $right   = ['sm' => 4,  'md' => 3,  'lg' => 3];
 
-            if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE) {
+            if (defined('RIGHT') && RIGHT && $this->getParam('right') == TRUE) {
                 $content['sm'] = $content['sm'] - $right['sm'];
                 $content['md'] = $content['md'] - $right['md'];
                 $content['lg'] = $content['lg'] - $right['lg'];
@@ -75,7 +75,7 @@ class Main extends Core {
             }
 
             echo '<div class="container">';
-                if ($this->GetParam('notices') == TRUE) {
+                if ($this->getParam('notices') == TRUE) {
                     echo renderNotices(getNotices(['all', FUSION_SELF]));
                 }
 
@@ -89,7 +89,7 @@ class Main extends Core {
                         echo defined('L_CENTER') && L_CENTER ? L_CENTER : '';
                     echo '</div>';
 
-                    if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE) {
+                    if (defined('RIGHT') && RIGHT && $this->getParam('right') == TRUE) {
                         echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
                             echo defined('RIGHT') && RIGHT ? RIGHT : '';
                         echo '</div>';
@@ -104,12 +104,12 @@ class Main extends Core {
 
         echo '</main>';
 
-        if ($this->GetParam('footer') == TRUE) {
-            self::Footer();
+        if ($this->getParam('footer') == TRUE) {
+            self::footer();
         }
     }
 
-    private function Header() {
+    private function header() {
         $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
         $settings = fusion_get_settings();
@@ -196,7 +196,7 @@ class Main extends Core {
                                     echo '<a href="#" id="login-register" data-toggle="dropdown"><i class="fa fa-sign-in"></i> '.$locale['login'].' <span class="caret"></span></a>';
 
                                     echo '<ul class="dropdown-menu" aria-labelledby="login-register">';
-                                        echo '<li>'.self::LoginForm().'</li>';
+                                        echo '<li>'.self::loginForm().'</li>';
                                         echo '<li>'.str_replace(['[LINK]', '[/LINK]'], ['<a class="display-block" href="'.BASEDIR.'lostpassword.php">', '</a>'], $locale['global_106']).'</li>';
                                     echo '</ul>';
                                 echo '</li>';
@@ -211,7 +211,7 @@ class Main extends Core {
         echo '</header>';
     }
 
-    private function LoginForm() {
+    private function loginForm() {
         $locale = fusion_get_locale();
 
         $action_url = FUSION_SELF.(FUSION_QUERY ? '?'.FUSION_QUERY : '');
@@ -242,11 +242,11 @@ class Main extends Core {
         return $html;
     }
 
-    private function Footer() {
+    private function footer() {
         $settings = fusion_get_settings();
 
         echo '<footer class="site-footer">';
-            if (self::GetParam('footer_panels') == TRUE) {
+            if (self::getParam('footer_panels') == TRUE) {
                 echo '<div id="backtotop" class="center-x"><a href="#" class="button"><i class="fa fa-angle-up"></i></a></div>';
 
                 echo '<div id="footer">';
@@ -272,13 +272,13 @@ class Main extends Core {
                         echo '</div>';
 
                         echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                            Footer\Comments::Panel();
+                            Footer\Comments::panel();
                         echo '</div>';
 
                         $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
                         if ($news) {
                             echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                                Footer\News::Panel();
+                                Footer\News::panel();
                             echo '</div>';
                         }
                     echo '</div>';*/
@@ -304,7 +304,7 @@ class Main extends Core {
             }
 
             echo '<div id="copyright" class="clearfix p-b-10">';
-                $this->ThemeCopyright();
+                $this->themeCopyright();
 
                 echo '<div class="pull-right">';
                     echo showcopyright('', TRUE).showprivacypolicy();
@@ -314,15 +314,15 @@ class Main extends Core {
         echo '<div class="overlay"><!-- --></div>';
     }
 
-    public static function HideAll() {
+    public static function hideAll() {
         Panels::getInstance(TRUE)->hide_panel('RIGHT');
         Panels::getInstance(TRUE)->hide_panel('LEFT');
         Panels::getInstance(TRUE)->hide_panel('AU_CENTER');
         Panels::getInstance(TRUE)->hide_panel('U_CENTER');
         Panels::getInstance(TRUE)->hide_panel('L_CENTER');
         Panels::getInstance(TRUE)->hide_panel('BL_CENTER');
-        self::SetParam('header', FALSE);
-        self::SetParam('footer', FALSE);
-        self::SetParam('notices', FALSE);
+        self::setParam('header', FALSE);
+        self::setParam('footer', FALSE);
+        self::setParam('notices', FALSE);
     }
 }

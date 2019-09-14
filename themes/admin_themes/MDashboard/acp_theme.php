@@ -67,11 +67,11 @@ function closeside($title = FALSE) {
 }
 
 function opentable($title, $class = NULL) {
-    MDashboard\AdminPanel::OpenTable($title, $class);
+    MDashboard\AdminPanel::openTable($title, $class);
 }
 
 function closetable() {
-    MDashboard\AdminPanel::CloseTable();
+    MDashboard\AdminPanel::closeTable();
 }
 
 if (!IS_V9) {

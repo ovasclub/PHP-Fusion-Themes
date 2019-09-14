@@ -26,25 +26,25 @@ use \PHPFusion\Panels;
  * @package CzechiaTheme\Templates
  */
 class Downloads extends Core {
-    public static function render_downloads($info) {
+    public static function renderDownloads($info) {
         $locale = fusion_get_locale();
 
-        add_to_head('<style type="text/css">.item .card-footer {margin-top: 10px;}</style>');
+        add_to_css('.item .card-footer {margin-top: 10px;}');
 
         echo '<h1 class="text-center">'.$locale['download_1000'].'</h1>';
 
         echo render_breadcrumbs();
 
-        Panels::addPanel('menu_panel', self::Menu($info), Panels::PANEL_RIGHT, iGUEST, 1);
+        Panels::addPanel('menu_panel', self::menu($info), Panels::PANEL_RIGHT, iGUEST, 1);
 
         if (isset($_GET['download_id']) && !empty($info['download_item'])) {
-            self::display_download_item($info);
+            self::displayDownloadItem($info);
         } else {
-            self::display_download_index($info);
+            self::displayDownloadIndex($info);
         }
     }
 
-    private static function display_download_index($info) {
+    private static function displayDownloadIndex($info) {
         $locale = fusion_get_locale();
         $dl_settings = get_settings('downloads');
 
@@ -78,7 +78,7 @@ class Downloads extends Core {
                                 echo '</div>';
 
                                 echo '<div class="publisher m-t-10 text-center">';
-                                    echo self::SetLocale('12').' ';
+                                    echo self::setLocale('12').' ';
                                     echo !empty($data['user_id']) ? profile_link($data['user_id'], $data['user_name'], $data['user_status']) : $locale['user_na'];
                                 echo '</div>';
                             echo '</div>';
@@ -99,10 +99,10 @@ class Downloads extends Core {
         }
     }
 
-    private static function display_download_item($info) {
+    private static function displayDownloadItem($info) {
         $locale = fusion_get_locale();
         $dl_settings = get_settings('downloads');
-        self::SetParam('content_container', FALSE);
+        self::setParam('content_container', FALSE);
         $data = $info['download_item'];
 
         echo '<div class="card">';
@@ -142,24 +142,24 @@ class Downloads extends Core {
                     $profile = profile_link($data['user_id'], $data['user_name'], $data['user_status']);
                     echo '<strong>'.$locale['global_050'].'</strong>: '.$profile.'<br />';
                     echo '<strong>'.$locale['download_1017'].'</strong>: '.$data['download_homepage'].'<br/>';
-                    echo '<strong>'.self::SetLocale('08').': </strong> ';
+                    echo '<strong>'.self::setLocale('08').': </strong> ';
                     $link = DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'];
                     echo '<a href="'.$link.'">'.$data['download_cat_name'].'</a>';
                     echo '<br/>';
-                    echo '<a href="'.$data['download_file_link'].'" class="btn btn-primary m-b-20"><i class="fa fa-download"></i> '.self::SetLocale('09').($data['download_filesize'] ? ' ('.$data['download_filesize'].')' : '').'</a>';
+                    echo '<a href="'.$data['download_file_link'].'" class="btn btn-primary m-b-20"><i class="fa fa-download"></i> '.self::setLocale('09').($data['download_filesize'] ? ' ('.$data['download_filesize'].')' : '').'</a>';
                 echo '</div>';
             echo '</div>';
 
             if ($data['download_description']) {
                 echo '<div class="p-10 m-b-20" style="border: 1px solid #ddd;">';
-                    echo '<strong>'.self::SetLocale('10').'</strong><br/>';
+                    echo '<strong>'.self::setLocale('10').'</strong><br/>';
                     echo $data['download_description'];
                 echo '</div>';
             }
 
             if ($dl_settings['download_screenshot'] == 1 && $data['download_image'] && file_exists(DOWNLOADS.'images/'.$data['download_image'])) {
                 echo '<div class="p-10 m-b-20" style="border: 1px solid #ddd;">';
-                    echo '<strong>'.self::SetLocale('11').'</strong><br/>';
+                    echo '<strong>'.self::setLocale('11').'</strong><br/>';
                     $link = DOWNLOADS.'images/'.$data['download_image'];
                     echo '<img src="'.$link.'" alt="'.$data['download_title'].'" class="img-responsive"/>';
                 echo '</div>';
@@ -206,10 +206,10 @@ class Downloads extends Core {
 
         echo $data['download_allow_comments'] && fusion_get_settings('comments_enabled') == 1 ? '<div class="card">'.$data['download_show_comments'].'</div>' : '';
         $ratings = $data['download_allow_ratings'] && fusion_get_settings('ratings_enabled') == 1 ? '<div class="m-b-20 ratings-box">'.$data['download_show_ratings'].'</div>' : '';
-        self::SetParam('right_middle_content', $ratings);
+        self::setParam('right_middle_content', $ratings);
     }
 
-    private static function display_cat_menu($info, $cat_id = 0, $level = 0) {
+    private static function displayCatMenu($info, $cat_id = 0, $level = 0) {
         $html = '';
 
         if (!empty($info[$cat_id])) {
@@ -221,7 +221,7 @@ class Downloads extends Core {
                 $html .= '<a href="'.$link.'" class="list-group-item p-5 p-l-15'.$active.'">'.$cdata['download_cat_name'].'</a>';
 
                 if (!empty($info[$download_cat_id])) {
-                    $html .= self::display_cat_menu($info, $download_cat_id, $level + 1);
+                    $html .= self::displayCatMenu($info, $download_cat_id, $level + 1);
                 }
             }
         }
@@ -229,7 +229,7 @@ class Downloads extends Core {
         return $html;
     }
 
-    private static function Menu($info) {
+    private static function menu($info) {
         $locale = fusion_get_locale();
 
         ob_start();
@@ -247,7 +247,7 @@ class Downloads extends Core {
 
         openside('<i class="fa fa-list"></i> '.$locale['download_1003']);
         echo '<div class="list-group">';
-            $download_cat_menu = self::display_cat_menu($info['download_categories']);
+            $download_cat_menu = self::displayCatMenu($info['download_categories']);
             echo !empty($download_cat_menu) ? $download_cat_menu : '<p>'.$locale['download_3001'].'</p>';
         echo '</div>';
         closeside();

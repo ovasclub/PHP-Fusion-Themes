@@ -19,7 +19,6 @@ namespace CzechiaTheme\Templates;
 
 use CzechiaTheme\Core;
 use \PHPFusion\News\NewsServer;
-use \PHPFusion\OutputHandler;
 use \PHPFusion\Panels;
 
 /**
@@ -28,10 +27,10 @@ use \PHPFusion\Panels;
  * @package CzechiaTheme\Templates
  */
 class News extends Core {
-    private static function Header($info) {
+    private static function header($info) {
         $locale = fusion_get_locale();
 
-        OutputHandler::addToHead('<style type="text/css">
+        add_to_css('
             figure {margin: 0;padding: 0;border: 0;font: inherit;vertical-align: baseline;display: block;}
             .item {padding: 0;height: inherit;}
             .item .thumb {float: left;height: 120px;overflow: hidden;margin-right: 10px;}
@@ -47,7 +46,7 @@ class News extends Core {
                 .item .post .readmore {border: 1px solid transparent; text-transform: uppercase;font-weight: bold;color: #046ca0;padding: 5px 10px;font-size: 14px;-webkit-border-radius: 2px;border-radius: 2px;display: inline-block;width: 100%;text-align: center;}
                 .item .post .readmore:hover {border-color: #046ca0;}
             }
-        </style>');
+        ');
 
         echo '<h1 class="text-center">'.$locale['news_0004'].'</h1>';
 
@@ -95,11 +94,11 @@ class News extends Core {
         Panels::addPanel('menu_panel', $cats_menu, Panels::PANEL_RIGHT, iGUEST, 1);
     }
 
-    public static function display_main_news($info) {
+    public static function displayMainNews($info) {
         $locale = fusion_get_locale();
         $news_settings = NewsServer::get_news_settings();
 
-        self::Header($info);
+        self::header($info);
 
         if (!empty($info['news_items'])) {
             echo '<div class="card">';
@@ -122,7 +121,7 @@ class News extends Core {
                                         echo '<span class="m-r-5"><i class="fa fa-clock-o"></i> '.showdate(fusion_get_settings('newsdate'), $data['news_date']).'</span>';
                                         echo '<span><i class="fa fa-folder-o"></i> <a href="'.INFUSIONS.'news/news.php?cat_id='.$data['news_cat_id'].'">'.$data['news_cat_name'].'</a></span>';
                                     echo '</div>';
-                                    echo '<a href="'.$link.'" class="readmore m-t-5">'.self::SetLocale('05').'</a>';
+                                    echo '<a href="'.$link.'" class="readmore m-t-5">'.self::setLocale('05').'</a>';
                                 echo '</div>';
                             echo '</article>';
                         echo '</div>';
@@ -142,13 +141,13 @@ class News extends Core {
         }
     }
 
-    public static function render_news_item($info) {
+    public static function renderNewsItem($info) {
         $locale = fusion_get_locale();
         $data = $info['news_item'];
 
-        OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'.INCLUDES.'jquery/colorbox/colorbox.css"/>');
-        OutputHandler::addToFooter('<script type="text/javascript" src="'.INCLUDES.'jquery/colorbox/jquery.colorbox.js"></script>');
-        OutputHandler::addToJQuery('
+        add_to_head('<link rel="stylesheet" type="text/css" href="'.INCLUDES.'jquery/colorbox/colorbox.css"/>');
+        add_to_footer('<script type="text/javascript" src="'.INCLUDES.'jquery/colorbox/jquery.colorbox.js"></script>');
+        add_to_jquery('
             $(".news-image-overlay").colorbox({
                 transition: "elasic",
                 height: "100%",
@@ -163,7 +162,7 @@ class News extends Core {
            });
         ');
 
-        self::Header($info);
+        self::header($info);
 
         echo '<div class="card">';
             echo '<h1 class="display-inline-block m-t-5">'.$data['news_subject'].'</h1>';

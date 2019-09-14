@@ -26,13 +26,13 @@ use CzechiaTheme\Main;
  * @package CzechiaTheme\Templates
  */
 class Error extends Core {
-    public static function display_error_page($data) {
+    public static function displayErrorPage($data) {
         $locale = fusion_get_locale();
         $settings = fusion_get_settings();
 
-        add_to_head('<style type="text/css">body {background: #0077C0;color: #fff;}.wrapper {margin: 50px auto;max-width: 600px;}.logo {max-height: 120px;}.status {font-size: 5em;}@media (min-width: 400px) {.status {font-size: 7em;}}@media (min-width: 768px) {.status {font-size: 10em;}}</style>');
+        add_to_css('body {background: #0077C0;color: #fff;}.wrapper {margin: 50px auto;max-width: 600px;}.logo {max-height: 120px;}.status {font-size: 5em;}@media (min-width: 400px) {.status {font-size: 7em;}}@media (min-width: 768px) {.status {font-size: 10em;}}');
 
-        Main::HideAll();
+        Main::hideAll();
 
         $locale['error'] = str_replace('!', '', $locale['error']);
         set_title($locale['error'].' '.$data['status']);

@@ -22,15 +22,15 @@ class Dashboard {
         $pagenum = (int)filter_input(INPUT_GET, 'pagenum');
 
         if ((isset($pagenum) && $pagenum) > 0) {
-            $html = $this->AdminIcons();
+            $html = $this->adminIcons();
         } else {
-            $html = $this->RenderDashboard();
+            $html = $this->renderDashboard();
         }
 
         echo $html;
     }
 
-    private function RenderDashboard() {
+    private function renderDashboard() {
         global $members, $forum, $download, $news, $articles, $weblinks, $photos,
                $submit_type, $submit_link, // for 9.0
                $global_comments, $global_ratings, $global_submissions, $global_infusions, $link_type, $submit_data, $comments_type, $infusions_count;
@@ -315,7 +315,7 @@ class Dashboard {
         return $html;
     }
 
-    private function AdminIcons() {
+    private function adminIcons() {
         global $admin_icons;
 
         $locale = fusion_get_locale();

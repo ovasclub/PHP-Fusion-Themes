@@ -56,7 +56,7 @@ function closeside() {
  * @param $info
  */
 function render_downloads($info) {
-    CzechiaTheme\Templates\Downloads::render_downloads($info);
+    CzechiaTheme\Templates\Downloads::renderDownloads($info);
 }
 
 /**
@@ -64,7 +64,7 @@ function render_downloads($info) {
  * @param $info
  */
 function display_error_page($info) {
-    CzechiaTheme\Templates\Error::display_error_page($info);
+    CzechiaTheme\Templates\Error::displayErrorPage($info);
 }
 
 /**
@@ -72,11 +72,11 @@ function display_error_page($info) {
  * @param $info
  */
 function display_loginform($info) {
-    CzechiaTheme\Templates\Login::LoginForm($info);
+    CzechiaTheme\Templates\Login::loginForm($info);
 }
 
 function display_register_form($info) {
-    CzechiaTheme\Templates\Login::RegisterForm($info);
+    CzechiaTheme\Templates\Login::registerForm($info);
 }
 
 /**
@@ -84,11 +84,11 @@ function display_register_form($info) {
  * @param $info
  */
 function display_main_news($info) {
-    CzechiaTheme\Templates\News::display_main_news($info);
+    CzechiaTheme\Templates\News::displayMainNews($info);
 }
 
 function render_news_item($info) {
-    CzechiaTheme\Templates\News::render_news_item($info);
+    CzechiaTheme\Templates\News::renderNewsItem($info);
 }
 
 set_image('imagenotfound', fusion_get_settings('siteurl').'themes/Czechia/images/noimage.svg');

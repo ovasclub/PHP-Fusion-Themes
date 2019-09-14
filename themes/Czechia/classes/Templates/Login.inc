@@ -26,13 +26,13 @@ use CzechiaTheme\Main;
  * @package CzechiaTheme\Templates
  */
 class Login extends Core {
-    public static function LoginForm($info) {
+    public static function loginForm($info) {
         $locale = fusion_get_locale();
         $aidlink = fusion_get_aidlink();
         $userdata = fusion_get_userdata();
         $settings = fusion_get_settings();
 
-        Main::HideAll();
+        Main::hideAll();
 
         echo '<div class="panel panel-default" style="max-width: 500px; margin: 30px auto;">';
             echo '<div class="panel-heading" style="background: #fff;">';
@@ -92,11 +92,11 @@ class Login extends Core {
         echo '</div>';
     }
 
-    public static function RegisterForm($info) {
+    public static function registerForm($info) {
         $locale = fusion_get_locale();
         $settings = fusion_get_settings();
 
-        Main::HideAll();
+        Main::hideAll();
 
         echo '<div class="panel panel-default" style="max-width: 650px; margin: 30px auto;">';
             echo '<div class="panel-heading" style="background: #fff;">';
