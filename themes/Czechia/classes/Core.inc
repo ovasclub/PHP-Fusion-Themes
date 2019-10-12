@@ -74,7 +74,6 @@ class Core {
      * Copyright
      */
     public static function themeCopyright() {
-        echo '<strong>'.self::setLocale('pfc_title').' &copy; '.date('Y').' '.self::setLocale('created_by');
-        echo ' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
+        echo '<strong>&copy; '.date('Y').' '.self::setLocale('created_by').' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
     }
 }

@@ -17,7 +17,6 @@
 +--------------------------------------------------------*/
 namespace CzechiaTheme;
 
-use \PHPFusion\OutputHandler;
 use \PHPFusion\Panels;
 use \PHPFusion\SiteLinks;
 
@@ -31,14 +30,9 @@ class Main extends Core {
     public function __construct() {
         $settings = fusion_get_settings();
 
-        if ($this->getParam('header') == TRUE) {
-            $url = $settings['siteurl'].'themes/Czechia/assets/';
-            OutputHandler::addToFooter('<script src="'.$url.'js/scripts.min.js"></script>');
-            OutputHandler::addToHead('<link rel="stylesheet" type="text/css" href="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
-            OutputHandler::addToFooter('<script src="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>');
-            OutputHandler::addToHead('<script src="'.$url.'js/jquery.mousewheel.min.js"></script>');
-            OutputHandler::addToJQuery('$(".leftmenu .left-content").mCustomScrollbar({theme: "dark-2",axis: "y",scrollInertia: 550,mouseWheel: {enable: !0,axis: "y",preventDefault: !0},scrollButtons: {enable: true}});');
+        add_to_footer('<script src="'.THEME.'js/scripts.min.js"></script>');
 
+        if ($this->getParam('header') == TRUE) {
             self::header();
 
             $icon = '';
@@ -51,7 +45,6 @@ class Main extends Core {
             $menu_options = [
                 'id'           => 'main-menu',
                 'navbar_class' => 'navbar-default',
-                'searchbar'    => TRUE,
                 'show_header'  => $icon.$logo
             ];
 
@@ -156,18 +149,11 @@ class Main extends Core {
 
                                     echo '<ul class="dropdown-menu dropdown-user" role="menu">';
                                         echo '<li><div class="navbar-login">';
-                                            echo '<div class="row">';
-                                                echo '<div class="col-sm-4"><p>';
-                                                    echo display_avatar($userdata, '87px', '', FALSE, 'img-circle m-t-5 m-l-10');
-                                                echo '</p></div>';
-                                                echo '<div class="col-sm-8">';
-                                                    echo '<p class="text-left"><strong>'.$userdata['user_name'].'</strong></p>';
-                                                    echo '<p class="text-left small">'.getuserlevel($userdata['user_level']).'</p>';
-                                                    echo '<div class="btn-group btn-group-sm btn-group-justified">';
-                                                        echo '<a href="'.$user_url.'" class="btn btn-primary">'.$locale['view'].' '.$locale['profile'].'</a>';
-                                                        echo '<a href="'.BASEDIR.'edit_profile.php" class="btn btn-warning">'.$locale['UM080'].'</a>';
-                                                    echo '</div>';
-                                                echo '</div>';
+                                            echo '<p class="text-left"><strong>'.$userdata['user_name'].'</strong></p>';
+                                            echo '<p class="text-left small">'.getuserlevel($userdata['user_level']).'</p>';
+                                            echo '<div class="btn-group btn-group-sm btn-group-justified">';
+                                                echo '<a href="'.$user_url.'" class="btn btn-primary">'.$locale['view'].' '.$locale['profile'].'</a>';
+                                                echo '<a href="'.BASEDIR.'edit_profile.php" class="btn btn-warning">'.$locale['UM080'].'</a>';
                                             echo '</div>';
                                         echo '</div></li>';
                                         echo '<li class="divider m-b-0"></li>';
@@ -247,8 +233,6 @@ class Main extends Core {
 
         echo '<footer class="site-footer">';
             if (self::getParam('footer_panels') == TRUE) {
-                echo '<div id="backtotop" class="center-x"><a href="#" class="button"><i class="fa fa-angle-up"></i></a></div>';
-
                 echo '<div id="footer">';
                     echo '<div class="row">';
                         echo defined('USER1') && USER1 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER1.'</div>' : '';
@@ -256,32 +240,6 @@ class Main extends Core {
                         echo defined('USER3') && USER3 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER3.'</div>' : '';
                         echo defined('USER4') && USER4 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER4.'</div>' : '';
                     echo '</div>';
-
-                    /*$grid = 4;
-                    echo '<div class="row">';
-                        echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                            echo '<h3 class="title"><i class="fa fa-info-circle"></i> '.$this->SetLocale('02').'</h3>';
-                            echo $settings['description'];
-                            echo '<br/>';
-                            echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
-
-                            if ($settings['visitorcounter_enabled']) {
-                                echo '<br/>';
-                                echo showcounter();
-                            }
-                        echo '</div>';
-
-                        echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                            Footer\Comments::panel();
-                        echo '</div>';
-
-                        $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
-                        if ($news) {
-                            echo '<div class="col-xs-12 col-sm-'.$grid.' col-md-'.$grid.' col-lg-'.$grid.'">';
-                                Footer\News::panel();
-                            echo '</div>';
-                        }
-                    echo '</div>';*/
 
                     echo '<div class="p-20">'.nl2br(parse_textarea($settings['footer'], FALSE, TRUE)).'</div>';
 

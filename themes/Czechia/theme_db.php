@@ -25,9 +25,9 @@ if (file_exists(THEMES.'Czechia/locale/'.LANGUAGE.'.php')) {
 
 $theme_title       = $locale['pfc_title'];
 $theme_description = $locale['pfc_description'];
-$theme_screenshot  = 'preview.png';
+$theme_screenshot  = 'screenshot.jpg';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
 $theme_license     = 'AGPL3';
-$theme_version     = '2.1';
+$theme_version     = '2.2';
 $theme_folder      = 'Czechia';

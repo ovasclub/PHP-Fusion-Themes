@@ -1,7 +1,7 @@
 # Czechia Theme
-Official Theme for Czech support.
+Lite version of Czechia theme from Official Czech NSS.
 
-![Version](https://img.shields.io/badge/Version-2.1-blue.svg)
+![Version](https://img.shields.io/badge/Version-2.2-blue.svg)
 
 Custom templates:
  - Downloads
@@ -9,4 +9,4 @@ Custom templates:
  - Login / Register
  - News
 
-![Preview](preview.png)
+![Preview](screenshot.jpg)
