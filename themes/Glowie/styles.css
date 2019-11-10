@@ -291,6 +291,17 @@ hr {
     border-top: 1px solid #ddd;
 }
 
+blockquote {
+    border-left: 4px solid #3452aa;
+    font-size: 22px;
+    font-weight: 100;
+    padding: 7px 6px;
+}
+
+.alt {
+    color: #04688d;
+}
+
 .dropdown-menu {
     -webkit-border-radius: 0;
     border-radius: 0;
