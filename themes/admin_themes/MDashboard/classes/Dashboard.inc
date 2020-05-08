@@ -52,7 +52,7 @@ class Dashboard {
 
             $html .= '<div class="row m-b-20">';
                 foreach ($panels as $panel => $block) {
-                    $block['link'] = empty($block['link']) ? $block['link'] : '&amp;'.$block['link'];
+                    $block['link'] = empty($block['link']) ? $block['link'] : '&'.$block['link'];
 
                     $html .= '<div class="col-xs-'.$grid['mobile'].' col-sm-'.$grid['tablet'].' col-md-'.$grid['laptop'].' col-lg-'.$grid['desktop'].' block">';
                         $html .= '<div class="small-box">';
@@ -180,9 +180,9 @@ class Dashboard {
                                         if (isset($comments_type[$comment_data['comment_type']]) && isset($link_type[$comment_data['comment_type']])) {
                                             $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
                                                 $html .= '<div id="comment_action-'.$i.'" class="btn-group btn-group-xs pull-right m-t-10">';
-                                                    $html .= '<a class="btn btn-primary" title="'.$locale['274'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-eye"></i></a>';
-                                                    $html .= '<a class="btn btn-warning" title="'.$locale['275'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;action=edit&amp;comment_id='.$comment_data['comment_id'].'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-pencil"></i></a>';
-                                                    $html .= '<a class="btn btn-danger" title="'.$locale['276'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;action=delete&amp;comment_id='.$comment_data['comment_id'].'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-trash"></i></a>';
+                                                    $html .= '<a class="btn btn-primary" title="'.$locale['274'].'" href="'.ADMIN.'comments.php'.$aidlink.'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-eye"></i></a>';
+                                                    $html .= '<a class="btn btn-warning" title="'.$locale['275'].'" href="'.ADMIN.'comments.php'.$aidlink.'&action=edit&comment_id='.$comment_data['comment_id'].'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-pencil"></i></a>';
+                                                    $html .= '<a class="btn btn-danger" title="'.$locale['276'].'" href="'.ADMIN.'comments.php'.$aidlink.'&action=delete&comment_id='.$comment_data['comment_id'].'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-trash"></i></a>';
                                                 $html .= '</div>';
                                                 $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($comment_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
                                                 $html .= '<strong>'.(!empty($comment_data['user_id']) ? profile_link($comment_data['user_id'], $comment_data['user_name'], $comment_data['user_status']) : $comment_data['comment_name']).' </strong>';
@@ -268,8 +268,8 @@ class Dashboard {
                                                     // v8
                                                     if (!IS_V9) {
                                                         $html .= '<div class="btn-group m-l-10 pull-right">';
-                                                            $html .= '<a class="btn btn-xs btn-primary" title="'.$locale['286'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;action=2&amp;t='.$submit_data['submit_type'].'&amp;submit_id='.$submit_data['submit_id'].'"><i class="fa fa-eye"></i></a>';
-                                                            $html .= '<a class="btn btn-xs btn-danger" title="'.$locale['287'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&amp;delete='.$submit_data['submit_id'].'"><i class="fa fa-trash"></i></a>';
+                                                            $html .= '<a class="btn btn-xs btn-primary" title="'.$locale['286'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&action=2&t='.$submit_data['submit_type'].'&submit_id='.$submit_data['submit_id'].'"><i class="fa fa-eye"></i></a>';
+                                                            $html .= '<a class="btn btn-xs btn-danger" title="'.$locale['287'].'" href="'.ADMIN.'submissions.php'.$aidlink.'&delete='.$submit_data['submit_id'].'"><i class="fa fa-trash"></i></a>';
                                                         $html .= '</div>';
                                                     }
                                                 }

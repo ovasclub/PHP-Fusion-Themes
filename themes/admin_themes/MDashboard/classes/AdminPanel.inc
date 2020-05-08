@@ -66,7 +66,7 @@ class AdminPanel {
                         $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                         $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
                         $html .= '<li class="divider"></li>';
-                        $html .= IS_V9 ? '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>' : '';
+                        $html .= IS_V9 ? '<li><a href="'.FUSION_REQUEST.'&logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>' : '';
                         $html .= '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> <span class="text-danger">'.$locale['logout'].'</span></a></li>';
                     $html .= '</ul>';
                 $html .= '</li>';
@@ -112,7 +112,7 @@ class AdminPanel {
                         $html .= '<div class="msg-block">';
                             $html .= '<div class="clearfix">';
                                 $html .= $message['user']['user_name'];
-                                $html .= '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';
+                                $html .= '<br/><a href="'.BASEDIR.'messages.php?folder=inbox&msg_read='.$message['link'].'" title="'.$message['title'].'">'.trim_text($message['title'], 18).'</a><small class="pull-right msg-date">'.$message['datestamp'].'</small>';
                             $html .= '</div>';
                         $html .= '</div>';
                     $html .= '</li>';
@@ -179,7 +179,7 @@ class AdminPanel {
                     $i = 0;
                     foreach ($sections as $section_name) {
                         $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i)) ? TRUE : FALSE;
-                        $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
+                        $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
                         $i++;
                     }
                 }
