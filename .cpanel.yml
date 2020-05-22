@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/robinn/public_html/repositories/PHP-Fusion-Themes/
-    - /bin/cp * $DEPLOYPATH
