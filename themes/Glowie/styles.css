@@ -31,8 +31,6 @@ a {
 
 .header-top {
     background: rgb(43, 59, 65);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(43, 59, 65, 1)), color-stop(100%, rgba(25, 29, 43, 1)));
-    background: -webkit-linear-gradient(top, rgba(43, 59, 65, 1) 0%, rgba(25, 29, 43, 1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 59, 65, 1)), to(rgba(25, 29, 43, 1)));
     background: linear-gradient(to bottom, rgba(43, 59, 65, 1) 0%, rgba(25, 29, 43, 1) 100%);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
@@ -305,7 +303,6 @@ blockquote {
 }
 
 .btn-default {
-    background-image: -webkit-linear-gradient(top, #FFF 0, #E0E0E0 100%);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFF), to(#E0E0E0));
     background-image: linear-gradient(to bottom, #FFF 0, #E0E0E0 100%);
     background-repeat: repeat-x;
@@ -326,8 +323,6 @@ blockquote {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     background-repeat: repeat-x;
     background: #0099cd;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0099cd), color-stop(71%, #0077c9));
-    background: -webkit-linear-gradient(top, #0099cd 0%, #0077c9 71%);
     background: -webkit-gradient(linear, left top, left bottom, from(#0099cd), color-stop(71%, #0077c9));
     background: linear-gradient(to bottom, #0099cd 0%, #0077c9 71%);
     color: #fff;
@@ -336,7 +331,6 @@ blockquote {
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-image: -webkit-linear-gradient(top, rgb(0, 138, 234) 0, rgb(2, 77, 207) 100%);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(0, 138, 234)), to(rgb(2, 77, 207)));
     background-image: linear-gradient(to bottom, rgb(0, 138, 234) 0, rgb(2, 77, 207) 100%);
     border-color: #0483d9;
@@ -346,8 +340,6 @@ blockquote {
 .btn-success {
     background-repeat: repeat-x;
     background: #5CB85C;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5CB85C), color-stop(100%, #419641));
-    background: -webkit-linear-gradient(top, #5CB85C 0%, #419641 100%);
     background: -webkit-gradient(linear, left top, left bottom, from(#5CB85C), to(#419641));
     background: linear-gradient(to bottom, #5CB85C 0%, #419641 100%);
     border-color: #3E8F3E;
@@ -363,8 +355,6 @@ blockquote {
     text-shadow: 0 1px 0 #1D3B6A;
     background-repeat: repeat-x;
     background: #00a8e1;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00abe1), color-stop(71%, #0098f4));
-    background: -webkit-linear-gradient(top, #00abe1 0%, #0098f4 71%);
     background: -webkit-gradient(linear, left top, left bottom, from(#00abe1), color-stop(71%, #0098f4));
     background: linear-gradient(to bottom, #00abe1 0%, #0098f4 71%);
     color: rgb(255, 255, 255);
@@ -379,9 +369,6 @@ blockquote {
 .btn-warning {
     background-repeat: repeat-x;
     background: #F0AD4E;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F0AD4E), color-stop(100%, #EB9316));
-    background: -webkit-linear-gradient(top, #F0AD4E 0%, #EB9316 100%);
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 222, 95, 1)), to(#EB9316));
     background: -webkit-gradient(linear, left top, left bottom, from(#F0AD4E), to(#EB9316));
     background: linear-gradient(to bottom, #F0AD4E 0%, #EB9316 100%);
     border-color: #E38D13;
@@ -396,7 +383,6 @@ blockquote {
 .btn-danger {
     background-repeat: repeat-x;
     background: #D9534F;
-    background-image: -webkit-linear-gradient(top, #D9534F 0, #C12E2A 100%);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #D9534F), to(#C12E2A));
     background-image: linear-gradient(to bottom, #D9534F 0, #C12E2A 100%);
     border-color: #B92C28;
