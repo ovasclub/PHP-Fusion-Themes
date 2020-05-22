@@ -178,7 +178,7 @@ class AdminPanel {
                 if (!empty($sections)) {
                     $i = 0;
                     foreach ($sections as $section_name) {
-                        $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i)) ? TRUE : FALSE;
+                        $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i));
                         $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum='.$i.'" title="'.$section_name.'">'.Admins::getInstance()->get_admin_section_icons($i).'</a></li>';
                         $i++;
                     }
