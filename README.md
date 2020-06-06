@@ -12,4 +12,7 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
     - [Glowie](themes/Glowie)
 
 - ### Admin Themes:
+    - [Ares](themes/admin_themes/Ares)
     - [MDashboard](themes/admin_themes/MDashboard)
+
+Other themes and SDK https://github.com/php-fusion/Addons
