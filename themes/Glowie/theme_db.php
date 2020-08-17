@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Glowie/theme_db.php
+| Filename: theme_db.php
 | Author: Frederick MC Chan (Chan)
 | Author: RobiNN
 +--------------------------------------------------------+
@@ -22,7 +22,7 @@ $theme_title = 'Glowie';
 $theme_description = '';
 $theme_screenshot = 'screenshot.jpg';
 $theme_author = 'Frederick MC Chan (Chan) & RobiNN';
-$theme_web = 'https://php-fusion.co.uk';
+$theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
 $theme_version = '1.0';
 $theme_folder = 'Glowie';

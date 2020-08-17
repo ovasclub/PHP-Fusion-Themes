@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Czechia/theme_autoloader.php
+| Filename: theme_autoloader.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
