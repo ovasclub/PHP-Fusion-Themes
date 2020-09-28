@@ -8,11 +8,18 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
 
 
 - ### Themes:
+    - [Arise](themes/Arise)
+    - [Atom9](themes/Atom9)
+    - [Atom-X](themes/Atom-X)
+    - [Atom-X2](themes/Atom-X2)
     - [Czechia](themes/Czechia)
     - [Glowie](themes/Glowie)
+    - [iTheme2](themes/iTheme2)
+    - [Shadowness](themes/Shadowness)
 
 - ### Admin Themes:
-    - [Ares](themes/admin_themes/Ares)
-    - [MDashboard](themes/admin_themes/MDashboard)
+    - [Ares](admin_themes/Ares)
+    - [Atom-XCP](admin_themes/Atom-XCP)
+    - [MDashboard](admin_themes/MDashboard)
 
 Other themes and SDK https://github.com/php-fusion/Addons

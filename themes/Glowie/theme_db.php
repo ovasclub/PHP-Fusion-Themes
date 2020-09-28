@@ -24,5 +24,5 @@ $theme_screenshot = 'screenshot.jpg';
 $theme_author = 'Frederick MC Chan (Chan) & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
-$theme_version = '1.0';
+$theme_version = '1.1';
 $theme_folder = 'Glowie';
