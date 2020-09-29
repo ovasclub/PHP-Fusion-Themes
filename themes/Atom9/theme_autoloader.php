@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme_autoloader.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the

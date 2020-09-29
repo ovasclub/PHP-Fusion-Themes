@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -34,7 +34,7 @@ if (!defined('ATOM9_LOCALE')) {
 }
 
 function render_page() {
-    Atom9Theme\Producer::GetInstance()->render_page();
+    Atom9Theme\Main::getInstance()->renderPage();
 }
 
 function opentable($title = '', $class = '') {
@@ -63,4 +63,4 @@ $theme_settings = get_theme_settings('Atom9');
 $ignition_pack = !empty($theme_settings['ignition_pack']) ? $theme_settings['ignition_pack'] : 'StarCity';
 define('IGNITION_PACK', THEME.'IgnitionPacks/'.$ignition_pack.'/');
 
-Atom9Theme\Core::GetInstance()->GetIgnitionPacks($ignition_pack);
+Atom9Theme\Core::getInstance()->getIgnitionPacks($ignition_pack);

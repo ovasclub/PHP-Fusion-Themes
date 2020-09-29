@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: AtomX.inc
+| Filename: Main.inc
 | Author: PHP-Fusion Inc
 | Author: RobiNN
 +--------------------------------------------------------+
@@ -18,20 +18,22 @@
 +--------------------------------------------------------*/
 namespace AtomXTheme;
 
+use PHPFusion\Panels;
 use \PHPFusion\SiteLinks;
 
-class AtomX extends Components {
-    public function RenderPage() {
+class Main extends Core {
+    public function renderPage() {
         echo '<div class="page-box">';
             echo '<section id="topcontent"><div class="container-fluid">';
                 echo '<div class="logo"><a href="'.BASEDIR.$this->settings['opening_page'].'" class="'.$this->settings['logoposition_xs'].' '.$this->settings['logoposition_sm'].' '.$this->settings['logoposition_md'].' '.$this->settings['logoposition_lg'].'"><img src="'.BASEDIR.$this->settings['sitebanner'].'" alt="Logo" class="img-responsive"/></a></div>';
 
-                // Uncomment and edit, if you want show social networks in right top
-                /*echo '<div class="social-links">';
-                    echo '<a href="https://github.com/php-fusion" target="_blank"><i class="fa fa-github"></i></a>';
-                    echo '<a href="https://www.facebook.com/GenuineFusion" target="_blank"><i class="fa fa-facebook"></i></a>';
-                    echo '<a href="https://twitter.com/PHPFusion" target="_blank"><i class="fa fa-twitter"></i></a>';
-                echo '</div>';*/
+                if (defined('ATOMX_SOCIAL_NETWORKS') && is_array(ATOMX_SOCIAL_NETWORKS)) {
+                    echo '<div class="social-links">';
+                        foreach (ATOMX_SOCIAL_NETWORKS as $link => $icon) {
+                            echo '<a href="'.$link.'" target="_blank"><i class="'.$icon.'"></i></a>';
+                        }
+                    echo '</div>';
+                }
 
             echo '</div></section>'; // #topcontent
 
@@ -42,13 +44,13 @@ class AtomX extends Components {
                     'nav_class'       => 'nav navbar-nav primary',
                     'container_fluid' => TRUE,
                     'show_header'     => TRUE,
-                    'html_content'    => $this->UserMenu()
+                    'html_content'    => $this->userMenu()
                 ]);
                 $nav->addMenuLink(1000, $this->locale['search'], 0, '#', '', FALSE, FALSE,  FALSE, FALSE, 'search-btn');
                 echo SiteLinks::getInstance('atom-menu')->showSubLinks();
             echo '</div></div></header>'; // #header
 
-            $this->UserInfoBar();
+            $this->userInfoBar();
 
             new SearchEngine();
 
@@ -56,15 +58,15 @@ class AtomX extends Components {
                 echo renderNotices(getNotices(['all', FUSION_SELF]));
             echo '</div>';
 
-            if (self::GetParam('section_header')) {
-                echo '<section class="section-block '.self::GetParam('section_header_class').'">';
-                    echo self::GetParam('section_header');
+            if (self::getParam('section_header')) {
+                echo '<section class="section-block '.self::getParam('section_header_class').'">';
+                    echo self::getParam('section_header');
                 echo '</section>';
             }
 
-            $body_id = self::GetParam('greybody') == TRUE ? 'greybody' : 'mainbody';
+            $body_id = self::getParam('greybody') == TRUE ? 'greybody' : 'mainbody';
             echo '<section id="'.$body_id.'">';
-                echo self::GetParam('container_fluid') ? '<div class="container-fluid">' : '';
+                echo self::getParam('container_fluid') ? '<div class="container-fluid">' : '';
 
                 echo defined('AU_CENTER') && AU_CENTER ? AU_CENTER : '';
                 echo showbanners(1);
@@ -81,7 +83,7 @@ class AtomX extends Components {
                     $content['lg'] = $content['lg'] - $left['lg'];
                 }
 
-                if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE || $this->GetParam('right_content')) {
+                if (defined('RIGHT') && RIGHT && $this->getParam('right') == TRUE || $this->getParam('right_content')) {
                     $content['sm'] = $content['sm'] - $right['sm'];
                     $content['md'] = $content['md'] - $right['md'];
                     $content['lg'] = $content['lg'] - $right['lg'];
@@ -100,10 +102,10 @@ class AtomX extends Components {
                     echo showbanners(2);
                 echo '</div>';
 
-                if (defined('RIGHT') && RIGHT && $this->GetParam('right') == TRUE || $this->GetParam('right_content')) {
+                if (defined('RIGHT') && RIGHT && $this->getParam('right') == TRUE || $this->getParam('right_content')) {
                     echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
-                        echo ($this->GetParam('right') == TRUE && defined('RIGHT') && RIGHT) ? RIGHT : '';
-                        echo $this->GetParam('right_content');
+                        echo ($this->getParam('right') == TRUE && defined('RIGHT') && RIGHT) ? RIGHT : '';
+                        echo $this->getParam('right_content');
                     echo '</div>';
                 }
 
@@ -111,7 +113,7 @@ class AtomX extends Components {
 
                 echo defined('BL_CENTER') && BL_CENTER ? BL_CENTER : '';
 
-                echo self::GetParam('container_fluid') ? '</div>' : '';
+                echo self::getParam('container_fluid') ? '</div>' : '';
             echo '</section>'; // #mainbody
 
             echo '<section class="section-block">';
@@ -131,8 +133,9 @@ class AtomX extends Components {
 
                 echo '<div class="row">';
                     echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
-                        echo '<i class="fa fa-rocket"></i> '.$this->locale['AX9_009'];
-                        echo '<br/>'.$this->locale['AX9_010'];
+                        echo nl2br(parse_textarea($this->settings['footer'], FALSE, TRUE));
+                        echo '<br>';
+                        echo self::themeCopyright();
                     echo '</div>';
                     echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">';
                         echo showcopyright().showprivacypolicy();
@@ -144,17 +147,15 @@ class AtomX extends Components {
                         echo '<br/>'.showcounter();
                     echo '</div>';
                 echo '</div>';
-
-                echo nl2br(parse_textarea($this->settings['footer'], FALSE, TRUE));
             echo '</div></footer>'; // #footer
         echo '</div>'; // .page-box
     }
 
-    private function UserMenu() {
+    private function userMenu() {
         $languages = fusion_get_enabled_languages();
 
         if (iMEMBER) {
-            $name = $this->locale['AX9_001'].$this->userdata['user_name'];
+            $name = $this->locale['ax9_001'].$this->userdata['user_name'];
         } else {
             $name = $this->locale['login'];
         }
@@ -185,7 +186,7 @@ class AtomX extends Components {
 
                 if (iMEMBER) {
                     echo '<ul class="dropdown-menu" aria-labelledby="user-menu">';
-                        echo '<li class="dropdown-header">'.$this->locale['AX9_002'].'</li>';
+                        echo '<li class="dropdown-header">'.$this->locale['ax9_002'].'</li>';
                         echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$this->userdata['user_id'].'">'.$this->locale['view'].' '.$this->locale['profile'].'</a></li>';
                         echo '<li><a href="'.BASEDIR.'messages.php">'.$this->locale['message'].'</a></li>';
 
@@ -197,7 +198,7 @@ class AtomX extends Components {
                     echo '</ul>';
                 } else {
                     echo '<ul class="dropdown-menu login-menu" aria-labelledby="user-menu">';
-                        echo '<li class="dropdown-header">'.$this->locale['AX9_003'].'</li>';
+                        echo '<li class="dropdown-header">'.$this->locale['ax9_003'].'</li>';
                         echo '<li>';
                             $action_url = FUSION_SELF.(FUSION_QUERY ? '?'.FUSION_QUERY : '');
                             if (isset($_GET['redirect']) && strstr($_GET['redirect'], '/')) {
@@ -232,5 +233,102 @@ class AtomX extends Components {
         $html = ob_get_contents();
         ob_end_clean();
         return $html;
+    }
+
+    private function userInfoBar() {
+        if (iMEMBER) {
+            $this->locale += fusion_get_locale('', LOCALE.LOCALESET.'user_fields.php');
+            echo '<ul class="user-info-bar hidden-xs">';
+                echo '<li>'.display_avatar($this->userdata, '40px', '', FALSE, 'img-rounded m-t-10 m-l-20 m-r-10').'</li>';
+
+                echo '<li style="margin-left: 50px;"><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
+                    echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">';
+                        echo '<h4>'.$this->userdata['user_name'].' <span class="caret"></span></h4>';
+                        echo '<small>'.getuserlevel($this->userdata['user_level']).'</small>';
+                    echo '</a>';
+                    echo '<ul class="dropdown-menu" style="min-width: 320px;"><li class="p-15">';
+                        echo '<strong>'.$this->locale['ax9_004'].timer($this->userdata['user_joined']).'</strong>';
+                        echo '<div class="row">';
+                            echo '<div class="col-xs-6"><small>';
+                                echo '<b>'.$this->locale['u066'].':</b> '.showdate('shortdate', $this->userdata['user_joined']).'<br/>';
+                                echo '<b>'.$this->locale['u067'].':</b> '.($this->userdata['user_lastvisit'] ? showdate('shortdate', $this->userdata['user_lastvisit']) : $this->locale['u042']).'<br/>';
+                                if (column_exists('users', 'user_location')) echo '<b>'.fusion_get_locale('uf_location', LOCALE.LOCALESET.'user_fields/user_location.php').':</b> '.(!empty($this->userdata['user_location']) ? $this->userdata['user_location'] : $this->locale['user_na']).'<br/>';
+                            echo '</small></div>';
+                            echo '<div class="col-xs-6"><small>';
+                                echo '<b>'.fusion_get_locale('uf_comments-stat', LOCALE.LOCALESET.'user_fields/user_comments-stat.php').':</b> '.number_format(dbcount("(comment_id)", DB_COMMENTS, "comment_name='".$this->userdata['user_id']."'")).'<br/>';
+                                if (column_exists('users', 'user_posts')) echo '<b>'.fusion_get_locale('uf_forum-stat', LOCALE.LOCALESET.'user_fields/user_forum-stat.php').':</b> '.number_format($this->userdata['user_posts']).'<br/>';
+                                echo '<b>'.$this->locale['u049'].':</b> '.$this->userdata['user_ip'].'<br/>';
+                            echo '</small></div>';
+                        echo '</div>';
+                    echo '</li></ul>';
+                echo '</li></ul></li>'; // .info-bar-dropdown
+
+                echo '<li class="user-icon"><a href="'.BASEDIR.'profile.php?lookup='.$this->userdata['user_id'].'"><i class="fa icon fa-user"></i></a></li>';
+
+                $msg_count = dbcount(
+                    "('message_id')",
+                    DB_MESSAGES, "message_to=:my_id AND message_read=:unread AND message_folder=:inbox",
+                    [':inbox' => 0, ':my_id' => $this->userdata['user_id'], ':unread' => 0]
+                );
+
+                $messages_count = '';
+                if ($msg_count > 0) {
+                    $messages_count = '<span class="msg-count label label-danger m-l-5">'.$msg_count.'</span>';
+                }
+
+                echo '<li><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
+                    echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa icon fa-envelope"></i>'.$messages_count.' <span class="caret"></span></a>';
+                    echo '<ul class="dropdown-menu" style="width: 280px;padding-top: 0;">';
+                        echo '<li class="mailbox">';
+                            echo '<strong><a href="'.BASEDIR.'messages.php">'.$this->locale['ax9_005'].'</a></strong>';
+                        echo '</li>';
+                        echo '<li><ul>';
+                            $result = dbquery("SELECT *
+                                FROM ".DB_MESSAGES."
+                                WHERE message_to='".$this->userdata['user_id']."' AND message_user='".$this->userdata['user_id']."' AND message_read='0' AND message_folder='0'
+                                ORDER BY message_datestamp DESC LIMIT 0, 5
+                            ");
+
+                            if (dbrows($result) > 0) {
+                                $i = 0;
+                                while ($maildata = dbarray($result)) {
+                                    echo '<li style="padding: 3px 10px; '.($i > 0 ? 'border-top: 1px dashed rgba(0,0,0,0.1);' : '').'"><a href="'.BASEDIR.'messages.php?folder=inbox&msg_read='.$maildata['message_id'].'">'.$maildata['message_subject'].'</a><small class="pull-right">'.timer($maildata['message_datestamp']).'</small></li>';
+                                    $i++;
+                                }
+                            } else {
+                                echo '<li class="text-center p-10">'.$this->locale['ax9_006'].'</li>';
+                                echo '<li class="text-center p-10" style="border-top: 1px dashed rgba(0,0,0,0.1);"><a href="'.BASEDIR.'messages.php">'.$this->locale['ax9_007'].'</a></li>';
+                            }
+                        echo '</ul></li>';
+                    echo '</ul>';
+                echo '</li></ul></li>'; // .info-bar-dropdown
+
+                echo '<li><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
+                    echo '<a class="dropdown-toggle" style="border-right: 1px solid rgba(0,0,0,0.23);" data-toggle="dropdown" href="#"><i class="fa icon fa-users"></i> <span class="caret"></span></a>';
+                    echo '<ul class="dropdown-menu" style="width: 250px;">';
+                        echo '<li class="dropdown-header"><b>'.$this->locale['u057'].'</b></li>';
+
+                        $user_groups = strpos($this->userdata['user_groups'], ".") == 0 ? substr($this->userdata['user_groups'], 1) : $this->userdata['user_groups'];
+                        $user_groups = explode('.', $user_groups);
+                        if (!empty($user_groups['0'])) {
+                            for ($i = 0; $i < count($user_groups); $i++) {
+                                echo '<li><a href="'.BASEDIR.'profile.php?group_id='.$user_groups[$i].'">'.getgroupname($user_groups[$i]).': <small class="text-lighter">'.getgroupname($user_groups[$i], TRUE).'</small></a></li>';
+                            }
+                        } else {
+                            echo '<li class="text-center">'.$this->locale['ax9_008'].'</li>';
+                        }
+                    echo '</ul>';
+                echo '</li></ul></li>'; // .info-bar-dropdown
+            echo '</ul>';
+        }
+    }
+
+    public static function hidePanels() {
+        Panels::getInstance(TRUE)->hide_panel('LEFT');
+        Panels::getInstance(TRUE)->hide_panel('RIGHT');
+        Panels::getInstance(TRUE)->hide_panel('U_CENTER');
+        Panels::getInstance(TRUE)->hide_panel('L_CENTER');
+        Panels::getInstance(TRUE)->hide_panel('AU_CENTER');
+        Panels::getInstance(TRUE)->hide_panel('BL_CENTER');
     }
 }

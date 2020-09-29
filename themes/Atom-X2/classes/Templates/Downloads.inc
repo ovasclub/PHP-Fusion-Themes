@@ -22,20 +22,20 @@ use AtomX2Theme\Core;
 use \PHPFusion\Panels;
 
 class Downloads extends Core {
-    public static function render_downloads($info) {
+    public static function renderRownloads($info) {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
 
         Panels::getInstance(TRUE)->hide_panel('LEFT');
         Panels::getInstance(TRUE)->hide_panel('RIGHT');
 
         $header = '<ul class="menu">';
             $header .= '<li><a href="'.DOWNLOADS.'downloads.php">'.$locale['download_1001'].'</a></li>';
-            $download_cat_menu = self::display_cat_menu($info['download_categories']);
+            $download_cat_menu = self::displayCatMenu($info['download_categories']);
 
             if (!empty($download_cat_menu)) {
                 $header .= '<li class="dropdown">';
-                    $header .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$locale['AX9_055'].' <span class="caret"></span></a>';
+                    $header .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$locale['ax9_055'].' <span class="caret"></span></a>';
                     $header .= '<ul class="dropdown-menu">';
                         $header .= $download_cat_menu;
                     $header .= '</ul>';
@@ -48,17 +48,17 @@ class Downloads extends Core {
             }
         $header .= '</ul>';
 
-        self::SetParam('section_header', $header);
-        self::SetParam('section_header_class', 'atom-subnav');
+        self::setParam('section_header', $header);
+        self::setParam('section_header_class', 'atom-subnav');
 
         if (isset($_GET['download_id']) && !empty($info['download_item'])) {
-            self::display_download_item($info);
+            self::displayDownloadItem($info);
         } else {
-            self::display_download_index($info);
+            self::displayDownloadIndex($info);
         }
     }
 
-    private static function display_download_index($info) {
+    private static function displayDownloadIndex($info) {
         $locale = fusion_get_locale();
         $dl_settings = get_settings('downloads');
 
@@ -98,9 +98,9 @@ class Downloads extends Core {
         }
     }
 
-    private static function display_download_item($info) {
+    private static function displayDownloadItem($info) {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
         $dl_settings = get_settings('downloads');
         $data = $info['download_item'];
 
@@ -124,7 +124,7 @@ class Downloads extends Core {
                         echo '<h2 class="m-t-0 m-b-0"><strong>'.$data['download_title'].'</strong></h2>';
                         echo '<strong>'.$locale['global_050'].' </strong>'.profile_link($data['user_id'], $data['user_name'], $data['user_status']).'<br/>';
                         echo '<strong>'.$locale['download_1017'].' </strong>'.$data['download_homepage'].'<br/>';
-                        echo '<strong>'.$locale['AX9_051'].' </strong> <a href="'.DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'">'.$data['download_cat_name'].'</a><br/>';
+                        echo '<strong>'.$locale['ax9_051'].' </strong> <a href="'.DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'">'.$data['download_cat_name'].'</a><br/>';
 
                         echo '<a href="'.$data['download_file_link'].'" class="btn btn-primary m-t-10"><i class="fa fa-download"></i> '.$locale['download_1007'].'</a>';
 
@@ -140,7 +140,7 @@ class Downloads extends Core {
                 echo '</div>';
 
                 echo '<div class="p-10 m-t-20 m-b-20" style="border: 1px solid #ddd;">';
-                    echo '<h4><strong>'.$locale['AX9_052'].'</strong></h4><br/>';
+                    echo '<h4><strong>'.$locale['ax9_052'].'</strong></h4><br/>';
                     echo $data['download_description_short'];
                     if ($data['download_description']) {
                         echo '<hr/>';
@@ -150,7 +150,7 @@ class Downloads extends Core {
 
                 if ($dl_settings['download_screenshot'] && $data['download_image'] && file_exists(DOWNLOADS.'images/'.$data['download_image']))  {
                     echo '<div class="p-10 m-t-20 m-b-20" style="border: 1px solid #ddd;">';
-                        echo '<h4><strong>'.$locale['AX9_053'].'</strong></h4><br/>';
+                        echo '<h4><strong>'.$locale['ax9_053'].'</strong></h4><br/>';
                         echo '<img src="'.DOWNLOADS.'images/'.$data['download_image'].'" alt="'.$data['download_title'].'" class="img-responsive"/>';
                     echo '</div>';
                 }
@@ -165,7 +165,7 @@ class Downloads extends Core {
         echo '</div>';
 
         echo '<div class="m-b-20">';
-            echo '<h4 class="m-b-20"><b>'.$locale['AX9_054'].'</b></h4>';
+            echo '<h4 class="m-b-20"><b>'.$locale['ax9_054'].'</b></h4>';
             echo '<div class="row">';
                 echo '<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">';
                     echo '<h5 class="m-b-5"><strong>'.$locale['download_1021'].'</strong></h5><p class="m-b-20">'.$data['download_post_time'].'</p>';
@@ -192,7 +192,7 @@ class Downloads extends Core {
         echo $data['download_show_comments'];
     }
 
-    private static function display_cat_menu($info, $cat_id = 0, $level = 0) {
+    private static function displayCatMenu($info, $cat_id = 0, $level = 0) {
         $html = '';
 
         if (!empty($info[$cat_id])) {
@@ -203,7 +203,7 @@ class Downloads extends Core {
                 $html .= '<li'.$active.'><a href="'.DOWNLOADS.'downloads.php?cat_id='.$download_cat_id.'">'.$cdata['download_cat_name'].'</a></li>';
 
                 if (!empty($info[$download_cat_id])) {
-                    $html .= self::display_cat_menu($info, $download_cat_id, $level + 1);
+                    $html .= self::displayCatMenu($info, $download_cat_id, $level + 1);
                 }
             }
         }

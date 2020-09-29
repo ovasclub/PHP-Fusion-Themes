@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Messages.inc
-| Author: Frederick MC Chan (Chan)
+| Filename: PrivateMessages.inc
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,13 +19,13 @@
 namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 
 use Atom9Theme\Core;
-class Messages extends Core {
-    public static function display_inbox($info) {
+class PrivateMessages extends Core {
+    public static function displayInbox($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
-        self::SetParam('panels', FALSE);
+        self::setParam('panels', FALSE);
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/messages.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/messages.css">');
 
         echo '<div class="starmail">';
             echo '<div class="row equal-height mail-top">';
@@ -125,7 +125,7 @@ class Messages extends Core {
                 echo '</div>';
             } else {
                 echo '<div class="col-xs-12 col-sm-3"><div class="mail-left">';
-                    self::Inbox($info);
+                    self::inbox($info);
                 echo '</div></div>';
                 echo '<div class="col-xs-12 col-sm-9"><div class="mail-right">';
                     if (!empty($info['items'])) {
@@ -159,7 +159,7 @@ class Messages extends Core {
         echo '</div>'; // .starmail
     }
 
-    private static function Inbox($info) {
+    private static function inbox($info) {
         $locale = fusion_get_locale();
 
         $is_inbox = isset($_GET['folder']) && $_GET['folder'] == 'inbox';

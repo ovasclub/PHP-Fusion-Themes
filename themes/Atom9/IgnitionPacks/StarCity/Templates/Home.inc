@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Home.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -21,13 +21,13 @@ namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 use Atom9Theme\Core;
 
 class Home extends Core {
-    public static function HomePanel($info) {
+    public static function homePanel($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
-        self::SetParam('left', FALSE);
-        self::SetParam('right', FALSE);
+        self::setParam('left', FALSE);
+        self::setParam('right', FALSE);
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/home.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/home.css">');
 
         $row = [];
         foreach ($info as $db_id => $content) {
@@ -74,14 +74,14 @@ class Home extends Core {
                             echo '<h4><a href="'.$data['url'].'">'.$data['title'].'</a></h4>';
                             echo '<span>'.trim_text(strip_tags($data['content']), 150).'</span>';
                         echo '</div>';
-                        echo '<div class="footer"><a class="btn btn-primary btn-sm" href="'.$data['url'].'">'.$locale['A9_101'].'</a></div>';
+                        echo '<div class="footer"><a class="btn btn-primary btn-sm" href="'.$data['url'].'">'.$locale['a9_101'].'</a></div>';
                     echo '</div>';
                 }
             }
             echo '</div>';
         } else {
             opentable();
-            echo $locale['A9_102'];
+            echo $locale['a9_102'];
             closetable();
         }
     }

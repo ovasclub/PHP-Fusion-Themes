@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -195,7 +195,7 @@ function render_page() {
     echo '</main>';
 
     echo '<footer class="m-t-20 m-b-20"><div class="container"><hr/>';
-        echo '<div>Glowie Theme by <a href="https://www.phpfusion.com" target="_blank">Frederick MC Chan (Chan)</a> & <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></div>';
+        echo '<div>Glowie Theme by <a href="https://www.phpfusion.com" target="_blank">Frederick MC Chan</a> & <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></div>';
         echo showFooterErrors();
 
         echo '<div class="row m-t-10">';

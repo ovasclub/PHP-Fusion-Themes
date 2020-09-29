@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Login.inc
-| Author: Frederick MC Chan (Chan)
+| Filename: Auth.inc
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -20,16 +20,16 @@ namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 
 use Atom9Theme\Core;
 
-class Login extends Core {
-    public static function LoginForm($info) {
+class Auth extends Core {
+    public static function loginForm($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $aidlink = fusion_get_aidlink();
         $userdata = fusion_get_userdata();
         $settings = fusion_get_settings();
 
-        self::SetParam('panels', FALSE);
+        self::setParam('panels', FALSE);
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/login.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/login.css">');
 
         echo '<div class="form-block">';
             echo '<div class="heading">'.$locale['global_100'].'</div>';
@@ -81,13 +81,13 @@ class Login extends Core {
         echo '</div>';
     }
 
-    public static function RegisterForm($info) {
+    public static function registerForm($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $settings = fusion_get_settings();
 
-        self::SetParam('panels', FALSE);
+        self::setParam('panels', FALSE);
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/login.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/login.css">');
 
         echo '<div class="form-block">';
             echo '<div class="heading">'.$locale['global_107'].'</div>';

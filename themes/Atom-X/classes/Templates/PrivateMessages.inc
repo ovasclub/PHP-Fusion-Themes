@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Messages.inc
+| Filename: PrivateMessages.inc
 | Author: PHP-Fusion Inc
 | Author: RobiNN
 +--------------------------------------------------------+
@@ -16,38 +16,35 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-namespace AtomX2Theme\Templates;
+namespace AtomXTheme\Templates;
 
-use AtomX2Theme\Core;
-use AtomX2Theme\Components;
+use AtomXTheme\Core;
+use AtomXTheme\Main;
 
-class Messages extends Core {
-    public static function display_inbox($info) {
+class PrivateMessages extends Core {
+    public static function displayInbox($info) {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
 
-        Components::HidePanels();
+        Main::hidePanels();
 
         $menu = [
             'inbox'   => ['link' => BASEDIR.'messages.php?folder=inbox', 'title' => $locale['402'], 'icon' => 'inbox'],
-            'outbox'  => ['link' => BASEDIR.'messages.php?folder=outbox', 'title' => $locale['AX9_045'], 'icon' => 'send-o'],
-            'archive' => ['link' => BASEDIR.'messages.php?folder=archive', 'title' => $locale['AX9_046'], 'icon' => 'archive'],
+            'outbox'  => ['link' => BASEDIR.'messages.php?folder=outbox', 'title' => $locale['ax9_045'], 'icon' => 'send-o'],
+            'archive' => ['link' => BASEDIR.'messages.php?folder=archive', 'title' => $locale['ax9_046'], 'icon' => 'archive'],
             'new'     => ['link' => BASEDIR.'messages.php?msg_send=new', 'title' => $locale['401'], 'icon' => 'envelope'],
             'options' => ['link' => BASEDIR.'messages.php?folder=options', 'title' => $locale['425'], 'icon' => 'cog']
         ];
 
-        ob_start();
-        echo '<ul>';
+        $header = '<ul>';
             foreach ($menu as $key => $folder) {
                 $active = (isset($_GET['folder']) && $_GET['folder'] == $key) || (isset($_GET['msg_send']) && $_GET['msg_send'] == $key) ? ' class="active"' : '';
-                echo '<li'.$active.'><a href="'.$folder['link'].'"><span class="visible-xs"><i class="fa fa-'.$folder['icon'].'"></i></span><span class="hidden-xs">'.$folder['title'].'</span></a></li>';
+                $header .= '<li'.$active.'><a href="'.$folder['link'].'"><span class="visible-xs"><i class="fa fa-'.$folder['icon'].'"></i></span><span class="hidden-xs">'.$folder['title'].'</span></a></li>';
             }
-        echo '</ul>';
-        $header = ob_get_contents();
-        ob_end_clean();
+        $header .= '</ul>';
 
-        self::SetParam('section_header', $header);
-        self::SetParam('section_header_class', 'messages');
+        self::setParam('section_header', $header);
+        self::setParam('section_header_class', 'messages');
 
         echo '<div class="row">';
             if (!isset($_GET['msg_send'])) {
@@ -59,7 +56,7 @@ class Messages extends Core {
                         foreach ($info['folders'] as $key => $folder) {
                             $active = isset($_GET['folder']) && ($_GET['folder'] == $key) ? ' class="active text-dark"' : '';
 
-                            echo '<li'.$active.'><a href="'.$folder['link'].'">';
+                            echo '<li><a'.$active.' href="'.$folder['link'].'">';
                                 echo $folder['title'];
 
                                 if ($i < count($info['folders']) - 1) {
@@ -139,17 +136,17 @@ class Messages extends Core {
                         echo $info['options_form'];
                         break;
                     case 'inbox':
-                        self::Inbox($info);
+                        self::inbox($info);
                         break;
                     default:
-                        self::Inbox($info);
+                        self::inbox($info);
                 }
 
             echo '</div>';
         echo '</div>';
     }
 
-    private static function Inbox($info) {
+    private static function inbox($info) {
         $locale = fusion_get_locale();
 
         if (isset($_GET['msg_read']) && isset($info['items'][$_GET['msg_read']])) {

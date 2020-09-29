@@ -18,21 +18,21 @@
 +--------------------------------------------------------*/
 namespace AtomX2Theme\Templates;
 
-use AtomX2Theme\Components;
 use AtomX2Theme\Core;
+use AtomX2Theme\Main;
 use \PHPFusion\News\NewsServer;
 
 class News extends Core {
-    public static function display_main_news($info) {
+    public static function displayMainNews($info) {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
         $settings = fusion_get_settings();
         $news_settings = NewsServer::get_news_settings();
 
-        self::SetParam('mainbody_class', '');
+        self::setParam('mainbody_class', '');
 
-        Components::HidePanels();
-        self::RightSide($info);
+        Main::hidePanels();
+        self::rightSide($info);
 
         if (!empty($info['news_items'])) {
             echo '<div class="row">';
@@ -50,11 +50,11 @@ class News extends Core {
                                 echo trim_text($data['news_news'], 400);
                             echo '</div>';
                             echo '<div class="panel-footer">';
-                                echo '<span><i class="fa fa-window-maximize"></i> <a href="'.$data['news_link'].'">'.$locale['AX9_047'].'</a></span>';
+                                echo '<span><i class="fa fa-window-maximize"></i> <a href="'.$data['news_link'].'">'.$locale['ax9_047'].'</a></span>';
 
                                 if ($data['news_allow_comments'] && fusion_get_settings('comments_enabled') == 1) {
                                     if ($data['news_comments'] < 1) {
-                                        echo '<span class="pull-right"><i class="fa fa-commenting-o text-lighter"></i> <a href="'.$data['news_link'].'#comment">'.$locale['AX9_048'].'</a></span>';
+                                        echo '<span class="pull-right"><i class="fa fa-commenting-o text-lighter"></i> <a href="'.$data['news_link'].'#comment">'.$locale['ax9_048'].'</a></span>';
                                     } else {
                                         echo '<span class="pull-right"><i class="fa fa-comment'.($data['news_comments'] > 1 ? 's' : '').'-o text-lighter"></i> '.$data['news_display_comments'].'</span>';
                                     }
@@ -83,12 +83,12 @@ class News extends Core {
                             echo '<div class="small text-uppercase">';
                                 if ($data['news_allow_comments'] && fusion_get_settings('comments_enabled') == 1) {
                                     if ($data['news_comments'] < 1) {
-                                        echo '<span><i class="fa fa-commenting-o text-lighter"></i> <a href="'.$data['news_link'].'#comment">'.$locale['AX9_048'].'</a></span>';
+                                        echo '<span><i class="fa fa-commenting-o text-lighter"></i> <a href="'.$data['news_link'].'#comment">'.$locale['ax9_048'].'</a></span>';
                                     } else {
                                         echo '<span><i class="fa fa-comment'.($data['news_comments'] > 1 ? 's' : '').'-o text-lighter"></i> '.$data['news_display_comments'].'</span>';
                                     }
                                 }
-                                echo '<span class="m-l-10"><i class="fa fa-window-maximize"></i> <a href="'.$data['news_link'].'">'.$locale['AX9_047'].'</a></span>';
+                                echo '<span class="m-l-10"><i class="fa fa-window-maximize"></i> <a href="'.$data['news_link'].'">'.$locale['ax9_047'].'</a></span>';
                             echo '</div>';
                         echo '</div>';
                         $i++;
@@ -97,8 +97,8 @@ class News extends Core {
             echo '</div>';
 
             if ($info['news_total_rows'] > $news_settings['news_pagination']) {
-                $type_start = isset($_GET['type']) ? 'type='.$_GET['type'].'&amp;' : '';
-                $cat_start = isset($_GET['cat_id']) ? 'cat_id='.$_GET['cat_id'].'&amp;' : '';
+                $type_start = isset($_GET['type']) ? 'type='.$_GET['type'].'&' : '';
+                $cat_start = isset($_GET['cat_id']) ? 'cat_id='.$_GET['cat_id'].'&' : '';
                 echo '<div class="text-center m-t-10 m-b-10">';
                     echo makepagenav($_GET['rowstart'], $news_settings['news_pagination'], $info['news_total_rows'], 3, INFUSIONS.'news/news.php?'.$cat_start.$type_start);
                 echo '</div>';
@@ -108,16 +108,16 @@ class News extends Core {
         }
     }
 
-    public static function render_news_item($info) {
+    public static function renderNewsItem($info) {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
         $data = $info['news_item'];
 
-        self::SetParam('mainbody_class', '');
+        self::setParam('mainbody_class', '');
 
-        Components::HidePanels();
+        Main::hidePanels();
 
-        self::RightSide($info, $data['news_show_ratings']);
+        self::rightSide($info, $data['news_show_ratings']);
 
         echo '<div class="clearfix">';
             echo '<h1 class="m-t-0 display-inline">'.$data['news_subject'].'</h1>';
@@ -151,12 +151,12 @@ class News extends Core {
         echo '<div class="row m-t-20">';
             echo '<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">';
                 echo display_avatar($data, '50px', '', TRUE, 'img-rounded pull-right m-l-5');
-                echo '<div class="pull-right text-uppercase m-t-5">'.$locale['AX9_050'].profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</div>';
+                echo '<div class="pull-right text-uppercase m-t-5">'.$locale['ax9_050'].profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</div>';
                 echo'<div class="pull-right text-uppercase m-t-5 p-t-5" style="border-top: 1px solid #ccc;">'.showdate('newsdate', $data['news_datestamp']).'</div>';
             echo '</div>';
 
             echo '<div class=" col-xs-12 col-sm-10 col-md-10 col-lg-10">';
-                echo '<div class="text-uppercase m-b-20">'.$locale['AX9_051'].'<a href="'.INFUSIONS.'news/news.php?cat_id='.$data['news_cat_id'].'">'.$data['news_cat_name'].'</a></div>';
+                echo '<div class="text-uppercase m-b-20">'.$locale['ax9_051'].'<a href="'.INFUSIONS.'news/news.php?cat_id='.$data['news_cat_id'].'">'.$data['news_cat_name'].'</a></div>';
 
                 if ($data['news_image_align'] == 'pull-left' || $data['news_image_align'] == 'pull-right') {
                     echo '<div class="'.$data['news_image_align'].' m-r-10" style="max-width: 250px;">'.$data['news_image'].'</div>';
@@ -185,9 +185,9 @@ class News extends Core {
         echo '<hr/>'.$data['news_show_comments'];
     }
 
-    private static function RightSide($info, $additonal = '') {
+    private static function rightSide($info, $additonal = '') {
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
 
         ob_start();
         if (!empty($info['news_last_updated'])) {
@@ -236,7 +236,7 @@ class News extends Core {
         ");
 
         if (dbrows($result)) {
-            echo '<div class="text-uppercase m-t-20 m-b-20" style="background: #121A23;color: #fff;padding: 1px 10px;"><h6><b>'.$locale['AX9_049'].'</b></h6></div>';
+            echo '<div class="text-uppercase m-t-20 m-b-20" style="background: #121A23;color: #fff;padding: 1px 10px;"><h6><b>'.$locale['ax9_049'].'</b></h6></div>';
 
             while ($data = dbarray($result)) {
                 $image = \PHPFusion\News\News::get_NewsImage($data);
@@ -248,11 +248,11 @@ class News extends Core {
                         echo '<h4 class="m-t-0 m-b-0"><a class="text-dark text-underline" href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'"><b>'.$data['news_subject'].'</b></a></h4>';
                     echo '</div>';
                     echo '<div class="panel-footer clearfix">';
-                        echo '<span><i class="fa fa-window-maximize"></i> <a href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'">'.$locale['AX9_047'].'</a></span>';
+                        echo '<span><i class="fa fa-window-maximize"></i> <a href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'">'.$locale['ax9_047'].'</a></span>';
 
                         if ($data['news_allow_comments'] && fusion_get_settings('comments_enabled') == 1) {
                             if ($data['news_comments'] < 1) {
-                                echo '<span class="pull-right"><i class="fa fa-commenting-o text-lighter"></i> <a href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'#comment">'.$locale['AX9_048'].'</a></span>';
+                                echo '<span class="pull-right"><i class="fa fa-commenting-o text-lighter"></i> <a href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'#comment">'.$locale['ax9_048'].'</a></span>';
                             } else {
                                 echo '<span class="pull-right"><i class="fa fa-comment'.($data['news_comments'] > 1 ? 's' : '').'-o text-lighter"></i> <a href="'.INFUSIONS.'news/news.php?readmore='.$data['news_id'].'#comment">'.format_word($data['news_comments'], $locale['fmt_comment']).'</a></span>';
                             }
@@ -265,6 +265,6 @@ class News extends Core {
         $html = ob_get_contents();
         ob_end_clean();
 
-        self::SetParam('right_content', $html);
+        self::setParam('right_content', $html);
     }
 }

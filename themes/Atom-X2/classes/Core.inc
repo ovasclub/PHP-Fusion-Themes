@@ -33,23 +33,23 @@ class Core {
     public $aidlink = '';
 
     public function __construct() {
-        $this->locale = self::SetLocale();
+        $this->locale = self::setLocale();
         $this->locale += fusion_get_locale();
         $this->userdata = fusion_get_userdata();
         $this->settings = fusion_get_settings();
         $this->aidlink = fusion_get_aidlink();
     }
 
-    public static function GetInstance() {
+    public static function getInstance() {
         if (self::$instance === NULL) {
             self::$instance = new static();
-            self::$instance->SetLocale();
+            self::$instance->setLocale();
         }
 
         return self::$instance;
     }
 
-    protected static function GetParam($name = NULL) {
+    protected static function getParam($name = NULL) {
         if (isset(self::$options[$name])) {
             return self::$options[$name];
         }
@@ -57,11 +57,11 @@ class Core {
         return NULL;
     }
 
-    public static function SetParam($name, $value) {
+    public static function setParam($name, $value) {
         self::$options[$name] = $value;
     }
 
-    public function SetLocale() {
+    public function setLocale() {
         if (empty($this->locale)) {
             $locale = [];
 
@@ -75,5 +75,15 @@ class Core {
         }
 
         return $this->locale;
+    }
+
+    /**
+     * Theme Copyright
+     * Do not delete or change this code!
+     *
+     * @return string
+     */
+    public static function themeCopyright() {
+        return '&copy; '.date('Y').' Theme designed by <a href="https://www.phpfusion.com" target="_blank">PHP-Fusion Inc</a>, Ported for v9 by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
     }
 }

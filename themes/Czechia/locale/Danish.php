@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Czechia/locale/Danish.php
+| Filename: Danish.php
 | Author: Helmuth Mikkelsen (helmuth)
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,9 +15,6 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['pfc_title'] = 'Czechia tema';
-$locale['pfc_description'] = 'Tema til den officielle tjekkiske support.';
-$locale['created_by']  = 'Oprettet af';
 $locale['01'] = 'IP-adresse';
 $locale['02'] = 'Om os';
 $locale['03'] = 'Seneste nyheder';

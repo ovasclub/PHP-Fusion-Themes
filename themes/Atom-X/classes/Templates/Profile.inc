@@ -19,34 +19,33 @@
 namespace AtomXTheme\Templates;
 
 use AtomXTheme\Core;
-use AtomXTheme\Components;
-use \PHPFusion\Locale;
+use AtomXTheme\Main;
 
 class Profile extends Core {
-    public static function DisplayProfile($info) {
+    public static function displayProfile($info) {
         global $userFields;
 
         $locale = fusion_get_locale();
-        $locale += self::GetInstance()->SetLocale();
+        $locale += self::getInstance()->setLocale();
         $locale += fusion_get_locale('', LOCALE.LOCALESET.'user_fields.php');
         $userdata = fusion_get_userdata();
         $user_data = $userFields->getUserData();
         $settings = fusion_get_settings();
 
-        Components::HidePanels();
+        Main::hidePanels();
 
         ob_start();
         echo '<div class="container-fluid" style="padding-bottom: 30px;"><div class="row">';
             echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
-                echo '<h3 class="m-t-5"><span>'.$locale['AX9_011'].'</span>'.$user_data['user_name'].'</h3>';
+                echo '<h3 class="m-t-5"><span>'.$locale['ax9_011'].'</span>'.$user_data['user_name'].'</h3>';
 
                 echo '<div class="row">';
                     echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
                         echo '<span>'.$locale['u066'].': '.showdate('longdate', $user_data['user_joined']).'</span>';
-                        echo '<br/><span>'.$locale['u067'].': '.($user_data['user_lastvisit'] ? timer($user_data['user_lastvisit']) : $locale['u042']).'</span>';
+                        echo '<br><span>'.$locale['u067'].': '.($user_data['user_lastvisit'] ? timer($user_data['user_lastvisit']) : $locale['u042']).'</span>';
                     echo '</div>';
                     echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
-                        echo '<span>'.(iADMIN || $user_data['user_hide_email'] == 1) ? '<a href="mailto:'.$user_data['user_email'].'">'.$user_data['user_email'].'</a>' : $locale['AX9_012'].'</span>';
+                        echo '<span>'.(iADMIN || $user_data['user_hide_email'] == 1) ? '<a href="mailto:'.$user_data['user_email'].'">'.$user_data['user_email'].'</a>' : $locale['ax9_012'].'</span>';
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
@@ -57,7 +56,7 @@ class Profile extends Core {
                         echo '<a class="btn btn-primary" href="'.BASEDIR.'messages.php?msg_send='.$user_data['user_id'].'">'.$locale['u043'].'</a>';
 
                     if (checkrights('M') && fusion_get_userdata('user_level') <= USER_LEVEL_ADMIN && $user_data['user_id'] != 1) {
-                        echo '<a class="btn btn-primary" href="'.ADMIN.'members.php'.fusion_get_aidlink().'&amp;ref=log&amp;lookup='.$user_data['user_id'].'">'.$locale['u054'].'</a>';
+                        echo '<a class="btn btn-primary" href="'.ADMIN.'members.php'.fusion_get_aidlink().'&ref=log&lookup='.$user_data['user_id'].'">'.$locale['u054'].'</a>';
                     }
                     echo '</div>';
                 }
@@ -76,8 +75,8 @@ class Profile extends Core {
         $header = ob_get_contents();
         ob_end_clean();
 
-        self::SetParam('section_header', $header);
-        self::SetParam('container_fluid', TRUE);
+        self::setParam('section_header', $header);
+        self::setParam('container_fluid', TRUE);
 
         $custom_avatar = $settings['siteurl'].'themes/Atom-X/images/noavatar50.png';
         $forum = function_exists('infusion_exists') ? infusion_exists('forum') : db_exists(DB_PREFIX.'forums');
@@ -102,7 +101,7 @@ class Profile extends Core {
 
                 if ($tab_title['id'][$_GET['section']] == $tab_title['id'][1]) {
                     echo '<div class="panel panel-default">';
-                        echo '<div class="panel-heading" style="background: #222;color: #fff;">'.strtoupper($locale['AX9_013']).'</div>';
+                        echo '<div class="panel-heading" style="background: #222;color: #fff;">'.strtoupper($locale['ax9_013']).'</div>';
                         echo '<div class="panel-body">';
 
                         echo '<div class="row">';
@@ -140,16 +139,16 @@ class Profile extends Core {
 
                                 echo '<div class="btn-group btn-group-sm m-t-10">';
                                     if (isset($_GET['lookup']) && $userdata['user_id'] == $_GET['lookup']) {
-                                        echo '<a class="btn btn-primary" href="'.BASEDIR.'edit_profile.php">'.$locale['AX9_014'].'</a>';
+                                        echo '<a class="btn btn-primary" href="'.BASEDIR.'edit_profile.php">'.$locale['ax9_014'].'</a>';
                                     }
 
-                                    echo '<button type="button" id="show-uf" class="btn btn-primary">'.$locale['AX9_015'].'</button>';
+                                    echo '<button type="button" id="show-uf" class="btn btn-primary">'.$locale['ax9_015'].'</button>';
 
                                     add_to_jquery('
                                         $("#extra-info").hide();
                                         $("#show-uf").click(function () {
                                             $("#extra-info").slideToggle(200);
-                                            $(this).text($(this).text() == "'.$locale['AX9_015'].'" ? "'.$locale['AX9_016'].'" : "'.$locale['AX9_015'].'");
+                                            $(this).text($(this).text() == "'.$locale['ax9_015'].'" ? "'.$locale['ax9_016'].'" : "'.$locale['ax9_015'].'");
                                         });
                                     ');
                                 echo '</div>';
@@ -205,7 +204,7 @@ class Profile extends Core {
                                                     echo '<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">'.$field_data['value'].'</div>';
                                                 echo '</div>';
                                             } else {
-                                                echo '<div>'.$locale['AX9_017'].'</div>';
+                                                echo '<div>'.$locale['ax9_017'].'</div>';
                                             }
                                         }
                                     }
@@ -221,7 +220,7 @@ class Profile extends Core {
 
                 if ($tab_title['id'][$_GET['section']] == $tab_title['id'][1]) {
                     echo '<div>';
-                    echo '<h4 style="font-weight: bold;">'.$locale['AX9_018'].'</h4>';
+                    echo '<h4 style="font-weight: bold;">'.$locale['ax9_018'].'</h4>';
 
                     if (iMEMBER) {
                         $timeline = [];
@@ -237,29 +236,29 @@ class Profile extends Core {
                             ");
 
                             while ($fdata = dbarray($forum_activities)) {
-                                $item = '<label class="label label-primary">'.$locale['AX9_026'].'</label> '.$locale['in'].' <a href="'.FORUM.'viewthread.php?thread_id='.$fdata['thread_id'].'&pid='.$fdata['post_id'].'#post_'.$fdata['post_id'].'"><b>'.$fdata['thread_subject'].'</b></a>';
+                                $item = '<label class="label label-primary">'.$locale['ax9_026'].'</label> '.$locale['in'].' <a href="'.FORUM.'viewthread.php?thread_id='.$fdata['thread_id'].'&pid='.$fdata['post_id'].'#post_'.$fdata['post_id'].'"><b>'.$fdata['thread_subject'].'</b></a>';
                                 $time = $fdata['post_datestamp'];
-                                $message = '<img src="'.THEME.'images/icons/forum.png" alt="Forum" style="max-width: 22px;"/> '.display_avatar($user_data, '22px', '', FALSE, 'img-rounded', $custom_avatar).' <a class="label label-default" href="'.BASEDIR.'profile.php?lookup='.$user_data['user_id'].'">'.$user_data['user_name'].'</a>'.$locale['AX9_027'].$item;
+                                $message = '<img src="'.THEME.'images/icons/forum.png" alt="Forum" style="max-width: 22px;"> '.display_avatar($user_data, '22px', '', FALSE, 'img-rounded', $custom_avatar).' <a class="label label-default" href="'.BASEDIR.'profile.php?lookup='.$user_data['user_id'].'">'.$user_data['user_name'].'</a>'.$locale['ax9_027'].$item;
                                 $timeline[$time][] = $message;
                             }
                         }
 
                         krsort($timeline);
                         function timeline_format($time) {
-                            $locale = Core::GetInstance()->SetLocale();
+                            $locale = Core::getInstance()->setLocale();
 
                             if ($time >= strtotime('today 00:00')) {
                                 return date('G:i', $time);
                             } elseif ($time >= strtotime('yesterday 00:00')) {
-                                return $locale['AX9_021'];
+                                return $locale['ax9_021'];
                             } elseif ($time >= strtotime('-6 day 00:00')) {
-                                return $locale['AX9_022'];
+                                return $locale['ax9_022'];
                             } elseif ($time >= strtotime('-13 day 00:00')) {
-                                return $locale['AX9_023'];
+                                return $locale['ax9_023'];
                             } elseif ($time >= strtotime('-20 day 00:00')) {
-                                return $locale['AX9_024'];
+                                return $locale['ax9_024'];
                             } elseif ($time >= strtotime('-29 day 00:00')) {
-                                return $locale['AX9_025'];
+                                return $locale['ax9_025'];
                             } else {
                                 return date('M j, Y', $time);
                             }
@@ -268,15 +267,15 @@ class Profile extends Core {
                         foreach ($timeline as $timestamp => $item) {
                             $format = timeline_format($timestamp);
 
-                            if ($format == $locale['AX9_021']) {
+                            if ($format == $locale['ax9_021']) {
                                 $_timeline['1'][$format][] = $item;
-                            } else if ($format == $locale['AX9_022']) {
+                            } else if ($format == $locale['ax9_022']) {
                                 $_timeline['3'][$format][] = $item;
-                            } else if ($format == $locale['AX9_023']) {
+                            } else if ($format == $locale['ax9_023']) {
                                 $_timeline['4'][$format][] = $item;
-                            } else if ($format == $locale['AX9_024']) {
+                            } else if ($format == $locale['ax9_024']) {
                                 $_timeline['5'][$format][] = $item;
-                            } else if ($format == $locale['AX9_025']) {
+                            } else if ($format == $locale['ax9_025']) {
                                 $_timeline['6'][$format][] = $item;
                             } else {
                                 $_timeline['2'][$format][] = $item;
@@ -298,10 +297,10 @@ class Profile extends Core {
                                 }
                             }
                         } else {
-                            echo '<div class="well text-center">'.str_replace('[USER]', $user_data['user_name'], $locale['AX9_020']).'</div>';
+                            echo '<div class="well text-center">'.str_replace('[USER]', $user_data['user_name'], $locale['ax9_020']).'</div>';
                         }
                     } else {
-                        echo '<div class="well text-center">'.$locale['AX9_019'].'</div>';
+                        echo '<div class="well text-center">'.$locale['ax9_019'].'</div>';
                     }
                     echo '</div>';
                 }
@@ -316,15 +315,15 @@ class Profile extends Core {
             // Right Side
             echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
                 echo '<div id="point-of-interest" class="panel panel-default"><div class="panel-body">';
-                    echo '<p><span class="m-r-10"><img src="'.THEME.'images/icons/account.png" alt="Account"/></span><b>'.$locale['AX9_028'].'</b></p>';
+                    echo '<p><span class="m-r-10"><img src="'.THEME.'images/icons/account.png" alt="Account"></span><b>'.$locale['ax9_028'].'</b></p>';
 
                     echo '<ul class="profile-side-ul">';
-                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/messages.png" alt="Messages"/></span><a href="'.BASEDIR.'messages.php">'.$locale['message'].'</a></li>';
-                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/account.png" alt="Account"/></span><a href="'.BASEDIR.'edit_profile.php">'.$locale['AX9_014'].'</a></li>';
-                        if ($forum) echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/forum.png" alt="Forum"/></span><a href="'.FORUM.'index.php">'.$locale['AX9_029'].'</a></li>';
+                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/messages.png" alt="Messages"></span><a href="'.BASEDIR.'messages.php">'.$locale['message'].'</a></li>';
+                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/account.png" alt="Account"></span><a href="'.BASEDIR.'edit_profile.php">'.$locale['ax9_014'].'</a></li>';
+                        if ($forum) echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/forum.png" alt="Forum"></span><a href="'.FORUM.'index.php">'.$locale['ax9_029'].'</a></li>';
                         $news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
-                        if ($news) echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/news.png" alt="News"/></span><a href="'.INFUSIONS.'news/news.php">'.$locale['AX9_030'].'</a></li>';
-                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/mail.png" alt="Mail"/></span><a href="mailto:'.$settings['siteemail'].'">'.$settings['siteemail'].'</a></li>';
+                        if ($news) echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/news.png" alt="News"></span><a href="'.INFUSIONS.'news/news.php">'.$locale['ax9_030'].'</a></li>';
+                        echo '<li><span class="m-r-10"><img src="'.THEME.'images/icons/mail.png" alt="Mail"></span><a href="mailto:'.$settings['siteemail'].'">'.$settings['siteemail'].'</a></li>';
                     echo '</ul>';
                 echo '</div></div>'; // #point-of-interest
 
@@ -367,24 +366,24 @@ class Profile extends Core {
                     }
                 }
 
-                $totalonline = Locale::format_word($guests + count($members), $locale['fmt_user']);
-                $members_online = Locale::format_word(count($members), $locale['fmt_member']);
-                $guests = Locale::format_word($guests, $locale['fmt_guest']);
+                $totalonline = format_word($guests + count($members), $locale['fmt_user']);
+                $members_online = format_word(count($members), $locale['fmt_member']);
+                $guests = format_word($guests, $locale['fmt_guest']);
 
                 echo '<div class="panel panel-default">';
                     echo '<div class="panel-heading">';
-                        echo '<div class="m-b-10"><span class="m-r-10"><img src="'.THEME.'images/icons/info.png" alt="Info"/></span><b>'.$locale['AX9_031'].'</b></div>';
-                        echo str_replace(['[TOTAL_ONLINE]', '[MEMBERS]', '[GUESTS]'], [$totalonline, $members_online, $guests], $locale['AX9_032']);
+                        echo '<div class="m-b-10"><span class="m-r-10"><img src="'.THEME.'images/icons/info.png" alt="Info"></span><b>'.$locale['ax9_031'].'</b></div>';
+                        echo str_replace(['[TOTAL_ONLINE]', '[MEMBERS]', '[GUESTS]'], [$totalonline, $members_online, $guests], $locale['ax9_032']);
                     echo '</div>';
 
                     echo '<div class="panel-body">';
-                        echo '<div><i class="fa fa-fw fa-user"></i> <b>'.$locale['AX9_033'].'</b></div>';
+                        echo '<div><i class="fa fa-fw fa-user"></i> <b>'.$locale['ax9_033'].'</b></div>';
 
                         if (isset($settings['online_maxcount']) && isset($settings['online_maxtime'])) {
                             echo '<div class="m-b-5">'.str_replace(
                                 ['[MAX_ONLINE]', '[MAX_ONLINE_TIME]'],
                                 ['<b>'.$settings['online_maxcount'].'</b>', '<b>'.showdate('longdate', $settings['online_maxtime']).'</b>'],
-                                $locale['AX9_034']
+                                $locale['ax9_034']
                             ).'</div>';
                         }
 
@@ -396,27 +395,27 @@ class Profile extends Core {
                     echo '</div>';
 
                     echo '<div class="panel-footer">';
-                        echo '<div><i class="fa fa-fw fa-users"></i> <b>'.$locale['AX9_035'].'</b></div>';
+                        echo '<div><i class="fa fa-fw fa-users"></i> <b>'.$locale['ax9_035'].'</b></div>';
                         // New members
                         $data = dbarray(dbquery("SELECT user_id, user_name, user_status
                             FROM ".DB_USERS." WHERE user_status='0' ORDER BY user_joined DESC LIMIT 0,1
                         "));
-                        echo '<div>'.$locale['AX9_036'].profile_link($data['user_id'], $data['user_name'], $data['user_status'], 'member-color').'</div>';
+                        echo '<div>'.$locale['ax9_036'].profile_link($data['user_id'], $data['user_name'], $data['user_status'], 'member-color').'</div>';
 
                         $today = dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_joined > ".(time() - 86400 + (mktime(24, 0, 0) - time())));
                         $days_7 = dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_joined > ".(time() - 604800));
                         $days_30 = dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_joined > ".(time() - 2592000));
 
                         echo '<ul class="profile-side-ul m-t-10">';
-                            echo '<li><i class="fa fa-calendar"></i> '.$locale['AX9_037'].'<div class="pull-right">'.Locale::format_word($today, $locale['AX9_040']).'</div></li>';
-                            echo '<li><i class="fa fa-calendar"></i> '.$locale['AX9_038'].'<div class="pull-right">'.Locale::format_word($days_7, $locale['AX9_040']).'</div></li>';
-                            echo '<li><i class="fa fa-calendar"></i> '.$locale['AX9_039'].'<div class="pull-right">'.Locale::format_word($days_30, $locale['AX9_040']).'</div></li>';
+                            echo '<li><i class="fa fa-calendar"></i> '.$locale['ax9_037'].'<div class="pull-right">'.format_word($today, $locale['ax9_040']).'</div></li>';
+                            echo '<li><i class="fa fa-calendar"></i> '.$locale['ax9_038'].'<div class="pull-right">'.format_word($days_7, $locale['ax9_040']).'</div></li>';
+                            echo '<li><i class="fa fa-calendar"></i> '.$locale['ax9_039'].'<div class="pull-right">'.format_word($days_30, $locale['ax9_040']).'</div></li>';
                         echo '</ul>';
-                        echo '<hr/>';
+                        echo '<hr>';
 
                         $visited = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_lastvisit > UNIX_TIMESTAMP(CURDATE())"));
                         $total_members = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1'"), 0);
-                        echo '<div><b>'.$locale['AX9_041'].'</b><span class="pull-right">'.$visited.'/'.$total_members.'</span></div>';
+                        echo '<div><b>'.$locale['ax9_041'].'</b><span class="pull-right">'.$visited.'/'.$total_members.'</span></div>';
 
                         $i = 0;
                         $result = dbquery("SELECT user_id, user_name, user_level, user_status, user_lastvisit
@@ -434,8 +433,8 @@ class Profile extends Core {
                         }
 
                         if (column_exists('users', 'user_birthdate')) {
-                            echo '<hr/>';
-                            echo '<div><b>'.$locale['AX9_042'].'</b></div>';
+                            echo '<hr>';
+                            echo '<div><b>'.$locale['ax9_042'].'</b></div>';
 
                             $result = dbquery("SELECT user_id, user_name, user_level, user_status, user_birthdate
                                 FROM ".DB_USERS."
@@ -446,7 +445,7 @@ class Profile extends Core {
 
                             if ($birthdays) {
                                 $i = 1;
-                                echo str_replace('[MEMBERS]', $birthdays, $locale['AX9_044']);
+                                echo str_replace('[MEMBERS]', $birthdays, $locale['ax9_044']);
                                 while ($data = dbarray($result)) {
                                     $birthdate = explode('-', $data['user_birthdate']);
                                     $year = date('Y') - $birthdate[0];
@@ -456,7 +455,7 @@ class Profile extends Core {
                                     $i++;
                                 }
                             } else {
-                                echo $locale['AX9_043'];
+                                echo $locale['ax9_043'];
                             }
                         }
                     echo '</div>';
@@ -466,9 +465,9 @@ class Profile extends Core {
         echo '</div>';
     }
 
-    public static function EditProfile() {
-        self::SetParam('greybody', 'TRUE');
-        Components::HidePanels();
+    public static function editProfile() {
+        self::setParam('greybody', 'TRUE');
+        Main::hidePanels();
 
         echo '<div class="panel panel-default">';
         echo '<div class="panel-heading"><h4><b>'.fusion_get_locale('u102').'</b></h4></div>';

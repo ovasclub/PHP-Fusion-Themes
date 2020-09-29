@@ -20,11 +20,6 @@ namespace CzechiaTheme\Templates;
 use CzechiaTheme\Core;
 use CzechiaTheme\Main;
 
-/**
- * Class Error
- *
- * @package CzechiaTheme\Templates
- */
 class Error extends Core {
     public static function displayErrorPage($data) {
         $locale = fusion_get_locale();

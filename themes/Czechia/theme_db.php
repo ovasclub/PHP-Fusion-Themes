@@ -17,14 +17,8 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-if (file_exists(THEMES.'Czechia/locale/'.LANGUAGE.'.php')) {
-    $locale = fusion_get_locale('', THEMES.'Czechia/locale/'.LANGUAGE.'.php');
-} else {
-    $locale = fusion_get_locale('', THEMES.'Czechia/locale/English.php');
-}
-
-$theme_title       = $locale['pfc_title'];
-$theme_description = $locale['pfc_description'];
+$theme_title       = 'Czechia Theme';
+$theme_description = 'Theme for official Czech support.';
 $theme_screenshot  = 'screenshot.jpg';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';

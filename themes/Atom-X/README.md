@@ -5,8 +5,8 @@ V7 theme ported to v9.
 
 Custom templates:
  - Downloads
- - Messages
  - News
+ - Private Messages
  - Profile / Edit Profile
 
 ![Preview](screenshot.jpg)

@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Czechia/locale/Russian.php
+| Filename: Russian.php
 | Author: ovasclub
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,9 +15,6 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['pfc_title'] = 'Тема Чехия';
-$locale['pfc_description'] = 'Тема официальной чешской поддержки.';
-$locale['created_by']  = 'Создана';
 $locale['01'] = 'IP-адрес';
 $locale['02'] = 'О нас';
 $locale['03'] = 'Последние новости';

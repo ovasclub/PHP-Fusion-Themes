@@ -21,11 +21,6 @@ use CzechiaTheme\Core;
 use \PHPFusion\News\NewsServer;
 use \PHPFusion\Panels;
 
-/**
- * Class News
- *
- * @package CzechiaTheme\Templates
- */
 class News extends Core {
     private static function header($info) {
         $locale = fusion_get_locale();
@@ -144,23 +139,6 @@ class News extends Core {
     public static function renderNewsItem($info) {
         $locale = fusion_get_locale();
         $data = $info['news_item'];
-
-        add_to_head('<link rel="stylesheet" type="text/css" href="'.INCLUDES.'jquery/colorbox/colorbox.css"/>');
-        add_to_footer('<script type="text/javascript" src="'.INCLUDES.'jquery/colorbox/jquery.colorbox.js"></script>');
-        add_to_jquery('
-            $(".news-image-overlay").colorbox({
-                transition: "elasic",
-                height: "100%",
-                width: "100%",
-                maxWidth: "95%",
-                maxHeight: "95%",
-                scrolling: false,
-                overlayClose: true,
-                close: false,
-                photo: true,
-                onComplete: function(result) {$("#colorbox").live("click", function() {$(this).unbind("click");$.fn.colorbox.close();});}
-           });
-        ');
 
         self::header($info);
 

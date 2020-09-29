@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Czechia/locale/English.php
+| Filename: English.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,9 +15,6 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['pfc_title'] = 'Czechia Theme';
-$locale['pfc_description'] = 'Theme for official Czech support.';
-$locale['created_by']  = 'Created by';
 $locale['01'] = 'IP Address';
 $locale['02'] = 'About Us';
 $locale['03'] = 'Latest News';

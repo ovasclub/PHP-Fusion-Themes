@@ -26,6 +26,12 @@ define('BOOTSTRAP', TRUE);
 define('FONTAWESOME', TRUE);
 define('SOCIAL_SHARE', TRUE); // Set FALSE to turn Off, used only in News
 
+// Uncomment and edit, if you want show social networks in right top
+/*define('ATOMX_SOCIAL_NETWORKS', [
+    'https://www.facebook.com/GenuineFusion' => 'fa fa-facebook',
+    'https://github.com/php-fusion' => 'fa fa-github',
+]);*/
+
 function cache_users() {
     $settings = fusion_get_settings();
 
@@ -67,8 +73,8 @@ function cache_users() {
 function render_page() {
     cache_users();
 
-    $atom = new AtomXTheme\AtomX;
-    echo $atom->RenderPage();
+    $atom = new AtomXTheme\Main;
+    echo $atom->renderPage();
 }
 
 function opentable($title = FALSE, $class = '') {
@@ -94,27 +100,27 @@ function closeside() {
 }
 
 function render_downloads($info) {
-    AtomXTheme\Templates\Downloads::render_downloads($info);
+    AtomXTheme\Templates\Downloads::renderDownloads($info);
 }
 
 function display_inbox($info) {
-    AtomXTheme\Templates\Messages::GetInstance()->display_inbox($info);
+    AtomXTheme\Templates\PrivateMessages::getInstance()->displayInbox($info);
 }
 
 function display_main_news($info) {
-    AtomXTheme\Templates\News::GetInstance()->display_main_news($info);
+    AtomXTheme\Templates\News::getInstance()->display_main_news($info);
 }
 
 function render_news_item($info) {
-    AtomXTheme\Templates\News::GetInstance()->render_news_item($info);
+    AtomXTheme\Templates\News::getInstance()->render_news_item($info);
 }
 
 function display_user_profile($info) {
-    AtomXTheme\Templates\Profile::GetInstance()->DisplayProfile($info);
+    AtomXTheme\Templates\Profile::getInstance()->displayProfile($info);
 }
 
 function display_profile_form() {
-    AtomXTheme\Templates\Profile::GetInstance()->EditProfile();
+    AtomXTheme\Templates\Profile::getInstance()->editProfile();
 }
 
 set_image('noavatar50', fusion_get_settings('siteurl').'themes/Atom-X/images/noavatar50.png');

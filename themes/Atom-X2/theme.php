@@ -67,8 +67,8 @@ function cache_users() {
 function render_page() {
     cache_users();
 
-    $atom = new AtomX2Theme\AtomX;
-    echo $atom->RenderPage();
+    $atom = new AtomX2Theme\Main;
+    echo $atom->renderPage();
 }
 
 function opentable($title = FALSE, $class = '') {
@@ -94,27 +94,27 @@ function closeside() {
 }
 
 function render_downloads($info) {
-    AtomX2Theme\Templates\Downloads::render_downloads($info);
+    AtomX2Theme\Templates\Downloads::renderRownloads($info);
 }
 
 function display_inbox($info) {
-    AtomX2Theme\Templates\Messages::GetInstance()->display_inbox($info);
+    AtomX2Theme\Templates\PrivateMessages::getInstance()->displayInbox($info);
 }
 
 function display_main_news($info) {
-    AtomX2Theme\Templates\News::GetInstance()->display_main_news($info);
+    AtomX2Theme\Templates\News::getInstance()->displayMainNews($info);
 }
 
 function render_news_item($info) {
-    AtomX2Theme\Templates\News::GetInstance()->render_news_item($info);
+    AtomX2Theme\Templates\News::getInstance()->renderNewsItem($info);
 }
 
 function display_user_profile($info) {
-    AtomX2Theme\Templates\Profile::GetInstance()->DisplayProfile($info);
+    AtomX2Theme\Templates\Profile::getInstance()->DisplayProfile($info);
 }
 
 function display_profile_form() {
-    AtomX2Theme\Templates\Profile::GetInstance()->EditProfile();
+    AtomX2Theme\Templates\Profile::getInstance()->EditProfile();
 }
 
 set_image('noavatar50', fusion_get_settings('siteurl').'themes/Atom-X2/images/noavatar50.png');

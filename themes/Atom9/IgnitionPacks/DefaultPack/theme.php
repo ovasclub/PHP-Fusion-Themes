@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -18,8 +18,8 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-Atom9Theme\Core::SetParam('atom_banner', FALSE);
+Atom9Theme\Core::setParam('atom_banner', FALSE);
 
 function display_home($info) {
-    Atom9Theme\IgnitionPacks\DefaultPack\Templates\Home::HomePanel($info);
+    Atom9Theme\IgnitionPacks\DefaultPack\Templates\Home::homePanel($info);
 }

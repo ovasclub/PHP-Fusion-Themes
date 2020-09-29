@@ -20,11 +20,6 @@ namespace CzechiaTheme\Templates;
 use CzechiaTheme\Core;
 use \PHPFusion\Panels;
 
-/**
- * Class Downloads
- *
- * @package CzechiaTheme\Templates
- */
 class Downloads extends Core {
     public static function renderDownloads($info) {
         $locale = fusion_get_locale();

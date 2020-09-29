@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Producer.inc
-| Author: Frederick MC Chan (Chan)
+| Filename: Main.inc
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -21,10 +21,10 @@ namespace Atom9Theme;
 use PHPFusion\Rewrite\Router;
 use \PHPFusion\SiteLinks;
 
-class Producer extends Core {
+class Main extends Core {
     protected static $instance = NULL;
 
-    public static function GetInstance() {
+    public static function getInstance() {
         if (self::$instance === NULL) {
             self::$instance = new static();
         }
@@ -32,7 +32,7 @@ class Producer extends Core {
         return self::$instance;
     }
 
-    private function DispalyNavbar() {
+    private function dispalyNavbar() {
         $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
         $languages = fusion_get_enabled_languages();
@@ -92,7 +92,6 @@ class Producer extends Core {
                     $messages_count = '<span class="label label-danger msg-count">'.$msg_count.'</span>';
                 }
 
-                // echo '<li><a href="#"><i class="fa fa-bell"></i></a></li>';
                 echo '<li><a href="'.BASEDIR.'messages.php" title="'.$locale['UM081'].'"><i class="fa fa-envelope-o"></i>'.$messages_count.'</a></li>';
             } else {
                 echo '<li><a href="'.BASEDIR.'login.php" title="'.$locale['login'].'"><i class="fa fa-sign-in"></i></a></li>';
@@ -147,14 +146,12 @@ class Producer extends Core {
         echo '<div style="min-height: 67px;">';
             echo SiteLinks::setSubLinks($menu_options)->showSubLinks();
         echo '</div>';
-
-        //add_to_jquery('$("#main-menu").affix({offset: {top: 67}});');
     }
 
-    private function DispalyBanner() {
+    private function dispalyBanner() {
         $settings = fusion_get_settings();
 
-        if ($this->GetParam('atom_banner') == TRUE) {
+        if ($this->getParam('atom_banner') == TRUE) {
             echo '<div class="atom-banner">';
                 $file_path = str_replace(ltrim($settings['site_path'], '/'), '', preg_replace('/^\//', '', FUSION_REQUEST));
                 if ($settings['site_seo'] && defined('IN_PERMALINK')) {
@@ -173,12 +170,12 @@ class Producer extends Core {
         }
     }
 
-    private function DispalyBody() {
+    private function dispalyBody() {
         $theme_settings = get_theme_settings('Atom9');
 
         $notices = getNotices(['all', FUSION_SELF]);
 
-        if (!empty($notices) && $this->GetParam('notices') == TRUE) {
+        if (!empty($notices) && $this->getParam('notices') == TRUE) {
             echo '<section class="top">';
                 echo '<div class="container container-top">';
                     echo renderNotices($notices);
@@ -191,7 +188,7 @@ class Producer extends Core {
 
                 echo showbanners(1);
 
-                if ($this->GetParam('panels') == TRUE) {
+                if ($this->getParam('panels') == TRUE) {
                     if (defined('AU_CENTER') && AU_CENTER) {
                         echo '<div class="content_top"><div class="container-content-top">'.AU_CENTER.'</div></div>';
                     }
@@ -208,14 +205,14 @@ class Producer extends Core {
                     $right_side = $theme_settings['column_side'] == 'RIGHT';
                 }
 
-                if ($this->GetParam('panels') == TRUE) {
-                    if ((defined('LEFT') && LEFT) && $left_side == TRUE && $this->GetParam('left') == TRUE || $this->GetParam('left_content')) {
+                if ($this->getParam('panels') == TRUE) {
+                    if ((defined('LEFT') && LEFT) && $left_side == TRUE && $this->getParam('left') == TRUE || $this->getParam('left_content')) {
                         $content['sm'] = $content['sm'] - $left['sm'];
                         $content['md'] = $content['md'] - $left['md'];
                         $content['lg'] = $content['lg'] - $left['lg'];
                     }
 
-                    if ((defined('RIGHT') && RIGHT) && $right_side == TRUE && $this->GetParam('right') == TRUE || $this->GetParam('right_content')) {
+                    if ((defined('RIGHT') && RIGHT) && $right_side == TRUE && $this->getParam('right') == TRUE || $this->getParam('right_content')) {
                         $content['sm'] = $content['sm'] - $right['sm'];
                         $content['md'] = $content['md'] - $right['md'];
                         $content['lg'] = $content['lg'] - $right['lg'];
@@ -223,38 +220,38 @@ class Producer extends Core {
                 }
 
                 echo '<div class="row">';
-                    if ($this->GetParam('panels') == TRUE) {
-                        if ((defined('LEFT') && LEFT) && $left_side == TRUE && $this->GetParam('left') == TRUE || $this->GetParam('left_content')) {
+                    if ($this->getParam('panels') == TRUE) {
+                        if ((defined('LEFT') && LEFT) && $left_side == TRUE && $this->getParam('left') == TRUE || $this->getParam('left_content')) {
                             echo '<div class="col-xs-12 col-sm-'.$left['sm'].' col-md-'.$left['md'].' col-lg-'.$left['lg'].'">';
-                                echo $this->GetParam('left') == TRUE && defined('RIGHT') && RIGHT && $right_side == FALSE ? RIGHT : '';
-                                echo $this->GetParam('left') == TRUE && defined('LEFT') && LEFT ? LEFT : '';
-                                echo $this->GetParam('left_content');
+                                echo $this->getParam('left') == TRUE && defined('RIGHT') && RIGHT && $right_side == FALSE ? RIGHT : '';
+                                echo $this->getParam('left') == TRUE && defined('LEFT') && LEFT ? LEFT : '';
+                                echo $this->getParam('left_content');
                             echo '</div>';
                         }
                     }
 
                     echo '<div class="col-xs-12 col-sm-'.$content['sm'].' col-md-'.$content['md'].' col-lg-'.$content['lg'].'">';
-                        if ($this->GetParam('panels') == TRUE) {
+                        if ($this->getParam('panels') == TRUE) {
                             echo defined('U_CENTER') && U_CENTER ? '<div class="top">'.U_CENTER.'</div>' : '';
                         }
                         echo CONTENT;
-                        if ($this->GetParam('panels') == TRUE) {
+                        if ($this->getParam('panels') == TRUE) {
                             echo defined('L_CENTER') && L_CENTER ? L_CENTER : '';
                         }
                     echo '</div>';
 
-                    if ($this->GetParam('panels') == TRUE) {
-                        if ((defined('RIGHT') && RIGHT) && $right_side == TRUE && $this->GetParam('right') == TRUE || $this->GetParam('right_content')) {
+                    if ($this->getParam('panels') == TRUE) {
+                        if ((defined('RIGHT') && RIGHT) && $right_side == TRUE && $this->getParam('right') == TRUE || $this->getParam('right_content')) {
                             echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
-                                echo $this->GetParam('right') == TRUE && defined('RIGHT') && RIGHT ? RIGHT : '';
-                                echo $this->GetParam('right') == TRUE && defined('LEFT') && LEFT && $left_side == FALSE ? LEFT : '';
-                                echo $this->GetParam('right_content');
+                                echo $this->getParam('right') == TRUE && defined('RIGHT') && RIGHT ? RIGHT : '';
+                                echo $this->getParam('right') == TRUE && defined('LEFT') && LEFT && $left_side == FALSE ? LEFT : '';
+                                echo $this->getParam('right_content');
                             echo '</div>';
                         }
                     }
                 echo '</div>'; // .row
 
-                if ($this->GetParam('panels') == TRUE) {
+                if ($this->getParam('panels') == TRUE) {
                     if (defined('BL_CENTER') && BL_CENTER) {
                         echo '<div class="bottom"><div class="container-bottom">'.BL_CENTER.'</div></div>';
                     }
@@ -265,7 +262,7 @@ class Producer extends Core {
         echo '</section>'; // .body-wrapper
     }
 
-    private function DispalyFooter() {
+    private function dispalyFooter() {
         $theme_settings = get_theme_settings('Atom9');
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
@@ -280,7 +277,7 @@ class Producer extends Core {
 
             if (!empty($theme_settings['facebook_url']) || !empty($theme_settings['twitter_url'])) {
                 echo '<div class="social m-b-20">';
-                    echo '<span class="m-r-20">'.$locale['A9_001'].' </span>';
+                    echo '<span class="m-r-20">'.$locale['a9_001'].' </span>';
 
                     if (!empty($theme_settings['facebook_url'])) {
                         echo '<a href="'.$theme_settings['facebook_url'].'" target="_blank"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>';
@@ -301,25 +298,25 @@ class Producer extends Core {
                 echo '</div>';
             }
 
-            if (self::FooterPanels() == TRUE) {
+            if (self::footerPanels() == TRUE) {
                 echo '<div class="row">';
-                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::GetFooterPanel('footer_col1').'</div>';
-                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::GetFooterPanel('footer_col2').'</div>';
-                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::GetFooterPanel('footer_col3').'</div>';
-                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::GetFooterPanel('footer_col4').'</div>';
+                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::getFooterPanel('footer_col1').'</div>';
+                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::getFooterPanel('footer_col2').'</div>';
+                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::getFooterPanel('footer_col3').'</div>';
+                    echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.self::getFooterPanel('footer_col4').'</div>';
                 echo '</div>';
             }
         echo '</div></section>'; // .container-footer
     }
 
-    private function DispalyCopyright() {
-        $locale = fusion_get_locale('', ATOM9_LOCALE);
+    private function dispalyCopyright() {
         $settings = fusion_get_settings();
 
         echo '<section class="container-copyright"><div class="container"><div class="row">';
             echo '<div class="col-xs-12 col-sm-5">';
                 echo showcopyright().showprivacypolicy();
-                echo '<br/>'.$locale['A9_015'];
+                echo '<br>';
+                echo self::themeCopyright();
 
                 if ($settings['rendertime_enabled'] == 1 || $settings['rendertime_enabled'] == 2) {
                     echo '<br/><small>';
@@ -340,7 +337,7 @@ class Producer extends Core {
         echo '</div></div></section>'; // .container-copyright
     }
 
-    public static function Util() {
+    public static function util() {
         $reference = get_breadcrumbs();
         $page_title = fusion_get_locale('home');
 
@@ -365,11 +362,11 @@ class Producer extends Core {
         echo '</div>';
     }
 
-    public function render_page() {
-        $this->DispalyNavbar();
-        $this->DispalyBanner();
-        $this->DispalyBody();
-        $this->DispalyFooter();
-        $this->DispalyCopyright();
+    public function renderPage() {
+        $this->dispalyNavbar();
+        $this->dispalyBanner();
+        $this->dispalyBody();
+        $this->dispalyFooter();
+        $this->dispalyCopyright();
     }
 }

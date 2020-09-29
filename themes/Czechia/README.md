@@ -1,5 +1,5 @@
 # Czechia Theme
-Lite version of Czechia theme from old Czech NSS.
+The Lite version of Czechia theme from old Czech NSS.
 
 ![Version](https://img.shields.io/badge/Version-2.3-blue.svg)
 

@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Downloads.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,16 +19,16 @@
 namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 
 use Atom9Theme\Core;
-use Atom9Theme\Producer;
+use Atom9Theme\Main;
 
 class Downloads extends Core {
-    public static function render_downloads($info) {
+    public static function renderDownloads($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
-        self::SetParam('panels', FALSE);
+        self::setParam('panels', FALSE);
 
-        Producer::Util();
+        Main::util();
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/downloads.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/downloads.css">');
 
         echo '<div class="downloads">';
             echo '<div class="heading filter clearfix">';
@@ -47,23 +47,23 @@ class Downloads extends Core {
                 echo '</div>';
 
                 echo '<div class="dropdown pull-right">';
-                    echo '<button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown">'.$locale['A9_106'].' <span class="caret"></span></button>';
+                    echo '<button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown">'.$locale['a9_106'].' <span class="caret"></span></button>';
                     echo '<ul class="dropdown-menu" aria-labelledby="categories">';
-                        $download_cat_menu = self::display_cat_menu($info['download_categories']);
+                        $download_cat_menu = self::displayCatMenu($info['download_categories']);
                         echo !empty($download_cat_menu) ? $download_cat_menu : '<li>'.$locale['download_3001'].'</li>';
                     echo '</ul>';
                 echo '</div>';
             echo '</div>';
 
             if (isset($_GET['download_id']) && !empty($info['download_item'])) {
-                self::display_download_item($info);
+                self::displayDownloadItem($info);
             } else {
-                self::display_download_index($info);
+                self::displayDownloadIndex($info);
             }
         echo '</div>';
     }
 
-    private static function display_download_index($info) {
+    private static function displayDownloadIndex($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $dl_settings = get_settings('downloads');
 
@@ -88,8 +88,8 @@ class Downloads extends Core {
                                 echo '<small>'.trim_text(strip_tags($data['download_description_short']), 90).'</small>';
                             echo '</div>';
                             echo '<div class="footer clearfix overflow-hide">';
-                                echo '<a class="btn btn-default btn-sm" href="'.$data['download_link'].'">'.$locale['A9_107'].'</a>';
-                                echo '<a class="btn btn-primary btn-sm pull-right" href="'.$data['download_file_link'].'">'.$locale['A9_108'].'</a>';
+                                echo '<a class="btn btn-default btn-sm" href="'.$data['download_link'].'">'.$locale['a9_107'].'</a>';
+                                echo '<a class="btn btn-primary btn-sm pull-right" href="'.$data['download_file_link'].'">'.$locale['a9_108'].'</a>';
                             echo '</div>';
                         echo '</div>';
                     echo '</div>';
@@ -100,11 +100,11 @@ class Downloads extends Core {
                 $dl_settings['download_pagination'] = !empty($dl_settings['download_pagination']) ? $dl_settings['download_pagination'] : 15;
 
                 echo '<div class="footer text-center">';
-                    $page_nav_link = (!empty($_GET['type']) ? '?type='.$_GET['type'].'&amp;' : '');
+                    $page_nav_link = (!empty($_GET['type']) ? '?type='.$_GET['type'].'&' : '');
                     if (!empty($_GET['cat_id']) && isnum($_GET['cat_id'])) {
-                        $page_nav_link = INFUSIONS.'downloads/downloads.php?cat_id='.$_GET['cat_id'].(!empty($_GET['type']) ? '&amp;type='.$_GET['type'] : '').'&amp;';
+                        $page_nav_link = INFUSIONS.'downloads/downloads.php?cat_id='.$_GET['cat_id'].(!empty($_GET['type']) ? '&type='.$_GET['type'] : '').'&';
                     } else if (!empty($_GET['author']) && isnum($_GET['author'])) {
-                        $page_nav_link = INFUSIONS.'downloads/downloads.php?author='.$_GET['author'].'&amp;';
+                        $page_nav_link = INFUSIONS.'downloads/downloads.php?author='.$_GET['author'].'&';
                     }
 
                     $_GET['rowstart'] = (isset($_GET['rowstart']) && isnum($_GET['rowstart']) && $_GET['rowstart'] <= $info['download_max_rows']) ? $_GET['rowstart'] : 0;
@@ -121,7 +121,7 @@ class Downloads extends Core {
         }
     }
 
-    private static function display_download_item($info) {
+    private static function displayDownloadItem($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $dl_settings = get_settings('downloads');
         $data = $info['download_item'];
@@ -156,10 +156,10 @@ class Downloads extends Core {
                         echo $data['download_description_short'];
                         echo '<div class="m-t-10">'.$data['download_post_time2'].' '.$data['download_post_cat'].'</div>';
 
-                        echo '<p class="m-t-20 m-b-10">'.$locale['A9_109'].'</p>';
+                        echo '<p class="m-t-20 m-b-10">'.$locale['a9_109'].'</p>';
                         echo '<div class="description">';
                             echo '<small class="display-block"><b>'.$locale['download_1021'].': </b>'.$data['download_post_time'].'</small>';
-                            echo '<small class="display-block"><b>'.$locale['A9_110'].': </b>'.profile_link($data['user_id'], $data['user_name'], $data['user_status'], 'profile-link').'</small>';
+                            echo '<small class="display-block"><b>'.$locale['a9_110'].': </b>'.profile_link($data['user_id'], $data['user_name'], $data['user_status'], 'profile-link').'</small>';
                             echo '<small class="display-block"><b>'.$locale['download_1017'].': </b>'.$data['download_homepage'].'</small>';
                             echo '<small class="display-block"><b>'.$locale['download_1015'].': </b>'.$data['download_copyright'].'</small>';
                         echo '</div>';
@@ -182,7 +182,7 @@ class Downloads extends Core {
         echo '</div>';
     }
 
-    private static function display_cat_menu($info, $cat_id = 0) {
+    private static function displayCatMenu($info, $cat_id = 0) {
         $html = '';
 
         if (!empty($info[$cat_id])) {
@@ -192,7 +192,7 @@ class Downloads extends Core {
                 $html .= '<li'.$active.'><a href="'.DOWNLOADS.'downloads.php?cat_id='.$download_cat_id.'">'.$cdata['download_cat_name'].'</a></li>';
 
                 if (!empty($info[$download_cat_id])) {
-                    $html .= self::display_cat_menu($info, $download_cat_id);
+                    $html .= self::displayCatMenu($info, $download_cat_id);
                 }
             }
         }

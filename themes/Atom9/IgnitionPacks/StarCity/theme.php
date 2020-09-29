@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -18,30 +18,30 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-function render_downloads($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\Downloads::render_downloads($info);
-}
-
-function display_home($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\Home::HomePanel($info);
-}
-
 function display_loginform($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\Login::LoginForm($info);
+    Atom9Theme\IgnitionPacks\StarCity\Templates\Auth::loginForm($info);
 }
 
 function display_register_form($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\Login::RegisterForm($info);
+    Atom9Theme\IgnitionPacks\StarCity\Templates\Auth::registerForm($info);
+}
+
+function render_downloads($info) {
+    Atom9Theme\IgnitionPacks\StarCity\Templates\Downloads::renderDownloads($info);
+}
+
+function display_home($info) {
+    Atom9Theme\IgnitionPacks\StarCity\Templates\Home::homePanel($info);
 }
 
 function display_main_news($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\News::display_main_news($info);
+    Atom9Theme\IgnitionPacks\StarCity\Templates\News::displayMainNews($info);
 }
 
 function render_news_item($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\News::render_news_item($info);
+    Atom9Theme\IgnitionPacks\StarCity\Templates\News::renderNewsItem($info);
 }
 
 function display_inbox($info) {
-    Atom9Theme\IgnitionPacks\StarCity\Templates\Messages::display_inbox($info);
+    Atom9Theme\IgnitionPacks\StarCity\Templates\PrivateMessages::displayInbox($info);
 }

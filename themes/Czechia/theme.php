@@ -72,11 +72,11 @@ function display_error_page($info) {
  * @param $info
  */
 function display_loginform($info) {
-    CzechiaTheme\Templates\Login::loginForm($info);
+    CzechiaTheme\Templates\Auth::loginForm($info);
 }
 
 function display_register_form($info) {
-    CzechiaTheme\Templates\Login::registerForm($info);
+    CzechiaTheme\Templates\Auth::registerForm($info);
 }
 
 /**
@@ -93,6 +93,6 @@ function render_news_item($info) {
 
 set_image('imagenotfound', fusion_get_settings('siteurl').'themes/Czechia/images/noimage.svg');
 
-\PHPFusion\OutputHandler::addHandler(function ($output = '') {
+add_handler(function ($output = '') {
     return preg_replace("/<meta name='theme-color' content='#ffffff'>/i", '<meta name="theme-color" content="#196496"/>', $output);
 });

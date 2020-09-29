@@ -17,12 +17,6 @@
 +--------------------------------------------------------*/
 namespace CzechiaTheme;
 
-/**
- * Class Core
- * The core of the theme
- *
- * @package CzechiaTheme
- */
 class Core {
     private static $options = [
         'right'         => TRUE,
@@ -32,11 +26,6 @@ class Core {
         'notices'       => TRUE
     ];
 
-    /**
-     * @param null $name
-     *
-     * @return mixed
-     */
     protected static function getParam($name = NULL) {
         if (isset(self::$options[$name])) {
             return self::$options[$name];
@@ -45,19 +34,10 @@ class Core {
         return NULL;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
     public static function setParam($name, $value) {
         self::$options[$name] = $value;
     }
 
-    /**
-     * @param null $key
-     *
-     * @return mixed
-     */
     public static function setLocale($key = NULL) {
         $locale = [];
 
@@ -71,9 +51,12 @@ class Core {
     }
 
     /**
-     * Copyright
+     * Theme Copyright
+     * Do not delete or change this code!
+     *
+     * @return string
      */
     public static function themeCopyright() {
-        echo '<strong>&copy; '.date('Y').' '.self::setLocale('created_by').' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a></strong>';
+        return '&copy; '.date('Y').' Created by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
     }
 }

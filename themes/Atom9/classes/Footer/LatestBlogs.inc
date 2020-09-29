@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: LatestBlogs.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,12 +19,12 @@
 namespace Atom9Theme\Footer;
 
 class LatestBlogs {
-    public static function Panel() {
+    public static function panel() {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
         ob_start();
 
-        echo '<h3>'.$locale['A9_009'].'</h3>';
+        echo '<h3>'.$locale['a9_009'].'</h3>';
 
         $blogs = function_exists('infusion_exists') ? infusion_exists('blog') : db_exists(DB_PREFIX.'blog');
         if ($blogs) {
@@ -43,10 +43,10 @@ class LatestBlogs {
                 }
                 echo '</ul>';
             } else {
-                echo $locale['A9_010'];
+                echo $locale['a9_010'];
             }
         } else {
-            echo $locale['A9_011'];
+            echo $locale['a9_011'];
         }
 
         $html = ob_get_contents();

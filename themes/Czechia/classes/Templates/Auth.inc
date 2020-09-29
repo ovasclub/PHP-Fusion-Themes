@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Login.inc
+| Filename: Auth.inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -20,12 +20,7 @@ namespace CzechiaTheme\Templates;
 use CzechiaTheme\Core;
 use CzechiaTheme\Main;
 
-/**
- * Class Login
- *
- * @package CzechiaTheme\Templates
- */
-class Login extends Core {
+class Auth extends Core {
     public static function loginForm($info) {
         $locale = fusion_get_locale();
         $aidlink = fusion_get_aidlink();

@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme_db.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -21,7 +21,7 @@ defined('IN_FUSION') || exit;
 $theme_title = 'Glowie';
 $theme_description = '';
 $theme_screenshot = 'screenshot.jpg';
-$theme_author = 'Frederick MC Chan (Chan) & RobiNN';
+$theme_author = 'Frederick MC Chan & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
 $theme_version = '1.1';

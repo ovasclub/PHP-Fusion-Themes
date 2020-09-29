@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Core.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -30,7 +30,7 @@ class Core {
         'atom_banner'   => TRUE
     ];
 
-    public static function GetInstance() {
+    public static function getInstance() {
         if (self::$instance === NULL) {
             self::$instance = new static();
         }
@@ -38,7 +38,7 @@ class Core {
         return self::$instance;
     }
 
-    protected static function GetParam($name = NULL) {
+    protected static function getParam($name = NULL) {
         if (isset(self::$options[$name])) {
             return self::$options[$name];
         }
@@ -46,24 +46,24 @@ class Core {
         return NULL;
     }
 
-    public static function SetParam($name, $value) {
+    public static function setParam($name, $value) {
         self::$options[$name] = $value;
     }
 
-    public function GetIgnitionPacks($ignition_pack) {
+    public function getIgnitionPacks($ignition_pack) {
         $css = file_exists(THEME.'IgnitionPacks/'.$ignition_pack.'/styles.min.css') ? THEME.'IgnitionPacks/'.$ignition_pack.'/styles.min.css' : THEME.'IgnitionPacks/'.$ignition_pack.'/styles.css';
-        add_to_head('<link rel="stylesheet" href="'.$css.'" type="text/css"/>');
+        add_to_head('<link rel="stylesheet" href="'.$css.'">');
 
         require_once THEME.'IgnitionPacks/'.$ignition_pack.'/theme.php';
     }
 
-    public static function GetFooterPanel($col) {
+    public static function getFooterPanel($col) {
         $settings = get_theme_settings('Atom9');
 
         if (!empty($settings[$col])) {
             $panel = str_replace('.inc', '', $settings[$col]);
             $col = new \ReflectionClass('Atom9Theme\\Footer\\'.$panel);
-            $col = $col->newInstance()->Panel();
+            $col = $col->newInstance()->panel();
 
             return $col;
         }
@@ -71,7 +71,7 @@ class Core {
         return NULL;
     }
 
-    public static function FooterPanels() {
+    public static function footerPanels() {
         $settings = fusion_get_settings();
         $theme_settings = get_theme_settings('Atom9');
         $exclude_list = '';
@@ -103,5 +103,15 @@ class Core {
         } else {
             return TRUE;
         }
+    }
+
+    /**
+     * Theme Copyright
+     * Do not delete or change this code!
+     *
+     * @return string
+     */
+    public static function themeCopyright() {
+        return '&copy; '.date('Y').' Theme by <a href="https://www.phpfusion.com" target="_blank">Frederick MC Chan</a> & <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
     }
 }

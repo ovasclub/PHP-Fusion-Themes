@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: News.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,21 +19,21 @@
 namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 
 use Atom9Theme\Core;
-use Atom9Theme\Producer;
+use Atom9Theme\Main;
 use \PHPFusion\News\NewsServer;
 
 class News extends Core {
-    public static function display_main_news($info) {
+    public static function displayMainNews($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $news_settings = NewsServer::get_news_settings();
 
-        self::SetParam('panels', FALSE);
+        self::setParam('panels', FALSE);
 
-        Producer::Util();
+        Main::util();
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/news.css"/>');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/news.css">');
 
-        self::HorizontalMenu($info);
+        self::horizontalMenu($info);
 
         echo '<div class="news-wrapper">';
 
@@ -65,7 +65,7 @@ class News extends Core {
 
                         echo '<p>';
                             echo trim_text($data['news_news'], 350);
-                            echo $data['news_ext'] == 'y' ? ' <a href="'.$data['news_url'].'" class="readmore">'.$locale['A9_104'].'</a>' : '';
+                            echo $data['news_ext'] == 'y' ? ' <a href="'.$data['news_url'].'" class="readmore">'.$locale['a9_104'].'</a>' : '';
                         echo '</p>';
 
                         echo '<div class="news-stats">';
@@ -80,8 +80,8 @@ class News extends Core {
             }
 
             if ($info['news_total_rows'] > $news_settings['news_pagination']) {
-                $type_start = isset($_GET['type']) ? 'type='.$_GET['type'].'&amp;' : '';
-                $cat_start = isset($_GET['cat_id']) ? 'cat_id='.$_GET['cat_id'].'&amp;' : '';
+                $type_start = isset($_GET['type']) ? 'type='.$_GET['type'].'&' : '';
+                $cat_start = isset($_GET['cat_id']) ? 'cat_id='.$_GET['cat_id'].'&' : '';
                 echo '<div class="text-center m-t-10 m-b-10">';
                     echo makepagenav($_GET['rowstart'], $news_settings['news_pagination'], $info['news_total_rows'], 3, INFUSIONS.'news/news.php?'.$cat_start.$type_start);
                 echo '</div>';
@@ -93,32 +93,18 @@ class News extends Core {
         echo '</div>';
     }
 
-    public static function render_news_item($info) {
+    public static function renderNewsItem($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $data = $info['news_item'];
 
-        self::SetParam('left', FALSE);
-        self::SetParam('right', FALSE);
+        self::setParam('left', FALSE);
+        self::setParam('right', FALSE);
 
-        Producer::Util();
+        Main::util();
 
-        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/news.css"/>');
-        add_to_head('<link rel="stylesheet" type="text/css" href="'.INCLUDES.'jquery/colorbox/colorbox.css"/>');
-        add_to_footer('<script type="text/javascript" src="'.INCLUDES.'jquery/colorbox/jquery.colorbox.js"></script>');
-        add_to_jquery('$(".news-image-overlay").colorbox({
-            transition: "elasic",
-            height: "100%",
-            width: "100%",
-            maxWidth: "95%",
-            maxHeight: "95%",
-            scrolling: false,
-            overlayClose: true,
-            close: false,
-            photo: true,
-            onComplete: function(result) {$("#colorbox").live("click", function() {$(this).unbind("click");$.fn.colorbox.close();});}
-       });');
+        add_to_head('<link rel="stylesheet" href="'.IGNITION_PACK.'Templates/css/news.css">');
 
-        self::HorizontalMenu($info);
+        self::horizontalMenu($info);
 
         echo '<div class="news-wrapper p-20">';
             echo '<div class="clearfix m-b-20">';
@@ -136,7 +122,7 @@ class News extends Core {
                     echo profile_link($data['user_id'], $data['user_name'], $data['user_status']);
                     echo ' '.getuserlevel($data['user_level']);
                 echo '</div><br/>';
-                echo '<small>'.$locale['A9_105'].' '.timer($data['news_date']).' - '.showdate('newsdate', $data['news_date']).'</small>';
+                echo '<small>'.$locale['a9_105'].' '.timer($data['news_date']).' - '.showdate('newsdate', $data['news_date']).'</small>';
             echo '</div>';
 
             echo '<div class="overflow-hide">';
@@ -186,7 +172,7 @@ class News extends Core {
         echo '</div>';
     }
 
-    private static function HorizontalMenu($info) {
+    private static function horizontalMenu($info) {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
         echo '<nav class="nav news-nav">';
@@ -261,7 +247,7 @@ class News extends Core {
             echo '</nav>';
 
             echo '<ul class="sub-nav">';
-                echo '<li class="active"><a href="'.INFUSIONS.'news/news.php">'.$locale['A9_103'].'</a></li>';
+                echo '<li class="active"><a href="'.INFUSIONS.'news/news.php">'.$locale['a9_103'].'</a></li>';
             echo '</ul>';
             echo '</div>';
 

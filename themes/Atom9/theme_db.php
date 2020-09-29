@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme_db.php
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -21,7 +21,7 @@ defined('IN_FUSION') || exit;
 $theme_title = 'Atom9';
 $theme_description = 'Atom 9 Ignition Pack.';
 $theme_screenshot = 'screenshot.jpg';
-$theme_author = 'Frederick MC Chan (Chan) & RobiNN';
+$theme_author = 'Frederick MC Chan & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
 $theme_version = '1.5';
@@ -36,7 +36,7 @@ if (!defined('ATOM9_LOCALE')) {
 }
 
 $theme_insertdbrow[] = DB_SETTINGS_THEME." (settings_name, settings_value, settings_theme) VALUES
-    ('ignition_pack', 'DefaultPack', '".$theme_folder."'),
+    ('ignition_pack', 'StarCity', '".$theme_folder."'),
     ('facebook_url', '', '".$theme_folder."'),
     ('twitter_url', '', '".$theme_folder."'),
     ('panel_exlude', '', '".$theme_folder."'),

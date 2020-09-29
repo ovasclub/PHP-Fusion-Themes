@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: AboutUs.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,13 +19,13 @@
 namespace Atom9Theme\Footer;
 
 class AboutUs {
-    public static function Panel() {
+    public static function panel() {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
         $settings = fusion_get_settings();
 
         ob_start();
 
-        echo '<h3>'.$locale['A9_002'].'</h3>';
+        echo '<h3>'.$locale['a9_002'].'</h3>';
         echo '<div>';
             echo '<b>'.$settings['sitename'].'</b><br/><br/>';
             echo '<p>'.$settings['description'].'</p>';

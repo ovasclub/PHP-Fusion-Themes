@@ -5,7 +5,7 @@
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Users.inc
-| Author: Frederick MC Chan (Chan)
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -19,12 +19,12 @@
 namespace Atom9Theme\Footer;
 
 class Users {
-    public static function Panel() {
+    public static function panel() {
         $locale = fusion_get_locale('', ATOM9_LOCALE);
 
         ob_start();
 
-        echo '<h3>'.$locale['A9_012'].'</h3>';
+        echo '<h3>'.$locale['a9_012'].'</h3>';
 
         $result = dbquery("SELECT user_id, user_name, user_status, user_avatar
             FROM ".DB_USERS."
@@ -40,9 +40,9 @@ class Users {
             }
             echo '</div>';
 
-            echo '<a href="'.BASEDIR.'members.php" class="more-dark">'.$locale['A9_013'].'</a>';
+            echo '<a href="'.BASEDIR.'members.php" class="more-dark">'.$locale['a9_013'].'</a>';
         } else {
-            echo $locale['A9_014'];
+            echo $locale['a9_014'];
         }
 
         $html = ob_get_contents();

@@ -20,12 +20,6 @@ namespace CzechiaTheme;
 use \PHPFusion\Panels;
 use \PHPFusion\SiteLinks;
 
-/**
- * Class Main
- * Main theme class
- *
- * @package CzechiaTheme
- */
 class Main extends Core {
     public function __construct() {
         $settings = fusion_get_settings();
@@ -262,7 +256,7 @@ class Main extends Core {
             }
 
             echo '<div id="copyright" class="clearfix p-b-10">';
-                $this->themeCopyright();
+                echo $this->themeCopyright();
 
                 echo '<div class="pull-right">';
                     echo showcopyright('', TRUE).showprivacypolicy();
