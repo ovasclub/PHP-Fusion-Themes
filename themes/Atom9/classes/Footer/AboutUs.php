@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: theme_autoloader.php
-| Author: PHP-Fusion Inc
+| Filename: AboutUs.php
+| Author: Frederick MC Chan
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -16,12 +16,24 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-defined('IN_FUSION') || exit;
+namespace Atom9Theme\Footer;
 
-spl_autoload_register(function ($class_name) {
-    $path = THEME.'classes/'.str_replace(['\\', 'AtomXTheme'], ['/', ''], $class_name).'.php';
+class AboutUs {
+    public static function panel() {
+        $locale = fusion_get_locale('', ATOM9_LOCALE);
+        $settings = fusion_get_settings();
 
-    if (file_exists($path)) {
-        require_once $path;
+        ob_start();
+
+        echo '<h3>'.$locale['a9_002'].'</h3>';
+        echo '<div>';
+            echo '<b>'.$settings['sitename'].'</b><br/><br/>';
+            echo '<p>'.$settings['description'].'</p>';
+        echo '</div>';
+
+        $html = ob_get_contents();
+        ob_end_clean();
+
+        return $html;
     }
-});
+}

@@ -40,10 +40,10 @@ $theme_insertdbrow[] = DB_SETTINGS_THEME." (settings_name, settings_value, setti
     ('facebook_url', '', '".$theme_folder."'),
     ('twitter_url', '', '".$theme_folder."'),
     ('panel_exlude', '', '".$theme_folder."'),
-    ('footer_col1', 'AboutUs.inc', '".$theme_folder."'),
-    ('footer_col2', 'LatestArticles.inc', '".$theme_folder."'),
-    ('footer_col3', 'LatestNews.inc', '".$theme_folder."'),
-    ('footer_col4', 'Users.inc', '".$theme_folder."'),
+    ('footer_col1', 'AboutUs.php', '".$theme_folder."'),
+    ('footer_col2', 'LatestArticles.php', '".$theme_folder."'),
+    ('footer_col3', 'LatestNews.php', '".$theme_folder."'),
+    ('footer_col4', 'Users.php', '".$theme_folder."'),
     ('2columns_layout', 0, '".$theme_folder."'),
     ('column_side', 'LEFT', '".$theme_folder."')
 ";

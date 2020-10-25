@@ -18,7 +18,7 @@
 defined('IN_FUSION') || exit;
 
 spl_autoload_register(function ($class_name) {
-    $path = MD.'classes/'.str_replace(['\\', 'MDashboard'], ['/', ''], $class_name).'.inc';
+    $path = MD.'classes/'.str_replace(['\\', 'MDashboard'], ['/', ''], $class_name).'.php';
 
     if (file_exists($path)) {
         require_once $path;

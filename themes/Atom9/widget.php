@@ -94,11 +94,11 @@ $panels = [];
 $file_list = makefilelist(THEME.'classes/Footer/', $filter);
 foreach ($file_list as $files) {
     $panels[$files] = strtr($files, [
-        'AboutUs.inc'        => $locale['a9_002'],
-        'LatestArticles.inc' => $locale['a9_003'],
-        'LatestBlogs.inc'    => $locale['a9_009'],
-        'LatestNews.inc'     => $locale['a9_006'],
-        'Users.inc'          => $locale['a9_012']
+        'AboutUs.php'        => $locale['a9_002'],
+        'LatestArticles.php' => $locale['a9_003'],
+        'LatestBlogs.php'    => $locale['a9_009'],
+        'LatestNews.php'     => $locale['a9_006'],
+        'Users.php'          => $locale['a9_012']
     ]);
 }
 
