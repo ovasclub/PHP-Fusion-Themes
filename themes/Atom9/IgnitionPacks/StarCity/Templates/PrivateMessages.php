@@ -172,15 +172,17 @@ class PrivateMessages extends Core {
                     if (action === "check") {
                         unread_checkbox.prop("checked", true);
                         read_checkbox.prop("checked", true);
-                        $(".unread").addClass("active");
-                        $(".read").addClass("active");
+                        $(".unread").addClass("selected");
+                        $(".read").addClass("selected");
+                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         unread_checkbox.prop("checked", false);
                         read_checkbox.prop("checked", false);
-                        $(".unread").removeClass("active");
-                        $(".read").removeClass("active");
+                        $(".unread").removeClass("selected");
+                        $(".read").removeClass("selected");
+                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
@@ -190,12 +192,14 @@ class PrivateMessages extends Core {
                     let action = $(this).data("action");
                     if (action === "check") {
                         read_checkbox.prop("checked", true);
-                        $(".read").addClass("active");
+                        $(".read").addClass("selected");
+                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         read_checkbox.prop("checked", false);
-                        $(".read").removeClass("active");
+                        $(".read").removeClass("selected");
+                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
@@ -205,12 +209,14 @@ class PrivateMessages extends Core {
                     let action = $(this).data("action");
                     if (action === "check") {
                         unread_checkbox.prop("checked", true);
-                        $(".unread").addClass("active");
+                        $(".unread").addClass("selected");
+                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         unread_checkbox.prop("checked", false);
-                        $(".unread").removeClass("active");
+                        $(".unread").removeClass("selected");
+                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
