@@ -166,7 +166,7 @@ class PrivateMessages extends Core {
             add_to_jquery('
                 let unread_checkbox = $(".unread").find(":checkbox");
                 let read_checkbox = $(".read").find(":checkbox");
-            
+
                 $("#check_all_pm").off("click").on("click", function () {
                     let action = $(this).data("action");
                     if (action === "check") {
@@ -185,7 +185,7 @@ class PrivateMessages extends Core {
                         $("#selectedPM").val(checkedCheckbox());
                     }
                 });
-                
+
                 $("#check_read_pm").off("click").on("click", function () {
                     let action = $(this).data("action");
                     if (action === "check") {
@@ -200,7 +200,7 @@ class PrivateMessages extends Core {
                         $("#selectedPM").val(checkedCheckbox());
                     }
                 });
-            
+
                 $("#check_unread_pm").off("click").on("click", function () {
                     let action = $(this).data("action");
                     if (action === "check") {
