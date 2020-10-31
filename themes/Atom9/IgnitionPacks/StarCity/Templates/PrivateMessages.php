@@ -162,200 +162,88 @@ class PrivateMessages extends Core {
     private static function inbox($info) {
         $locale = fusion_get_locale();
 
-        $is_inbox = isset($_GET['folder']) && $_GET['folder'] == 'inbox';
-
         if (!empty($info['items'])) {
-            $unread = [];
-            $read = [];
-
-            if ($is_inbox) {
-                foreach ($info['items'] as $message_id => $messageData) {
-                    if ($messageData['message_read'] == 1) {
-                        $read[$message_id] = $messageData;
-                    } else {
-                        $unread[$message_id] = $messageData;
-                    }
-                }
-            } else {
-                foreach ($info['items'] as $message_id => $messageData) {
-                    $read[$message_id] = $messageData;
-                }
-            }
-
             add_to_jquery('
-                var unread_checkbox = $("#unread_tbl .item").find(":checkbox");
-                var read_checkbox = $("#read_tbl .item").find(":checkbox");
-
-                $("#check_all_pm").unbind("click");
-                $("#check_all_pm").bind("click", function () {
-                    var action = $(this).data("action");
+                let unread_checkbox = $(".unread").find(":checkbox");
+                let read_checkbox = $(".read").find(":checkbox");
+            
+                $("#check_all_pm").off("click").on("click", function () {
+                    let action = $(this).data("action");
                     if (action === "check") {
                         unread_checkbox.prop("checked", true);
                         read_checkbox.prop("checked", true);
-                        $("#unread_tbl .item").addClass("selected");
-                        $("#read_tbl .item").addClass("selected");
-                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
+                        $(".unread").addClass("active");
+                        $(".read").addClass("active");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         unread_checkbox.prop("checked", false);
                         read_checkbox.prop("checked", false);
-                        $("#unread_tbl .item").removeClass("selected");
-                        $("#read_tbl .item").removeClass("selected");
-                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
+                        $(".unread").removeClass("active");
+                        $(".read").removeClass("active");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
                 });
-
-                $("#check_read_pm").unbind("click");
-                $("#check_read_pm").bind("click", function () {
-                    var action = $(this).data("action");
+                
+                $("#check_read_pm").off("click").on("click", function () {
+                    let action = $(this).data("action");
                     if (action === "check") {
                         read_checkbox.prop("checked", true);
-                        $("#read_tbl .item").addClass("selected");
-                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
+                        $(".read").addClass("active");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         read_checkbox.prop("checked", false);
-                        $("#read_tbl .item").removeClass("selected");
-                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
+                        $(".read").removeClass("active");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
                 });
-
-                $("#check_unread_pm").unbind("click");
-                $("#check_unread_pm").bind("click", function () {
-                    var action = $(this).data("action");
+            
+                $("#check_unread_pm").off("click").on("click", function () {
+                    let action = $(this).data("action");
                     if (action === "check") {
                         unread_checkbox.prop("checked", true);
-                        $("#unread_tbl .item").addClass("selected");
-                        $("#chkv").removeClass("fa fa-square-o").addClass("fa fa-minus-square-o");
+                        $(".unread").addClass("active");
                         $(this).data("action", "uncheck");
                         $("#selectedPM").val(checkedCheckbox());
                     } else {
                         unread_checkbox.prop("checked", false);
-                        $("#unread_tbl .item").removeClass("selected");
-                        $("#chkv").removeClass("fa fa-minus-square-o").addClass("fa fa-square-o");
+                        $(".unread").removeClass("active");
                         $(this).data("action", "check");
                         $("#selectedPM").val(checkedCheckbox());
                     }
-                });
-
-                $("input[type=checkbox]").unbind("click");
-                $("input[type=checkbox]").bind("click", function () {
-                    var selectedpm = $("#selectedPM");
-                    var checkList = selectedpm.val();
-                    if ($(this).is(":checked")) {
-                        $(this).parents(".item").addClass("selected");
-                        checkList += $(this).val() + ",";
-                    } else {
-                        $(this).parents(".item").removeClass("selected");
-                        checkList = checkList.replace($(this).val() + ",", "");
-                    }
-                    selectedpm.val(checkList);
                 });
             ');
 
-            if ($is_inbox) {
-                // Inbox
-                echo '<a data-target="#unread_inbox" class="pointer mail-list-title" data-toggle="collapse">'.$locale['446'].' <span class="caret"></span></a>';
-                echo '<div id="unread_inbox" class="collapse in">';
-                    if (!empty($unread)) {
-                        echo '<ul class="mail-list" id="unread_tbl">';
-                            $i = 0;
-                            foreach ($unread as $id => $messageData) {
-                                $active = !empty($_GET['msg_read']) && $_GET['msg_read'] == $id;
+            echo '<ul class="mail-list">';
+                $i = 0;
+                foreach ($info['items'] as $id => $data) {
+                    $active = !empty($_GET['msg_read']) && $_GET['msg_read'] == $id;
 
-                                echo '<li class="item'.($active == TRUE ? ' active' : '').'">';
-                                    echo '<a href="'.$messageData['message']['link'].'">';
-                                        echo '<div class="pull-left">'.form_checkbox('pmID', '', '', [
-                                            'input_id' => 'pmID-'.$id,
-                                            'value'    => $id,
-                                            'class'    => 'm-t-10 m-r-5'
-                                        ]).'</div>';
+                    echo '<li class="item'.($active == TRUE || $data['message_read'] == 0 ? ' active unread' : ' read').'">';
+                        echo '<a href="'.$data['message']['link'].'">';
+                            echo '<div class="pull-left">'.form_checkbox('pmID', '', '', [
+                                'input_id' => 'pmID-'.$id,
+                                'value'    => $id,
+                                'class'    => 'm-t-10 m-r-5'
+                            ]).'</div>';
 
-                                        echo '<div class="overflow-hide">';
-                                            echo '<div class="msg-list-heading">';
-                                                echo '<span class="text-uppercase pull-right">'.date('d M', $messageData['message_datestamp']).'</span>';
-                                                echo '<span>'.$messageData['contact_user']['user_name'].'</span>';
-                                            echo '</div>';
-                                            echo '<strong>'.trim_text($messageData['message']['name'], 20).'</strong>';
-                                        echo '</div>';
-                                    echo '</a>';
-                                echo '</li>';
-                                $i++;
-                            }
-                        echo '</ul>';
-                    } else {
-                        echo '<div class="no-messages text-center">'.$locale['471'].'</div>';
-                    }
-                echo '</div>';
-
-                echo '<a data-target="#read_inbox" class="pointer mail-list-title" data-toggle="collapse">'.$locale['447'].' <span class="caret"></span></a>';
-                echo '<div id="read_inbox" class="collapse in">';
-                    if (!empty($read)) {
-                        echo '<ul class="mail-list m-b-0" id="read_tbl">';
-                            $i = 0;
-                            foreach ($read as $id => $messageData) {
-                                $active = !empty($_GET['msg_read']) && $_GET['msg_read'] == $id;
-
-                                echo '<li class="item'.($active == TRUE ? ' active' : '').'">';
-                                    echo '<a href="'.$messageData['message']['link'].'">';
-                                        echo '<div class="pull-left">'.form_checkbox('pmID', '', '', [
-                                            'input_id' => 'pmID-'.$id,
-                                            'value'    => $id,
-                                            'class'    => 'm-t-10 m-r-5'
-                                        ]).'</div>';
-
-                                        echo '<div class="overflow-hide">';
-                                            echo '<div class="msg-list-heading">';
-                                                echo '<span class="text-uppercase pull-right">'.date('d M', $messageData['message_datestamp']).'</span>';
-                                                echo '<span>'.$messageData['contact_user']['user_name'].'</span>';
-                                            echo '</div>';
-                                            echo '<strong>'.trim_text($messageData['message']['name'], 20).'</strong>';
-                                        echo '</div>';
-                                    echo '</a>';
-                                echo '</li>';
-                                $i++;
-                            }
-                        echo '</ul>';
-                    }
-                echo '</div>';
-            } else {
-                // Outbox & Archive
-                if (!empty($read)) {
-                    echo '<ul class="mail-list m-b-0" id="read_tbl">';
-                        $i = 0;
-                        foreach ($read as $id => $messageData) {
-                            $active = !empty($_GET['msg_read']) && $_GET['msg_read'] == $id;
-
-                            echo '<li class="item'.($active == TRUE ? ' active' : '').'">';
-                                echo '<a href="'.$messageData['message']['link'].'">';
-                                    echo '<div class="pull-left">'.form_checkbox('pmID', '', '', [
-                                        'input_id' => 'pmID-'.$id,
-                                        'value'    => $id,
-                                        'class'    => 'm-t-10 m-r-5'
-                                    ]).'</div>';
-
-                                    echo '<div class="overflow-hide">';
-                                        echo '<div class="msg-list-heading">';
-                                            echo '<span class="text-uppercase pull-right">'.date('d M', $messageData['message_datestamp']).'</span>';
-                                            echo '<span>'.$messageData['contact_user']['user_name'].'</span>';
-                                        echo '</div>';
-                                        echo '<strong>'.trim_text($messageData['message']['name'], 20).'</strong>';
-                                    echo '</div>';
-                                echo '</a>';
-                            echo '</li>';
-                            $i++;
-                        }
-                    echo '</ul>';
+                            echo '<div class="overflow-hide">';
+                                echo '<div class="msg-list-heading">';
+                                    echo '<span class="text-uppercase pull-right">'.date('d M', $data['message_datestamp']).'</span>';
+                                    echo '<span>'.$data['contact_user']['user_name'].'</span>';
+                                echo '</div>';
+                                echo '<strong>'.trim_text($data['message']['name'], 20).'</strong>';
+                            echo '</div>';
+                        echo '</a>';
+                    echo '</li>';
+                    $i++;
                 }
-            }
+            echo '</ul>';
         } else {
-            echo '<div class="no-messages text-center">'.$info['no_item'].'</div>';
+            echo '<div class="no-messages text-center">'.$locale['471'].'</div>';
         }
     }
 }
