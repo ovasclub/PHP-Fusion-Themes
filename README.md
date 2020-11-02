@@ -13,6 +13,7 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
     - [Atom-X2](themes/Atom-X2)
     - [Czechia](themes/Czechia)
     - [Glowie](themes/Glowie)
+    - [Material](themes/Material)
 
 - ### Admin Themes:
     - [Ares](admin_themes/Ares)

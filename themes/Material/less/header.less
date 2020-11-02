@@ -1,0 +1,67 @@
+.header {
+    background: @blue url("@{theme-images}header_bg/bg1_light.jpg");
+    background-size: cover;
+    min-height: 150px;
+
+    &.in_container {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .title {
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.42);
+        margin-top: 20%;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .sub-title {
+        text-align: center;
+        color: #f3f3f3;
+    }
+
+    .breadcrumb {
+        background-color: transparent !important;
+        color: #fff;
+        text-align: center;
+
+        a {
+            color: #fff;
+        }
+    }
+
+    @media (min-width: 900px) {
+        min-height: 250px;
+
+        .title {
+            margin-top: 13%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        min-height: 390px;
+
+        .title {
+            margin-top: 15%;
+            font-size: 55px;
+        }
+    }
+
+    .breadcrumb,
+    .breadcrumb a {
+        text-shadow: 1px 1px 3px #4c4b4b;
+    }
+}
+
+.small_header .title {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+[id*="header_"] {
+    background-size: cover !important;
+    background-position: center !important;
+}

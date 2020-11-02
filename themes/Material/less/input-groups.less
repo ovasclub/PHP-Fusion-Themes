@@ -1,0 +1,27 @@
+.input-group-addon,
+.input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.input-group-addon {
+    padding: @padding-base-vertical @padding-base-horizontal;
+    font-size: @font-size-base;
+    color: @input-color;
+    background-color: @input-group-addon-bg;
+    border: 1px solid @input-group-addon-border-color;
+    .border-radius(@input-border-radius);
+
+    &.input-sm {
+        padding: @padding-small-vertical @padding-small-horizontal;
+        font-size: @font-size-small;
+        .border-radius(@input-border-radius-small);
+    }
+
+    &.input-lg {
+        padding: @padding-large-vertical @padding-large-horizontal;
+        font-size: @font-size-large;
+        .border-radius(@input-border-radius-large);
+    }
+}

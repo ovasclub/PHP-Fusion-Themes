@@ -1,0 +1,113 @@
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+.progress {
+    overflow: hidden;
+    margin-bottom: @line-height-computed;
+    background-color: @progress-bg;
+    position: relative;
+    z-index: 1;
+    height: 20px;
+    .border-radius(0);
+    .box-shadow(none);
+
+    &-bar {
+        .box-shadow(none);
+
+        &:last-child {
+            .border-radius(0 3px 3px 0);
+        }
+
+        &:last-child {
+            &:before {
+                display: block;
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                right: 0;
+                z-index: -1;
+                background-color: lighten(@progress-bar-bg, 35%);
+            }
+        }
+
+        &-success:last-child.progress-bar:before {
+            background-color: lighten(@progress-bar-success-bg, 35%);
+        }
+
+        &-info:last-child.progress-bar:before {
+            background-color: lighten(@progress-bar-info-bg, 45%);
+        }
+
+        &-warning:last-child.progress-bar:before {
+            background-color: lighten(@progress-bar-warning-bg, 35%);
+        }
+
+        &-danger:last-child.progress-bar:before {
+            background-color: lighten(@progress-bar-danger-bg, 25%);
+        }
+    }
+}
+
+.progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: @font-size-small;
+    color: @progress-bar-color;
+    text-align: center;
+    background-color: @progress-bar-bg;
+    .box-shadow(inset 0 -1px 0 rgba(0, 0, 0, .15));
+    .transition(width .6s ease);
+}
+
+.progress-striped .progress-bar,
+.progress-bar-striped {
+    #gradient > .striped();
+    background-size: 40px 40px;
+}
+
+.progress.active .progress-bar,
+.progress-bar.active {
+    .animation(progress-bar-stripes 2s linear infinite);
+}
+
+.progress-bar-variant(@color) {
+    background-color: @color;
+
+    .progress-striped & {
+        #gradient > .striped();
+    }
+}
+
+.progress-bar-success {
+    .progress-bar-variant(@progress-bar-success-bg);
+}
+
+.progress-bar-info {
+    .progress-bar-variant(@progress-bar-info-bg);
+}
+
+.progress-bar-warning {
+    .progress-bar-variant(@progress-bar-warning-bg);
+}
+
+.progress-bar-danger {
+    .progress-bar-variant(@progress-bar-danger-bg);
+}
