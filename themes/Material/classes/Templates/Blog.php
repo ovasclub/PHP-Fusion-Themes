@@ -217,7 +217,7 @@ class Blog extends Core {
                     $active = $year == date('Y') ? ' text-dark' : '';
                     echo '<li>';
                         $collaped_ = isset($_GET['archive']) && $_GET['archive'] == $year ? ' strong' : '';
-                        echo '<a class="'.$active.$collaped_.'" data-toggle="collapse" data-parent="#blogarchive" href="#blog-'.$year.'">'.$year.'</a>';
+                        echo '<a class="'.$active.$collaped_.'" data-toggle="collapse" data-parent="#blogarchive" href="#blog-'.$year.'" aria-expanded="false" aria-controls="blog-'.$year.'">'.$year.'</a>';
 
                         $collaped = isset($_GET['archive']) && $_GET['archive'] == $year ? ' in' : '';
                         echo '<ul id="blog-'.$year.'" class="collapse m-l-15 '.$collaped.'">';

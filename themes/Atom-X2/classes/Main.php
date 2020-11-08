@@ -215,11 +215,11 @@ class Main extends Core {
                 echo '<li>'.display_avatar($this->userdata, '40px', '', FALSE, 'img-rounded m-t-10 m-l-20 m-r-10').'</li>';
 
                 echo '<li style="margin-left: 50px;"><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
-                    echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">';
+                    echo '<a id="dduser" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">';
                         echo '<h4>'.$this->userdata['user_name'].' <span class="caret"></span></h4>';
                         echo '<small>'.getuserlevel($this->userdata['user_level']).'</small>';
                     echo '</a>';
-                    echo '<ul class="dropdown-menu" style="min-width: 320px;"><li class="p-15">';
+                    echo '<ul class="dropdown-menu" aria-labelledby="dduser" style="min-width: 320px;"><li class="p-15">';
                         echo '<strong>'.$this->locale['ax9_004'].timer($this->userdata['user_joined']).'</strong>';
                         echo '<div class="row">';
                             echo '<div class="col-xs-6"><small>';
@@ -250,8 +250,8 @@ class Main extends Core {
                 }
 
                 echo '<li><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
-                    echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa icon fa-envelope"></i>'.$messages_count.' <span class="caret"></span></a>';
-                    echo '<ul class="dropdown-menu" style="width: 280px;padding-top: 0;">';
+                    echo '<a id="ddmsgs" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="fa icon fa-envelope"></i>'.$messages_count.' <span class="caret"></span></a>';
+                    echo '<ul class="dropdown-menu" aria-labelledby="ddmsgs" style="width: 280px;padding-top: 0;">';
                         echo '<li class="mailbox">';
                             echo '<strong><a href="'.BASEDIR.'messages.php">'.$this->locale['ax9_005'].'</a></strong>';
                         echo '</li>';
@@ -277,8 +277,8 @@ class Main extends Core {
                 echo '</li></ul></li>'; // .info-bar-dropdown
 
                 echo '<li><ul class="info-bar-dropdown list-style-none"><li class="dropdown">';
-                    echo '<a class="dropdown-toggle" style="border-right: 1px solid rgba(0,0,0,0.23);" data-toggle="dropdown" href="#"><i class="fa icon fa-users"></i> <span class="caret"></span></a>';
-                    echo '<ul class="dropdown-menu" style="width: 250px;">';
+                    echo '<a id="ddugroups" class="dropdown-toggle" style="border-right: 1px solid rgba(0,0,0,0.23);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="fa icon fa-users"></i> <span class="caret"></span></a>';
+                    echo '<ul class="dropdown-menu" aria-labelledby="ddugroups" style="width: 250px;">';
                         echo '<li class="dropdown-header"><b>'.$this->locale['u057'].'</b></li>';
 
                         $user_groups = strpos($this->userdata['user_groups'], ".") == 0 ? substr($this->userdata['user_groups'], 1) : $this->userdata['user_groups'];

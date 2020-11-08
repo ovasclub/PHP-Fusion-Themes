@@ -71,7 +71,7 @@ class ViewThread extends Core {
                     echo '<div class="clearfix">';
                         echo '<div class="pull-left">';
                             echo '<div class="dropdown display-inline-block m-r-10">';
-                                echo '<a class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">';
+                                echo '<a id="ddfiltertime" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                     echo '<strong>'.$locale['forum_0183'].'</strong> ';
                                     $selector['oldest'] = $locale['forum_0180'];
                                     $selector['latest'] = $locale['forum_0181'];
@@ -80,7 +80,7 @@ class ViewThread extends Core {
                                 echo '</a>';
 
                                 if (!empty($info['post-filters'])) {
-                                    echo '<ul class="dropdown-menu">';
+                                    echo '<ul class="dropdown-menu" aria-labelledby="ddfiltertime">';
                                         foreach ($info['post-filters'] as $i => $filters) {
                                             echo '<li><a class="text-smaller" href="'.$filters['value'].'">'.$filters['locale'].'</a></li>';
                                         }

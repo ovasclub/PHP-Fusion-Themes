@@ -115,13 +115,13 @@ class Main extends Core {
 
                             if (count($languages) > 1) {
                                 echo '<li class="dropdown language-switcher">';
-                                    echo '<a href="#" class="dropdown-toggle pointer" data-toggle="dropdown" title="'.LANGUAGE.'">';
+                                    echo '<a id="ddlangs" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="'.LANGUAGE.'">';
                                         echo '<i class="fa fa-globe"></i> ';
                                         echo '<img class="current" style="margin-top: -5px;" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
                                         echo '<span class="caret"></span>';
                                     echo '</a>';
 
-                                    echo '<ul class="dropdown-menu">';
+                                    echo '<ul class="dropdown-menu" aria-labelledby="ddlangs">';
                                         foreach ($languages as $language_folder => $language_name) {
                                             echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'">';
                                             echo '<img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> ';
@@ -134,14 +134,14 @@ class Main extends Core {
 
                             if (iMEMBER) {
                                 echo '<li class="dropdown">';
-                                    echo '<a href="#" title="'.$userdata['user_name'].'" class="dropdown-toggle pointer" data-toggle="dropdown">';
+                                    echo '<a id="dduser" href="#" title="'.$userdata['user_name'].'" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                         echo display_avatar($userdata, '18px', '', FALSE, 'img-circle m-l-5 link-avatar');
                                         echo ' <span class="caret"></span>';
                                     echo '</a>';
 
                                     $user_url = BASEDIR.'profile.php?lookup='.$userdata['user_id'];
 
-                                    echo '<ul class="dropdown-menu dropdown-user" role="menu">';
+                                    echo '<ul class="dropdown-menu dropdown-user" aria-labelledby="dduser" role="menu">';
                                         echo '<li><div class="navbar-login">';
                                             echo '<p class="text-left"><strong>'.$userdata['user_name'].'</strong></p>';
                                             echo '<p class="text-left small">'.getuserlevel($userdata['user_level']).'</p>';
@@ -173,7 +173,7 @@ class Main extends Core {
                                 }
                             } else {
                                 echo '<li class="dropdown loginform">';
-                                    echo '<a href="#" id="login-register" data-toggle="dropdown"><i class="fa fa-sign-in"></i> '.$locale['login'].' <span class="caret"></span></a>';
+                                    echo '<a href="#" id="login-register" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-in"></i> '.$locale['login'].' <span class="caret"></span></a>';
 
                                     echo '<ul class="dropdown-menu" aria-labelledby="login-register">';
                                         echo '<li>'.self::loginForm().'</li>';

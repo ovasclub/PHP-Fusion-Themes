@@ -35,8 +35,8 @@ class Downloads extends Core {
 
             if (!empty($download_cat_menu)) {
                 $header .= '<li class="dropdown">';
-                    $header .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$locale['ax9_055'].' <span class="caret"></span></a>';
-                    $header .= '<ul class="dropdown-menu">';
+                    $header .= '<a id="ddcats" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">'.$locale['ax9_055'].' <span class="caret"></span></a>';
+                    $header .= '<ul class="dropdown-menu" aria-labelledby="ddcats">';
                         $header .= $download_cat_menu;
                     $header .= '</ul>';
                 $header .= '</li>';

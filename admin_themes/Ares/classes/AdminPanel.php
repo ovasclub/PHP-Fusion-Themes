@@ -35,7 +35,7 @@ class AdminPanel {
         $html = '<div class="topnav-wrapper">';
             $html .= '<nav class="navbar navbar-default topnav-bar">';
                 $html .= '<div class="navbar-header">';
-                        $html .= '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ares-navbar"><span class="sr-only">'.$locale['global_017'].'</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
+                        $html .= '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ares-navbar" aria-expanded="false" aria-controls="ares-navbar"><span class="sr-only">'.$locale['global_017'].'</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
                         $html .= '<div class="visible-xs"><a href="#" class="navicon navtogglem"><i class="fa fa-bars"></i></a></div>';
                         $html .= '<div class="navbar-brand topnav-brand" id="ares-brand">';
                         $html .= '<img class="logo" src="'.IMAGES.'php-fusion-icon.png" alt="Logo"/>';
@@ -49,8 +49,8 @@ class AdminPanel {
                         $sections = Admins::getInstance()->getAdminSections();
                         if (!empty($sections)) {
                             $html .= '<li class="dropdown">';
-                                $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$locale['ares_005'].' <span class="caret"></span></a>';
-                                $html .= '<ul class="dropdown-menu">';
+                                $html .= '<a id="ddsections" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$locale['ares_005'].' <span class="caret"></span></a>';
+                                $html .= '<ul class="dropdown-menu" aria-labelledby="ddsections">';
                                     $i = 0;
                                     foreach ($sections as $section_name) {
                                         $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i));
@@ -65,8 +65,8 @@ class AdminPanel {
                         $languages = fusion_get_enabled_languages();
                         if (count($languages) > 1) {
                             $html .= '<li class="dropdown languages-switcher">';
-                                $html .= '<a class="dropdown-toggle pointer" data-toggle="dropdown" title="'.$locale['282'].'"><i class="fa fa-globe"></i> <img class="current" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/> <span class="caret"></span></a>';
-                                $html .= '<ul class="dropdown-menu">';
+                                $html .= '<a id="ddlangs" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="'.$locale['282'].'"><i class="fa fa-globe"></i> <img class="current" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/> <span class="caret"></span></a>';
+                                $html .= '<ul class="dropdown-menu" aria-labelledby="ddlangs">';
                                     foreach ($languages as $language_folder => $language_name) {
                                         $html .= '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'"><img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> '.$language_name.'</a></li>';
                                     }
@@ -75,8 +75,8 @@ class AdminPanel {
                         }
 
                         $html .= '<li class="dropdown user">';
-                            $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$userdata['user_name'].' <span class="caret"></span> '.display_avatar($userdata, '35px', '', FALSE, 'img-circle').'</a>';
-                            $html .= '<ul class="dropdown-menu" role="menu">';
+                            $html .= '<a id="dduser" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$userdata['user_name'].' <span class="caret"></span> '.display_avatar($userdata, '35px', '', FALSE, 'img-circle').'</a>';
+                            $html .= '<ul class="dropdown-menu" aria-labelledby="dduser" role="menu">';
                                 $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                                 $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
                                 $html .= '<li class="divider"></li>';
@@ -121,7 +121,7 @@ class AdminPanel {
 
                     if (!empty($admin_pages[$i])) {
                         $html .= '<li class="ares-mitem dropdown'.($active ? ' active' : '').'">';
-                            $html .= '<a class="dropdown-toggle pointer" data-toggle="collapse" data-parent="#aressub" data-target="#aresnavsection'.$i.'">';
+                            $html .= '<a class="dropdown-toggle pointer" data-toggle="collapse" data-parent="#aressub" data-target="#aresnavsection'.$i.'" aria-expanded="false" aria-controls="aresnavsection'.$i.'">';
                                 $html .= Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
                                 $html .= '<span class="caret"></span>';
                                 $html .= ($i > 4 ? '<small class="badge pull-right m-r-5">'.count($admin_pages[$i]).'</small>' : '');

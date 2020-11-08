@@ -47,8 +47,8 @@ class Downloads extends Core {
                 echo '</div>';
 
                 echo '<div class="dropdown pull-right">';
-                    echo '<button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown">'.$locale['a9_106'].' <span class="caret"></span></button>';
-                    echo '<ul class="dropdown-menu" aria-labelledby="categories">';
+                    echo '<button id="ddcats" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$locale['a9_106'].' <span class="caret"></span></button>';
+                    echo '<ul class="dropdown-menu" aria-labelledby="ddcats">';
                         $download_cat_menu = self::displayCatMenu($info['download_categories']);
                         echo !empty($download_cat_menu) ? $download_cat_menu : '<li>'.$locale['download_3001'].'</li>';
                     echo '</ul>';

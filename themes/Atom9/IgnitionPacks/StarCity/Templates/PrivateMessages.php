@@ -73,8 +73,8 @@ class PrivateMessages extends Core {
                                     echo '</div>';
                                 } else {
                                     echo '<div class="dropdown display-inline-block m-r-10">';
-                                        echo '<a href="#" data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle"><i id="chkv" class="fa fa-square-o"></i><span class="caret m-l-5"></span></a>';
-                                        echo '<ul class="dropdown-menu">';
+                                        echo '<a id="ddactions" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle"><i id="chkv" class="fa fa-square-o"></i><span class="caret m-l-5"></span></a>';
+                                        echo '<ul class="dropdown-menu" aria-labelledby="ddactions">';
                                             foreach ($info['actions_form']['check'] as $id => $title) {
                                                 echo '<li><a id="'.$id.'" data-action="check" class="pointer">'.$title.'</a></li>';
                                             }
@@ -91,8 +91,8 @@ class PrivateMessages extends Core {
                                     echo '</div>';
 
                                     echo '<div class="dropdown display-inline-block m-r-10">';
-                                        echo '<a href="#" data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle">'.$locale['444'].'&hellip; <span class="caret"></span></a>';
-                                        echo '<ul class="dropdown-menu">';
+                                        echo '<a id="ddactions2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">'.$locale['444'].'&hellip; <span class="caret"></span></a>';
+                                        echo '<ul class="dropdown-menu" aria-labelledby="ddactions2">';
                                             echo '<li>'.$info['actions_form']['mark_all'].'</li>';
                                             echo '<li>'.$info['actions_form']['mark_read'].'</li>';
                                             echo '<li>'.$info['actions_form']['mark_unread'].'</li>';

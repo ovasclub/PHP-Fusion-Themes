@@ -198,13 +198,13 @@ class Main extends Core {
 
                     if (count($languages) > 1) {
                         echo '<li class="dropdown language-switcher">';
-                            echo '<a href="#" class="dropdown-toggle pointer" data-toggle="dropdown">';
+                            echo '<a id="ddlangs" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                 echo '<span class="hidden-xs"><i class="fa fa-globe-europe"></i> </span>';
                                 echo '<img class="current" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
                                 echo '<span class="caret"></span>';
                             echo '</a>';
 
-                            echo '<ul class="dropdown-menu">';
+                            echo '<ul class="dropdown-menu" aria-labelledby="ddlangs">';
                             foreach ($languages as $language_folder => $language_name) {
                                 echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'">';
                                     echo '<img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> ';
@@ -228,14 +228,14 @@ class Main extends Core {
                         }
 
                         echo '<li class="dropdown action-menu">';
-                            echo '<a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">';
+                            echo '<a id="dduser" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">';
                                 echo '<div class="display-inline avatar-ripple'.($msg_count > 0 ? ' active' : '').'" title="'.$userdata['user_name'].'">';
                                 echo display_avatar($userdata, '23px', '', FALSE, 'img-circle m-l-5');
                                 echo '</div>';
                                 echo '<span class="caret"></span>';
                             echo '</a>';
 
-                            echo '<ul class="dropdown-menu">';
+                            echo '<ul class="dropdown-menu" aria-labelledby="dduser">';
                                 if (iADMIN) {
                                     echo '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0"><i class="fa fa-tachometer-alt"></i><small>'.$locale['global_123'].'</small></a></li>';
                                 }

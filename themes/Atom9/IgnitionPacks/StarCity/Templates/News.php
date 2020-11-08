@@ -180,7 +180,7 @@ class News extends Core {
             echo '<nav class="navbar navbar-default news-cats">';
                 echo '<div class="container-fluid">';
                     echo '<div class="navbar-header">';
-                        echo '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#news-cats-nav" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
+                        echo '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#news-cats-nav" aria-expanded="false" aria-controls="news-cats-nav"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
                         echo '<a class="navbar-brand" href="#">'.$locale['news_0009'].'</a>';
                     echo '</div>';
 
@@ -209,8 +209,8 @@ class News extends Core {
                                         if (isset($info['news_categories'][$cat_data['news_cat_id']])) {
                                             // Sub Cats
                                             echo '<li'.$active.'>';
-                                                echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$cat_data['news_cat_name'].' <span class="caret"></span></a>';
-                                                echo '<ul class="dropdown-menu">';
+                                                echo '<a id="ddcat'.$cat_data['news_cat_id'].'" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">'.$cat_data['news_cat_name'].' <span class="caret"></span></a>';
+                                                echo '<ul class="dropdown-menu" aria-labelledby="ddcat'.$cat_data['news_cat_id'].'">';
                                                     echo '<li'.$active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$cat_data['news_cat_id'].'">'.$cat_data['news_cat_name'].'</a></li>';
 
                                                     foreach ($info['news_categories'][$cat_data['news_cat_id']] as $sub_cat_data) {
@@ -226,8 +226,8 @@ class News extends Core {
                                     } else {
                                         // Show More
                                         if ($child_more == FALSE && $extended > 0) {
-                                            echo'<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$locale['global_700'].' <span class="caret"></span></a>';
-                                            echo '<ul class="dropdown-menu">';
+                                            echo'<li><a id="ddcat'.$cat_data['news_cat_id'].'" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$locale['global_700'].' <span class="caret"></span></a>';
+                                            echo '<ul class="dropdown-menu" aria-labelledby="ddcat'.$cat_data['news_cat_id'].'">';
                                             $child_more = TRUE;
                                         }
 

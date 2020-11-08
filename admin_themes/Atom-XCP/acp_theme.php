@@ -40,7 +40,7 @@ function render_admin_panel() {
         $html .= '<header id="header"><div class="container-fluid"><div class="col-xs-12 col-md-12 col-lg-12">';
             $html .= '<div id="atom-menu" class="navbar navbar-default" role="navigation"><div class="container-fluid">';
                 $html .= '<div class="navbar-header">';
-                    $html .= '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#atom-menu_menu" aria-expanded="false">';
+                    $html .= '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#atom-menu_menu" aria-expanded="false" aria-controls="atom-menu_menu">';
                         $html .= '<span class="sr-only">'.$locale['global_017'].'</span><span class="icon-bar top-bar"></span><span class="icon-bar middle-bar"></span><span class="icon-bar bottom-bar"></span>';
                     $html .= '</button>';
                     $html .= '<a class="navbar-brand visible-xs hidden-sm hidden-md hidden-lg" href="'.$settings['siteurl'].'">'.$settings['sitename'].'</a>';
@@ -56,8 +56,8 @@ function render_admin_panel() {
 
                             $html .= '<li class="'.($i > 0 ? 'dropdown' : '').($active ? ' active' : '').'">';
                             if (!empty($admin_pages[$i])) {
-                                $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.($i > 4 ? ' <span class="label label-primary">'.count($admin_pages[$i]).'</span>' : '').($i > 0 ? ' <span class="caret"></span>' : '').'</a>';
-                                $html .= '<ul class="dropdown-menu">';
+                                $html .= '<a id="ddsection'.$i.'" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.($i > 4 ? ' <span class="label label-primary">'.count($admin_pages[$i]).'</span>' : '').($i > 0 ? ' <span class="caret"></span>' : '').'</a>';
+                                $html .= '<ul class="dropdown-menu" aria-labelledby="ddsection'.$i.'">';
                                     $html .= '<li><a class="adl-link" href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum='.$i.'">'.$section_name.'</a></li>';
 
                                     foreach ($admin_pages[$i] as $key => $data) {
@@ -92,7 +92,7 @@ function render_admin_panel() {
 
                         $html .= '<li class="dropdown nav-search-dropdown">';
                             $html .= '<div class="navbar-form m-t-10 m-b-0"><input class="form-control input-sm" type="text" id="search_pages" name="search_pages" placeholder="'.$locale['search'].'"/></div>';
-                            $html .= '<ul class="dropdown-menu m-l-15" id="search_result"></ul>';
+                            $html .= '<ul class="dropdown-menu m-l-15" aria-labelledby="search_pages" id="search_result"></ul>';
                         $html .= '</li>';
                     $html .= '</ul>';
 
@@ -135,12 +135,12 @@ function render_admin_panel() {
 
                         if (count($languages) > 1) {
                             $html .= '<li class="dropdown language-switcher">';
-                                $html .= '<a href="#" class="dropdown-toggle pointer" data-toggle="dropdown" title="'.LANGUAGE.'">';
+                                $html .= '<a id="ddlangs" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="'.LANGUAGE.'">';
                                     $html .= '<i class="fa fa-globe"></i> ';
                                     $html .= '<img src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
                                     $html .= '<span class="caret"></span>';
                                 $html .= '</a>';
-                                $html .= '<ul class="dropdown-menu">';
+                                $html .= '<ul class="dropdown-menu" aria-labelledby="ddlangs">';
                                     foreach ($languages as $language_folder => $language_name) {
                                         $html .= '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'">';
                                             $html .= '<img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> ';
@@ -152,8 +152,8 @@ function render_admin_panel() {
                         }
 
                         $html .= '<li class="dropdown user">';
-                            $html .= '<button class="dropdown-toggle btn btn-primary btn-sm m-t-10" data-toggle="dropdown">'.display_avatar($userdata, '16px', '', FALSE, 'img-rounded').' '.$userdata['user_name'].' <span class="caret"></span></button>';
-                            $html .= '<ul class="dropdown-menu">';
+                            $html .= '<buttonid="dduser" class="dropdown-toggle btn btn-primary btn-sm m-t-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.display_avatar($userdata, '16px', '', FALSE, 'img-rounded').' '.$userdata['user_name'].' <span class="caret"></span></button>';
+                            $html .= '<ul class="dropdown-menu" aria-labelledby="dduser">';
                                 $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                                 $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
                                 $html .= '<li class="divider"></li>';

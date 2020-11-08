@@ -72,13 +72,13 @@ function render_page() {
 
                     if (count($languages) > 1) {
                         echo '<li class="dropdown language-switcher">';
-                            echo '<a href="#" class="dropdown-toggle pointer" data-toggle="dropdown" title="'.LANGUAGE.'">';
+                            echo '<a id="ddlangs" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="'.LANGUAGE.'">';
                                 echo '<i class="fa fa-globe"></i> ';
                                 echo '<img class="current" style="margin-top: -5px;" src="'.BASEDIR.'locale/'.LANGUAGE.'/'.LANGUAGE.'-s.png" alt="'.translate_lang_names(LANGUAGE).'"/>';
                                 echo '<span class="caret"></span>';
                             echo '</a>';
 
-                            echo '<ul class="dropdown-menu">';
+                            echo '<ul class="dropdown-menu" aria-labelledby="ddlangs">';
                                 foreach ($languages as $language_folder => $language_name) {
                                     echo '<li><a class="display-block" href="'.clean_request('lang='.$language_folder, ['lang'], FALSE).'">';
                                     echo '<img class="m-r-5" src="'.BASEDIR.'locale/'.$language_folder.'/'.$language_folder.'-s.png" alt="'.$language_folder.'"/> ';
@@ -91,13 +91,13 @@ function render_page() {
 
                     if (iMEMBER) {
                         echo '<li class="dropdown user-menu">';
-                            echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
+                            echo '<a id="dduser" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                 echo display_avatar($userdata, '24px', '', FALSE, 'img-rounded header-avatar m-r-5');
                                 echo $userdata['user_name'];
                                 echo ' <span class="caret"></span>';
                             echo '</a>';
 
-                            echo '<ul class="dropdown-menu text-left">';
+                            echo '<ul class="dropdown-menu text-left" aria-labelledby="dduser">';
                                 echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'">'.$locale['view'].' '.$locale['profile'].'</a></li>';
                                 echo '<li class="divider"></li>';
                                 echo '<li><a href="'.BASEDIR.'edit_profile.php">'.$locale['UM080'].'</a></li>';

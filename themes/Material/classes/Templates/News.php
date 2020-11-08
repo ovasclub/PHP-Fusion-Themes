@@ -48,7 +48,7 @@ class News extends Core {
             echo '</div>';
 
             echo '<div class="dropdown pull-left">';
-                echo '<a id="categories" href="#" class="dropdown-toggle" data-toggle="dropdown" data-submenu>';
+                echo '<a id="categories" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-submenu>';
                     echo '<span class="text-bigger">'.$locale['news_0009'].'</span> <span class="caret"></span>';
                 echo '</a>';
                 echo '<ul class="dropdown-menu m-t-15" style="width: 300px;" aria-labelledby="categories">';
@@ -70,9 +70,9 @@ class News extends Core {
                             if (isset($info['news_categories'][$cat_data['news_cat_id']])) {
                                 // Sub Cats
                                 echo '<li class="dropdown-submenu submenu-cats '.($active == TRUE ? ' active' : '').'">';
-                                    echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$cat_data['news_cat_name'].'</a>';
+                                    echo '<a id="ddncat'.$cat_data['news_cat_id'].'" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">'.$cat_data['news_cat_name'].'</a>';
 
-                                    echo '<ul class="dropdown-menu" style="width: 250px;">';
+                                    echo '<ul class="dropdown-menu" aria-labelledby="ddncat'.$cat_data['news_cat_id'].'" style="width: 250px;">';
                                         echo '<li'.($active == TRUE ? ' class="active"' : '').'><a href="'.INFUSIONS.'news/news.php?cat_id='.$cat_data['news_cat_id'].'">'.$cat_data['news_cat_name'].'</a></li>';
 
                                         foreach ($info['news_categories'][$cat_data['news_cat_id']] as $sub_cat_data) {
