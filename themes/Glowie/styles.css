@@ -376,3 +376,11 @@ blockquote {
 .btn-danger:focus {
     background: #C12E2A 0 -15px !important;
 }
+
+.select2-offscreen {
+    display: none;
+}
+
+.select2-container {
+    width: 100% !important;
+}

@@ -770,6 +770,10 @@ blockquote {
     display: none;
 }
 
+.select2-container {
+    width: 100% !important;
+}
+
 .maintenance {
     height: 100vh;
 }
