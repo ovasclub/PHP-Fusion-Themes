@@ -152,7 +152,7 @@ function render_admin_panel() {
                         }
 
                         $html .= '<li class="dropdown user">';
-                            $html .= '<buttonid="dduser" class="dropdown-toggle btn btn-primary btn-sm m-t-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.display_avatar($userdata, '16px', '', FALSE, 'img-rounded').' '.$userdata['user_name'].' <span class="caret"></span></button>';
+                            $html .= '<button id="dduser" class="dropdown-toggle btn btn-primary btn-sm m-t-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.display_avatar($userdata, '16px', '', FALSE, 'img-rounded').' '.$userdata['user_name'].' <span class="caret"></span></button>';
                             $html .= '<ul class="dropdown-menu" aria-labelledby="dduser">';
                                 $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                                 $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';

@@ -249,6 +249,7 @@ class AdminPanel {
             INNER JOIN ".DB_USERS." u ON u.user_id=message_from
             WHERE message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
             GROUP BY message_id
+            ORDER BY message_datestamp DESC
         ");
 
         if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND ".$msg_user."='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {

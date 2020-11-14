@@ -83,8 +83,4 @@ if (!IS_V9) {
             'class="button'   => 'class="button btn btn-default'
         ]);
     });
-} else {
-    if (fusion_get_settings('version') === '9.0') {
-        \PHPFusion\Admins::getInstance()->setAdminBreadcrumbs();
-    }
 }
