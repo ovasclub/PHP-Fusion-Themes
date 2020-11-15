@@ -18,6 +18,7 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
 - ### Admin Themes:
     - [Ares](admin_themes/Ares)
     - [Atom-XCP](admin_themes/Atom-XCP)
+    - [Material](admin_themes/Material)
     - [MDashboard](admin_themes/MDashboard)
 
 Other themes and SDK https://github.com/php-fusion/Addons
