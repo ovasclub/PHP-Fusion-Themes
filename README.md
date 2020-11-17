@@ -16,6 +16,7 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
     - [Material](themes/Material)
 
 - ### Admin Themes:
+    - [AdminLTE3](admin_themes/AdminLTE3)
     - [Ares](admin_themes/Ares)
     - [Atom-XCP](admin_themes/Atom-XCP)
     - [Material](admin_themes/Material)
