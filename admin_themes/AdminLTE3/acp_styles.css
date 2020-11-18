@@ -24253,3 +24253,28 @@ input[type=radio]:checked:before {
 .label-default {
     background-color: var(--secondary);
 }
+
+.display-flex-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    gap: 5px;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.notices .alert {
+    border-radius: 0;
+}
+
+.sidebar-form input[type=text] {
+    box-shadow: none;
+    color: #fff;
+    background-color: #272b2f;
+    border: 1px solid transparent;
+}

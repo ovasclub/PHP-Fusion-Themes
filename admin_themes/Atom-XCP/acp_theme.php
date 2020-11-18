@@ -33,10 +33,6 @@ function render_admin_panel() {
     add_to_head('<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700"/>');
 
     $html = '<div class="page-box">';
-        $html .= '<section id="topcontent"><div class="container-fluid display-inline-block">';
-            $html .= '<a href="'.$settings['siteurl'].'"><img class="img-responsive logo" src="'.IMAGES.'php-fusion-logo.png" alt="Logo"></a>';
-        $html .= '</div></section>'; // #topcontent
-
         $html .= '<header id="header"><div class="container-fluid"><div class="col-xs-12 col-md-12 col-lg-12">';
             $html .= '<div id="atom-menu" class="navbar navbar-default" role="navigation"><div class="container-fluid">';
                 $html .= '<div class="navbar-header">';
