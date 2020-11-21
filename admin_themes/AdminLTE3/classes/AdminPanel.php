@@ -263,13 +263,13 @@ class AdminPanel {
                                                 $html .= '<a href="#" class="nav-link'.($active ? ' active' : '').'">'.$icon.' '.$title.'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
                                                 $html .= '<ul class="nav nav-treeview"'.($sub_active ? ' style="display: block;"' : '').'>';
                                                     foreach ($admin_pages[$data['admin_rights']] as $sub_page) {
-                                                        $html .= '<li class="nav-item"><a class="nav-link'.($active ? ' active' : '').'" href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
+                                                        $html .= '<li class="nav-item"><a class="nav-link'.($active ? ' active' : '').'" href="'.$sub_page['admin_link'].'"><p>'.$sub_page['admin_title'].'</p></a></li>';
                                                     }
                                                 $html .= '</ul>';
                                             $html .= '</li>';
                                         }
                                     } else {
-                                        $html .= '<li class="nav-item"><a class="nav-link'.($sub_active ? ' active' : '').'" href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' '.$title.'</a></li>';
+                                        $html .= '<li class="nav-item"><a class="nav-link'.($sub_active ? ' active' : '').'" href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icon.' <p>'.$title.'</p></a></li>';
                                     }
                                 }
                             }
@@ -277,7 +277,7 @@ class AdminPanel {
                     $html .= '</li>';
                 } else {
                     $html .= '<li class="nav-item"><a class="nav-link'.($active ? ' active' : '').'" href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum=0">';
-                        $html .= Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
+                        $html .= Admins::getInstance()->get_admin_section_icons($i).' <p>'.$section_name.'</p>';
                     $html .= '</a></li>';
                 }
             }
