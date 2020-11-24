@@ -45,13 +45,13 @@ class Dashboard {
             $panels = [
                 'registered'   => ['link' => '', 'title' => $locale['251'], 'bg' => 'green', 'icon' => 'users'],
                 'cancelled'    => ['link' => 'status=5', 'title' => $locale['263'], 'bg' => 'yellow', 'icon' => 'user-times'],
-                'unactivated'  => ['link' => 'status=2', 'title' => $locale['252'], 'bg' => 'info', 'icon' => 'user-secret'],
+                'unactivated'  => ['link' => 'status=2', 'title' => $locale['252'], 'bg' => 'primary', 'icon' => 'user-secret'],
                 'security_ban' => ['link' => 'status=4', 'title' => $locale['253'], 'bg' => 'red', 'icon' => 'user-slash']
             ];
 
             $html .= '<div class="row">';
                 foreach ($panels as $panel => $block) {
-                    $block['link'] = empty($block['link']) ? $block['link'] : '&amp;'.$block['link'];
+                    $block['link'] = empty($block['link']) ? $block['link'] : '&'.$block['link'];
 
                     $html .= '<div class="col-xs-'.$grid['mobile'].' col-sm-'.$grid['tablet'].' col-md-'.$grid['laptop'].' col-lg-'.$grid['desktop'].' block">';
                         $html .= '<div class="small-box bg-'.$block['bg'].'">';
@@ -151,7 +151,7 @@ class Dashboard {
                 if (!empty($modules)) {
                     foreach ($modules as $name => $module) {
                         $html .= '<div class="col-xs-'.$grid['mobile'].' col-sm-'.$grid['tablet'].' col-md-'.$grid['laptop'].' col-lg-'.$grid['desktop'].' block">';
-                            $html .= '<div class="info-box bg-info">';
+                            $html .= '<div class="info-box bg-primary">';
                                 $html .= '<span class="info-box-icon"><i class="'.$module['icon'].'"></i></span>';
                                 $html .= '<div class="info-box-content">';
                                     $html .= '<strong class="info-box-text">'.$module['title'].' '.$locale['258'].'</strong>';
@@ -182,11 +182,11 @@ class Dashboard {
                                         if (isset($comments_type[$comment_data['comment_type']]) && isset($link_type[$comment_data['comment_type']])) {
                                             $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
                                                 $html .= '<div id="comment_action-'.$i.'" class="btn-group btn-group-xs pull-right m-t-10">';
-                                                    $html .= '<a class="btn btn-primary" title="'.$locale['274'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-eye"></i></a>';
-                                                    $html .= '<a class="btn btn-warning" title="'.$locale['275'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;action=edit&amp;comment_id='.$comment_data['comment_id'].'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-pencil"></i></a>';
-                                                    $html .= '<a class="btn btn-danger" title="'.$locale['276'].'" href="'.ADMIN.'comments.php'.$aidlink.'&amp;action=delete&amp;comment_id='.$comment_data['comment_id'].'&amp;ctype='.$comment_data['comment_type'].'&amp;comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-trash"></i></a>';
+                                                    $html .= '<a class="btn btn-primary" title="'.$locale['274'].'" href="'.ADMIN.'comments.php'.$aidlink.'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-eye"></i></a>';
+                                                    $html .= '<a class="btn btn-warning" title="'.$locale['275'].'" href="'.ADMIN.'comments.php'.$aidlink.'&action=edit&comment_id='.$comment_data['comment_id'].'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-pencil"></i></a>';
+                                                    $html .= '<a class="btn btn-danger" title="'.$locale['276'].'" href="'.ADMIN.'comments.php'.$aidlink.'&action=delete&comment_id='.$comment_data['comment_id'].'&ctype='.$comment_data['comment_type'].'&comment_item_id='.$comment_data['comment_item_id'].'"><i class="fa fa-trash"></i></a>';
                                                 $html .= '</div>';
-                                                $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($comment_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
+                                                $html .= '<div class="pull-left display-inline-block">'.display_avatar($comment_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
                                                 $html .= '<strong>'.(!empty($comment_data['user_id']) ? profile_link($comment_data['user_id'], $comment_data['user_name'], $comment_data['user_status']) : $comment_data['comment_name']).' </strong>';
                                                 $html .= $locale['273'].' <a href="'.sprintf($link_type[$comment_data['comment_type']], $comment_data['comment_item_id']).'"><strong>'.$comments_type[$comment_data['comment_type']].'</strong></a> ';
                                                 $html .= timer($comment_data['comment_datestamp']).'<br/>';
@@ -215,7 +215,7 @@ class Dashboard {
                                     foreach ($global_ratings['data'] as $i => $ratings_data) {
                                         if (isset($link_type[$ratings_data['rating_type']]) && isset($comments_type[$ratings_data['rating_type']])) {
                                             $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
-                                                $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($ratings_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
+                                                $html .= '<div class="pull-left display-inline-block">'.display_avatar($ratings_data, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
                                                 $html .= '<strong>'.profile_link($ratings_data['user_id'], $ratings_data['user_name'], $ratings_data['user_status']).' </strong>';
                                                 $html .= $locale['273a'].' <a href="'.sprintf($link_type[$ratings_data['rating_type']], $ratings_data['rating_item_id']).'"><strong>'.$comments_type[$ratings_data['rating_type']].'</strong></a> ';
                                                 $html .= timer($ratings_data['rating_datestamp']);
@@ -244,7 +244,7 @@ class Dashboard {
                                         $review_link = sprintf($submit_data[$submit_date['submit_type']]['admin_link'], $submit_date['submit_id']);
 
                                         $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
-                                            $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($submit_date, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
+                                            $html .= '<div class="pull-left display-inline-block">'.display_avatar($submit_date, '25px', '', FALSE, 'img-circle m-r-5').'</div>';
                                             $html .= '<strong>'.profile_link($submit_date['user_id'], $submit_date['user_name'], $submit_date['user_status']).' </strong>';
                                             $html .= $locale['273b'].' <strong>'.$submit_data[$submit_date['submit_type']]['submit_locale'].'</strong> ';
                                             $html .= timer($submit_date['submit_datestamp']);
@@ -275,7 +275,7 @@ class Dashboard {
                             if ($infusions_count > 0) {
                                 if (!empty($global_infusions)) {
                                     foreach ($global_infusions as $inf_id => $inf_data) {
-                                        $html .= '<span class="badge bg-info m-b-10 m-r-5">'.$inf_data['inf_title'].'</span>';
+                                        $html .= '<span class="badge bg-primary m-b-10 m-r-5">'.$inf_data['inf_title'].'</span>';
                                     }
                                 }
                                 $content = checkrights('I') ? '<div class="text-right text-uppercase"><a class="text-smaller" href="'.ADMIN.'infusions.php'.$aidlink.'">'.$locale['285'].' <i class="fa fa-arrow-circle-right"></i></a></div>' : '';

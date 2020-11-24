@@ -48,7 +48,7 @@ class Login {
                     ]);
                 }
 
-                $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&amp;pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&amp;pagenum=0' : FUSION_REQUEST;
+                $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&pagenum=0' : FUSION_REQUEST;
                 $html .= openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
                     $html .= '<div class="input-group">';
                         $html .= '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['ALT_007'].'">';

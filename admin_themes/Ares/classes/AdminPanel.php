@@ -54,7 +54,7 @@ class AdminPanel {
                                     $i = 0;
                                     foreach ($sections as $section_name) {
                                         $active = ((isset($_GET['pagenum']) && $this->pagenum === $i) || (!$this->pagenum && Admins::getInstance()->_isActive() === $i));
-                                        $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum='.$i.'">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.'</a></li>';
+                                        $html .= '<li'.($active ? ' class="active"' : '').'><a href="'.ADMIN.'index.php'.$aidlink.'&pagenum='.$i.'">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.'</a></li>';
                                         $i++;
                                     }
                                 $html .= '</ul>';
@@ -80,7 +80,7 @@ class AdminPanel {
                                 $html .= '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
                                 $html .= '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
                                 $html .= '<li class="divider"></li>';
-                                $html .= '<li><a href="'.FUSION_REQUEST.'&amp;logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>';
+                                $html .= '<li><a href="'.FUSION_REQUEST.'&logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>';
                                 $html .= '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> '.$locale['logout'].'</a></li>';
                             $html .= '</ul>';
                         $html .= '</li>';
@@ -157,7 +157,7 @@ class AdminPanel {
                             $html .= '</ul>';
                         $html .= '</li>';
                     } else {
-                        $html .= '<li class="ares-mitem'.($active ? ' active' : '').'"><a href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum=0">';
+                        $html .= '<li class="ares-mitem'.($active ? ' active' : '').'"><a href="'.ADMIN.'index.php'.$aidlink.'&pagenum=0">';
                             $html .= Admins::getInstance()->get_admin_section_icons($i).' <span>'.$section_name.'</span>';
                         $html .= '</a></li>';
                     }

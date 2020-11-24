@@ -109,7 +109,7 @@ class AdminPanel {
                 if (!empty($messages)) {
                     foreach ($messages as $message) {
                         $html .= '<li class="dropdown-item">';
-                            $html .= '<a href="'.BASEDIR.'messages.php?folder=inbox&amp;msg_read='.$message['link'].'">';
+                            $html .= '<a href="'.BASEDIR.'messages.php?folder=inbox&msg_read='.$message['link'].'">';
                                 $html .= '<div class="media">';
                                     $html .= display_avatar($message['user'], '40px', '', FALSE, 'img-size-50 mr-3 img-circle');
                                     $html .= '<div class="media-body">';
@@ -138,10 +138,11 @@ class AdminPanel {
         $html = '<li class="nav-item dropdown user user-menu">';
             $html .= '<a id="dduser" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$userdata['user_name'].'<span class="caret"></span></a>';
             $html .= '<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dduser">';
-                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'edit_profile.php">'.$locale['UM080'].'</a></li>';
-                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'">'.$locale['view'].' '.$locale['profile'].'</a></li>';
-                $html .= '<li class="dropdown-item"><a href="'.FUSION_REQUEST.'&amp;logout">'.$locale['admin-logout'].'</a></li>';
-                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'index.php?logout=yes">'.$locale['logout'].'</a></li>';
+                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pencil fa-fw"></i> '.$locale['UM080'].'</a></li>';
+                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye fa-fw"></i> '.$locale['view'].' '.$locale['profile'].'</a></li>';
+                $html .= '<li class="dropdown-divider"></li>';
+                $html .= '<li class="dropdown-item"><a href="'.FUSION_REQUEST.'&logout"><i class="fa fa-sign-out fa-fw"></i> '.$locale['admin-logout'].'</a></li>';
+                $html .= '<li class="dropdown-item"><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out fa-fw"></i> <span class="text-danger">'.$locale['logout'].'</span></a></li>';
             $html .= '</ul>';
         $html .= '</li>';
 
@@ -157,11 +158,11 @@ class AdminPanel {
         $html = '<aside class="main-sidebar sidebar-dark-primary elevation-4">';
             $html .= '<a href="'.ADMIN.'index.php'.$aidlink.'" class="brand-link text-center"><span class="brand-text font-weight-light">PHP-Fusion</span></a>';
             $html .= '<div class="sidebar">';
-                $html .= '<div class="user-panel mt-3 pb-3 mb-3 d-flex">';
+                $html .= '<div class="user-card mt-3 pb-3 mb-3 d-flex">';
                     $html .= '<div class="image">';
-                        $html .= display_avatar($userdata, '45px', '', FALSE, 'img-circle elevation-2');
+                        $html .= display_avatar($userdata, '2.1rem', '', FALSE, 'img-circle elevation-2');
                     $html .= '</div>';
-                    $html .= '<div class="info m-l-5">';
+                    $html .= '<div class="info">';
                         $html .= '<span class="d-block text-white">'.$userdata['user_name'].'</span>';
                         $html .= '<a class="d-block online-status" href="#">';
                             $html .= '<i class="fa fa-circle '.($useronline ? 'text-success' : 'text-danger').'"></i> ';
@@ -276,7 +277,7 @@ class AdminPanel {
                         $html .= '</ul>';
                     $html .= '</li>';
                 } else {
-                    $html .= '<li class="nav-item"><a class="nav-link'.($active ? ' active' : '').'" href="'.ADMIN.'index.php'.$aidlink.'&amp;pagenum=0">';
+                    $html .= '<li class="nav-item"><a class="nav-link'.($active ? ' active' : '').'" href="'.ADMIN.'index.php'.$aidlink.'&pagenum=0">';
                         $html .= Admins::getInstance()->get_admin_section_icons($i).' <p>'.$section_name.'</p>';
                     $html .= '</a></li>';
                 }
