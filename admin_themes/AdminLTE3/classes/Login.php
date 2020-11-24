@@ -19,7 +19,7 @@ namespace AdminLTE3;
 
 class Login {
     public function __construct() {
-        $locale = fusion_get_locale('', ALTE_LOCALE);
+        $locale = fusion_get_locale();
         $userdata = fusion_get_userdata();
 
         add_to_jquery('$("#admin_password").focus();');
@@ -51,7 +51,7 @@ class Login {
                 $form_action = FUSION_SELF.fusion_get_aidlink() == ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0' ? FUSION_SELF.fusion_get_aidlink().'&pagenum=0' : FUSION_REQUEST;
                 $html .= openform('admin-login-form', 'post', $form_action, ['class' => 'lockscreen-credentials']);
                     $html .= '<div class="input-group">';
-                        $html .= '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['ALT_007'].'">';
+                        $html .= '<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="'.$locale['global_102'].'">';
 
                         $html .= '<div class="input-group-btn">';
                             $html .= '<button type="submit" name="admin_login" class="btn" title="'.$locale['login'].'"><i class="fa fa-arrow-right text-muted"></i></button>';
@@ -66,7 +66,7 @@ class Login {
 
             $html .= '<div class="lockscreen-footer text-center">';
                 $html .= 'AdminLTE3 Admin Theme &copy; '.date('Y').'<br/>';
-                $html .= $locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                $html .= 'Created by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
                 $html .= $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a><br/>';
                 $html .= showcopyright();
             $html .= '</div>';

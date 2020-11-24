@@ -17,14 +17,6 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-if (!defined('ALTE_LOCALE')) {
-    if (file_exists(THEMES.'admin_themes/AdminLTE3/locale/'.LANGUAGE.'.php')) {
-        define('ALTE_LOCALE', THEMES.'admin_themes/AdminLTE3/locale/'.LANGUAGE.'.php');
-    } else {
-        define('ALTE_LOCALE', THEMES.'admin_themes/AdminLTE3/locale/English.php');
-    }
-}
-
 define('ADMINLTE3', THEMES.'admin_themes/AdminLTE3/');
 require_once ADMINLTE3.'acp_autoloader.php';
 

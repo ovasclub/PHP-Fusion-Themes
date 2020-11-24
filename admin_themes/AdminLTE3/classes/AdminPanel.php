@@ -95,7 +95,7 @@ class AdminPanel {
     }
 
     private function messagesMenu() {
-        $locale = fusion_get_locale('', ALTE_LOCALE);
+        $locale = fusion_get_locale();
         $messages = $this->messages();
         $msg_icon = !empty($messages) ? '<span class="badge badge-danger navbar-badge">'.count($messages).'</span>' : '';
 
@@ -105,7 +105,6 @@ class AdminPanel {
                 $html .= '<span class="caret"></span>';
             $html .= '</a>';
             $html .= '<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="ddmsg">';
-                $html .= '<li class="dropdown-header text-center"><h5>'.$locale['ALT_001'].' '.format_word(count($messages), $locale['fmt_message']).'</h5></li>';
                 if (!empty($messages)) {
                     foreach ($messages as $message) {
                         $html .= '<li class="dropdown-item">';
@@ -122,9 +121,9 @@ class AdminPanel {
                         $html .= '</li>';
                     }
                 } else {
-                    $html .= '<li class="dropdown-item text-center">'.$locale['ALT_002'].'</li>';
+                    $html .= '<li class="dropdown-item text-center">'.$locale['global_460'].'</li>';
                 }
-                $html .= '<li class="dropdown-item text-center"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$locale['ALT_003'].'</a></li>';
+                $html .= '<li class="dropdown-item text-center"><a href="'.BASEDIR.'messages.php?msg_send=new" class="text-bold">'.$locale['send_message'].'</a></li>';
             $html .= '</ul>';
         $html .= '</li>';
 
@@ -172,7 +171,7 @@ class AdminPanel {
                 $html .= '</div>';
 
                 $html .= '<div class="sidebar-form">';
-                    $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['ALT_005'].'">';
+                    $html .= '<input type="text" id="search_pages" name="search_pages" class="form-control" placeholder="'.$locale['search'].'">';
                 $html .= '</div>';
                 $html .= '<nav class="mt-2"><ul class="sidebar-menu nav nav-pills nav-sidebar flex-column" id="search_result" style="display: none;"></ul></nav>';
                 $html .= '<img id="ajax-loader" style="width: 30px; display: none;" class="img-responsive center-x m-t-10" alt="Ajax Loader" src="'.ADMINLTE3.'images/loader.svg"/>';
@@ -298,7 +297,7 @@ class AdminPanel {
             }
 
             $html .= '<strong>';
-                $html .= 'AdminLTE v3 Admin Theme &copy; '.date('Y').' '.$locale['ALT_006'].' <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
+                $html .= 'AdminLTE v3 Admin Theme &copy; '.date('Y').' Created by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a> ';
                 $html .= $locale['and'].' <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a>';
             $html .= '</strong>';
             $html .= '<br/>'.str_replace('<br />', ' | ', showcopyright());
