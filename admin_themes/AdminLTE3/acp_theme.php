@@ -76,7 +76,6 @@ function closetable($bg = TRUE) {
             'panel-body'        => 'card-body',
             'panel-footer'      => 'card-footer',
             'badge-defaul'      => 'badge-secondary',
-            'input-group-addon' => 'input-group-append',
             'input-group-btn'   => 'input-group-append'
         ]);
     }, $output);
