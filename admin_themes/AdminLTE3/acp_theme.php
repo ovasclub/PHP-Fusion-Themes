@@ -29,6 +29,21 @@ if (!check_admin_pass('')) {
     define('THEME_BODY', '<body class="hold-transition sidebar-mini">');
 }
 
+add_handler(function ($output = '') {
+    return preg_replace_callback("/class=(['\"])[^('|\")]*/im", function ($m) {
+        return strtr($m[0], [
+            'btn-default'   => 'btn-secondary',
+            'panel-group'   => 'panel-group',
+            'panel'         => 'card',
+            'panel-heading' => 'card-header',
+            'panel-title'   => 'card-title',
+            'panel-body'    => 'card-body',
+            'panel-footer'  => 'card-footer',
+            'badge-defaul'  => 'badge-secondary'
+        ]);
+    }, $output);
+});
+
 function render_admin_panel() {
     new AdminLTE3\AdminPanel();
 }
@@ -64,19 +79,3 @@ function opentable($title, $class = NULL, $bg = TRUE) {
 function closetable($bg = TRUE) {
     AdminLTE3\AdminPanel::closeTable($bg);
 }
-
-\PHPFusion\OutputHandler::addHandler(function ($output = '') {
-    return preg_replace_callback("/class=(['\"])[^('|\")]*/im", function ($m) {
-        return strtr($m[0], [
-            'btn-default'       => 'btn-secondary',
-            'panel-group'       => 'panel-group',
-            'panel'             => 'card',
-            'panel-heading'     => 'card-header',
-            'panel-title'       => 'card-title',
-            'panel-body'        => 'card-body',
-            'panel-footer'      => 'card-footer',
-            'badge-defaul'      => 'badge-secondary',
-            'input-group-btn'   => 'input-group-append'
-        ]);
-    }, $output);
-});
