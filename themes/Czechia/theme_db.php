@@ -23,5 +23,5 @@ $theme_screenshot  = 'screenshot.jpg';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
 $theme_license     = 'AGPL3';
-$theme_version     = '2.3';
+$theme_version     = '2.3.1';
 $theme_folder      = 'Czechia';
