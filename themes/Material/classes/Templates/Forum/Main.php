@@ -53,7 +53,11 @@ class Main extends Core {
 
         echo '<div class="row">';
             echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
-                echo '<a href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
+                if (iMEMBER) {
+                    echo '<a id="create_new_thread" href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
+                    forum_newtopic();
+                }
+
                 self::tags();
                 self::popularThreads();
             echo '</div>';
