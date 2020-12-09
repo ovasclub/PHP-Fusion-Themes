@@ -25,7 +25,7 @@ class PrivateMessages extends Core {
         $locale = fusion_get_locale();
 
         Panels::getInstance(TRUE)->hide_panel('RIGHT');
-
+        echo '<div class="card">';
         echo '<div class="row">';
             echo '<div class="col-xs-12 col-sm-3">';
                 echo '<div class="text-center"><a class="btn btn-primary btn-block" href="'.$info['button']['new']['link'].'">'.$locale['401'].'</a></div>';
@@ -52,8 +52,6 @@ class PrivateMessages extends Core {
             echo '</div>';
 
             echo '<div class="col-xs-12 col-sm-9">';
-                echo '<div class="card">';
-
                 if (!isset($_GET['msg_send']) && (!empty($info['actions_form']) || isset($_GET['msg_read']))) {
                     echo '<div class="m-b-20">';
                         if (isset($_GET['msg_read'])) {
@@ -122,9 +120,8 @@ class PrivateMessages extends Core {
                     default:
                         self::inbox($info);
                 }
-
-                echo '</div>';
             echo '</div>';
+        echo '</div>';
         echo '</div>';
     }
 

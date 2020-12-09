@@ -22,13 +22,13 @@ use MaterialTheme\Main;
 use \PHPFusion\Panels;
 
 class Blog extends Core {
-    private static function header($info) {
+    private static function header($info, $bg = NULL) {
         $locale = fusion_get_locale();
 
         Main::headerContent([
             'id'         => 'blog',
             'title'      => $locale['blog_1000'],
-            'background' => TRUE
+            'background' => $bg
         ]);
 
         add_to_head('<style type="text/css">.blog-cat-img {width: 25px; height: 25px;}</style>');
@@ -39,8 +39,6 @@ class Blog extends Core {
 
     public static function renderMainBlog($info) {
         add_to_head('<link rel="stylesheet" type="text/css" href="'.INFUSIONS.'blog/templates/css/blog.css"/>');
-        self::header($info);
-
         if (isset($_GET['readmore']) && !empty($info['blog_item'])) {
             self::displayBlogItem($info);
         } else {
@@ -50,6 +48,8 @@ class Blog extends Core {
 
     private static function displayBlogIndex($info) {
         $locale = fusion_get_locale();
+
+        self::header($info);
 
         echo '<div class="card">';
 
@@ -118,6 +118,9 @@ class Blog extends Core {
         $blog_settings = get_settings('blog');
         $locale = fusion_get_locale();
         $data = $info['blog_item'];
+
+        $bg = !empty($data['blog_image']) ? $data['blog_image'] : Main::getRandImg();
+        self::header($info, $bg);
 
         echo '<div class="card">';
             echo '<div class="pull-right" id="options">';

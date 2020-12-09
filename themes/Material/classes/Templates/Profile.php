@@ -130,9 +130,8 @@ class Profile extends Core {
         ];
 
         Main::headerContent([
-            'id'         => 'profile',
-            'background' => THEME.'images/profile_bg/profile.jpg',
-            'custom'     => self::profileHeader($header_data)
+            'id'     => 'profile',
+            'custom' => self::profileHeader($header_data)
         ]);
 
         if (!empty($info['section'])) {
@@ -269,52 +268,6 @@ class Profile extends Core {
                 echo closetab();
             echo '</div>';
         }
-    }
-
-    public static function editProfile() {
-        $locale = fusion_get_locale();
-        $userdata = fusion_get_userdata();
-        self::setTplCss('profile');
-
-        $user_avatar = '<div class="img-profile">';
-        $user_avatar .= display_avatar($userdata, '115px', '', FALSE, 'img-circle');
-        $user_avatar .= '</div>';
-
-        $profile = '<div class="pull-right"><a class="btn btn-success btn-sm" href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'">'.$locale['profile'].'</a></div>';
-
-        $header_data = [
-            'username'   => $userdata['user_name'],
-            'userlevel'  => getgroupname($userdata['user_level']),
-            'useronline' => $userdata['user_lastvisit'] >= time() - 300, // After 5 minutes user is offline
-            'avatar'     => $user_avatar,
-            'buttons'    => '',
-            'profile'    => $profile,
-            'social'     => ''
-        ];
-
-        Main::headerContent([
-            'id'         => 'profile',
-            'background' => THEME.'images/profile_bg/profile.jpg',
-            'custom'     => self::profileHeader($header_data)
-        ]);
-
-        echo '<div class="card profile-card">';
-            echo '{%tab_header%}';
-                echo '{%open_form%}';
-                echo '{%user_name_field%}';
-                echo '{%user_email_field%}';
-                echo '{%user_hide_email_field%}';
-                echo '{%user_reputation_field%}';
-                echo '{%user_avatar_field%}';
-                echo '{%user_password_field%}';
-                echo '{%user_admin_password_field%}';
-                echo '{%custom_fields%}';
-                echo '{%captcha_fields%}';
-                echo '{%eula%}';
-                echo '{%post_button%}';
-                echo '{%close_form%}';
-            echo '{%tab_footer%}';
-        echo '</div>';
     }
 
     private static function changeAvatar() {

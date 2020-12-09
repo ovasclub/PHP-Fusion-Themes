@@ -143,7 +143,3 @@ function render_news_item($info) {
 function display_user_profile($info) {
     MaterialTheme\Templates\Profile::displayProfile($info);
 }
-
-function display_profile_form() {
-    MaterialTheme\Templates\Profile::editProfile();
-}

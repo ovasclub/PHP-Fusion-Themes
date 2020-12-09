@@ -10,8 +10,9 @@ Custom templates:
  - Error Page
  - Forum
  - Home
+ - News
  - Messages
- - Profile / Edit Profile
+ - Profile
 
  Features:
  - Light and Dark mode

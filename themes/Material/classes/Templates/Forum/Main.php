@@ -98,8 +98,8 @@ class Main extends Core {
                                 $sub_forums = $forums[$forum_id]['child'];
 
                                 foreach ($sub_forums as $sub_forum_id => $cdata) {
-                                    echo '<div class="list-group-item list-group-item-hover">';
-                                        echo render_forum_item($cdata);
+                                    echo '<div class="list-group-item clearfix">';
+                                    render_forum_item($cdata);
                                     echo '</div>';
                             }
                             echo '</div>';
@@ -112,8 +112,8 @@ class Main extends Core {
                 } else {
                     echo '<div class="list-group">';
                     if ($data['forum_type'] != 1) {
-                        echo '<div class="list-group-item">';
-                        echo render_forum_item($data);
+                        echo '<div class="list-group-item clearfix">';
+                        render_forum_item($data);
                         echo '</div>';
                     }
                     echo '</div>';
@@ -187,7 +187,9 @@ class Main extends Core {
                     if ($info['forum_type'] > 1) {
                         echo '<div class="forum-title m-t-20">'.$locale['forum_0002'].'</div>';
 
+                        echo '<div class="m-t-20 m-b-20">';
                         echo forum_filter($info);
+                        echo '</div>';
 
                         echo '<div id="forumThreads" class="panel panel-default">';
                             self::renderForumThreads($info);
@@ -198,13 +200,15 @@ class Main extends Core {
                     if (!empty($info['item'][$_GET['forum_id']]['child'])) {
                         echo '<div class="forum-title m-t-20">'.$locale['forum_0351'].'</div>';
 
+                        echo '<div class="m-t-20 m-b-20">';
                         echo forum_filter($info);
+                        echo '</div>';
 
                         echo '<div class="panel panel-default">';
                             echo '<div class="list-group">';
                                 foreach ($info['item'][$_GET['forum_id']]['child'] as $subforum_id => $subforum_data) {
-                                    echo '<div class="list-group-item list-group-item-hover">';
-                                        echo render_forum_item($subforum_data);
+                                    echo '<div class="list-group-item clearfix">';
+                                    render_forum_item($subforum_data);
                                     echo '</div>';
                                 }
                             echo '</div>';
@@ -279,7 +283,9 @@ class Main extends Core {
                     break;
             }
         } else {
+            echo '<div class="m-t-20 m-b-20">';
             echo forum_filter($info);
+            echo '</div>';
 
             echo '<div class="list-group">';
                 self::renderForumThreads($info);

@@ -23,7 +23,7 @@ use \PHPFusion\News\NewsServer;
 use \PHPFusion\Panels;
 
 class News extends Core {
-    private static function header($info, $bg = '') {
+    private static function header($info, $bg = NULL) {
         $locale = fusion_get_locale();
         self::setTplCss('news');
         Panels::getInstance(TRUE)->hide_panel('RIGHT');

@@ -434,7 +434,7 @@ class Main extends Core {
 
         self::setParam($small.'header_content', $header);
 
-        if ($options['background'] == TRUE || !empty($options['background'])) {
+        if ($options['random_image'] == TRUE || $options['background'] !== NULL) {
             $background = !empty($options['background']) && file_exists($options['background']) ? $options['background'] : self::getRandImg();
             self::setParam('header_styles', 'background: url('.$background.')');
         }
