@@ -119,7 +119,7 @@ class Blog extends Core {
         $locale = fusion_get_locale();
         $data = $info['blog_item'];
 
-        $bg = !empty($data['blog_image']) ? $data['blog_image'] : Main::getRandImg();
+        $bg = !empty($data['blog_image_link']) ? $data['blog_image_link'] : Main::getRandImg();
         self::header($info, $bg);
 
         echo '<div class="card">';
