@@ -9,4 +9,4 @@ Custom templates:
  - Private Messages
  - Profile / Edit Profile
 
-![Preview](screenshot.jpg)
+![Preview](screenshot.png)

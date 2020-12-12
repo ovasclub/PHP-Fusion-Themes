@@ -20,7 +20,7 @@ defined('IN_FUSION') || exit;
 
 $theme_title = 'Glowie';
 $theme_description = '';
-$theme_screenshot = 'screenshot.jpg';
+$theme_screenshot = 'screenshot.png';
 $theme_author = 'Frederick MC Chan & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';

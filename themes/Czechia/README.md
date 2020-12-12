@@ -9,4 +9,4 @@ Custom templates:
  - Login / Register
  - News
 
-![Preview](screenshot.jpg)
+![Preview](screenshot.png)

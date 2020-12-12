@@ -18,8 +18,8 @@
 defined('IN_FUSION') || exit;
 
 $theme_title       = 'Czechia Theme';
-$theme_description = 'Theme for official Czech support.';
-$theme_screenshot  = 'screenshot.jpg';
+$theme_description = 'Theme for former Czech support.';
+$theme_screenshot  = 'screenshot.png';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
 $theme_license     = 'AGPL3';

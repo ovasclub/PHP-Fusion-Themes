@@ -11,4 +11,4 @@ Themes:
 - StarCity
     - Custom templates: Downloads, Home, Login / Register, News, Private Messages
 
-![Preview](screenshot.jpg)
+![Preview](screenshot.png)

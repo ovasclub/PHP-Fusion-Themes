@@ -25,7 +25,7 @@ if (file_exists(THEMES.'Material/locale/'.LANGUAGE.'.php')) {
 
 $theme_title       = $locale['mt_title'];
 $theme_description = $locale['mt_description'];
-$theme_screenshot  = 'screenshot.jpg';
+$theme_screenshot  = 'screenshot.png';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
 $theme_license     = 'AGPL3';

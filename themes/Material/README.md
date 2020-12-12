@@ -20,4 +20,4 @@ Custom templates:
  - Built-in Footer Panels with Excluding
  - Ability to choose Image logo or Text logo in menu
 
-![Preview](screenshot.jpg)
+![Preview](screenshot.png)
