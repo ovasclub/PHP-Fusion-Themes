@@ -54,7 +54,7 @@ class Articles extends Core {
                         echo '<h3 class="m-t-0"><a href="'.INFUSIONS.'articles/articles.php?article_id='.$data['article_id'].'">'.$data['article_subject'].'</a></h3>';
                     echo '</div>';
 
-                    echo parse_textarea($data['article_snippet'], TRUE, TRUE, FALSE, '', TRUE);
+                    echo $data['article_snippet'];
 
                     echo '<br/><a class="display-inline" href="'.INFUSIONS.'articles/articles.php?article_id='.$data['article_id'].'">'.self::setLocale('readmore').'</a>';
                     echo '<br/>';
