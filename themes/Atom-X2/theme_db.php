@@ -1,11 +1,11 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) PHP-Fusion Inc
+| Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: theme_db.php
-| Author: PHP-Fusion Inc
+| Author: PHP Fusion Inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -21,7 +21,7 @@ defined('IN_FUSION') || exit;
 $theme_title = 'Atom-X2';
 $theme_description = 'The Atom-X2 Theme for PHP Fusion 9.';
 $theme_screenshot = 'screenshot.png';
-$theme_author = 'PHP-Fusion Inc & RobiNN';
+$theme_author = 'PHP Fusion Inc & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
 $theme_version = '1.5.1';

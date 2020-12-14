@@ -1,11 +1,11 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) PHP-Fusion Inc
+| Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Core.php
-| Author: PHP-Fusion Inc
+| Author: PHP Fusion Inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -84,6 +84,6 @@ class Core {
      * @return string
      */
     public static function themeCopyright() {
-        return '&copy; '.date('Y').' Theme designed by <a href="https://www.phpfusion.com" target="_blank">PHP-Fusion Inc</a>, Ported for v9 by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
+        return '&copy; '.date('Y').' Theme designed by <a href="https://www.phpfusion.com" target="_blank">PHP Fusion Inc</a>, Ported for v9 by <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
     }
 }
