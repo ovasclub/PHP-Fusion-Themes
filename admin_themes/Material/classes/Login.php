@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -29,7 +29,7 @@ class Login {
             $html .= renderNotices(getNotices());
 
             $html .= '<div class="logo">';
-                $html .= '<img src="'.IMAGES.'php-fusion-logo.png" class="pf-logo img-responsive" alt="PHP-Fusion"/>';
+                $html .= '<img src="'.IMAGES.'php-fusion-logo.png" class="pf-logo img-responsive" alt="PHPFusion"/>';
                 $html .= '<h1><strong>'.$locale['280'].'</strong></h1>';
             $html .= '</div>';
 

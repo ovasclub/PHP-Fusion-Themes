@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -167,7 +167,7 @@ function render_admin_panel() {
         $html .= '<section id="banner"><div class="row">';
             $html .= '<div class="col-xs-12 col-sm-6">';
                 $html .= '<h1>'.$locale['ac10'].'</h1>';
-                $html .= '<h4>PHP-Fusion v'.$settings['version'].'</h4>';
+                $html .= '<h4>PHPFusion v'.$settings['version'].'</h4>';
             $html .= '</div>';
 
             $html .= '<div class="col-xs-12 col-sm-6">';
@@ -229,7 +229,7 @@ function render_admin_login() {
 
     $html = '<div class="login-container">';
         $html .= '<div class="logo">';
-            $html .= '<img src="'.IMAGES.'php-fusion-logo.png" class="pf-logo img-responsive" alt="PHP-Fusion"/>';
+            $html .= '<img src="'.IMAGES.'php-fusion-logo.png" class="pf-logo img-responsive" alt="PHPFusion"/>';
             $html .= '<h1><strong>'.$locale['280'].'</strong></h1>';
         $html .= '</div>';
 

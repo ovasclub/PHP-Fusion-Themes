@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -155,7 +155,7 @@ class AdminPanel {
         $useronline = $userdata['user_lastvisit'] >= time() - 900;
 
         $html = '<aside class="main-sidebar sidebar-dark-primary elevation-4">';
-            $html .= '<a href="'.ADMIN.'index.php'.$aidlink.'" class="brand-link text-center"><span class="brand-text font-weight-light">PHP-Fusion</span></a>';
+            $html .= '<a href="'.ADMIN.'index.php'.$aidlink.'" class="brand-link text-center"><span class="brand-text font-weight-light">PHPFusion</span></a>';
             $html .= '<div class="sidebar">';
                 $html .= '<div class="user-card mt-3 pb-3 mb-3 d-flex">';
                     $html .= '<div class="image">';
