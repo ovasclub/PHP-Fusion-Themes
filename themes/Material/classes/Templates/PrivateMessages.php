@@ -135,10 +135,10 @@ class PrivateMessages extends Core {
             echo '<div class="m-b-20">';
                 echo display_avatar($data, '40px', '', FALSE, 'img-rounded pull-left m-t-5 m-r-10');
                 echo profile_link($data['user_id'], $data['user_name'], $data['user_status'],'display-block');
-                echo '<span>'.showdate($locale['date_day'], $data['message_datestamp']).', '.timer($data['message_datestamp']).'</span>';
+                echo '<span>'.showdate('%d %b', $data['message_datestamp']).', '.timer($data['message_datestamp']).'</span>';
             echo '</div>';
 
-            echo nl2br(parse_textarea($data['message']['message_text'], TRUE, TRUE, FALSE));
+            echo $data['message']['message_text'];
             echo '<hr/>';
             echo $info['reply_form'];
         } else if (isset($_GET['msg_send'])) {
