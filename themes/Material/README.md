@@ -14,7 +14,7 @@ Custom templates:
  - Messages
  - Profile
 
- Features:
+Features:
  - Light and Dark mode
  - Social Networks Admin
  - Built-in Footer Panels with Excluding
