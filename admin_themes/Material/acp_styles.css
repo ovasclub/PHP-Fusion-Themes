@@ -309,7 +309,7 @@ main {
 }
 
 .sidebar .header .pf-logo {
-    background: url("../../../images/php-fusion-icon.png") no-repeat scroll -20px -2px;
+    background: url("../../../images/phpfusion-icon.png") no-repeat scroll -20px -2px;
     background-size: 100px;
     width: 260px;
     height: 68px;
@@ -619,7 +619,7 @@ main {
 }
 
 .sidebar-sm .sidebar .header .pf-logo {
-    background: url("../../../images/php-fusion-icon.png") no-repeat scroll 6px;
+    background: url("../../../images/phpfusion-icon.png") no-repeat scroll 6px;
     background-size: 55px 55px;
 }
 
@@ -4792,7 +4792,7 @@ html[dir="rtl"] .toggleicon span::after {
 }
 
 html[dir="rtl"] .sidebar .header .pf-logo {
-    background: url("../../../images/php-fusion-icon.png") no-repeat scroll 170px -23px;
+    background: url("../../../images/phpfusion-icon.png") no-repeat scroll 170px -23px;
 }
 
 html[dir="rtl"] .sidebar .header .version {

@@ -55,7 +55,7 @@ class AdminPanel {
         $userdata = fusion_get_userdata();
 
         $html = '<aside class="sidebar animate"><div class="sidebar-content">';
-            $html .= '<div class="logo overflow-hide"><i class="php-fusion"></i><span>'.$locale['md_001'].'</span></div>';
+            $html .= '<div class="logo overflow-hide"><i class="phpfusion-icon"></i><span>'.$locale['md_001'].'</span></div>';
 
             $html .= '<ul class="user-actions">';
                 $html .= '<li class="dropdown">';

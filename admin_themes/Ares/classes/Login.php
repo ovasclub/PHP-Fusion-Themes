@@ -26,7 +26,7 @@ class Login {
 
         $html = '<div class="login-container">';
             $html .= '<div class="logo">';
-                $html .= '<img style="margin-bottom: 30px;" src="'.IMAGES.'php-fusion-logo.png" class="pf-logo img-responsive" alt="PHPFusion"/>';
+                $html .= '<img style="margin-bottom: 30px;" src="'.IMAGES.'phpfusion-icon.png" class="pf-logo img-responsive" alt="PHPFusion"/>';
             $html .= '</div>';
 
             $html .= '<div class="login-box">';

@@ -93,7 +93,7 @@ class AdminPanel {
 
         $html = '<div class="top-menu navbar fixed">';
             $html .= '<div class="toggleicon" data-action="togglemenu"><span></span></div>';
-            $html .= '<div class="brand"><img src="'.IMAGES.'php-fusion-icon.png" alt="PHP Fusion 9"/> PHP Fusion 9</div>';
+            $html .= '<div class="brand"><img src="'.IMAGES.'phpfusion-icon.png" alt="PHP Fusion 9"/> PHP Fusion 9</div>';
             $html .= '<div class="pull-right hidden-sm hidden-md hidden-lg home-xs"><a title="'.$settings['sitename'].'" href="'.BASEDIR.'index.php"><i class="fa fa-home"></i></a></div>';
 
             $html .= '<ul class="nav navbar-nav navbar-left hidden-xs hidden-sm hidden-md">';

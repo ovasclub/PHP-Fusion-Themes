@@ -20,4 +20,4 @@ This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN
     - [Material](admin_themes/Material)
     - [MDashboard](admin_themes/MDashboard)
 
-Other themes and SDK https://github.com/php-fusion/Addons
+Other themes and SDK https://github.com/PHPFusion/Addons

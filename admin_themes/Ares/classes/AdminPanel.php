@@ -38,7 +38,7 @@ class AdminPanel {
                         $html .= '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ares-navbar" aria-expanded="false" aria-controls="ares-navbar"><span class="sr-only">'.$locale['global_017'].'</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>';
                         $html .= '<div class="visible-xs"><a href="#" class="navicon navtogglem"><i class="fa fa-bars"></i></a></div>';
                         $html .= '<div class="navbar-brand topnav-brand" id="ares-brand">';
-                        $html .= '<img class="logo" src="'.IMAGES.'php-fusion-icon.png" alt="Logo"/>';
+                        $html .= '<img class="logo" src="'.IMAGES.'phpfusion-icon.png" alt="Logo"/>';
                         $html .= '<div class="version">PHP Fusion</div>';
                     $html .= '</div>';
                 $html .= '</div>';
