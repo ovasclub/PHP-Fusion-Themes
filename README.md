@@ -1,6 +1,8 @@
 # PHPFusion Themes
 All of these themes are created for PHPFusion 9.03
+
 > Compatibility with older versions is not guaranteed.
+If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
 
 ## Don't edit Copyright!
 This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN" linking to my GitHub (https://github.com/RobiNN1), (YEAR is optional).
