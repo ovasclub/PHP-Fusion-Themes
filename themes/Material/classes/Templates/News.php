@@ -47,27 +47,28 @@ class News extends Core {
                 echo '</span>';
             echo '</div>';
 
-            echo '<div class="dropdown pull-left">';
-                echo '<a id="categories" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-submenu>';
-                    echo '<span class="text-bigger">'.$locale['news_0009'].'</span> <span class="caret"></span>';
-                echo '</a>';
-                echo '<ul class="dropdown-menu m-t-15" style="width: 300px;" aria-labelledby="categories">';
-                    $info['news_categories'] = dbquery_tree_full(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE news_cat_language='".LANGUAGE."'");
+            if (!empty($info['news_categories'])) {
+                echo '<div class="dropdown pull-left">';
+                    echo '<a id="categories" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-submenu>';
+                        echo '<span class="text-bigger">'.$locale['news_0009'].'</span> <span class="caret"></span>';
+                    echo '</a>';
 
-                    $current_parent = 0;
+                    echo '<ul class="dropdown-menu m-t-15" style="width: 300px;" aria-labelledby="categories">';
+                        $news_categories = dbquery_tree_full(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE news_cat_language='".LANGUAGE."'");
 
-                    if (isset($_GET['cat_id'])) {
-                        $news_index = dbquery_tree(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE news_cat_language='".LANGUAGE."'");
-                        $current_parent = get_parent($news_index, $_GET['cat_id']);
-                    }
+                        $current_parent = 0;
 
-                    if (!empty($info['news_categories'][0])) {
-                        $info['news_categories'][0] = sort_tree($info['news_categories'][0], 'news_cat_name');
+                        if (isset($_GET['cat_id'])) {
+                            $news_index = dbquery_tree(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE news_cat_language='".LANGUAGE."'");
+                            $current_parent = get_parent($news_index, $_GET['cat_id']);
+                        }
 
-                        foreach ($info['news_categories'][0] as $cat_data) {
+                        $news_categories[0] = sort_tree($news_categories[0], 'news_cat_name');
+
+                        foreach ($news_categories[0] as $cat_data) {
                             $active = isset($_GET['cat_id']) && isnum($_GET['cat_id']) && ($_GET['cat_id'] == $cat_data['news_cat_id'] || $current_parent == $cat_data['news_cat_id']);
 
-                            if (isset($info['news_categories'][$cat_data['news_cat_id']])) {
+                            if (isset($news_categories[$cat_data['news_cat_id']])) {
                                 // Sub Cats
                                 echo '<li class="dropdown-submenu submenu-cats '.($active == TRUE ? ' active' : '').'">';
                                     echo '<a id="ddncat'.$cat_data['news_cat_id'].'" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">'.$cat_data['news_cat_name'].'</a>';
@@ -75,7 +76,7 @@ class News extends Core {
                                     echo '<ul class="dropdown-menu" aria-labelledby="ddncat'.$cat_data['news_cat_id'].'" style="width: 250px;">';
                                         echo '<li'.($active == TRUE ? ' class="active"' : '').'><a href="'.INFUSIONS.'news/news.php?cat_id='.$cat_data['news_cat_id'].'">'.$cat_data['news_cat_name'].'</a></li>';
 
-                                        foreach ($info['news_categories'][$cat_data['news_cat_id']] as $sub_cat_data) {
+                                        foreach ($news_categories[$cat_data['news_cat_id']] as $sub_cat_data) {
                                             $sub_active = (isset($_GET['cat_id']) && isnum($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_data['news_cat_id']) ? ' class="active"' : '';
                                             echo '<li'.$sub_active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_data['news_cat_id'].'">'.$sub_cat_data['news_cat_name'].'</a></li>';
                                         }
@@ -88,11 +89,9 @@ class News extends Core {
                         }
 
                         echo '<li'.(isset($_GET['cat_id']) && isnum($_GET['cat_id']) && $_GET['cat_id'] == 0 ? ' class="active"' : '').'><a href="'.INFUSIONS.'news/news.php?cat_id=0">'.$locale['news_0006'].'</a></li>';
-                    } else {
-                        echo '<li class="text-center">'.$locale['news_0016'].'</li>';
-                    }
-                echo '</ul>';
-            echo '</div>';
+                    echo '</ul>';
+                echo '</div>';
+            }
         echo '</div>';
 
         Main::headerContent([

@@ -63,21 +63,35 @@ class News extends Core {
             echo '</span>';
         echo '</div>';
 
+        /**
+         * Check if array is multidimensional
+         *
+         * @param array $array
+         *
+         * @return bool
+         */
+        function is_multidimensiona_array($array) {
+            if (!is_array($array)) {
+                return FALSE;
+            }
+            foreach ($array as $elm) {
+                if (!is_array($elm)) {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+
         ob_start();
         openside('<i class="fa fa-list"></i> '.$locale['news_0009']);
         echo '<ul class="list-style-none">';
-            foreach ($info['news_categories'][0] as $id => $data) {
-                $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' class="text-dark"' : '';
-                echo '<li><a'.$active.' href="'.INFUSIONS.'news/news.php?cat_id='.$id.'">'.$data['name'].'</a></li>';
+            $categories = is_multidimensiona_array($info['news_categories'][0]) ? $info['news_categories'][0] : $info['news_categories'];
+            foreach ($categories as $cat) {
+                echo '<li><a'.($cat['active'] ? ' class="text-dark"' : '').' href="'.$cat['link'].'">'.$cat['name'].'</a></li>';
 
-                if ($id != 0 && $info['news_categories'] != 0) {
-                    foreach ($info['news_categories'] as $sub_cats_id => $sub_cats) {
-                        foreach ($sub_cats as $sub_cat_id => $sub_cat_data) {
-                            if (!empty($sub_cat_data['parent']) && $sub_cat_data['parent'] == $id) {
-                                $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_id ? 'text-dark ' : '';
-                                echo '<li><a class="'.$active.'p-l-15" href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_id.'">'.$sub_cat_data['name'].'</a></li>';
-                            }
-                        }
+                if (!empty($cat['sub'])) {
+                    foreach ($cat['sub'] as $sub_cat) {
+                        echo '<li><a class="'.($sub_cat['active'] ? 'text-dark ' : '').'p-l-15" href="'.$sub_cat['link'].'">'.$sub_cat['name'].'</a></li>';
                     }
                 }
             }

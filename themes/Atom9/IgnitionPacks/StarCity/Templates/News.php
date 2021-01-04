@@ -184,36 +184,36 @@ class News extends Core {
                         echo '<a class="navbar-brand" href="#">'.$locale['news_0009'].'</a>';
                     echo '</div>';
 
-                    echo '<div class="collapse navbar-collapse" id="news-cats-nav">';
-                        echo '<ul class="nav navbar-nav">';
-                            $info['news_categories'] = dbquery_tree_full(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE ".in_group('news_cat_language', LANGUAGE));
-                            $current_parent = 0;
+                    if (!empty($info['news_categories'])) {
+                        echo '<div class="collapse navbar-collapse" id="news-cats-nav">';
+                            echo '<ul class="nav navbar-nav">';
+                                $news_categories = dbquery_tree_full(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE ".in_group('news_cat_language', LANGUAGE));
+                                $current_parent = 0;
 
-                            if (isset($_GET['cat_id'])) {
-                                $news_index = dbquery_tree(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE ".in_group('news_cat_language', LANGUAGE));
-                                $current_parent = get_parent($news_index, $_GET['cat_id']);
-                            }
+                                if (isset($_GET['cat_id'])) {
+                                    $news_index = dbquery_tree(DB_NEWS_CATS, 'news_cat_id', 'news_cat_parent', "WHERE ".in_group('news_cat_language', LANGUAGE));
+                                    $current_parent = get_parent($news_index, $_GET['cat_id']);
+                                }
 
-                            if (!empty($info['news_categories'][0])) {
-                                $info['news_categories'][0] = sort_tree($info['news_categories'][0], 'news_cat_name');
+                                $news_categories[0] = sort_tree($news_categories[0], 'news_cat_name');
                                 $limit = 6;
-                                $extended = count($info['news_categories'][0]) - $limit;
+                                $extended = count($news_categories[0]) - $limit;
                                 $child_more = FALSE;
 
                                 echo '<li'.(isset($_GET['cat_id']) && isnum($_GET['cat_id']) && $_GET['cat_id'] == 0 ? ' class="active"' : '').'><a href="'.INFUSIONS.'news/news.php?cat_id=0">'.$locale['news_0006'].'</a></li>';
 
-                                foreach ($info['news_categories'][0] as $cat_data) {
+                                foreach ($news_categories[0] as $cat_data) {
                                     $active = (isset($_GET['cat_id']) && isnum($_GET['cat_id']) && ($_GET['cat_id'] == $cat_data['news_cat_id'] || $current_parent == $cat_data['news_cat_id'])) ? ' class="active"' : '';
 
                                     if ($limit > 0) {
-                                        if (isset($info['news_categories'][$cat_data['news_cat_id']])) {
+                                        if (isset($news_categories[$cat_data['news_cat_id']])) {
                                             // Sub Cats
                                             echo '<li'.$active.'>';
                                                 echo '<a id="ddcat'.$cat_data['news_cat_id'].'" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">'.$cat_data['news_cat_name'].' <span class="caret"></span></a>';
                                                 echo '<ul class="dropdown-menu" aria-labelledby="ddcat'.$cat_data['news_cat_id'].'">';
                                                     echo '<li'.$active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$cat_data['news_cat_id'].'">'.$cat_data['news_cat_name'].'</a></li>';
 
-                                                    foreach ($info['news_categories'][$cat_data['news_cat_id']] as $sub_cat_data) {
+                                                    foreach ($news_categories[$cat_data['news_cat_id']] as $sub_cat_data) {
                                                         $sub_active = (isset($_GET['cat_id']) && isnum($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_data['news_cat_id']) ? ' class="active"' : '';
                                                         echo '<li'.$sub_active.'><a href="'.INFUSIONS.'news/news.php?cat_id='.$sub_cat_data['news_cat_id'].'">'.$sub_cat_data['news_cat_name'].'</a></li>';
                                                     }
@@ -240,9 +240,9 @@ class News extends Core {
                                     }
                                     $limit--;
                                 }
-                            }
-                        echo '</ul>';
-                    echo '</div>';
+                            echo '</ul>';
+                        echo '</div>';
+                    }
                 echo '</div>';
             echo '</nav>';
 

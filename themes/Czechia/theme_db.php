@@ -18,7 +18,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title       = 'Czechia Theme';
-$theme_description = 'Theme for former Czech support.';
+$theme_description = 'The Lite version of Czechia theme from the former Czech NSS.';
 $theme_screenshot  = 'screenshot.png';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
