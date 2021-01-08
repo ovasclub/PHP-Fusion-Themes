@@ -186,7 +186,7 @@ class News extends Core {
                 echo $data['news_extended'];
             echo '</div>';
 
-            if (!empty($data['news_gallery'])) {
+            if (!empty($data['news_gallery']) && count($data['news_gallery']) > 1) {
                 echo '<hr />';
                 echo '<h3>'.$locale['news_0019'].'</h3>';
 

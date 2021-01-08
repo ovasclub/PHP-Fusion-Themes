@@ -165,7 +165,7 @@ class News extends Core {
                 echo $data['news_news'];
                 echo !empty($data['news_extended']) ? '<p class="m-t-10">'.$data['news_extended'].'</p>' : '';
 
-                if (!empty($data['news_gallery'])) {
+                if (!empty($data['news_gallery']) && count($data['news_gallery']) > 1) {
                     echo '<hr/>';
                     echo '<h3>'.$locale['news_0019'].'</h3>';
 
@@ -227,7 +227,7 @@ class News extends Core {
         echo '<ul class="list-style-none">';
             $categories = is_multidimensiona_array($info['news_categories'][0]) ? $info['news_categories'][0] : $info['news_categories'];
             foreach ($categories as $cat) {
-                echo '<li><a'.($cat['active'] ? ' class="text-dark"' : '').' href="'.$cat['link'].'">'.$cat['name'].'</a></li>';
+                echo '<li><a'.(!empty($cat['active']) && $cat['active'] ? ' class="text-dark"' : '').' href="'.$cat['link'].'">'.$cat['name'].'</a></li>';
 
                 if (!empty($cat['sub'])) {
                     foreach ($cat['sub'] as $sub_cat) {
