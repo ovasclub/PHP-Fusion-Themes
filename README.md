@@ -4,7 +4,7 @@
 If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
 
 ## Don't edit Copyright!
-This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN" linking to my GitHub (https://github.com/RobiNN1), (YEAR is optional).
+This text must be in a visible place: `© YEAR Created by RobiNN` - with "RobiNN" linking to my GitHub (https://github.com/RobiNN1), YEAR is optional.
 
 > I will not provide any support for sites that remove it.
 
