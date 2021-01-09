@@ -76,7 +76,7 @@ class Dashboard {
             $html .= '<div class="row">';
                 $modules = [];
 
-                if (defined('FORUM_EXIST') || db_exists(DB_PREFIX.'forums')) {
+                if (defined('FORUM_EXISTS') || db_exists(DB_PREFIX.'forums')) {
                     $modules['forum'] = [
                         'title' => $locale['265'],
                         'icon' => 'fa fa-comments',
@@ -89,7 +89,7 @@ class Dashboard {
                     ];
                 }
 
-                if (defined('DOWNLOADS_EXIST') || db_exists(DB_PREFIX.'downloads')) {
+                if (defined('DOWNLOADS_EXISTS') || db_exists(DB_PREFIX.'downloads')) {
                     $modules['downloads'] = [
                         'title' => $locale['268'],
                         'icon' => 'fa fa-cloud-download',
@@ -101,7 +101,7 @@ class Dashboard {
                     ];
                 }
 
-                if (defined('NEWS_EXIST') || db_exists(DB_PREFIX.'news')) {
+                if (defined('NEWS_EXISTS') || db_exists(DB_PREFIX.'news')) {
                     $modules['news'] = [
                         'title' => $locale['269'],
                         'icon' => 'fa fa-newspaper-o',
@@ -113,7 +113,7 @@ class Dashboard {
                     ];
                 }
 
-                if (defined('ARTICLES_EXIST') || db_exists(DB_PREFIX.'articles')) {
+                if (defined('ARTICLES_EXISTS') || db_exists(DB_PREFIX.'articles')) {
                     $modules['articles'] = [
                         'title' => $locale['270'],
                         'icon' => 'fa fa-book',
@@ -125,7 +125,7 @@ class Dashboard {
                     ];
                 }
 
-                if (defined('WEBLINKS_EXIST') || db_exists(DB_PREFIX.'weblinks')) {
+                if (defined('WEBLINKS_EXISTS') || db_exists(DB_PREFIX.'weblinks')) {
                     $modules['weblinks'] = [
                         'title' => $locale['271'],
                         'icon' => 'fa fa-link',
@@ -136,7 +136,7 @@ class Dashboard {
                     ];
                 }
 
-                if (defined('GALLERY_EXIST') || db_exists(DB_PREFIX.'photos')) {
+                if (defined('GALLERY_EXISTS') || db_exists(DB_PREFIX.'photos')) {
                     $modules['gallery'] = [
                         'title' => $locale['272'],
                         'icon' => 'fa fa-camera-retro',
