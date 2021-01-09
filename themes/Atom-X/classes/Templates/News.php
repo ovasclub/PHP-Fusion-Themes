@@ -23,7 +23,7 @@ use AtomXTheme\Main;
 use \PHPFusion\News\NewsServer;
 
 class News extends Core {
-    public static function display_main_news($info) {
+    public static function displayMainNews($info) {
         $locale = fusion_get_locale();
         $locale += self::getInstance()->setLocale();
         $settings = fusion_get_settings();
@@ -106,7 +106,7 @@ class News extends Core {
         }
     }
 
-    public static function render_news_item($info) {
+    public static function renderNewsItem($info) {
         $locale = fusion_get_locale();
         $locale += self::getInstance()->setLocale();
         $data = $info['news_item'];

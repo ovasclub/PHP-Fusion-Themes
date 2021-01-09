@@ -108,19 +108,15 @@ function display_inbox($info) {
 }
 
 function display_main_news($info) {
-    AtomXTheme\Templates\News::getInstance()->display_main_news($info);
+    AtomXTheme\Templates\News::getInstance()->displayMainNews($info);
 }
 
 function render_news_item($info) {
-    AtomXTheme\Templates\News::getInstance()->render_news_item($info);
+    AtomXTheme\Templates\News::getInstance()->renderNewsItem($info);
 }
 
 function display_user_profile($info) {
     AtomXTheme\Templates\Profile::getInstance()->displayProfile($info);
-}
-
-function display_profile_form() {
-    AtomXTheme\Templates\Profile::getInstance()->editProfile();
 }
 
 set_image('noavatar50', fusion_get_settings('siteurl').'themes/Atom-X/images/noavatar50.png');

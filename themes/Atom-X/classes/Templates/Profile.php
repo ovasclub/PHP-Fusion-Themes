@@ -464,30 +464,4 @@ class Profile extends Core {
 
         echo '</div>';
     }
-
-    public static function editProfile() {
-        self::setParam('greybody', 'TRUE');
-        Main::hidePanels();
-
-        echo '<div class="panel panel-default">';
-        echo '<div class="panel-heading"><h4><b>'.fusion_get_locale('u102').'</b></h4></div>';
-        echo '<div class="panel-body">';
-        echo '{%tab_header%}';
-        echo '{%open_form%}';
-        echo '{%user_name_field%}';
-        echo '{%user_email_field%}';
-        echo '{%user_hide_email_field%}';
-        echo '{%user_reputation_field%}';
-        echo '{%user_avatar_field%}';
-        echo '{%user_password_field%}';
-        echo '{%user_admin_password_field%}';
-        echo '{%custom_fields%}';
-        echo '{%captcha_fields%}';
-        echo '{%eula%}';
-        echo '{%post_button%}';
-        echo '{%close_form%}';
-        echo '{%tab_footer%}';
-        echo '</div>';
-        echo '</div>';
-    }
 }

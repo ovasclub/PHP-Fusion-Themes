@@ -110,11 +110,7 @@ function render_news_item($info) {
 }
 
 function display_user_profile($info) {
-    AtomX2Theme\Templates\Profile::getInstance()->DisplayProfile($info);
-}
-
-function display_profile_form() {
-    AtomX2Theme\Templates\Profile::getInstance()->EditProfile();
+    AtomX2Theme\Templates\Profile::getInstance()->displayProfile($info);
 }
 
 set_image('noavatar50', fusion_get_settings('siteurl').'themes/Atom-X2/images/noavatar50.png');
