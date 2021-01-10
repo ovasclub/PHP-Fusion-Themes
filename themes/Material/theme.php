@@ -94,11 +94,6 @@ function render_downloads($info) {
     MaterialTheme\Templates\Downloads::renderDownloads($info);
 }
 
-// Error Page
-function display_error_page($info) {
-    MaterialTheme\Templates\Error::displayErrorPage($info);
-}
-
 // Forum
 function render_forum($info) {
     MaterialTheme\Templates\Forum\Main::renderForum($info);
@@ -123,11 +118,6 @@ function display_forum_postform($info) {
 // Home Page
 function display_home($info) {
     MaterialTheme\Templates\HomePage::displayHome($info);
-}
-
-// Messages
-function display_inbox($info) {
-    MaterialTheme\Templates\PrivateMessages::displayInbox($info);
 }
 
 // News

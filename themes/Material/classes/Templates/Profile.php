@@ -29,7 +29,7 @@ class Profile extends Core {
         echo '<div class="container p-t-20 p-b-20">';
             echo '<div class="row">';
                 echo '<div class="col-xs-12 col-sm-10 col-md-10 col-md-10">';
-                    echo '<div class="m-50 p-b-60">';
+                    echo '<div class="m-50 p-b-60" style="margin-top: 100px;">';
                         echo '<div class="pull-left m-r-20">'.$info['avatar'].'</div>';
                         echo '<div class="overflow-hide text-white">';
                             echo '<h4 class="m-b-0 display-inline-block"><strong style="text-shadow: 0 1px 1px rgba(0,0,0,0.2);">'.$info['username'].'</strong></h4>';
@@ -47,17 +47,6 @@ class Profile extends Core {
                     echo !empty($info['profile']) ? $info['profile'] : '';
                 echo '</div>';
             echo '</div>';
-
-            if (!empty($info['social'])) {
-                echo '<div class="social display-block">';
-                    echo '<div class="pull-right">';
-                        foreach ($info['social'] as $type => $social) {
-                            echo '<a href="'.$social['link'].'" target="_blank">'.$social['icon'].'</a>';
-                        }
-                    echo '</div>';
-                echo '</div>';
-            }
-
         echo '</div>';
         $html = ob_get_contents();
         ob_end_clean();
@@ -107,26 +96,13 @@ class Profile extends Core {
             $editprofile = '<div class="pull-right"><a class="btn btn-success btn-sm" href="'.BASEDIR.'edit_profile.php">'.$locale['UM080'].'</a></div>';
         }
 
-        if (!empty($info['user_field'])) {
-            foreach ($info['user_field'] as $cat_id => $category_data) {
-                if (!empty($category_data['fields'])) {
-                    foreach ($category_data['fields'] as $field_id => $field_data) {
-                        if (!empty($field_data['type']) && $field_data['type'] == 'social') {
-                            $social[] = $field_data;
-                        }
-                    }
-                }
-            }
-        }
-
         $header_data = [
             'username'   => $info['core_field']['profile_user_name']['value'],
             'userlevel'  => $info['core_field']['profile_user_level']['value'],
             'useronline' => $user_data['user_lastvisit'] >= time() - 300, // After 5 minutes user is offline
             'avatar'     => !empty($user_avatar) ? $user_avatar : '',
             'buttons'    => !empty($buttons) ? $buttons : '',
-            'profile'    => !empty($editprofile) ? $editprofile : '',
-            'social'     => !empty($social) ? $social : ''
+            'profile'    => !empty($editprofile) ? $editprofile : ''
         ];
 
         Main::headerContent([
@@ -228,11 +204,7 @@ class Profile extends Core {
                                 if (!empty($category_data['fields'])) {
                                     if (isset($category_data['fields'])) {
                                         foreach ($category_data['fields'] as $field_id => $field_data) {
-                                            if (isset($field_data['type']) && $field_data['type'] == 'social') {
-                                                // Hide Social UF
-                                            } else {
-                                                $fields[] = $field_data;
-                                            }
+                                            $fields[] = $field_data;
                                         }
                                     }
 
@@ -243,14 +215,10 @@ class Profile extends Core {
 
                                                 if (isset($category_data['fields'])) {
                                                     foreach ($category_data['fields'] as $field_id => $field_data) {
-                                                        if (isset($field_data['type']) && $field_data['type'] == 'social') {
-                                                            // Hide Social UF
-                                                        } else {
-                                                            echo '<div id="field-'.$field_id.'" class="row m-0 m-b-10 cat-field">';
-                                                                echo '<label class="pull-left"><strong>'.(!empty($field_data['icon']) ? $field_data['icon'] : '').' '.$field_data['title'].'</strong></label>';
-                                                                echo '<div class="pull-right">'.$field_data['value'].'</div>';
-                                                            echo '</div>';
-                                                        }
+                                                        echo '<div id="field-'.$field_id.'" class="row m-0 m-b-10 cat-field">';
+                                                            echo '<label class="pull-left"><strong>'.(!empty($field_data['icon']) ? $field_data['icon'] : '').' '.$field_data['title'].'</strong></label>';
+                                                            echo '<div class="pull-right">'.$field_data['value'].'</div>';
+                                                        echo '</div>';
                                                     }
                                                 }
                                             echo '</div>';

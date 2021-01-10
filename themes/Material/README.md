@@ -7,11 +7,9 @@ Custom templates:
 - Articles
 - Blog
 - Downloads
-- Error Page
 - Forum
 - Home
 - News
-- Messages
 - Profile
 
 Features:
