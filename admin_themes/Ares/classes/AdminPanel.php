@@ -39,7 +39,7 @@ class AdminPanel {
                         $html .= '<div class="visible-xs"><a href="#" class="navicon navtogglem"><i class="fa fa-bars"></i></a></div>';
                         $html .= '<div class="navbar-brand topnav-brand" id="ares-brand">';
                         $html .= '<img class="logo" src="'.IMAGES.'phpfusion-icon.png" alt="Logo"/>';
-                        $html .= '<div class="version">PHP Fusion</div>';
+                        $html .= '<div class="version">PHPFusion</div>';
                     $html .= '</div>';
                 $html .= '</div>';
 
@@ -169,9 +169,8 @@ class AdminPanel {
             $html .= render_breadcrumbs();
 
             $html .= '<div class="notice">';
-                if (function_exists('renderNotices') && function_exists('getNotices')) {
-                    $html .= renderNotices(getNotices());
-                }
+                $html .= '<div id="updatechecker_result" class="alert alert-info" style="display:none;"></div>';
+                $html .= renderNotices(getNotices());
             $html .= '</div>';
 
             $html .= '<div class="main-content">';

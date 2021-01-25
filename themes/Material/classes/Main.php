@@ -29,7 +29,7 @@ class Main extends Core {
         add_to_head('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,700,300italic,400italic,700italic">');
         add_to_head('<link rel="stylesheet" href="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.css">');
         add_to_footer('<script src="'.$url.'mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>'); // https://github.com/malihu/malihu-custom-scrollbar-plugin
-        add_to_footer('<script src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
+        add_to_footer('<script src="'.INCLUDES.'jscripts/js.cookie.min.js"></script>');
         $theme_js = file_exists($url.'js/scripts.min.js') ? $url.'js/scripts.min.js' : $url.'js/scripts.js';
         add_to_footer('<script async src="'.$theme_js.'?v='.filemtime($theme_js).'"></script>');
 

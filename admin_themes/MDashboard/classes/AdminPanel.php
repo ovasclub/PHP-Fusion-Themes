@@ -27,7 +27,7 @@ class AdminPanel {
     public function __construct() {
         $this->pagenum = (int)filter_input(INPUT_GET, 'pagenum');
 
-        add_to_footer('<script type="text/javascript" src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
+        add_to_footer('<script type="text/javascript" src="'.INCLUDES.'jscripts/js.cookie.min.js"></script>');
         add_to_footer('<script type="text/javascript" src="'.MD.'assets/js/scripts.min.js"></script>');
         add_to_head('<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,latin-ext,vietnamese"/>');
         add_to_head('<link rel="stylesheet" type="text/css" href="'. MD.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
@@ -38,6 +38,8 @@ class AdminPanel {
         $html .= $this->sidebar();
 
         $html .= '<div class="content-wrapper animate">';
+            $html .= '<div id="updatechecker_result" class="alert alert-info m-b-0" style="display:none;"></div>';
+
             if (function_exists('renderNotices') && function_exists('getNotices')) {
                 $html .= renderNotices(getNotices());
             }

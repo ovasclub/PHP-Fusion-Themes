@@ -29,7 +29,7 @@ class AdminPanel {
         $this->pagenum = (int)filter_input(INPUT_GET, 'pagenum');
 
         add_to_head('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans"/>');
-        add_to_footer('<script src="'.INCLUDES.'jquery/jquery.cookie.js"></script>');
+        add_to_footer('<script src="'.INCLUDES.'jscripts/js.cookie.min.js"></script>');
         add_to_footer('<script src="'.MDT.'assets/js/scripts.min.js"></script>');
         add_to_head('<link rel="stylesheet" href="'.MDT.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>');
         add_to_footer('<script src="'.MDT.'assets/mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>');
@@ -57,6 +57,7 @@ class AdminPanel {
                     $html .= render_breadcrumbs();
                 $html .= '</div>';
 
+                $html .= '<div id="updatechecker_result" class="alert alert-info" style="display:none;"></div>';
                 $html .= renderNotices(getNotices());
                 $html .= CONTENT;
 
