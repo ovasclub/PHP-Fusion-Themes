@@ -585,21 +585,6 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
     max-width: 45px;
 }
 
-#error_logform {
-    margin-bottom: 20px !important;
-}
-
-#error_logform #delete_entries {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 2px;
-}
-
-#error_logform #delete_status-field {
-    margin-top: 1.5px;
-}
-
 #site-links {
     list-style: none;
     min-height: 20px;

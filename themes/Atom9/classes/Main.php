@@ -161,7 +161,7 @@ class Main extends Core {
                 if ($settings['opening_page'] == $file_path) {
                     add_to_head('<style type="text/css">.body-wrapper{margin-top: 200px;}</style>');
                     echo '<div class="clearfix" style="margin-top: 100px;"><div class="container text-center">';
-                        echo '<a href="'.BASEDIR.$settings['opening_page'].'" class="display-inline-block"><img class="img-responsive" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'"/></a>';
+                        echo '<a href="'.BASEDIR.$settings['opening_page'].'" class="text-center"><img class="display-inline-block img-responsive" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'" style="width:25%;"></a>';
                         echo '<h1 style="font-size: 5rem;text-transform: uppercase;">'.$settings['sitename'].'</h1>';
                     echo '</div></div>';
                 }

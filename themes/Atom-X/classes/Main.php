@@ -25,7 +25,7 @@ class Main extends Core {
     public function renderPage() {
         echo '<div class="page-box">';
             echo '<section id="topcontent"><div class="container-fluid">';
-                echo '<div class="logo"><a href="'.BASEDIR.$this->settings['opening_page'].'" class="'.$this->settings['logoposition_xs'].' '.$this->settings['logoposition_sm'].' '.$this->settings['logoposition_md'].' '.$this->settings['logoposition_lg'].'"><img src="'.BASEDIR.$this->settings['sitebanner'].'" alt="Logo" class="img-responsive"/></a></div>';
+                echo '<div class="logo"><a href="'.BASEDIR.$this->settings['opening_page'].'"><img src="'.BASEDIR.$this->settings['sitebanner'].'" alt="Logo" class="img-responsive" style="width:25%;"></a></div>';
 
                 if (defined('ATOMX_SOCIAL_NETWORKS') && is_array(ATOMX_SOCIAL_NETWORKS)) {
                     echo '<div class="social-links">';
