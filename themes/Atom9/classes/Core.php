@@ -112,6 +112,6 @@ class Core {
      * @return string
      */
     public static function themeCopyright() {
-        return '&copy; '.date('Y').' Theme by <a href="https://phpfusion.com" target="_blank">Frederick MC Chan</a> & <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
+        return '&copy; '.date('Y').' Theme created by <a href="https://phpfusion.com" target="_blank">Frederick MC Chan</a> & <a href="https://github.com/RobiNN1" target="_blank">RobiNN</a>';
     }
 }
