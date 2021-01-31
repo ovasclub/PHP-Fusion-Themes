@@ -23,7 +23,7 @@ use \PHPFusion\Panels;
 
 class Main extends Core {
     public static function header() {
-        add_to_head('<link rel="stylesheet" href="'.INFUSIONS.'forum/templates/forum.css">');
+        add_to_head('<link rel="stylesheet" href="'.INFUSIONS.'forum/templates/css/forum.css">');
         self::setTplCss('forum');
         self::setParam('body_class', 'forum_main');
         self::setParam('container_class', 'p-b-20');

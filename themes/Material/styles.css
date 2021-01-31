@@ -212,9 +212,6 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
 .select2-offscreen {
   display: none;
 }
-.select2-container {
-  width: 100% !important;
-}
 .file-input .form-control {
   border: 1px solid #ccc;
   -webkit-transition: 0.5s;
