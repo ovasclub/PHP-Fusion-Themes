@@ -34,7 +34,7 @@ class LatestNews extends Core {
                 ".(multilang_table('NS') ? "WHERE n.news_language='".LANGUAGE."' AND" : "WHERE")." ".groupaccess('n.news_visibility')."
                 AND (n.news_start = 0 || n.news_start <= ".time().") AND (n.news_end = 0 || n.news_end >= ".time().") AND n.news_draft = 0
                 GROUP BY n.news_id
-                ORDER BY n.news_start DESC
+                ORDER BY n.news_datestamp DESC
                 LIMIT 5
             ");
 

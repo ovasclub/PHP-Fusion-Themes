@@ -34,7 +34,7 @@ class LatestBlogs extends Core {
                 ".(multilang_table('BL') ? "WHERE b.blog_language = '".LANGUAGE."' AND" : "WHERE")." ".groupaccess('b.blog_visibility')." AND (b.blog_start = 0 || b.blog_start <= ".time().")
                 AND (b.blog_end = 0 || b.blog_end >= ".time().") AND b.blog_draft = 0
                 GROUP BY b.blog_id
-                ORDER BY blog_start DESC
+                ORDER BY b.blog_datestamp DESC
                 LIMIT 5
             ");
 

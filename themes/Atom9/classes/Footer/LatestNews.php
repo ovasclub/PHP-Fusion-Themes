@@ -32,7 +32,7 @@ class LatestNews {
                 FROM ".DB_NEWS."
                 ".(multilang_table("NS") ? "WHERE ".in_group('news_language', LANGUAGE)." AND" : "WHERE")." ".groupaccess('news_visibility')."
                 AND (news_start='0'||news_start<=".time().") AND (news_end='0' || news_end>=".time().") AND news_draft='0'
-                ORDER BY news_start DESC
+                ORDER BY news_datestamp DESC
                 LIMIT 5
             ");
 

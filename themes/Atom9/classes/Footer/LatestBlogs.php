@@ -32,7 +32,7 @@ class LatestBlogs {
                 FROM ".DB_BLOG."
                 ".(multilang_table("BL") ? "WHERE ".in_group('blog_language', LANGUAGE)." AND" : "WHERE")." ".groupaccess('blog_visibility')." AND (blog_start='0'||blog_start<=".time().")
                 AND (blog_end='0'||blog_end>=".time().") AND blog_draft='0'
-                ORDER BY blog_start DESC
+                ORDER BY blog_datestamp DESC
                 LIMIT 5
             ");
 
