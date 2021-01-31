@@ -194,6 +194,7 @@ class Main extends Core {
                         echo iADMIN ? '<li role="separator" class="divider"></li>' : '';
                         echo iADMIN ? '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0">'.$this->locale['global_123'].'</a></li>' : '';
                         echo '<li role="separator" class="divider"></li>';
+                        echo session_get('login_as') ? '<li><a href="'.BASEDIR.'index.php?logoff='.$this->userdata['user_id'].'">'.$this->locale['UM103'].'</a></li>' : '';
                         echo '<li><a href="'.BASEDIR.'index.php?logout=yes">'.$this->locale['logout'].'</a></li>';
                     echo '</ul>';
                 } else {

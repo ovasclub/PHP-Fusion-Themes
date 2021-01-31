@@ -236,15 +236,13 @@ class Main extends Core {
                             echo '</a>';
 
                             echo '<ul class="dropdown-menu" aria-labelledby="dduser">';
-                                if (iADMIN) {
-                                    echo '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0"><i class="fa fa-tachometer-alt"></i><small class="text-overflow-hide">'.$locale['global_123'].'</small></a></li>';
-                                }
-
+                                echo iADMIN ? '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0"><i class="fa fa-tachometer-alt"></i><small class="text-overflow-hide">'.$locale['global_123'].'</small></a></li>' : '';
                                 echo '<li><a href="'.BASEDIR.'messages.php"><i class="fa fa-envelope"></i><small class="text-overflow-hide">'.$locale['UM081'].'</small>'.$messages_count.'</a></li>';
                                 echo '<li><a href="'.BASEDIR.'edit_profile.php"><i class="fa fa-pen"></i><small class="text-overflow-hide">'.$locale['UM080'].'</small></a></li>';
                                 echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'"><i class="fa fa-eye"></i><small class="text-overflow-hide">'.$locale['view'].' '.$locale['profile'].'</small></a></li>';
                                 echo '<li><a href="'.BASEDIR.'members.php"><i class="fa fa-users"></i><small class="text-overflow-hide">'.$locale['UM082'].'</small></a></li>';
-                                 echo '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out-alt"></i><small class="text-overflow-hide">'.$locale['logout'].'</small></a></li>';
+                                echo session_get('login_as') ? '<li><a href="'.BASEDIR.'index.php?logoff='.$userdata['user_id'].'"><i class="fa fa-sign-out-alt"></i><small class="text-overflow-hide">'.$locale['UM103'].'</small></a></li>' : '';
+                                echo '<li><a href="'.BASEDIR.'index.php?logout=yes"><i class="fa fa-sign-out-alt"></i><small class="text-overflow-hide">'.$locale['logout'].'</small></a></li>';
                             echo '</ul>';
                         echo '</li>';
                     } else {

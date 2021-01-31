@@ -104,6 +104,7 @@ function render_page() {
                                 echo iADMIN ? '<li role="separator" class="divider"></li>' : '';
                                 echo iADMIN ? '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0">'.$locale['global_123'].'</a></li>' : '';
                                 echo '<li class="divider"></li>';
+                                echo session_get('login_as') ? '<li><a href="'.BASEDIR.'index.php?logoff='.$userdata['user_id'].'">'.$locale['UM103'].'</a></li>' : '';
                                 echo '<li><a href="'.BASEDIR.'index.php?logout=yes">'.$locale['logout'].'</a></li>';
                             echo '</ul>';
                         echo '</li>';

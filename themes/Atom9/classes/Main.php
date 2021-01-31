@@ -72,11 +72,8 @@ class Main extends Core {
                     echo '<ul class="dropdown-menu dropdown-user" aria-labelledby="dduser" role="menu">';
                         echo '<li><a href="'.BASEDIR.'profile.php?lookup='.$userdata['user_id'].'">'.$locale['profile'].'</a></li>';
                         echo '<li><a href="'.BASEDIR.'edit_profile.php">'.$locale['UM080'].'</a></li>';
-
-                        if (iADMIN) {
-                            echo '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0">'.$locale['global_123'].'</a></li>';
-                        }
-
+                        echo iADMIN ? '<li><a href="'.ADMIN.'index.php'.fusion_get_aidlink().'&pagenum=0">'.$locale['global_123'].'</a></li>' : '';
+                        echo session_get('login_as') ? '<li><a href="'.BASEDIR.'index.php?logoff='.$userdata['user_id'].'">'.$locale['UM103'].'</a></li>' : '';
                         echo '<li><a href="'.BASEDIR.'index.php?logout=yes">'.$locale['logout'].'</a></li>';
                     echo '</ul>';
                 echo '</li>';

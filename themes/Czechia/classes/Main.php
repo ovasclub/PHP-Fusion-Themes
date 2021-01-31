@@ -151,6 +151,7 @@ class Main extends Core {
                                             echo '</div>';
                                         echo '</div></li>';
                                         echo '<li class="divider m-b-0"></li>';
+                                        echo session_get('login_as') ? '<li><a href="'.BASEDIR.'index.php?logoff='.$userdata['user_id'].'">'.$locale['UM103'].'</a></li>' : '';
                                         echo '<li><p class="m-0 p-10 p-b-5"><a href="'.BASEDIR.'index.php?logout=yes" class="btn btn-danger btn-sm btn-block"><i class="fa fa-sign-out fa-fw"></i> '.$locale['logout'].'</a></p></li>';
                                     echo '</ul>';
                                 echo '</li>';
