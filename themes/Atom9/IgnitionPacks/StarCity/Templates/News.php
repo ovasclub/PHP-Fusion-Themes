@@ -57,11 +57,7 @@ class News extends Core {
                     echo '<div class="text">';
                         echo $data['news_anchor'];
 
-                        if ($data['news_ext'] == 'y') {
-                            echo '<h2><a href="'.$data['news_url'].'">'.$data['news_subject'].'</a></h2>';
-                        } else {
-                            echo '<h2>'.$data['news_subject'].'</h2>';
-                        }
+                        echo '<h2><a href="'.$data['news_url'].'">'.$data['news_subject'].'</a></h2>';
 
                         echo '<p>';
                             echo trim_text($data['news_news'], 350);
