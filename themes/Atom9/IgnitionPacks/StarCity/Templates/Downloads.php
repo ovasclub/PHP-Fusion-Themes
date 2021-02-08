@@ -108,12 +108,7 @@ class Downloads extends Core {
                     }
 
                     $_GET['rowstart'] = (isset($_GET['rowstart']) && isnum($_GET['rowstart']) && $_GET['rowstart'] <= $info['download_max_rows']) ? $_GET['rowstart'] : 0;
-                    $pagenav = makepagenav($_GET['rowstart'], $dl_settings['download_pagination'], $info['download_max_rows'], 3, $page_nav_link, 'rowstart', TRUE);
-
-                    echo strtr($pagenav, [
-                        'btn-block' => '',
-                        '\'>'       => '\'><i class="fa fa-refresh"></i> '
-                    ]);
+                    echo makepagenav($_GET['rowstart'], $dl_settings['download_pagination'], $info['download_max_rows'], 3, $page_nav_link, 'rowstart');
                 echo '</div>';
             }
         } else {
