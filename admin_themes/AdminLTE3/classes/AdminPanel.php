@@ -243,7 +243,6 @@ class AdminPanel {
                             $html .= ' <p>';
                                 $html .= $section_name;
                                 $html .= '<i class="fas fa-angle-left right"></i>';
-                                $html .= ($i > 4 ? '<span class="badge badge-info right">'.count($admin_pages[$i]).'</span>' : '');
                             $html .= '</p>';
                         $html .= '</a>';
                         $html .= '<ul class="nav nav-treeview">';

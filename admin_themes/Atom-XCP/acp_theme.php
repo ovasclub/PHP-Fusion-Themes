@@ -53,7 +53,7 @@ function render_admin_panel() {
 
                             $html .= '<li class="'.($i > 0 ? 'dropdown' : '').($active ? ' active' : '').'">';
                             if (!empty($admin_pages[$i])) {
-                                $html .= '<a id="ddsection'.$i.'" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.($i > 4 ? ' <span class="label label-primary">'.count($admin_pages[$i]).'</span>' : '').($i > 0 ? ' <span class="caret"></span>' : '').'</a>';
+                                $html .= '<a id="ddsection'.$i.'" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.Admins::getInstance()->get_admin_section_icons($i).' '.$section_name.($i > 0 ? ' <span class="caret"></span>' : '').'</a>';
                                 $html .= '<ul class="dropdown-menu" aria-labelledby="ddsection'.$i.'">';
                                     $html .= '<li><a class="adl-link" href="'.ADMIN.'index.php'.$aidlink.'&pagenum='.$i.'">'.$section_name.'</a></li>';
 
