@@ -230,7 +230,6 @@ function render_admin_login() {
 
     $html = '<div class="login-container">';
         $html .= '<div class="logo">';
-            $html .= '<img src="'.IMAGES.'phpfusion-icon.png" class="pf-logo img-responsive" alt="PHPFusion"/>';
             $html .= '<h1><strong>'.$locale['280'].'</strong></h1>';
         $html .= '</div>';
 
