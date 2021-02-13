@@ -32,7 +32,7 @@ class Downloads extends Core {
 
         Panels::addPanel('menu_panel', self::menu($info), Panels::PANEL_RIGHT, iGUEST, 1);
 
-        if (isset($_GET['download_id']) && !empty($info['download_item'])) {
+        if ($info['get']['download_id'] && !empty($info['download_item'])) {
             self::displayDownloadItem($info);
         } else {
             self::displayDownloadIndex($info);

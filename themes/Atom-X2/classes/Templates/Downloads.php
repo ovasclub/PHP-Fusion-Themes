@@ -51,7 +51,7 @@ class Downloads extends Core {
         self::setParam('section_header', $header);
         self::setParam('section_header_class', 'atom-subnav');
 
-        if (isset($_GET['download_id']) && !empty($info['download_item'])) {
+        if ($info['get']['download_id'] && !empty($info['download_item'])) {
             self::displayDownloadItem($info);
         } else {
             self::displayDownloadIndex($info);

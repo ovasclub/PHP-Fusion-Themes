@@ -55,7 +55,7 @@ class Downloads extends Core {
                 echo '</div>';
             echo '</div>';
 
-            if (isset($_GET['download_id']) && !empty($info['download_item'])) {
+            if ($info['get']['download_id'] && !empty($info['download_item'])) {
                 self::displayDownloadItem($info);
             } else {
                 self::displayDownloadIndex($info);
