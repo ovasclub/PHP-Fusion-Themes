@@ -149,20 +149,21 @@ class Main extends Core {
         $settings = fusion_get_settings();
 
         if ($this->getParam('atom_banner') == TRUE) {
-            echo '<div class="atom-banner">';
-                $file_path = str_replace(ltrim($settings['site_path'], '/'), '', preg_replace('/^\//', '', FUSION_REQUEST));
-                if ($settings['site_seo'] && defined('IN_PERMALINK')) {
-                    $file_path = Router::getRouterInstance()->getCurrentURL();
-                }
 
-                if ($settings['opening_page'] == $file_path) {
-                    add_to_head('<style type="text/css">.body-wrapper{margin-top: 200px;}</style>');
-                    echo '<div class="clearfix" style="margin-top: 100px;"><div class="container text-center">';
-                        echo '<a href="'.BASEDIR.$settings['opening_page'].'" class="text-center"><img class="display-inline-block img-responsive" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'" style="width:25%;"></a>';
-                        echo '<h1 style="font-size: 5rem;text-transform: uppercase;">'.$settings['sitename'].'</h1>';
-                    echo '</div></div>';
-                }
-            echo '</div>';
+            $file_path = str_replace(ltrim($settings['site_path'], '/'), '', preg_replace('/^\//', '', FUSION_REQUEST));
+            if ($settings['site_seo'] && defined('IN_PERMALINK')) {
+                $file_path = Router::getRouterInstance()->getCurrentURL();
+            }
+
+            if ($settings['opening_page'] == $file_path) {
+                add_to_head('<style type="text/css">.body-wrapper{margin-top: 200px;}</style>');
+                echo '<div class="atom-banner">';
+                echo '<div class="clearfix" style="margin-top: 100px;"><div class="container text-center">';
+                    echo '<a href="'.BASEDIR.$settings['opening_page'].'" class="text-center"><img class="display-inline-block img-responsive" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'" style="width:%;"></a>';
+                    echo '<h1 style="font-size: 5rem;text-transform: uppercase;">'.$settings['sitename'].'</h1>';
+                echo '</div></div>';
+                echo '</div>';
+            }
         }
     }
 
