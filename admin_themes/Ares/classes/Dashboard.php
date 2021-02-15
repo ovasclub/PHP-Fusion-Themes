@@ -254,32 +254,34 @@ class Dashboard {
             $html .= '</div>'; // #ratings
         }
 
-        $html .= '<div id="submissions">';
-            $html .= fusion_get_function('openside', '<strong class="text-uppercase">'.$locale['279'].'</strong><span class="pull-right badge">'.number_format($global_submissions['rows']).'</span>');
-                if (count($global_submissions['data']) > 0) {
-                    foreach ($global_submissions['data'] as $i => $submit_date) {
-                        if (isset($submit_data[$submit_date['submit_type']])) {
-                            $review_link = sprintf($submit_data[$submit_date['submit_type']]['admin_link'], $submit_date['submit_id']);
+        if (!empty(\PHPFusion\Admins::getInstance()->getSubmitData())) {
+            $html .= '<div id="submissions">';
+                $html .= fusion_get_function('openside', '<strong class="text-uppercase">'.$locale['279'].'</strong><span class="pull-right badge">'.number_format($global_submissions['rows']).'</span>');
+                    if (count($global_submissions['data']) > 0) {
+                        foreach ($global_submissions['data'] as $i => $submit_date) {
+                            if (isset($submit_data[$submit_date['submit_type']])) {
+                                $review_link = sprintf($submit_data[$submit_date['submit_type']]['admin_link'], $submit_date['submit_id']);
 
-                            $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
-                            $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($submit_date, '25px', '', FALSE, 'img-rounded m-r-5').'</div>';
-                            $html .= '<strong>'.profile_link($submit_date['user_id'], $submit_date['user_name'], $submit_date['user_status']).' </strong>';
-                            $html .= $locale['273b'].' <strong>'.$submit_data[$submit_date['submit_type']]['submit_locale'].'</strong> ';
-                            $html .= timer($submit_date['submit_datestamp']);
-                            if (!empty($review_link)) {
-                                $html .= '<a class="btn btn-sm btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
+                                $html .= '<div data-id="'.$i.'" class="clearfix p-b-10'.($i > 0 ? ' p-t-10' : '').'"'.($i > 0 ? ' style="border-top: 1px solid #ddd;"' : '').'>';
+                                $html .= '<div class="pull-left display-inline-block m-t-5 m-b-0">'.display_avatar($submit_date, '25px', '', FALSE, 'img-rounded m-r-5').'</div>';
+                                $html .= '<strong>'.profile_link($submit_date['user_id'], $submit_date['user_name'], $submit_date['user_status']).' </strong>';
+                                $html .= $locale['273b'].' <strong>'.$submit_data[$submit_date['submit_type']]['submit_locale'].'</strong> ';
+                                $html .= timer($submit_date['submit_datestamp']);
+                                if (!empty($review_link)) {
+                                    $html .= '<a class="btn btn-sm btn-default m-l-10 pull-right" href="'.$review_link.'">'.$locale['286'].'</a>';
+                                }
+                                $html .= '</div>';
                             }
-                            $html .= '</div>';
                         }
+                        if (isset($global_submissions['submissions_nav'])) {
+                            $html .= '<div class="clearfix"><span class="pull-right text-smaller">'.$global_submissions['submissions_nav'].'</span></div>';
+                        }
+                    } else {
+                        $html .= '<div class="text-center">'.$global_submissions['nodata'].'</div>';
                     }
-                    if (isset($global_submissions['submissions_nav'])) {
-                        $html .= '<div class="clearfix"><span class="pull-right text-smaller">'.$global_submissions['submissions_nav'].'</span></div>';
-                    }
-                } else {
-                    $html .= '<div class="text-center">'.$global_submissions['nodata'].'</div>';
-                }
-            $html .= fusion_get_function('closeside', '');
-        $html .= '</div>'; // #submissions
+                $html .= fusion_get_function('closeside', '');
+            $html .= '</div>'; // #submissions
+        }
 
         return $html;
     }
