@@ -725,3 +725,7 @@ ul > li.divider {
     margin-top: 10px;
     font-size: 14px;
 }
+
+.post-item {
+    background: rgba(0, 0, 0, .70) !important;
+}
