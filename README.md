@@ -23,6 +23,8 @@ This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "
 - [Material](admin_themes/Material)
 - [MDashboard](admin_themes/MDashboard)
 
+---
+
 Other themes and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
 
 <!-- Don't copy my code! -->
