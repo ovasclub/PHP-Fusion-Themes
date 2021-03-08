@@ -115,18 +115,11 @@ class Articles extends Core {
             echo '<div class="pull-right" id="options">';
                 $action = $data['admin_actions'];
 
-                if (!empty($action)) {
-                    echo '<div class="floating-container">';
-                        echo '<div class="buttons">';
-                            echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
-                            echo '<a href="'.$action['edit']['link'].'" class="btn btn-warning btn-circle btn-xs" title="'.$locale['edit'].'"><i class="fa fa-pen"></i></a>';
-                            echo '<a href="'.$action['delete']['link'].'" class="btn btn-danger btn-circle btn-xs" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
-                        echo '</div>';
+                echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs m-r-10" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
 
-                        echo '<div class="btn bg-alizarin btn-circle btn-sm" data-ripple="true" data-ripple-style="border"><i class="fa fa-ellipsis-v"></i></div>';
-                    echo '</div>';
-                } else {
-                    echo '<a class="btn btn-primary btn-circle btn-sm print" href="'.$data['print_link'].'" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
+                if (!empty($action)) {
+                    echo '<a href="'.$action['edit']['link'].'" class="btn btn-warning btn-circle btn-xs m-r-10" title="'.$locale['edit'].'"><i class="fa fa-pen"></i></a>';
+                    echo '<a href="'.$action['delete']['link'].'" class="btn btn-danger btn-circle btn-xs" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
                 }
             echo '</div>';
 
@@ -214,7 +207,7 @@ class Articles extends Core {
                     }
                 }
 
-                echo '<div class="list-group ripple-effect">';
+                echo '<div class="list-group">';
                     foreach ($info['article_categories'] as $cat_id => $cat_data) {
                         $active = !empty($_GET['cat_id']) && $_GET['cat_id'] == $cat_id;
                         $active = ($active ? ' active' : '');

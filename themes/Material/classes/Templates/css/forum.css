@@ -1,21 +1,3 @@
-body {
-    background: #efefef url("../../../images/bg1.jpg") fixed;
-    background-size: cover;
-}
-
-body:before {
-    background: transparent !important;
-}
-
-.main-box {
-    background-color: #ecf0f1;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
-}
-
-#header_forum .breadcrumb > li + li:before {
-    color: #fff;
-}
-
 .forum-main .panel,
 .forum-panel {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

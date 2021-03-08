@@ -63,15 +63,6 @@ $locale['dl_05'] = 'Od';
 // Templates/News.php
 $locale['ns_01'] = 'Související novinky';
 
-// Templates/Profile.php
-$locale['profile_01'] = 'Změnit foto';
-$locale['profile_02'] = 'Titulní fotka';
-$locale['profile_03'] = 'Změnit titulní fotografii';
-$locale['profile_notice_01'] = 'Profilová fotka bila odstraněna';
-$locale['profile_notice_02'] = 'Profilová fotka bila aktualizovaná';
-$locale['profile_notice_03'] = 'Titulní fotka bila odstraněna';
-$locale['profile_notice_04'] = 'Titulní fotka bila aktualizovaná';
-
 // widget.php
 $locale['widget_title'] = 'Konfigurace Material témy';
 $locale['widget_title_01'] = 'Hlavní nastavení témy';

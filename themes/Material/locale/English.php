@@ -63,15 +63,6 @@ $locale['dl_05'] = 'By';
 // Templates/News.php
 $locale['ns_01'] = 'Related News';
 
-// Templates/Profile.php
-$locale['profile_01'] = 'Change Photo';
-$locale['profile_02'] = 'Profile Cover Photo';
-$locale['profile_03'] = 'Change Cover Photo';
-$locale['profile_notice_01'] = 'Profile Photo has been deleted';
-$locale['profile_notice_02'] = 'Profile Photo has been updated';
-$locale['profile_notice_03'] = 'Profile Cover Photo has been deleted';
-$locale['profile_notice_04'] = 'Profile Cover Photo has been updated';
-
 // widget.php
 $locale['widget_title'] = 'Material Theme Configuration';
 $locale['widget_title_01'] = 'Main Theme Settings';

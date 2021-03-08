@@ -24,12 +24,6 @@ class Tags {
         Main::header();
 
         echo '<div class="row">';
-            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
-                echo '<a href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
-
-                Main::tags();
-            echo '</div>';
-
             echo '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
                 echo '<div class="forum-title">'.$locale['forum_tag_0100'].'</div>';
 
@@ -100,6 +94,12 @@ class Tags {
                         }
                     echo '</div>';
                 }
+            echo '</div>';
+
+            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
+                echo '<a href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
+
+                Main::tags();
             echo '</div>';
         echo '</div>';
     }

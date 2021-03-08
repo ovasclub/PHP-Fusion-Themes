@@ -39,7 +39,6 @@ class Core {
         'notices'              => TRUE,
         'header'               => FALSE,
         'header_id'            => 'default',
-        'header_in_container'  => FALSE,
         'header_content'       => '',
         'header_styles'        => '',
         'small_header'         => FALSE,

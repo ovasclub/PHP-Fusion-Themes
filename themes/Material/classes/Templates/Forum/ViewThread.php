@@ -30,22 +30,6 @@ class ViewThread extends Core {
         $pdata   = !empty($info['post_items']) ? $info['post_items'] : [];
 
         echo '<div class="row">';
-            echo '<div class="col-xs-12 col-sm-2 col-md-2 col-lg-3">';
-                echo '<a href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
-                Main::tags();
-
-                if (!empty($info['thread_users'])) {
-                    echo '<div class="panel panel-default">';
-                        echo '<div class="panel-body"><b>'.$locale['forum_0581'].'</b> ';
-                            foreach ($info['thread_users'] as $user_id => $user) {
-                                echo '<a href="'.BASEDIR.'profile.php?lookup='.$user_id.'">'.$user['user_name'].', </a>';
-                            }
-                        echo '</div>';
-                    echo '</div>';
-                }
-
-            echo '</div>';
-
             echo '<div class="col-xs-12 col-sm-10 col-md-10 col-lg-9 thread">';
                 echo '<h2>';
                     if ($data['thread_sticky'] == TRUE) {
@@ -120,7 +104,7 @@ class ViewThread extends Core {
                 if (!empty($pdata)) {
                     $i = 1;
                     foreach ($pdata as $post_id => $post_data) {
-                        echo render_post_item($post_data, $i + (isset($_GET['rowstart']) ? $_GET['rowstart'] : ''));
+                        render_post_item($post_data, $i + (isset($_GET['rowstart']) ? $_GET['rowstart'] : ''));
 
                         if ($post_id == $info['post_firstpost']) {
                             if ($info['permissions']['can_post'] == 1) {
@@ -171,7 +155,7 @@ class ViewThread extends Core {
 
                 if (!empty($info['quick_reply_form'])) {
                     add_to_jquery('$("#post_quick_reply").removeClass("m-r-10");');
-                    echo '<div class="card m-t-10 p-t-5 p-b-0">'.$info['quick_reply_form'].'</div>';
+                    echo '<div class="m-t-10 p-t-5 p-b-0">'.$info['quick_reply_form'].'</div>';
                 }
 
                 echo '<div class="block m-t-20 m-b-20">';
@@ -195,6 +179,22 @@ class ViewThread extends Core {
                 if ($info['forum_moderators']) {
                     echo '<div class="block m-b-10">'.$locale['forum_0185'].' '.$info['forum_moderators'].'</div>';
                 }
+            echo '</div>';
+
+            echo '<div class="col-xs-12 col-sm-2 col-md-2 col-lg-3">';
+                echo '<a href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
+                Main::tags();
+
+                if (!empty($info['thread_users'])) {
+                    echo '<div class="panel panel-default">';
+                        echo '<div class="panel-body"><b>'.$locale['forum_0581'].'</b> ';
+                            foreach ($info['thread_users'] as $user_id => $user) {
+                                echo '<a href="'.BASEDIR.'profile.php?lookup='.$user_id.'">'.$user['user_name'].', </a>';
+                            }
+                        echo '</div>';
+                    echo '</div>';
+                }
+
             echo '</div>';
         echo '</div>';
     }

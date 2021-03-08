@@ -63,15 +63,6 @@ $locale['dl_05'] = 'от';
 // Templates/News.php
 $locale['ns_01'] = 'Связанные новости';
 
-// Templates/Profile.php
-$locale['profile_01'] = 'Изменить фото';
-$locale['profile_02'] = 'Фото обложки профиля';
-$locale['profile_03'] = 'Изменить фото обложки';
-$locale['profile_notice_01'] = 'Фото профиля было удалено';
-$locale['profile_notice_02'] = 'Фото профиля обновлено';
-$locale['profile_notice_03'] = 'Фото обложки профиля было удалено';
-$locale['profile_notice_04'] = 'Фото профиля обложки обновлено';
-
 // widget.php
 $locale['widget_title'] = 'Конфигурация темы Материал';
 $locale['widget_title_01'] = 'Основные настройки темы';

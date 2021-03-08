@@ -2,23 +2,6 @@
     overflow: hidden;
 }
 
-.img-profile .edit-photo > a {
-    position: relative;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.2);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 115px;
-    width: 115px;
-    padding: 5px;
-    font-size: 12px;
-    margin-top: -115px;
-    color: #fff;
-    border-radius: 50%;
-}
-
 .social {
     margin-top: -40px;
 }

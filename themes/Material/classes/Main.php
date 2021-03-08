@@ -104,16 +104,10 @@ class Main extends Core {
                 echo '</div>';
             }
 
-            if ($this->getParam('header_in_container') == FALSE) {
-                $this->header();
-            }
+            $this->header();
 
             if ($this->getParam('container') == TRUE) {
                 echo '<div class="container main-box p-t-20 '.$this->getParam('container_class').'">';
-            }
-
-            if ($this->getParam('header_in_container') == TRUE) {
-                $this->header();
             }
 
             echo defined('AU_CENTER') && AU_CENTER ? AU_CENTER : '';
@@ -186,10 +180,6 @@ class Main extends Core {
                     }
 
                     $this->socialLinks();
-
-                    echo '<ul class="top-nav-logo visible-sm list-style-none">';
-                        echo '<li><a href="'.BASEDIR.$settings['opening_page'].'">'.$settings['sitename'].'</a></li>';
-                    echo '</ul>';
                 echo '</div>';
 
                 echo '<ul class="right-links">';
@@ -229,7 +219,7 @@ class Main extends Core {
 
                         echo '<li class="dropdown action-menu">';
                             echo '<a id="dduser" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">';
-                                echo '<div class="display-inline avatar-ripple'.($msg_count > 0 ? ' active' : '').'" title="'.$userdata['user_name'].'">';
+                                echo '<div class="display-inline'.($msg_count > 0 ? ' active' : '').'" title="'.$userdata['user_name'].'">';
                                 echo display_avatar($userdata, '23px', '', FALSE, 'img-circle m-l-5');
                                 echo '</div>';
                                 echo '<span class="caret"></span>';
@@ -272,10 +262,9 @@ class Main extends Core {
     private function header() {
         if ($this->getParam('header') == TRUE || $this->getParam('small_header') == TRUE) {
             $small = $this->getParam('small_header') == TRUE ? 'small_' : '';
-            $class = $this->getParam('header_in_container') == TRUE ? ' in_container' : '';
             $styles = !empty($this->getParam('header_styles')) ? ' style="'.$this->getParam('header_styles').'"' : '';
 
-            echo '<header class="'.$small.'header'.$class.'" id="'.$small.'header_'.$this->getParam($small.'header_id').'"'.$styles.'>';
+            echo '<header class="'.$small.'header" id="'.$small.'header_'.$this->getParam($small.'header_id').'"'.$styles.'>';
                 echo $this->getParam($small.'header_content');
             echo '</header>';
         }
@@ -305,7 +294,7 @@ class Main extends Core {
 
             echo '<div id="footer">';
                 $errors = showFooterErrors();
-                if ($errors) echo '<div class="errors fixed">'.$errors.'</div>';
+                if ($errors) echo '<div class="errors">'.$errors.'</div>';
 
                 echo '<div id="copyright" class="clearfix">';
                     echo '<div class="row">';
@@ -339,7 +328,7 @@ class Main extends Core {
             $result = dbquery("SELECT * FROM ".DB_MT_NETWORKS." ORDER BY network_order ASC");
 
             if (dbrows($result)) {
-                echo '<ul class="social-networks pull-left hidden-xs hidden-sm">';
+                echo '<ul class="social-networks pull-left">';
                     while ($data = dbarray($result)) {
                         if ($data['network_visible']) {
                             echo '<li><a href="'.$data['network_link'].'" title="'.$data['network_title'].'" target="_blank"><i class="'.$data['network_icon'].'"></i></a></li>';

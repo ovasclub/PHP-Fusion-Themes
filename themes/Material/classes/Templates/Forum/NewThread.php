@@ -24,10 +24,6 @@ class NewThread {
         Main::header();
 
         echo '<div class="row">';
-            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
-                Main::tags();
-            echo '</div>';
-
             echo '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
                 echo '<h3 class="m-t-0">'.$info['title'].'</h3>';
                 opentable('');
@@ -76,6 +72,10 @@ class NewThread {
                 closetable();
 
                 echo !empty($info['last_posts_reply']) ? '<div class="card">'.$info['last_posts_reply'].'</div>' : '';
+            echo '</div>';
+
+            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
+                Main::tags();
             echo '</div>';
         echo '</div>';
     }

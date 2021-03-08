@@ -65,18 +65,9 @@ class Profile extends Core {
         if (!empty($info['core_field'])) {
             foreach ($info['core_field'] as $field_id => $field_data) {
                 if ($field_id == 'profile_user_avatar') {
-                    $edit_photo = '<div class="edit-photo">';
-                    $edit_photo .= '<a href="'.BASEDIR.'edit_profile.php" id="change-photo">';
-                    $edit_photo .= '<i class="fa fa-camera fa-fw m-r-5"></i> '.self::setLocale('profile_01');
-                    $edit_photo .= '</a>';
-                    $edit_photo .= '</div>';
                     $user_avatar = '<div class="img-profile">';
                     $user_avatar .= display_avatar($user_data, '115px', '', FALSE, 'img-circle');
-                    $user_avatar .= $userdata['user_id'] == $_GET['lookup'] ? $edit_photo : '';
                     $user_avatar .= '</div>';
-
-                    if ($userdata['user_id'] == $_GET['lookup'])
-                        self::changeAvatar();
                 }
             }
         }
@@ -236,84 +227,5 @@ class Profile extends Core {
                 echo closetab();
             echo '</div>';
         }
-    }
-
-    private static function changeAvatar() {
-        $locale = fusion_get_locale();
-        $userdata = fusion_get_userdata();
-        $settings = fusion_get_settings();
-
-        $img_path = IMAGES.'avatars/';
-        $modal = '';
-
-        $modal .= openmodal('change-photo', self::setLocale('profile_01'), ['button_id' => 'change-photo']);
-        $modal .= openform('change-photo', 'post', FUSION_REQUEST, ['enctype' => TRUE]);
-
-        if (!empty($userdata['user_avatar']) && $userdata['user_avatar'] != '') {
-            if (isset($_POST['delete_avatar'])) {
-                if ($userdata['user_avatar'] != ''
-                    && file_exists($img_path.$userdata['user_avatar'])
-                    && is_file($img_path.$userdata['user_avatar'])) {
-                    unlink($img_path.$userdata['user_avatar']);
-                }
-
-                if (\defender::safe()) {
-                    $db = ['user_id' => $userdata['user_id'], 'user_avatar' => ''];
-                    dbquery_insert(DB_USERS, $db, 'update');
-                    addNotice('success', self::setLocale('profile_notice_01'));
-                    redirect(FUSION_REQUEST);
-                }
-            }
-
-            $modal .= '<div class="form-group display-block overflow-hide m-t-10 m-b-0">';
-            $modal .= '<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3 p-l-0">'.$locale['u185'].'</label>';
-            $modal .= '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
-            $modal .= display_avatar($userdata, '100px', '', FALSE, 'img-thumbnail');
-            $modal .= form_checkbox('delete_avatar', $locale['delete'], '', ['reverse_label' => TRUE]);
-            $modal .= '</div>';
-            $modal .= '</div>'; // .form-group
-            $modal .= form_button('save', $locale['save'], $locale['save'], ['class' => 'btn-success', 'icon' => 'fa fa-save']);
-        } else {
-            if (isset($_POST['update'])) {
-                $photo = '';
-
-                if (isset($_FILES['user_avatar']) && $_FILES['user_avatar']['name']) {
-                    if (!empty($_FILES['user_avatar']) && is_uploaded_file($_FILES['user_avatar']['tmp_name'])) {
-                        $upload = (array)form_sanitizer($_FILES['user_avatar'], '', 'user_avatar');
-                        if ($upload['error'] === 0) $photo = $upload['image_name'];
-                    }
-                }
-
-                if (\defender::safe()) {
-                    $db = ['user_id' => $userdata['user_id'], 'user_avatar' => $photo];
-                    dbquery_insert(DB_USERS, $db, 'update');
-                    addNotice('success', self::setLocale('profile_notice_02'));
-                    redirect(FUSION_REQUEST);
-                }
-            }
-
-            $modal .= form_fileinput('user_avatar', $locale['u185'], '', [
-                'upload_path'     => $img_path,
-                'type'            => 'image',
-                'max_byte'        => $settings['avatar_filesize'],
-                'max_height'      => $settings['avatar_width'],
-                'max_width'       => $settings['avatar_height'],
-                'inline'          => TRUE,
-                'thumbnail'       => 0,
-                'width'           => '100%',
-                'delete_original' => FALSE,
-                'class'           => 'm-t-10 m-b-0',
-                'error_text'      => $locale['u180'],
-                'template'        => 'modern',
-                'ext_tip'         => sprintf($locale['u184'], parsebytesize($settings['avatar_filesize']), $settings['avatar_width'], $settings['avatar_height'])
-            ]);
-
-            $modal .= form_button('update', $locale['save'], $locale['save'], ['class' => 'btn-success', 'icon' => 'fa fa-save']);
-        }
-
-        $modal .= closeform();
-        $modal .= closemodal();
-
-        add_to_footer($modal);
     }
 }

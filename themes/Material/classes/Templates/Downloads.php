@@ -205,37 +205,15 @@ class Downloads extends Core {
     }
 
     private static function horizontalMenu($info) {
-        $locale = fusion_get_locale();
-
         ob_start();
 
-        $hide = 'hidden-xs hidden-sm hidden-md';
-
-        echo '<div class="horizontal-menu row">';
-            echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">';
-                echo '<ul class="list-style-none menu home">';
-                    echo '<li><a title="'.$locale['download_1001'].'" href="'.DOWNLOADS.'downloads.php">';
-                        echo '<i class="fa fa-home"></i>';
-                        echo '<span class="'.$hide.'"> '.$locale['download_1001'].'</span>';
-                    echo '</a></li>';
-                echo '</ul>';
-            echo '</div>';
-
-            echo '<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">';
-                echo '<ul class="list-style-none menu pull-right">';
-                    $icons = [
-                        'download' => 'download-cloud',
-                        'recent'   => 'bookmark',
-                        'comments' => 'comments',
-                        'ratings'  => 'star'
-                    ];
-
-                    foreach ($info['download_filter'] as $filter_key => $filter) {
-                        $active = isset($_GET['type']) && $_GET['type'] === $filter_key ? ' class="active strong"' : '';
-                        echo '<li'.$active.'><a href="'.$filter['link'].'"><i class="fa fa-'.$icons[$filter_key].'"></i><span class="'.$hide.'"> '.$filter['title'].'</span></a></li>';
-                    }
-                echo '</ul>';
-            echo '</div>';
+        echo '<div class="horizontal-menu clearfix">';
+            echo '<ul class="list-style-none menu pull-right">';
+                foreach ($info['download_filter'] as $filter_key => $filter) {
+                    $active = isset($_GET['type']) && $_GET['type'] === $filter_key ? ' class="active strong"' : '';
+                    echo '<li'.$active.'><a href="'.$filter['link'].'">'.$filter['title'].'</a></li>';
+                }
+            echo '</ul>';
         echo '</div>';
 
         $html = ob_get_contents();
@@ -274,7 +252,7 @@ class Downloads extends Core {
                     }
                 }
 
-                echo '<div class="list-group ripple-effect">';
+                echo '<div class="list-group">';
                     foreach ($dl_cats as $cat_id => $cat_data) {
                         $active = !empty($_GET['cat_id']) && $_GET['cat_id'] == $cat_id ? ' active' : '';
 

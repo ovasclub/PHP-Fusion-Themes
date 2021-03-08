@@ -126,15 +126,9 @@ class Blog extends Core {
             echo '<div class="pull-right" id="options">';
                 $action = $data['admin_link'];
                 if (!empty($action)) {
-                    echo '<div class="floating-container">';
-                        echo '<div class="buttons">';
-                            echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
-                            echo '<a href="'.$action['edit'].'" class="btn btn-warning btn-circle btn-xs" title="'.$locale['edit'].'"><i class="fa fa-pen"></i></a>';
-                            echo '<a href="'.$action['delete'].'" class="btn btn-danger btn-circle btn-xs" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
-                        echo '</div>';
-
-                        echo '<div class="btn bg-alizarin btn-circle btn-sm" data-ripple="true" data-ripple-style="border"><i class="fa fa-ellipsis-v"></i></div>';
-                    echo '</div>';
+                    echo '<a href="'.$data['print_link'].'" class="btn btn-primary btn-circle btn-xs m-r-10" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
+                    echo '<a href="'.$action['edit'].'" class="btn btn-warning btn-circle btn-xs m-r-10" title="'.$locale['edit'].'"><i class="fa fa-pen"></i></a>';
+                    echo '<a href="'.$action['delete'].'" class="btn btn-danger btn-circle btn-xs" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
                 } else {
                     echo '<a class="btn btn-primary btn-circle btn-sm print" href="'.$data['print_link'].'" title="'.$locale['print'].'" target="_blank"><i class="fa fa-print"></i></a>';
                 }
@@ -158,8 +152,20 @@ class Blog extends Core {
 
             echo $data['blog_nav'] ? '<div class="clearfix m-b-20"><div class="pull-right">'.$data['blog_nav'].'</div></div>' : '';
 
-            echo '<hr/>';
-            echo '<div class="m-b-10">'.$data['blog_author_info'].'</div>';
+            echo '<div class="well">';
+                $user_contact = '';
+                if (isset($item['user_skype']) && $item['user_skype']) {
+                    $user_contact .= '<strong>Skype:</strong> '.$item['user_skype'];
+                }
+                if (isset($item['user_icq']) && $item['user_icq']) {
+                    $user_contact .= '<strong>ICQ:</strong> '.$item['user_icq'];
+                }
+                echo  '<h4>'.$locale['about'].' '.profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</h4>';
+                echo (isset($data['user_joined']) && $data['user_joined'] !== '') ? sprintf($locale['testimonial_join'], showdate('shortdate', $data['user_joined'])).'. ' : '';
+                echo (isset($data['user_location']) && $data['user_location'] !== '') ? sprintf($locale['testimonial_location'], $data['user_location']) : '. ';
+                echo (isset($data['user_web']) && $data['user_web']) ? sprintf($locale['testimonial_web'], $data['user_web']).". " : '';
+                echo (isset($data['user_contact']) && $data['user_contact'] !== '') ? sprintf($locale['testimonial_contact'], $user_contact).'. ' : '';
+            echo '</div>';
         echo '</div>'; // .card
 
         echo $data['blog_allow_comments'] && fusion_get_settings('comments_enabled') == 1 ? '<div class="card">'.$data['blog_show_comments'].'</div>' : '';
@@ -188,7 +194,7 @@ class Blog extends Core {
 
         openside($locale['blog_1003'], '', FALSE);
 
-            echo '<div class="list-group ripple-effect">';
+            echo '<div class="list-groups">';
                 if (!empty($info['blog_categories'])) {
                     foreach ($info['blog_categories'][0] as $id => $data) {
                         $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $id ? ' active' : '';

@@ -2,8 +2,7 @@ $(function () {
     "use strict";
 
     let body = $("body"),
-        main_menu = $("#main-menu"),
-        errors = $(".errors");
+        main_menu = $("#main-menu");
 
     $("[data-toggle=\"tooltip\"]").tooltip();
 
@@ -19,10 +18,7 @@ $(function () {
     });
 
     $(window).scroll(function () {
-        $(this).scrollTop() + $(window).height() > $(document).height() - 100 ? errors.removeClass("fixed") : errors.addClass("fixed");
-
         let hamburger = main_menu.find(".hamburger");
-
         if ($(this).scrollTop() > $(".top-nav").outerHeight()) {
             hamburger.show();
         } else {
@@ -57,20 +53,6 @@ $(function () {
     $(".overlay").bind("click", function () {
         body.removeClass("menu-toggled").css("padding-right", "0px");
         main_menu.css("width", "100%");
-    });
-
-    $(".floating-container .btn-sm").click(function () {
-        $(".floating-container .buttons").toggleClass("show");
-    });
-
-    let data_ripple = $("[data-ripple]");
-
-    if (data_ripple.data("ripple-style") === "border") {
-        data_ripple.append("<div class=\"border-ripple\"></div>");
-    }
-
-    $('[data-ripple-style="border"]').click(function () {
-        $(this).find(".border-ripple").css("border-color", $(this).css("background-color")).toggleClass("rippling");
     });
 
     $(".leftmenu .left-content").mCustomScrollbar({

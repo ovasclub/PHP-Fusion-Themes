@@ -28,7 +28,6 @@ class Main extends Core {
         self::setParam('body_class', 'forum_main');
         self::setParam('container_class', 'p-b-20');
         self::setParam('right', FALSE);
-        self::setParam('header_in_container', TRUE);
 
         Panels::getInstance(TRUE)->hide_panel('RIGHT');
         Panels::getInstance(TRUE)->hide_panel('AU_CENTER');
@@ -39,7 +38,6 @@ class Main extends Core {
         \MaterialTheme\Main::headerContent([
             'id'          => 'forum',
             'title'       => fusion_get_locale('forum_0000'),
-            'background'  => THEME.'images/header_bg/bg2_'.(DARK_MODE ? 'dark': 'light').'.jpg',
             'breadcrumbs' => FALSE
         ]);
 
@@ -52,16 +50,6 @@ class Main extends Core {
         self::header();
 
         echo '<div class="row">';
-            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
-                if (iMEMBER) {
-                    echo '<a id="create_new_thread" href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
-                    forum_newtopic();
-                }
-
-                self::tags();
-                self::popularThreads();
-            echo '</div>';
-
             echo '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
                 if (isset($_GET['viewforum'])) {
                     self::viewForum($info);
@@ -72,6 +60,16 @@ class Main extends Core {
                         self::renderForumMain($info);
                     }
                 }
+            echo '</div>';
+
+            echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
+                if (iMEMBER) {
+                    echo '<a id="create_new_thread" href="'.FORUM.'newthread.php" class="btn btn-success btn-block m-b-20">'.$locale['forum_0057'].'</a>';
+                    forum_newtopic();
+                }
+
+                self::tags();
+                self::popularThreads();
             echo '</div>';
         echo '</div>';
     }
@@ -142,6 +140,7 @@ class Main extends Core {
                 echo '<div class="container-fluid">';
                     echo '<ul class="nav navbar-nav">';
                         $i = 0;
+                        unset($info['forum_page_link']['subforums']); // hide subforums section
                         foreach ($info['forum_page_link'] as $view_keys => $page_link) {
                             $active = (!isset($_GET['view']) && !$i) || (isset($_GET['view']) && $_GET['view'] === $view_keys) ? ' class="active"' : '';
 
@@ -153,31 +152,11 @@ class Main extends Core {
             echo '</nav>';
         }
 
-        if (iMEMBER && $info['permissions']['can_post'] && !empty($info['new_thread_link'])) {
-            echo '<div class="display-block m-b-10">';
-
-                if (!empty($info['new_thread_link']['link'])) {
-                    echo '<a class="btn btn-primary btn-sm" href="'.$info['new_thread_link']['link'].'"><i class="fa fa-comment"></i> '.$info['new_thread_link']['title'].'</a>';
-                } else {
-                    echo '<a class="btn btn-primary btn-sm" href="'.$info['new_thread_link'].'"><i class="fa fa-comment"></i> '.$locale['forum_0264'].'</a>';
-                }
-            echo '</div>';
-        }
-
         if (!empty($info['forum_rules'])) {
             echo '<div class="well m-t-20 text-white" style="background-color: #F44336;">';
                 echo '<div class="strong"><i class="fa fa-exclamation"></i> '.$locale['forum_0350'].'</div>';
                 echo $info['forum_rules'];
             echo '</div>';
-        }
-
-        if (!empty($info['filters']['type'])) {
-            echo '<ul class="nav nav-tabs m-b-10">';
-                foreach ($info['filters']['type'] as $key => $tab) {
-                    $active = $tab['active'] == 1 ? ' class="active"' : '';
-                    echo '<li'.$active.'><a href="'.$tab['link'].'">'.$tab['icon'].''.$tab['title'].' <span class="badge">'.$tab['count'].'</span></a></li>';
-                }
-            echo '</ul>';
         }
 
         if (isset($_GET['view'])) {
@@ -208,7 +187,7 @@ class Main extends Core {
                             echo '<div class="list-group">';
                                 foreach ($info['item'][$_GET['forum_id']]['child'] as $subforum_id => $subforum_data) {
                                     echo '<div class="list-group-item clearfix">';
-                                    render_forum_item($subforum_data);
+                                        render_forum_item($subforum_data);
                                     echo '</div>';
                                 }
                             echo '</div>';
@@ -283,13 +262,41 @@ class Main extends Core {
                     break;
             }
         } else {
-            echo '<div class="m-t-20 m-b-20">';
-            echo forum_filter($info);
-            echo '</div>';
+            if (!empty($info['subforums'])) {
 
-            echo '<div class="list-group">';
-                self::renderForumThreads($info);
-            echo '</div>';
+                if ($info['forum_type'] != 1) {
+                    echo '<div class="forum-title m-t-20">'.$locale['forum_0351'].'</div>';
+                }
+
+                echo '<div class="panel panel-default">';
+                    echo '<div class="list-group">';
+                    foreach ($info['subforums'] as $subforum_id => $subforum_data) {
+                        echo '<div class="list-group-item clearfix">';
+                            render_forum_item($subforum_data);
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                echo '</div>';
+            } else {
+                if ($info['forum_type'] == 1) {
+                    echo '<div class=" text-center">'.$locale['forum_0327'].'</div>';
+                }
+            }
+
+            if ($info['forum_type'] > 1 && !empty($info['filters']['type'])) {
+                echo '<ul class="nav nav-tabs m-b-10">';
+                    foreach ($info['filters']['type'] as $key => $tab) {
+                        $active = $tab['active'] == 1 ? ' class="active"' : '';
+                        echo '<li'.$active.'><a href="'.$tab['link'].'">'.$tab['icon'].''.$tab['title'].' <span class="badge">'.$tab['count'].'</span></a></li>';
+                    }
+                echo '</ul>';
+            }
+
+            if ($info['forum_type'] > 1) {
+                echo '<div class="list-group">';
+                    self::renderForumThreads($info);
+                echo '</div>';
+            }
         }
 
         echo '<div class="card">';
