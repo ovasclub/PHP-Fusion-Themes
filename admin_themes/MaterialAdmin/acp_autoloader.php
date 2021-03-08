@@ -18,7 +18,7 @@
 defined('IN_FUSION') || exit;
 
 spl_autoload_register(function ($class_name) {
-    $path = MDT.'classes/'.str_replace(['\\', 'Material'], ['/', ''], $class_name).'.php';
+    $path = MDT.'classes/'.str_replace(['\\', 'MaterialAdmin'], ['/', ''], $class_name).'.php';
 
     if (file_exists($path)) {
         require_once $path;

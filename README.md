@@ -20,7 +20,7 @@ This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "
 - [AdminLTE3](admin_themes/AdminLTE3)
 - [Ares](admin_themes/Ares)
 - [Atom-XCP](admin_themes/Atom-XCP)
-- [Material](admin_themes/Material)
+- [MaterialAdmin](admin_themes/MaterialAdmin)
 - [MDashboard](admin_themes/MDashboard)
 
 ---

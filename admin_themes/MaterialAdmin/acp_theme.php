@@ -19,14 +19,14 @@
 defined('IN_FUSION') || exit;
 
 if (!defined('MDT_LOCALE')) {
-    if (file_exists(THEMES.'admin_themes/Material/locale/'.LANGUAGE.'.php')) {
-        define('MDT_LOCALE', THEMES.'admin_themes/Material/locale/'.LANGUAGE.'.php');
+    if (file_exists(THEMES.'admin_themes/MaterialAdmin/locale/'.LANGUAGE.'.php')) {
+        define('MDT_LOCALE', THEMES.'admin_themes/MaterialAdmin/locale/'.LANGUAGE.'.php');
     } else {
-        define('MDT_LOCALE', THEMES.'admin_themes/Material/locale/English.php');
+        define('MDT_LOCALE', THEMES.'admin_themes/MaterialAdmin/locale/English.php');
     }
 }
 
-define('MDT', THEMES.'admin_themes/Material/');
+define('MDT', THEMES.'admin_themes/MaterialAdmin/');
 require_once MDT.'acp_autoloader.php';
 
 define('BOOTSTRAP', TRUE);
@@ -40,15 +40,15 @@ if (isset($_COOKIE['sidebar-toggled']) || isset($_COOKIE['sidebar-sm'])) {
 }
 
 function render_admin_panel() {
-    new Material\AdminPanel();
+    new MaterialAdmin\AdminPanel();
 }
 
 function render_admin_login() {
-    new Material\Login();
+    new MaterialAdmin\Login();
 }
 
 function render_admin_dashboard() {
-    new Material\Dashboard();
+    new MaterialAdmin\Dashboard();
 }
 
 function openside($title = FALSE, $class = NULL) {
