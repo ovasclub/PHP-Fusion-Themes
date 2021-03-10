@@ -2,10 +2,10 @@
 /*-------------------------------------------------------+
 | PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
-| https://phpfusion.com/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Russian.php
-| Author: ovasclub
+| Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -80,7 +80,7 @@ $locale['widget_08'] = 'Нет';
 $locale['widget_09'] = 'Лого сайта';
 $locale['widget_10'] = 'Предосмотр';
 $locale['widget_11'] = 'Действия';
-$locale['widget_12'] = 'Социальные сети не определены. [link]Добавте сеть[/link].';
+$locale['widget_12'] = 'Социальные сети не определены. [link]Добавьте сеть[/link].';
 
 $locale['widget_22'] = 'Скрыть';
 $locale['widget_23'] = 'Исключить панели нижнего колонтитула в';
