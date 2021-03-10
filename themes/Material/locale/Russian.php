@@ -2,10 +2,10 @@
 /*-------------------------------------------------------+
 | PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
-| https://www.phpfusion.com/
+| https://phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Russian.php
-| Author: RobiNN
+| Author: ovasclub
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -94,3 +94,5 @@ $locale['widget_notice_03'] = 'Социальная сеть удалена.';
 $locale['widget_notice_04'] = 'Настройки темы обновлены.';
 
 $locale['widget_notice_08'] = 'Социальные сети переупорядочены.';
+
+
